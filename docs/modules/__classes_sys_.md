@@ -6,9 +6,9 @@
 
 ## Index
 
-### Classes
+### Interfaces
 
-* [Sys](../classes/__classes_sys_.sys.md)
+* [Sys](../interfaces/__classes_sys_.sys.md)
 
 
 
