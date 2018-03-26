@@ -15,6 +15,7 @@ Sys implementation for web browsers. See [Sys](../interfaces/__classes_sys_.sys.
 
 ### Accessors
 
+* [displayBitmap](_web_sys_.websys.md#displaybitmap)
 * [displayHeight](_web_sys_.websys.md#displayheight)
 * [displayMode](_web_sys_.websys.md#displaymode)
 * [displayWidth](_web_sys_.websys.md#displaywidth)
@@ -23,18 +24,39 @@ Sys implementation for web browsers. See [Sys](../interfaces/__classes_sys_.sys.
 ### Methods
 
 * [log](_web_sys_.websys.md#log)
+* [pget](_web_sys_.websys.md#pget)
+* [pset](_web_sys_.websys.md#pset)
 * [setDisplayMode](_web_sys_.websys.md#setdisplaymode)
 
 
 
 ---
 ## Accessors
+<a id="displaybitmap"></a>
+
+###  displayBitmap
+
+
+getdisplayBitmap(): `undefined`⎮`ImageData`
+
+*Defined in web-sys.ts:11*
+
+
+
+
+
+**Returns:** `undefined`⎮`ImageData`
+
+
+
+___
+
 <a id="displayheight"></a>
 
 ###  displayHeight
 
 
-getdisplayHeight(): `undefined`⎮`number`
+getdisplayHeight(): `number`
 
 *Defined in web-sys.ts:10*
 
@@ -42,7 +64,7 @@ getdisplayHeight(): `undefined`⎮`number`
 
 
 
-**Returns:** `undefined`⎮`number`
+**Returns:** `number`
 
 
 
@@ -53,7 +75,7 @@ ___
 ###  displayMode
 
 
-getdisplayMode(): `undefined`⎮`string`
+getdisplayMode(): `string`
 
 *Defined in web-sys.ts:8*
 
@@ -61,7 +83,7 @@ getdisplayMode(): `undefined`⎮`string`
 
 
 
-**Returns:** `undefined`⎮`string`
+**Returns:** `string`
 
 
 
@@ -72,7 +94,7 @@ ___
 ###  displayWidth
 
 
-getdisplayWidth(): `undefined`⎮`number`
+getdisplayWidth(): `number`
 
 *Defined in web-sys.ts:9*
 
@@ -80,7 +102,7 @@ getdisplayWidth(): `undefined`⎮`number`
 
 
 
-**Returns:** `undefined`⎮`number`
+**Returns:** `number`
 
 
 
@@ -98,7 +120,7 @@ ___
 
 *Implementation of [Sys](../interfaces/__classes_sys_.sys.md).[log](../interfaces/__classes_sys_.sys.md#log)*
 
-*Defined in web-sys.ts:12*
+*Defined in web-sys.ts:13*
 
 
 
@@ -107,6 +129,74 @@ ___
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | msg | `any`   |  - |
+
+
+
+
+
+**Returns:** `void`
+
+
+
+
+
+___
+
+<a id="pget"></a>
+
+###  pget
+
+► **pget**(x: *`number`*, y: *`number`*): `Uint8ClampedArray`
+
+
+
+*Implementation of [Sys](../interfaces/__classes_sys_.sys.md).[pget](../interfaces/__classes_sys_.sys.md#pget)*
+
+*Defined in web-sys.ts:58*
+
+
+
+**Parameters:**
+
+| Param | Type | Description |
+| ------ | ------ | ------ |
+| x | `number`   |  - |
+| y | `number`   |  - |
+
+
+
+
+
+**Returns:** `Uint8ClampedArray`
+
+
+
+
+
+___
+
+<a id="pset"></a>
+
+###  pset
+
+► **pset**(x: *`number`*, y: *`number`*, r: *`number`*, g: *`number`*, b: *`number`*, a?: *`number`*): `void`
+
+
+
+*Defined in web-sys.ts:40*
+
+
+
+**Parameters:**
+
+| Param | Type | Default value | Description |
+| ------ | ------ | ------ | ------ |
+| x | `number`  | - |   - |
+| y | `number`  | - |   - |
+| r | `number`  | - |   - |
+| g | `number`  | - |   - |
+| b | `number`  | - |   - |
+| a | `number`  | 255 |   - |
 
 
 
@@ -130,7 +220,7 @@ ___
 
 *Implementation of [Sys](../interfaces/__classes_sys_.sys.md).[setDisplayMode](../interfaces/__classes_sys_.sys.md#setdisplaymode)*
 
-*Defined in web-sys.ts:16*
+*Defined in web-sys.ts:17*
 
 
 

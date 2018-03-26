@@ -13,14 +13,34 @@ Unified interface to system I/O
 
 
 ## Properties
+<a id="displaybitmap"></a>
+
+### «Optional» displayBitmap
+
+**●  displayBitmap**:  *`ImageData`* 
+
+*Defined in _classes/Sys.ts:12*
+
+
+
+The current display bitmap.
+
+
+
+
+___
+
 <a id="displayheight"></a>
 
-### «Optional» displayHeight
+###  displayHeight
 
-**●  displayHeight**:  *`undefined`⎮`number`* 
+**●  displayHeight**:  *`number`* 
 
-*Defined in _classes/Sys.ts:7*
+*Defined in _classes/Sys.ts:10*
 
+
+
+The current height of the display in characters or pixels.
 
 
 
@@ -29,12 +49,15 @@ ___
 
 <a id="displaymode"></a>
 
-### «Optional» displayMode
+###  displayMode
 
-**●  displayMode**:  *`undefined`⎮`string`* 
+**●  displayMode**:  *`string`* 
 
-*Defined in _classes/Sys.ts:5*
+*Defined in _classes/Sys.ts:6*
 
+
+
+Name of current display mode.
 
 
 
@@ -43,12 +66,15 @@ ___
 
 <a id="displaywidth"></a>
 
-### «Optional» displayWidth
+###  displayWidth
 
-**●  displayWidth**:  *`undefined`⎮`number`* 
+**●  displayWidth**:  *`number`* 
 
-*Defined in _classes/Sys.ts:6*
+*Defined in _classes/Sys.ts:8*
 
+
+
+The current width of the display in characters or pixels.
 
 
 
@@ -65,7 +91,7 @@ ___
 
 
 
-*Defined in _classes/Sys.ts:14*
+*Defined in _classes/Sys.ts:19*
 
 
 
@@ -90,6 +116,80 @@ Write something to console.
 
 ___
 
+<a id="pget"></a>
+
+###  pget
+
+► **pget**(x: *`number`*, y: *`number`*): `Uint8ClampedArray`
+
+
+
+*Defined in _classes/Sys.ts:46*
+
+
+
+Get a specific pixel and return its color.
+
+
+**Parameters:**
+
+| Param | Type | Description |
+| ------ | ------ | ------ |
+| x | `number`   |  X coordinate |
+| y | `number`   |  Y coordinate |
+
+
+
+
+
+**Returns:** `Uint8ClampedArray`
+The red,green,blue and alpha values in an array.
+
+
+
+
+
+
+___
+
+<a id="pset"></a>
+
+###  pset
+
+► **pset**(x: *`number`*, y: *`number`*, r: *`number`*, g: *`number`*, b: *`number`*, a?: *`undefined`⎮`number`*): `void`
+
+
+
+*Defined in _classes/Sys.ts:38*
+
+
+
+Set a specific pixel a specific color.
+
+
+**Parameters:**
+
+| Param | Type | Description |
+| ------ | ------ | ------ |
+| x | `number`   |  X coordinate |
+| y | `number`   |  Y coordinate |
+| r | `number`   |  Red |
+| g | `number`   |  Green |
+| b | `number`   |  Blue |
+| a | `undefined`⎮`number`   |  Alpha (default 255) |
+
+
+
+
+
+**Returns:** `void`
+
+
+
+
+
+___
+
 <a id="setdisplaymode"></a>
 
 ###  setDisplayMode
@@ -98,7 +198,7 @@ ___
 
 
 
-*Defined in _classes/Sys.ts:22*
+*Defined in _classes/Sys.ts:27*
 
 
 
