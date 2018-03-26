@@ -5,9 +5,9 @@
  * See [Sys](../interfaces/__classes_sys_.sys.md) for documentation
  */
 class WebSys implements Sys {
-  get displayMode() {
-    return this._displayMode
-  }
+  get displayMode() { return this._displayMode }
+  get displayWidth() { return this._displayWidth }
+  get displayHeight() { return this._displayHeight }
 
   log(msg: any) {
     console.log(msg)

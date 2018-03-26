@@ -15,7 +15,9 @@ Sys implementation for web browsers. See [Sys](../interfaces/__classes_sys_.sys.
 
 ### Accessors
 
+* [displayHeight](_web_sys_.websys.md#displayheight)
 * [displayMode](_web_sys_.websys.md#displaymode)
+* [displayWidth](_web_sys_.websys.md#displaywidth)
 
 
 ### Methods
@@ -27,6 +29,25 @@ Sys implementation for web browsers. See [Sys](../interfaces/__classes_sys_.sys.
 
 ---
 ## Accessors
+<a id="displayheight"></a>
+
+###  displayHeight
+
+
+getdisplayHeight(): `undefined`⎮`number`
+
+*Defined in web-sys.ts:10*
+
+
+
+
+
+**Returns:** `undefined`⎮`number`
+
+
+
+___
+
 <a id="displaymode"></a>
 
 ###  displayMode
@@ -41,6 +62,25 @@ getdisplayMode(): `undefined`⎮`string`
 
 
 **Returns:** `undefined`⎮`string`
+
+
+
+___
+
+<a id="displaywidth"></a>
+
+###  displayWidth
+
+
+getdisplayWidth(): `undefined`⎮`number`
+
+*Defined in web-sys.ts:9*
+
+
+
+
+
+**Returns:** `undefined`⎮`number`
 
 
 

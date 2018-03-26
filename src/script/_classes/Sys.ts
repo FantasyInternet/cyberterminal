@@ -2,6 +2,11 @@
  * Unified interface to system I/O
  */
 declare interface Sys {
+  displayMode?: string
+  displayWidth?: number
+  displayHeight?: number
+
+
   /**
    * Write something to console.
    * @param msg Something to write

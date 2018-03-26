@@ -12,6 +12,50 @@ Unified interface to system I/O
 * [WebSys](../classes/_web_sys_.websys.md)
 
 
+## Properties
+<a id="displayheight"></a>
+
+### «Optional» displayHeight
+
+**●  displayHeight**:  *`undefined`⎮`number`* 
+
+*Defined in _classes/Sys.ts:7*
+
+
+
+
+
+___
+
+<a id="displaymode"></a>
+
+### «Optional» displayMode
+
+**●  displayMode**:  *`undefined`⎮`string`* 
+
+*Defined in _classes/Sys.ts:5*
+
+
+
+
+
+___
+
+<a id="displaywidth"></a>
+
+### «Optional» displayWidth
+
+**●  displayWidth**:  *`undefined`⎮`number`* 
+
+*Defined in _classes/Sys.ts:6*
+
+
+
+
+
+___
+
+
 ## Methods
 <a id="log"></a>
 
@@ -21,7 +65,7 @@ Unified interface to system I/O
 
 
 
-*Defined in _classes/Sys.ts:9*
+*Defined in _classes/Sys.ts:14*
 
 
 
@@ -54,7 +98,7 @@ ___
 
 
 
-*Defined in _classes/Sys.ts:17*
+*Defined in _classes/Sys.ts:22*
 
 
 
