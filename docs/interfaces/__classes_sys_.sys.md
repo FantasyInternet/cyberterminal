@@ -19,7 +19,7 @@ Unified interface to system I/O
 
 **●  displayBitmap**:  *`ImageData`* 
 
-*Defined in _classes/Sys.ts:12*
+*Defined in [_classes/Sys.ts:12](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_classes/Sys.ts#L12)*
 
 
 
@@ -36,7 +36,7 @@ ___
 
 **●  displayHeight**:  *`number`* 
 
-*Defined in _classes/Sys.ts:10*
+*Defined in [_classes/Sys.ts:10](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_classes/Sys.ts#L10)*
 
 
 
@@ -53,7 +53,7 @@ ___
 
 **●  displayMode**:  *`string`* 
 
-*Defined in _classes/Sys.ts:6*
+*Defined in [_classes/Sys.ts:6](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_classes/Sys.ts#L6)*
 
 
 
@@ -70,7 +70,7 @@ ___
 
 **●  displayWidth**:  *`number`* 
 
-*Defined in _classes/Sys.ts:8*
+*Defined in [_classes/Sys.ts:8](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_classes/Sys.ts#L8)*
 
 
 
@@ -91,7 +91,7 @@ ___
 
 
 
-*Defined in _classes/Sys.ts:19*
+*Defined in [_classes/Sys.ts:19](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_classes/Sys.ts#L19)*
 
 
 
@@ -124,7 +124,7 @@ ___
 
 
 
-*Defined in _classes/Sys.ts:46*
+*Defined in [_classes/Sys.ts:46](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_classes/Sys.ts#L46)*
 
 
 
@@ -160,7 +160,7 @@ ___
 
 
 
-*Defined in _classes/Sys.ts:38*
+*Defined in [_classes/Sys.ts:38](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_classes/Sys.ts#L38)*
 
 
 
@@ -198,7 +198,7 @@ ___
 
 
 
-*Defined in _classes/Sys.ts:27*
+*Defined in [_classes/Sys.ts:27](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_classes/Sys.ts#L27)*
 
 
 

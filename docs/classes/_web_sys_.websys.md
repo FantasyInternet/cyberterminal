@@ -39,7 +39,7 @@ Sys implementation for web browsers. See [Sys](../interfaces/__classes_sys_.sys.
 
 getdisplayBitmap(): `undefined`⎮`ImageData`
 
-*Defined in web-sys.ts:11*
+*Defined in [web-sys.ts:11](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-sys.ts#L11)*
 
 
 
@@ -58,7 +58,7 @@ ___
 
 getdisplayHeight(): `number`
 
-*Defined in web-sys.ts:10*
+*Defined in [web-sys.ts:10](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-sys.ts#L10)*
 
 
 
@@ -77,7 +77,7 @@ ___
 
 getdisplayMode(): `string`
 
-*Defined in web-sys.ts:8*
+*Defined in [web-sys.ts:8](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-sys.ts#L8)*
 
 
 
@@ -96,7 +96,7 @@ ___
 
 getdisplayWidth(): `number`
 
-*Defined in web-sys.ts:9*
+*Defined in [web-sys.ts:9](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-sys.ts#L9)*
 
 
 
@@ -120,7 +120,7 @@ ___
 
 *Implementation of [Sys](../interfaces/__classes_sys_.sys.md).[log](../interfaces/__classes_sys_.sys.md#log)*
 
-*Defined in web-sys.ts:13*
+*Defined in [web-sys.ts:13](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-sys.ts#L13)*
 
 
 
@@ -152,7 +152,7 @@ ___
 
 *Implementation of [Sys](../interfaces/__classes_sys_.sys.md).[pget](../interfaces/__classes_sys_.sys.md#pget)*
 
-*Defined in web-sys.ts:58*
+*Defined in [web-sys.ts:58](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-sys.ts#L58)*
 
 
 
@@ -183,7 +183,7 @@ ___
 
 
 
-*Defined in web-sys.ts:40*
+*Defined in [web-sys.ts:40](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-sys.ts#L40)*
 
 
 
@@ -220,7 +220,7 @@ ___
 
 *Implementation of [Sys](../interfaces/__classes_sys_.sys.md).[setDisplayMode](../interfaces/__classes_sys_.sys.md#setdisplaymode)*
 
-*Defined in web-sys.ts:17*
+*Defined in [web-sys.ts:17](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-sys.ts#L17)*
 
 
 
