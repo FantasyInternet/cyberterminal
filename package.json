@@ -1,0 +1,56 @@
+{
+  "name": "cyberterminal",
+  "version": "0.0.1",
+  "private": true,
+  "build": {
+    "appId": "ninja.codeartistic",
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    },
+    "win": {
+      "target": [
+        "nsis",
+        "portable"
+      ]
+    },
+    "mac": {
+      "category": "your.app.category.type"
+    },
+    "directories": {
+      "app": "./build/",
+      "output": "./build-desktop/"
+    }
+  },
+  "scripts": {
+    "prepublish": "jake",
+    "build": "jake",
+    "build-desktop": "electron-builder",
+    "deploy": "jake deploy",
+    "start": "statify -d ./build/",
+    "watch": "jake watch"
+  },
+  "devDependencies": {
+    "@types/electron": "^1.6.10",
+    "browserify": "^16.1.1",
+    "cssmin": "^0.4.3",
+    "electron-builder": "^20.5.1",
+    "file-watch": "^0.1.0",
+    "ftp": "^0.3.10",
+    "htmlmin": "0.0.7",
+    "jake": "^8.0.15",
+    "jsmin": "^1.0.1",
+    "jstransformer-markdown-it": "^2.0.0",
+    "less": "^3.0.1",
+    "livereload": "^0.7.0",
+    "md5": "^2.2.1",
+    "pug": "^2.0.2",
+    "tsify": "^3.0.4",
+    "typedoc": "^0.11.1",
+    "typedoc-plugin-markdown": "^1.0.14",
+    "typescript": "^2.7.2"
+  },
+  "dependencies": {
+    "statify": "^2.0.1"
+  }
+}
