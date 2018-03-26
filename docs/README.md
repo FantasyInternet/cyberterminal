@@ -13,6 +13,7 @@ Made by [codeartistic.ninja](http://the.codeartistic.ninja/)
 
 * ["_classes/Sys"](modules/__classes_sys_.md)
 * ["main"](modules/_main_.md)
+* ["web-sys"](modules/_web_sys_.md)
 
 
 
