@@ -88,6 +88,7 @@ class WebSys implements Sys {
     if (width < 0 || x + width > bm.width) throw "Coordinates out of bounds!"
     height = Math.floor(height)
     if (height < 0 || y + height > bm.height) throw "Coordinates out of bounds!"
+    if (width === 0 || height === 0) return
     r = Math.min(Math.max(0, Math.floor(r)), 255)
     g = Math.min(Math.max(0, Math.floor(g)), 255)
     b = Math.min(Math.max(0, Math.floor(b)), 255)
@@ -97,15 +98,14 @@ class WebSys implements Sys {
     bm.data[i++] = g
     bm.data[i++] = b
     bm.data[i++] = a
-    i += -4
-    let bytes = bm.data.slice(i, i + 4)
-    for (let _x = 0; _x < width; _x++) {
+    let bytes = bm.data.slice(i - 4, i)
+    for (let _x = 1; _x < width; _x++) {
       bm.data.set(bytes, i)
       i += 4
     }
-    i += -4 * width
-    bytes = bm.data.slice(i, i + 4 * width)
-    for (let _y = 0; _y < height; _y++) {
+    bytes = bm.data.slice(i - 4 * width, i)
+    i += 4 * (bm.width - width)
+    for (let _y = 1; _y < height; _y++) {
       bm.data.set(bytes, i)
       i += 4 * bm.width
     }
