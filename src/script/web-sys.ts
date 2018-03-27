@@ -33,6 +33,7 @@ class WebSys implements Sys {
 
       case "bitmap":
         this._displayBitmap = new ImageData(this.displayWidth, this.displayHeight)
+        this.fillRect(0, 0, this._displayBitmap.width, this._displayBitmap.height, 0, 0, 0)
         this._initCanvas()
         break
 
@@ -45,7 +46,8 @@ class WebSys implements Sys {
     return
   }
 
-  pset(x: number, y: number, r: number, g: number, b: number, a = 255) {
+  pset(x: number, y: number, r: number, g: number, b: number) {
+    let a = 255
     if (!this.displayBitmap) throw "No bitmap present!"
     let bm = this.displayBitmap
     x = Math.floor(x)
@@ -71,10 +73,11 @@ class WebSys implements Sys {
     y = Math.floor(y)
     if (y < 0 || y >= bm.height) throw "Coordinates out of bounds!"
     let i = (y * bm.width + x) * 4
-    return bm.data.slice(i, i + 4)
+    return bm.data.slice(i, i + 3)
   }
 
-  fillRect(x: number, y: number, width: number, height: number, r: number, g: number, b: number, a = 255) {
+  fillRect(x: number, y: number, width: number, height: number, r: number, g: number, b: number) {
+    let a = 255
     if (!this.displayBitmap) throw "No bitmap present!"
     let bm = this.displayBitmap
     x = Math.floor(x)

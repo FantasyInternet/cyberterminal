@@ -87,11 +87,11 @@ ___
 
 ###  fillRect
 
-► **fillRect**(x: *`number`*, y: *`number`*, width: *`number`*, height: *`number`*, r: *`number`*, g: *`number`*, b: *`number`*, a?: *`undefined`⎮`number`*): `void`
+► **fillRect**(x: *`number`*, y: *`number`*, width: *`number`*, height: *`number`*, r: *`number`*, g: *`number`*, b: *`number`*): `void`
 
 
 
-*Defined in [_classes/Sys.ts:59](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_classes/Sys.ts#L59)*
+*Defined in [_classes/Sys.ts:57](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_classes/Sys.ts#L57)*
 
 
 
@@ -109,7 +109,6 @@ Fill a rectangle with a color on the display.
 | r | `number`   |  Red |
 | g | `number`   |  Green |
 | b | `number`   |  Blue |
-| a | `undefined`⎮`number`   |  Alpha |
 
 
 
@@ -164,7 +163,7 @@ ___
 
 
 
-*Defined in [_classes/Sys.ts:46](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_classes/Sys.ts#L46)*
+*Defined in [_classes/Sys.ts:45](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_classes/Sys.ts#L45)*
 
 
 
@@ -183,7 +182,7 @@ Get a specific pixel and return its color.
 
 
 **Returns:** `Uint8ClampedArray`
-The red,green,blue and alpha values in an array.
+The red, green and blue values in an array.
 
 
 
@@ -196,11 +195,11 @@ ___
 
 ###  pset
 
-► **pset**(x: *`number`*, y: *`number`*, r: *`number`*, g: *`number`*, b: *`number`*, a?: *`undefined`⎮`number`*): `void`
+► **pset**(x: *`number`*, y: *`number`*, r: *`number`*, g: *`number`*, b: *`number`*): `void`
 
 
 
-*Defined in [_classes/Sys.ts:38](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_classes/Sys.ts#L38)*
+*Defined in [_classes/Sys.ts:37](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_classes/Sys.ts#L37)*
 
 
 
@@ -216,7 +215,6 @@ Set a specific pixel a specific color.
 | r | `number`   |  Red |
 | g | `number`   |  Green |
 | b | `number`   |  Blue |
-| a | `undefined`⎮`number`   |  Alpha (default 255) |
 
 
 

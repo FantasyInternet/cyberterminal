@@ -33,15 +33,14 @@ declare interface Sys {
    * @param r Red
    * @param g Green
    * @param b Blue
-   * @param a Alpha (default 255)
    */
-  pset(x: number, y: number, r: number, g: number, b: number, a?: number): void
+  pset(x: number, y: number, r: number, g: number, b: number): void
 
   /**
    * Get a specific pixel and return its color.
    * @param x X coordinate
    * @param y Y coordinate
-   * @returns The red,green,blue and alpha values in an array.
+   * @returns The red, green and blue values in an array.
    */
   pget(x: number, y: number): Uint8ClampedArray
 
@@ -54,9 +53,8 @@ declare interface Sys {
    * @param r Red
    * @param g Green
    * @param b Blue
-   * @param a Alpha
    */
-  fillRect(x: number, y: number, width: number, height: number, r: number, g: number, b: number, a?: number): void
+  fillRect(x: number, y: number, width: number, height: number, r: number, g: number, b: number): void
 }
 
 declare let Sys: Sys

@@ -146,26 +146,27 @@ ___
 
 ###  fillRect
 
-► **fillRect**(x: *`number`*, y: *`number`*, width: *`number`*, height: *`number`*, r: *`number`*, g: *`number`*, b: *`number`*, a?: *`number`*): `void`
+► **fillRect**(x: *`number`*, y: *`number`*, width: *`number`*, height: *`number`*, r: *`number`*, g: *`number`*, b: *`number`*): `void`
 
 
 
-*Defined in [web-sys.ts:77](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-sys.ts#L77)*
+*Implementation of [Sys](../interfaces/__classes_sys_.sys.md).[fillRect](../interfaces/__classes_sys_.sys.md#fillrect)*
+
+*Defined in [web-sys.ts:79](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-sys.ts#L79)*
 
 
 
 **Parameters:**
 
-| Param | Type | Default value | Description |
-| ------ | ------ | ------ | ------ |
-| x | `number`  | - |   - |
-| y | `number`  | - |   - |
-| width | `number`  | - |   - |
-| height | `number`  | - |   - |
-| r | `number`  | - |   - |
-| g | `number`  | - |   - |
-| b | `number`  | - |   - |
-| a | `number`  | 255 |   - |
+| Param | Type | Description |
+| ------ | ------ | ------ |
+| x | `number`   |  - |
+| y | `number`   |  - |
+| width | `number`   |  - |
+| height | `number`   |  - |
+| r | `number`   |  - |
+| g | `number`   |  - |
+| b | `number`   |  - |
 
 
 
@@ -221,7 +222,7 @@ ___
 
 *Implementation of [Sys](../interfaces/__classes_sys_.sys.md).[pget](../interfaces/__classes_sys_.sys.md#pget)*
 
-*Defined in [web-sys.ts:66](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-sys.ts#L66)*
+*Defined in [web-sys.ts:68](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-sys.ts#L68)*
 
 
 
@@ -248,24 +249,25 @@ ___
 
 ###  pset
 
-► **pset**(x: *`number`*, y: *`number`*, r: *`number`*, g: *`number`*, b: *`number`*, a?: *`number`*): `void`
+► **pset**(x: *`number`*, y: *`number`*, r: *`number`*, g: *`number`*, b: *`number`*): `void`
 
 
 
-*Defined in [web-sys.ts:48](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-sys.ts#L48)*
+*Implementation of [Sys](../interfaces/__classes_sys_.sys.md).[pset](../interfaces/__classes_sys_.sys.md#pset)*
+
+*Defined in [web-sys.ts:49](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-sys.ts#L49)*
 
 
 
 **Parameters:**
 
-| Param | Type | Default value | Description |
-| ------ | ------ | ------ | ------ |
-| x | `number`  | - |   - |
-| y | `number`  | - |   - |
-| r | `number`  | - |   - |
-| g | `number`  | - |   - |
-| b | `number`  | - |   - |
-| a | `number`  | 255 |   - |
+| Param | Type | Description |
+| ------ | ------ | ------ |
+| x | `number`   |  - |
+| y | `number`   |  - |
+| r | `number`   |  - |
+| g | `number`   |  - |
+| b | `number`   |  - |
 
 
 
