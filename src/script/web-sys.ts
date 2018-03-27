@@ -10,6 +10,11 @@ class WebSys implements Sys {
   get displayHeight() { return this._displayHeight }
   get displayBitmap() { return this._displayBitmap }
 
+  constructor(private _container: HTMLElement) {
+    this._initContainer()
+    this._vsync()
+  }
+
   log(msg: any) {
     console.log(msg)
   }
@@ -19,6 +24,8 @@ class WebSys implements Sys {
     this._displayWidth = width
     this._displayHeight = height
     delete this._displayBitmap
+    delete this._displayCanvas
+    delete this._displayContext
     switch (this.displayMode) {
       case "text":
         console.error(`${this.displayMode} not yet implemented!`)
@@ -26,6 +33,7 @@ class WebSys implements Sys {
 
       case "bitmap":
         this._displayBitmap = new ImageData(this.displayWidth, this.displayHeight)
+        this._initCanvas()
         break
 
       default:
@@ -49,10 +57,10 @@ class WebSys implements Sys {
     b = Math.min(Math.max(0, Math.floor(b)), 255)
     a = Math.min(Math.max(0, Math.floor(a)), 255)
     let i = (y * bm.width + x) * 4
-    bm.data[i = 0] = r
-    bm.data[i = 1] = g
-    bm.data[i = 2] = b
-    bm.data[i = 3] = a
+    bm.data[i + 0] = r
+    bm.data[i + 1] = g
+    bm.data[i + 2] = b
+    bm.data[i + 3] = a
   }
 
   pget(x: number, y: number) {
@@ -71,5 +79,30 @@ class WebSys implements Sys {
   private _displayWidth: number = 0
   private _displayHeight: number = 0
   private _displayBitmap?: ImageData
+  private _displayContainer?: HTMLElement
+  private _displayCanvas?: HTMLCanvasElement
+  private _displayContext?: CanvasRenderingContext2D
+
+  private _initContainer() {
+    this._container.setAttribute("style", "display:block;")
+    this._container.innerHTML = '<div class="display"></div><div class="input"></div>'
+    this._displayContainer = <HTMLElement>this._container.querySelector(".display")
+  }
+
+  private _initCanvas() {
+    if (!this._displayContainer) throw "No display container!"
+    this._displayContainer.innerHTML = '<canvas style="image-rendering: -moz-crisp-edges;image-rendering: -webkit-crisp-edges;image-rendering: pixelated;image-rendering: crisp-edges;"></canvas>'
+    this._displayCanvas = <HTMLCanvasElement>this._displayContainer.querySelector("canvas")
+    this._displayCanvas.width = this.displayWidth
+    this._displayCanvas.height = this.displayHeight
+    this._displayContext = <CanvasRenderingContext2D>this._displayCanvas.getContext("2d")
+  }
+
+  private _vsync(t: number = 0) {
+    if (this._displayContext && this.displayBitmap) {
+      this._displayContext.putImageData(this.displayBitmap, 0, 0)
+    }
+    requestAnimationFrame(this._vsync.bind(this))
+  }
 }
-(<any>window)["Sys"] = new WebSys()
+(<any>window)["Sys"] = new WebSys(<HTMLElement>document.querySelector("fantasy-terminal"))

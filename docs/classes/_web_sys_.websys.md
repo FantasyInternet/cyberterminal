@@ -13,6 +13,11 @@ Sys implementation for web browsers. See [Sys](../interfaces/__classes_sys_.sys.
 
 ## Index
 
+### Constructors
+
+* [constructor](_web_sys_.websys.md#constructor)
+
+
 ### Accessors
 
 * [displayBitmap](_web_sys_.websys.md#displaybitmap)
@@ -31,6 +36,32 @@ Sys implementation for web browsers. See [Sys](../interfaces/__classes_sys_.sys.
 
 
 ---
+## Constructors
+<a id="constructor"></a>
+
+
+### ⊕ **new WebSys**(_container: *`HTMLElement`*): [WebSys](_web_sys_.websys.md)
+
+
+*Defined in [web-sys.ts:11](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-sys.ts#L11)*
+
+
+
+**Parameters:**
+
+| Param | Type | Description |
+| ------ | ------ | ------ |
+| _container | `HTMLElement`   |  - |
+
+
+
+
+
+**Returns:** [WebSys](_web_sys_.websys.md)
+
+---
+
+
 ## Accessors
 <a id="displaybitmap"></a>
 
@@ -120,7 +151,7 @@ ___
 
 *Implementation of [Sys](../interfaces/__classes_sys_.sys.md).[log](../interfaces/__classes_sys_.sys.md#log)*
 
-*Defined in [web-sys.ts:13](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-sys.ts#L13)*
+*Defined in [web-sys.ts:18](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-sys.ts#L18)*
 
 
 
@@ -152,7 +183,7 @@ ___
 
 *Implementation of [Sys](../interfaces/__classes_sys_.sys.md).[pget](../interfaces/__classes_sys_.sys.md#pget)*
 
-*Defined in [web-sys.ts:58](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-sys.ts#L58)*
+*Defined in [web-sys.ts:66](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-sys.ts#L66)*
 
 
 
@@ -183,7 +214,7 @@ ___
 
 
 
-*Defined in [web-sys.ts:40](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-sys.ts#L40)*
+*Defined in [web-sys.ts:48](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-sys.ts#L48)*
 
 
 
@@ -220,7 +251,7 @@ ___
 
 *Implementation of [Sys](../interfaces/__classes_sys_.sys.md).[setDisplayMode](../interfaces/__classes_sys_.sys.md#setdisplaymode)*
 
-*Defined in [web-sys.ts:17](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-sys.ts#L17)*
+*Defined in [web-sys.ts:22](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-sys.ts#L22)*
 
 
 
