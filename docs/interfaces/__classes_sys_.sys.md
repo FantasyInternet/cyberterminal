@@ -83,6 +83,46 @@ ___
 
 
 ## Methods
+<a id="fillrect"></a>
+
+###  fillRect
+
+► **fillRect**(x: *`number`*, y: *`number`*, width: *`number`*, height: *`number`*, r: *`number`*, g: *`number`*, b: *`number`*, a?: *`undefined`⎮`number`*): `void`
+
+
+
+*Defined in [_classes/Sys.ts:59](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_classes/Sys.ts#L59)*
+
+
+
+Fill a rectangle with a color on the display.
+
+
+**Parameters:**
+
+| Param | Type | Description |
+| ------ | ------ | ------ |
+| x | `number`   |  X coordinate |
+| y | `number`   |  Y coordinate |
+| width | `number`   |  Width of rectangle |
+| height | `number`   |  Height of rectangle |
+| r | `number`   |  Red |
+| g | `number`   |  Green |
+| b | `number`   |  Blue |
+| a | `undefined`⎮`number`   |  Alpha |
+
+
+
+
+
+**Returns:** `void`
+
+
+
+
+
+___
+
 <a id="log"></a>
 
 ###  log

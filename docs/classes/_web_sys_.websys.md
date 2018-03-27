@@ -28,6 +28,7 @@ Sys implementation for web browsers. See [Sys](../interfaces/__classes_sys_.sys.
 
 ### Methods
 
+* [fillRect](_web_sys_.websys.md#fillrect)
 * [log](_web_sys_.websys.md#log)
 * [pget](_web_sys_.websys.md#pget)
 * [pset](_web_sys_.websys.md#pset)
@@ -141,6 +142,43 @@ ___
 
 
 ## Methods
+<a id="fillrect"></a>
+
+###  fillRect
+
+► **fillRect**(x: *`number`*, y: *`number`*, width: *`number`*, height: *`number`*, r: *`number`*, g: *`number`*, b: *`number`*, a?: *`number`*): `void`
+
+
+
+*Defined in [web-sys.ts:77](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-sys.ts#L77)*
+
+
+
+**Parameters:**
+
+| Param | Type | Default value | Description |
+| ------ | ------ | ------ | ------ |
+| x | `number`  | - |   - |
+| y | `number`  | - |   - |
+| width | `number`  | - |   - |
+| height | `number`  | - |   - |
+| r | `number`  | - |   - |
+| g | `number`  | - |   - |
+| b | `number`  | - |   - |
+| a | `number`  | 255 |   - |
+
+
+
+
+
+**Returns:** `void`
+
+
+
+
+
+___
+
 <a id="log"></a>
 
 ###  log

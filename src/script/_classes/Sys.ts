@@ -44,6 +44,19 @@ declare interface Sys {
    * @returns The red,green,blue and alpha values in an array.
    */
   pget(x: number, y: number): Uint8ClampedArray
+
+  /**
+   * Fill a rectangle with a color on the display.
+   * @param x X coordinate
+   * @param y Y coordinate
+   * @param width Width of rectangle
+   * @param height Height of rectangle
+   * @param r Red
+   * @param g Green
+   * @param b Blue
+   * @param a Alpha
+   */
+  fillRect(x: number, y: number, width: number, height: number, r: number, g: number, b: number, a?: number): void
 }
 
 declare let Sys: Sys

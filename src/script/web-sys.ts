@@ -49,18 +49,18 @@ class WebSys implements Sys {
     if (!this.displayBitmap) throw "No bitmap present!"
     let bm = this.displayBitmap
     x = Math.floor(x)
-    if (x < 0 || x >= bm.width) return
+    if (x < 0 || x >= bm.width) throw "Coordinates out of bounds!"
     y = Math.floor(y)
-    if (y < 0 || y >= bm.height) return
+    if (y < 0 || y >= bm.height) throw "Coordinates out of bounds!"
     r = Math.min(Math.max(0, Math.floor(r)), 255)
     g = Math.min(Math.max(0, Math.floor(g)), 255)
     b = Math.min(Math.max(0, Math.floor(b)), 255)
     a = Math.min(Math.max(0, Math.floor(a)), 255)
     let i = (y * bm.width + x) * 4
-    bm.data[i + 0] = r
-    bm.data[i + 1] = g
-    bm.data[i + 2] = b
-    bm.data[i + 3] = a
+    bm.data[i++] = r
+    bm.data[i++] = g
+    bm.data[i++] = b
+    bm.data[i++] = a
   }
 
   pget(x: number, y: number) {
@@ -72,6 +72,40 @@ class WebSys implements Sys {
     if (y < 0 || y >= bm.height) throw "Coordinates out of bounds!"
     let i = (y * bm.width + x) * 4
     return bm.data.slice(i, i + 4)
+  }
+
+  fillRect(x: number, y: number, width: number, height: number, r: number, g: number, b: number, a = 255) {
+    if (!this.displayBitmap) throw "No bitmap present!"
+    let bm = this.displayBitmap
+    x = Math.floor(x)
+    if (x < 0 || x > bm.width) throw "Coordinates out of bounds!"
+    y = Math.floor(y)
+    if (y < 0 || y > bm.height) throw "Coordinates out of bounds!"
+    width = Math.floor(width)
+    if (width < 0 || x + width > bm.width) throw "Coordinates out of bounds!"
+    height = Math.floor(height)
+    if (height < 0 || y + height > bm.height) throw "Coordinates out of bounds!"
+    r = Math.min(Math.max(0, Math.floor(r)), 255)
+    g = Math.min(Math.max(0, Math.floor(g)), 255)
+    b = Math.min(Math.max(0, Math.floor(b)), 255)
+    a = Math.min(Math.max(0, Math.floor(a)), 255)
+    let i = (y * bm.width + x) * 4
+    bm.data[i++] = r
+    bm.data[i++] = g
+    bm.data[i++] = b
+    bm.data[i++] = a
+    i += -4
+    let bytes = bm.data.slice(i, i + 4)
+    for (let _x = 0; _x < width; _x++) {
+      bm.data.set(bytes, i)
+      i += 4
+    }
+    i += -4 * width
+    bytes = bm.data.slice(i, i + 4 * width)
+    for (let _y = 0; _y < height; _y++) {
+      bm.data.set(bytes, i)
+      i += 4 * bm.width
+    }
   }
 
   /** _privates */
