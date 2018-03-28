@@ -13,7 +13,7 @@ class WebCpu implements Sys {
   constructor() {
     console.log("The web worker is working!")
     this._initCom()
-    this.setDisplayMode("bitmap", 160, 90)
+    this.setDisplayMode("bitmap", 320, 180)
     for (let i = 0; i < 100; i++) {
       this.pset(i, i / 2, 255, 0, 255)
     }
@@ -194,7 +194,7 @@ class WebCpu implements Sys {
     if (!force && performance.now() - this._lastCommit < 100) return
     if (!this._displayBitmap) throw "No bitmap to commit!"
     let buffer: ArrayBuffer
-    if (this._transferBuffer) {
+    if (this._transferBuffer && this._transferBuffer.byteLength === this._displayBitmap.data.buffer.byteLength) {
       buffer = this._transferBuffer
       delete this._transferBuffer
     } else {
@@ -213,28 +213,42 @@ class WebCpu implements Sys {
   }
 }
 
-let _b = 0
-let _db = 1
-let _fps = 0
-let _lastFps = 0
 async function colorCube() {
+  let _x = 0
+  let _dx = 1
+  let _y = 0
+  let _dy = 1
+  let _z = 0
+  let _dz = 1
+  let _fps = 0
+  let _nextFps = 0
   let t = 0
   while (true) {
+    //await cpu.pset(0, 0, 0, 0, 0)
+    //t = performance.now()
     t = await cpu.waitForVsync()
     _fps++
-    if (t > _lastFps + 1000) {
-      console.log(_fps)
+    if (t >= _nextFps) {
+      console.log(_fps + " FPS")
       _fps = 0
-      _lastFps += 1000
+      _nextFps += 1000
     }
-    _b += _db
+    _x += _dx
+    _y += _dy
+    _z += _dz
     for (let y = 0; y < 64; y++) {
       for (let x = 0; x < 64; x++) {
-        cpu.pset(x + _b / 3, y + 8, x * 4, y * 4, _b)
+        cpu.pset(x + _x, y + _y, x * 4, y * 4, _z)
       }
     }
-    if (_b >= 255) _db = -1
-    if (_b <= 0) _db = 1
+    if (cpu.displayBitmap) {
+      if (_x >= cpu.displayBitmap.width - 64) _dx = -1
+      if (_x <= 0) _dx = 1
+      if (_y >= cpu.displayBitmap.height - 64) _dy = -1
+      if (_y <= 0) _dy = 1
+      if (_z >= 255) _dz = -1
+      if (_z <= 0) _dz = 1
+    }
   }
   //setTimeout(colorCube)
 }
