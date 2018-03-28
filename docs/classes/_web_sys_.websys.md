@@ -5,11 +5,7 @@
 # Class: WebSys
 
 
-Sys implementation for web browsers. See [Sys](../interfaces/__classes_sys_.sys.md) for documentation
-
-## Implements
-
-* [Sys](../interfaces/__classes_sys_.sys.md)
+Sys implementation for web browsers.
 
 ## Index
 
@@ -28,10 +24,6 @@ Sys implementation for web browsers. See [Sys](../interfaces/__classes_sys_.sys.
 
 ### Methods
 
-* [fillRect](_web_sys_.websys.md#fillrect)
-* [log](_web_sys_.websys.md#log)
-* [pget](_web_sys_.websys.md#pget)
-* [pset](_web_sys_.websys.md#pset)
 * [setDisplayMode](_web_sys_.websys.md#setdisplaymode)
 
 
@@ -44,7 +36,7 @@ Sys implementation for web browsers. See [Sys](../interfaces/__classes_sys_.sys.
 ### ⊕ **new WebSys**(_container: *`HTMLElement`*): [WebSys](_web_sys_.websys.md)
 
 
-*Defined in [web-sys.ts:11](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-sys.ts#L11)*
+*Defined in [web-sys.ts:10](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-sys.ts#L10)*
 
 
 
@@ -71,7 +63,7 @@ Sys implementation for web browsers. See [Sys](../interfaces/__classes_sys_.sys.
 
 getdisplayBitmap(): `undefined`⎮`ImageData`
 
-*Defined in [web-sys.ts:11](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-sys.ts#L11)*
+*Defined in [web-sys.ts:10](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-sys.ts#L10)*
 
 
 
@@ -90,7 +82,7 @@ ___
 
 getdisplayHeight(): `number`
 
-*Defined in [web-sys.ts:10](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-sys.ts#L10)*
+*Defined in [web-sys.ts:9](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-sys.ts#L9)*
 
 
 
@@ -109,7 +101,7 @@ ___
 
 getdisplayMode(): `string`
 
-*Defined in [web-sys.ts:8](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-sys.ts#L8)*
+*Defined in [web-sys.ts:7](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-sys.ts#L7)*
 
 
 
@@ -128,7 +120,7 @@ ___
 
 getdisplayWidth(): `number`
 
-*Defined in [web-sys.ts:9](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-sys.ts#L9)*
+*Defined in [web-sys.ts:8](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-sys.ts#L8)*
 
 
 
@@ -142,145 +134,6 @@ ___
 
 
 ## Methods
-<a id="fillrect"></a>
-
-###  fillRect
-
-► **fillRect**(x: *`number`*, y: *`number`*, width: *`number`*, height: *`number`*, r: *`number`*, g: *`number`*, b: *`number`*): `void`
-
-
-
-*Implementation of [Sys](../interfaces/__classes_sys_.sys.md).[fillRect](../interfaces/__classes_sys_.sys.md#fillrect)*
-
-*Defined in [web-sys.ts:79](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-sys.ts#L79)*
-
-
-
-**Parameters:**
-
-| Param | Type | Description |
-| ------ | ------ | ------ |
-| x | `number`   |  - |
-| y | `number`   |  - |
-| width | `number`   |  - |
-| height | `number`   |  - |
-| r | `number`   |  - |
-| g | `number`   |  - |
-| b | `number`   |  - |
-
-
-
-
-
-**Returns:** `void`
-
-
-
-
-
-___
-
-<a id="log"></a>
-
-###  log
-
-► **log**(msg: *`any`*): `void`
-
-
-
-*Implementation of [Sys](../interfaces/__classes_sys_.sys.md).[log](../interfaces/__classes_sys_.sys.md#log)*
-
-*Defined in [web-sys.ts:18](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-sys.ts#L18)*
-
-
-
-**Parameters:**
-
-| Param | Type | Description |
-| ------ | ------ | ------ |
-| msg | `any`   |  - |
-
-
-
-
-
-**Returns:** `void`
-
-
-
-
-
-___
-
-<a id="pget"></a>
-
-###  pget
-
-► **pget**(x: *`number`*, y: *`number`*): `Uint8ClampedArray`
-
-
-
-*Implementation of [Sys](../interfaces/__classes_sys_.sys.md).[pget](../interfaces/__classes_sys_.sys.md#pget)*
-
-*Defined in [web-sys.ts:68](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-sys.ts#L68)*
-
-
-
-**Parameters:**
-
-| Param | Type | Description |
-| ------ | ------ | ------ |
-| x | `number`   |  - |
-| y | `number`   |  - |
-
-
-
-
-
-**Returns:** `Uint8ClampedArray`
-
-
-
-
-
-___
-
-<a id="pset"></a>
-
-###  pset
-
-► **pset**(x: *`number`*, y: *`number`*, r: *`number`*, g: *`number`*, b: *`number`*): `void`
-
-
-
-*Implementation of [Sys](../interfaces/__classes_sys_.sys.md).[pset](../interfaces/__classes_sys_.sys.md#pset)*
-
-*Defined in [web-sys.ts:49](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-sys.ts#L49)*
-
-
-
-**Parameters:**
-
-| Param | Type | Description |
-| ------ | ------ | ------ |
-| x | `number`   |  - |
-| y | `number`   |  - |
-| r | `number`   |  - |
-| g | `number`   |  - |
-| b | `number`   |  - |
-
-
-
-
-
-**Returns:** `void`
-
-
-
-
-
-___
-
 <a id="setdisplaymode"></a>
 
 ###  setDisplayMode
@@ -289,9 +142,7 @@ ___
 
 
 
-*Implementation of [Sys](../interfaces/__classes_sys_.sys.md).[setDisplayMode](../interfaces/__classes_sys_.sys.md#setdisplaymode)*
-
-*Defined in [web-sys.ts:22](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-sys.ts#L22)*
+*Defined in [web-sys.ts:18](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-sys.ts#L18)*
 
 
 

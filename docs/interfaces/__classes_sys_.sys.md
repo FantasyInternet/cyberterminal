@@ -9,7 +9,7 @@ Unified interface to system I/O
 
 ## Implemented by
 
-* [WebSys](../classes/_web_sys_.websys.md)
+* [WebCpu](../classes/_web_cpu_.webcpu.md)
 
 
 ## Properties
