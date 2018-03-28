@@ -312,7 +312,7 @@ ___
 
 ###  waitForVsync
 
-► **waitForVsync**(): `Promise`.<`Object`>
+► **waitForVsync**(): `Promise`.<`number`>
 
 
 
@@ -322,7 +322,7 @@ ___
 
 
 
-**Returns:** `Promise`.<`Object`>
+**Returns:** `Promise`.<`number`>
 
 
 

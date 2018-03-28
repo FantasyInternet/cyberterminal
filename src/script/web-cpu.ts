@@ -119,7 +119,8 @@ class WebCpu implements Sys {
     this._commitBitmap()
   }
 
-  async waitForVsync() {
+  async waitForVsync(): Promise<number> {
+    this._commitBitmap(true)
     return this._sysRequest("waitForVsync")
   }
 
@@ -137,7 +138,7 @@ class WebCpu implements Sys {
   }
 
   private _onMessage(e: MessageEvent) {
-    console.log("main:", e)
+    //console.log("main:", e)
     switch (e.data.cmd) {
       case "imagedata":
         this._transferBuffer = e.data.buffer
@@ -171,7 +172,7 @@ class WebCpu implements Sys {
     })
   }
 
-  private _sysRequest(method: string, ...args: any[]) {
+  private _sysRequest(method: string, ...args: any[]): Promise<any> {
     let reqId = this._pendingRequests.indexOf(undefined)
     if (reqId < 0) reqId = this._pendingRequests.length
     this._pendingRequests[reqId] = true
@@ -214,9 +215,18 @@ class WebCpu implements Sys {
 
 let _b = 0
 let _db = 1
+let _fps = 0
+let _lastFps = 0
 async function colorCube() {
+  let t = 0
   while (true) {
-    await cpu.waitForVsync()
+    t = await cpu.waitForVsync()
+    _fps++
+    if (t > _lastFps + 1000) {
+      console.log(_fps)
+      _fps = 0
+      _lastFps += 1000
+    }
     _b += _db
     for (let y = 0; y < 64; y++) {
       for (let x = 0; x < 64; x++) {

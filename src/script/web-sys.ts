@@ -82,7 +82,7 @@ class WebSys {
 
   private _onMessage(e: MessageEvent) {
     if (!this._worker) return
-    console.log("worker:", e)
+    //console.log("worker:", e)
     switch (e.data.cmd) {
       case "call":
         let value
