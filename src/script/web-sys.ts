@@ -1,5 +1,6 @@
 /// <reference path="./_classes/Sys" />
 
+
 /**
  * Sys implementation for web browsers.
  */
@@ -42,6 +43,12 @@ class WebSys {
     return
   }
 
+  async waitForVsync() {
+    return new Promise((resolve, reject) => {
+      this._vsyncCallbacks.push(resolve)
+    })
+  }
+
   /** _privates */
   private _displayMode: string = ""
   private _displayWidth: number = 0
@@ -51,6 +58,7 @@ class WebSys {
   private _displayCanvas?: HTMLCanvasElement
   private _displayContext?: CanvasRenderingContext2D
   private _worker?: Worker
+  private _vsyncCallbacks: Function[] = []
 
   private _initContainer() {
     this._container.setAttribute("style", "display:block;")
@@ -74,10 +82,35 @@ class WebSys {
 
   private _onMessage(e: MessageEvent) {
     if (!this._worker) return
-    //console.log("worker:", e)
+    console.log("worker:", e)
     switch (e.data.cmd) {
       case "call":
-        (<any>this)[e.data.method].apply(this, e.data.arguments)
+        let value
+        try {
+          e.data.success = true
+          value = (<any>this)[e.data.method].apply(this, e.data.arguments)
+        } catch (error) {
+          e.data.success = false
+          value = error
+        }
+        if (e.data.reqId != null) {
+          e.data.cmd = "response"
+          if (value instanceof Promise) {
+            value.then((value) => {
+              if (!this._worker) return
+              e.data.value = value
+              this._worker.postMessage(e.data)
+            }, (value) => {
+              if (!this._worker) return
+              e.data.success = false
+              e.data.value = value
+              this._worker.postMessage(e.data)
+            })
+          } else {
+            e.data.value = value
+            this._worker.postMessage(e.data)
+          }
+        }
         break
 
       case "imagedata":
@@ -105,6 +138,8 @@ class WebSys {
       this._displayContext.putImageData(this.displayBitmap, 0, 0)
     }
     requestAnimationFrame(this._vsync.bind(this))
+    let cb
+    while (cb = this._vsyncCallbacks.pop()) cb(t)
   }
 }
 (<any>window)["Sys"] = new WebSys(<HTMLElement>document.querySelector("fantasy-terminal"))

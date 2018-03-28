@@ -32,7 +32,7 @@
 
 **●  _b**:  *`number`*  = 0
 
-*Defined in web-cpu.ts:181*
+*Defined in [web-cpu.ts:215](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-cpu.ts#L215)*
 
 
 
@@ -46,7 +46,7 @@ ___
 
 **●  _db**:  *`number`*  = 1
 
-*Defined in web-cpu.ts:182*
+*Defined in [web-cpu.ts:216](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-cpu.ts#L216)*
 
 
 
@@ -60,7 +60,7 @@ ___
 
 **●  cpu**:  *[WebCpu](../classes/_web_cpu_.webcpu.md)*  =  new WebCpu()
 
-*Defined in web-cpu.ts:197*
+*Defined in [web-cpu.ts:232](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-cpu.ts#L232)*
 
 
 
@@ -74,17 +74,17 @@ ___
 
 ###  colorCube
 
-► **colorCube**(): `void`
+► **colorCube**(): `Promise`.<`void`>
 
 
 
-*Defined in web-cpu.ts:183*
+*Defined in [web-cpu.ts:217](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-cpu.ts#L217)*
 
 
 
 
 
-**Returns:** `void`
+**Returns:** `Promise`.<`void`>
 
 
 

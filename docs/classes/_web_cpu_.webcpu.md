@@ -33,6 +33,7 @@ Central processing unit for browsers See [Sys](../interfaces/__classes_sys_.sys.
 * [pget](_web_cpu_.webcpu.md#pget)
 * [pset](_web_cpu_.webcpu.md#pset)
 * [setDisplayMode](_web_cpu_.webcpu.md#setdisplaymode)
+* [waitForVsync](_web_cpu_.webcpu.md#waitforvsync)
 
 
 
@@ -44,7 +45,7 @@ Central processing unit for browsers See [Sys](../interfaces/__classes_sys_.sys.
 ### ⊕ **new WebCpu**(): [WebCpu](_web_cpu_.webcpu.md)
 
 
-*Defined in web-cpu.ts:11*
+*Defined in [web-cpu.ts:11](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-cpu.ts#L11)*
 
 
 
@@ -63,7 +64,7 @@ Central processing unit for browsers See [Sys](../interfaces/__classes_sys_.sys.
 
 getdisplayBitmap(): `undefined`⎮`ImageData`
 
-*Defined in web-cpu.ts:11*
+*Defined in [web-cpu.ts:11](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-cpu.ts#L11)*
 
 
 
@@ -82,7 +83,7 @@ ___
 
 getdisplayHeight(): `number`
 
-*Defined in web-cpu.ts:10*
+*Defined in [web-cpu.ts:10](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-cpu.ts#L10)*
 
 
 
@@ -101,7 +102,7 @@ ___
 
 getdisplayMode(): `string`
 
-*Defined in web-cpu.ts:8*
+*Defined in [web-cpu.ts:8](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-cpu.ts#L8)*
 
 
 
@@ -120,7 +121,7 @@ ___
 
 getdisplayWidth(): `number`
 
-*Defined in web-cpu.ts:9*
+*Defined in [web-cpu.ts:9](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-cpu.ts#L9)*
 
 
 
@@ -144,7 +145,7 @@ ___
 
 *Implementation of [Sys](../interfaces/__classes_sys_.sys.md).[fillRect](../interfaces/__classes_sys_.sys.md#fillrect)*
 
-*Defined in web-cpu.ts:86*
+*Defined in [web-cpu.ts:86](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-cpu.ts#L86)*
 
 
 
@@ -182,7 +183,7 @@ ___
 
 *Implementation of [Sys](../interfaces/__classes_sys_.sys.md).[log](../interfaces/__classes_sys_.sys.md#log)*
 
-*Defined in web-cpu.ts:26*
+*Defined in [web-cpu.ts:26](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-cpu.ts#L26)*
 
 
 
@@ -214,7 +215,7 @@ ___
 
 *Implementation of [Sys](../interfaces/__classes_sys_.sys.md).[pget](../interfaces/__classes_sys_.sys.md#pget)*
 
-*Defined in web-cpu.ts:75*
+*Defined in [web-cpu.ts:75](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-cpu.ts#L75)*
 
 
 
@@ -247,7 +248,7 @@ ___
 
 *Implementation of [Sys](../interfaces/__classes_sys_.sys.md).[pset](../interfaces/__classes_sys_.sys.md#pset)*
 
-*Defined in web-cpu.ts:55*
+*Defined in [web-cpu.ts:55](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-cpu.ts#L55)*
 
 
 
@@ -283,7 +284,7 @@ ___
 
 *Implementation of [Sys](../interfaces/__classes_sys_.sys.md).[setDisplayMode](../interfaces/__classes_sys_.sys.md#setdisplaymode)*
 
-*Defined in web-cpu.ts:30*
+*Defined in [web-cpu.ts:30](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-cpu.ts#L30)*
 
 
 
@@ -300,6 +301,28 @@ ___
 
 
 **Returns:** `void`
+
+
+
+
+
+___
+
+<a id="waitforvsync"></a>
+
+###  waitForVsync
+
+► **waitForVsync**(): `Promise`.<`Object`>
+
+
+
+*Defined in [web-cpu.ts:122](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-cpu.ts#L122)*
+
+
+
+
+
+**Returns:** `Promise`.<`Object`>
 
 
 

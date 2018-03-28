@@ -119,6 +119,10 @@ class WebCpu implements Sys {
     this._commitBitmap()
   }
 
+  async waitForVsync() {
+    return this._sysRequest("waitForVsync")
+  }
+
   /* _privates */
   private _displayMode: string = ""
   private _displayWidth: number = 0
@@ -126,16 +130,28 @@ class WebCpu implements Sys {
   private _displayBitmap?: ImageData
   private _transferBuffer?: ArrayBuffer
   private _lastCommit: number = performance.now()
+  private _pendingRequests: any[] = []
 
   private _initCom() {
     self.addEventListener("message", this._onMessage.bind(this))
   }
 
   private _onMessage(e: MessageEvent) {
-    //console.log("main:", e)
+    console.log("main:", e)
     switch (e.data.cmd) {
       case "imagedata":
         this._transferBuffer = e.data.buffer
+        break
+
+      case "response":
+        if (this._pendingRequests[e.data.reqId]) {
+          if (e.data.success) {
+            this._pendingRequests[e.data.reqId].resolve(e.data.value)
+          } else {
+            this._pendingRequests[e.data.reqId].reject(e.data.value)
+          }
+          this._pendingRequests[e.data.reqId] = undefined
+        }
         break
 
       default:
@@ -150,8 +166,26 @@ class WebCpu implements Sys {
   private _sysCall(method: string, ...args: any[]) {
     this._postMessage({
       cmd: "call",
-      method: "setDisplayMode",
+      method: method,
       arguments: args
+    })
+  }
+
+  private _sysRequest(method: string, ...args: any[]) {
+    let reqId = this._pendingRequests.indexOf(undefined)
+    if (reqId < 0) reqId = this._pendingRequests.length
+    this._pendingRequests[reqId] = true
+    this._postMessage({
+      cmd: "call",
+      method: method,
+      arguments: args,
+      reqId: reqId
+    })
+    return new Promise((resolve, reject) => {
+      this._pendingRequests[reqId] = {
+        resolve: resolve,
+        reject: reject
+      }
     })
   }
 
@@ -180,8 +214,9 @@ class WebCpu implements Sys {
 
 let _b = 0
 let _db = 1
-function colorCube() {
+async function colorCube() {
   while (true) {
+    await cpu.waitForVsync()
     _b += _db
     for (let y = 0; y < 64; y++) {
       for (let x = 0; x < 64; x++) {

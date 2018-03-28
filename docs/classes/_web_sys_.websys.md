@@ -25,6 +25,7 @@ Sys implementation for web browsers.
 ### Methods
 
 * [setDisplayMode](_web_sys_.websys.md#setdisplaymode)
+* [waitForVsync](_web_sys_.websys.md#waitforvsync)
 
 
 
@@ -36,7 +37,7 @@ Sys implementation for web browsers.
 ### ⊕ **new WebSys**(_container: *`HTMLElement`*): [WebSys](_web_sys_.websys.md)
 
 
-*Defined in [web-sys.ts:10](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-sys.ts#L10)*
+*Defined in [web-sys.ts:11](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-sys.ts#L11)*
 
 
 
@@ -63,7 +64,7 @@ Sys implementation for web browsers.
 
 getdisplayBitmap(): `undefined`⎮`ImageData`
 
-*Defined in [web-sys.ts:10](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-sys.ts#L10)*
+*Defined in [web-sys.ts:11](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-sys.ts#L11)*
 
 
 
@@ -82,7 +83,7 @@ ___
 
 getdisplayHeight(): `number`
 
-*Defined in [web-sys.ts:9](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-sys.ts#L9)*
+*Defined in [web-sys.ts:10](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-sys.ts#L10)*
 
 
 
@@ -101,7 +102,7 @@ ___
 
 getdisplayMode(): `string`
 
-*Defined in [web-sys.ts:7](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-sys.ts#L7)*
+*Defined in [web-sys.ts:8](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-sys.ts#L8)*
 
 
 
@@ -120,7 +121,7 @@ ___
 
 getdisplayWidth(): `number`
 
-*Defined in [web-sys.ts:8](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-sys.ts#L8)*
+*Defined in [web-sys.ts:9](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-sys.ts#L9)*
 
 
 
@@ -142,7 +143,7 @@ ___
 
 
 
-*Defined in [web-sys.ts:18](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-sys.ts#L18)*
+*Defined in [web-sys.ts:19](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-sys.ts#L19)*
 
 
 
@@ -159,6 +160,28 @@ ___
 
 
 **Returns:** `void`
+
+
+
+
+
+___
+
+<a id="waitforvsync"></a>
+
+###  waitForVsync
+
+► **waitForVsync**(): `Promise`.<`Object`>
+
+
+
+*Defined in [web-sys.ts:46](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-sys.ts#L46)*
+
+
+
+
+
+**Returns:** `Promise`.<`Object`>
 
 
 
