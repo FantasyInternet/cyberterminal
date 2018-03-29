@@ -119,21 +119,27 @@ class WebCpu implements Sys {
     this._commitBitmap()
   }
 
+  async wait(milliseconds: number = 0) {
+    return new Promise((resolve) => {
+      setTimeout(resolve, milliseconds)
+    })
+  }
+
   async waitForVsync(): Promise<number> {
     this._commitBitmap(true)
     return this._sysRequest("waitForVsync")
   }
 
-  async commitDisplay() {
+  async commitDisplay(): Promise<number> {
     switch (this.displayMode) {
       case "bitmap":
         this._commitBitmap(true)
         break
 
       default:
-        return
+        return this._lastCommit
     }
-    return new Promise((resolve) => {
+    return new Promise<number>((resolve) => {
       this._pendingCommits.push(resolve)
     })
   }
@@ -158,7 +164,7 @@ class WebCpu implements Sys {
       case "imagedata":
         this._transferBuffer = e.data.buffer
         let cb: Function | undefined
-        while (cb = this._pendingCommits.pop()) cb()
+        while (cb = this._pendingCommits.pop()) cb(this._lastCommit)
         break
 
       case "response":
@@ -242,8 +248,8 @@ class WebCpu implements Sys {
     let _nextFps = 0
     let t = 0
     while (true) {
-      await this.commitDisplay()
       t = performance.now()
+      t = await this.commitDisplay()
       //t = await this.waitForVsync()
       _fps++
       if (t >= _nextFps) {

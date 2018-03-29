@@ -34,6 +34,7 @@ Central processing unit for browsers See [Sys](../interfaces/__classes_sys_.sys.
 * [pget](_web_cpu_.webcpu.md#pget)
 * [pset](_web_cpu_.webcpu.md#pset)
 * [setDisplayMode](_web_cpu_.webcpu.md#setdisplaymode)
+* [wait](_web_cpu_.webcpu.md#wait)
 * [waitForVsync](_web_cpu_.webcpu.md#waitforvsync)
 
 
@@ -140,17 +141,17 @@ ___
 
 ###  commitDisplay
 
-► **commitDisplay**(): `Promise`.<`undefined`⎮`Object`>
+► **commitDisplay**(): `Promise`.<`number`>
 
 
 
-*Defined in [web-cpu.ts:127](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-cpu.ts#L127)*
+*Defined in [web-cpu.ts:133](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-cpu.ts#L133)*
 
 
 
 
 
-**Returns:** `Promise`.<`undefined`⎮`Object`>
+**Returns:** `Promise`.<`number`>
 
 
 
@@ -331,6 +332,36 @@ ___
 
 ___
 
+<a id="wait"></a>
+
+###  wait
+
+► **wait**(milliseconds?: *`number`*): `Promise`.<`Object`>
+
+
+
+*Defined in [web-cpu.ts:122](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-cpu.ts#L122)*
+
+
+
+**Parameters:**
+
+| Param | Type | Default value | Description |
+| ------ | ------ | ------ | ------ |
+| milliseconds | `number`  | 0 |   - |
+
+
+
+
+
+**Returns:** `Promise`.<`Object`>
+
+
+
+
+
+___
+
 <a id="waitforvsync"></a>
 
 ###  waitForVsync
@@ -339,7 +370,7 @@ ___
 
 
 
-*Defined in [web-cpu.ts:122](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-cpu.ts#L122)*
+*Defined in [web-cpu.ts:128](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-cpu.ts#L128)*
 
 
 
