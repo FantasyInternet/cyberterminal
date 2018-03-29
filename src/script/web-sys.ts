@@ -57,6 +57,7 @@ class WebSys {
   private _displayContainer?: HTMLElement
   private _displayCanvas?: HTMLCanvasElement
   private _displayContext?: CanvasRenderingContext2D
+  private _displayScale: number = 1
   private _worker?: Worker
   private _vsyncCallbacks: Function[] = []
 
@@ -81,16 +82,31 @@ class WebSys {
 
   private _resizeCanvas() {
     if (!this._displayCanvas) return
-    let scale = 1
+    this._displayCanvas.style.display = "none"
     let terminalWidth = this._container.offsetWidth * devicePixelRatio
-    while (this.displayWidth * scale < terminalWidth) scale++
-    while (this.displayWidth * scale > terminalWidth) scale--
-    if (scale < 1) {
+    while (this.displayWidth * this._displayScale < terminalWidth) this._displayScale++
+    while (this.displayWidth * this._displayScale > terminalWidth) this._displayScale--
+    if (this._displayScale < 1) {
+      this._displayScale = 1
       let divide = 1
-      while (this.displayWidth * (1 / divide) > terminalWidth) scale = (1 / ++divide)
+      while (this.displayWidth * this._displayScale > terminalWidth) this._displayScale = (1 / ++divide)
     }
-    this._displayCanvas.style.width = (this._displayCanvas.width * scale) / devicePixelRatio + "px"
-    this._displayCanvas.style.height = (this._displayCanvas.height * scale) / devicePixelRatio + "px"
+    this._displayCanvas.style.width = (this._displayCanvas.width * this._displayScale) / devicePixelRatio + "px"
+    this._displayCanvas.style.height = (this._displayCanvas.height * this._displayScale) / devicePixelRatio + "px"
+    this._displayCanvas.style.display = "block"
+    requestAnimationFrame(this._resizeCanvasHeight.bind(this))
+  }
+  private _resizeCanvasHeight() {
+    if (!this._displayCanvas) return
+    let terminalHeight = this._container.offsetHeight * devicePixelRatio
+    while (this.displayHeight * this._displayScale > terminalHeight) this._displayScale--
+    if (this._displayScale < 1) {
+      this._displayScale = 1
+      let divide = 1
+      while (this.displayHeight * this._displayScale > terminalHeight) this._displayScale = (1 / ++divide)
+    }
+    this._displayCanvas.style.width = (this._displayCanvas.width * this._displayScale) / devicePixelRatio + "px"
+    this._displayCanvas.style.height = (this._displayCanvas.height * this._displayScale) / devicePixelRatio + "px"
   }
 
   private _initWorker() {

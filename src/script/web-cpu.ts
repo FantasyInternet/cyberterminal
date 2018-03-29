@@ -163,7 +163,7 @@ class WebCpu implements Sys {
     switch (e.data.cmd) {
       case "imagedata":
         this._transferBuffer = e.data.buffer
-        let cb: Function | undefined
+        let cb
         while (cb = this._pendingCommits.pop()) cb(this._lastCommit)
         break
 
