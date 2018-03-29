@@ -20,7 +20,7 @@ class WebCpu implements Sys {
     this.fillRect(80, 45, 79, 44, 0, 255, 127)
     this._commitBitmap(true)
     setTimeout(this._commitBitmap.bind(this), 3000)
-    setTimeout(colorCube, 5000)
+    setTimeout(this._test.bind(this), 5000)
   }
 
   log(msg: any) {
@@ -124,6 +124,20 @@ class WebCpu implements Sys {
     return this._sysRequest("waitForVsync")
   }
 
+  async commitDisplay() {
+    switch (this.displayMode) {
+      case "bitmap":
+        this._commitBitmap(true)
+        break
+
+      default:
+        return
+    }
+    return new Promise((resolve) => {
+      this._pendingCommits.push(resolve)
+    })
+  }
+
   /* _privates */
   private _displayMode: string = ""
   private _displayWidth: number = 0
@@ -131,6 +145,7 @@ class WebCpu implements Sys {
   private _displayBitmap?: ImageData
   private _transferBuffer?: ArrayBuffer
   private _lastCommit: number = performance.now()
+  private _pendingCommits: Function[] = []
   private _pendingRequests: any[] = []
 
   private _initCom() {
@@ -142,6 +157,8 @@ class WebCpu implements Sys {
     switch (e.data.cmd) {
       case "imagedata":
         this._transferBuffer = e.data.buffer
+        let cb: Function | undefined
+        while (cb = this._pendingCommits.pop()) cb()
         break
 
       case "response":
@@ -191,7 +208,7 @@ class WebCpu implements Sys {
   }
 
   private _commitBitmap(force = false) {
-    if (!force && performance.now() - this._lastCommit < 100) return
+    if (!force && performance.now() - this._lastCommit < 1000) return
     if (!this._displayBitmap) throw "No bitmap to commit!"
     let buffer: ArrayBuffer
     if (this._transferBuffer && this._transferBuffer.byteLength === this._displayBitmap.data.buffer.byteLength) {
@@ -211,46 +228,49 @@ class WebCpu implements Sys {
       }, [buffer])
     this._lastCommit = performance.now()
   }
-}
 
-async function colorCube() {
-  let _x = 0
-  let _dx = 1
-  let _y = 0
-  let _dy = 1
-  let _z = 0
-  let _dz = 1
-  let _fps = 0
-  let _nextFps = 0
-  let t = 0
-  while (true) {
-    //await cpu.pset(0, 0, 0, 0, 0)
-    //t = performance.now()
-    t = await cpu.waitForVsync()
-    _fps++
-    if (t >= _nextFps) {
-      console.log(_fps + " FPS")
-      _fps = 0
-      _nextFps += 1000
-    }
-    _x += _dx
-    _y += _dy
-    _z += _dz
-    for (let y = 0; y < 64; y++) {
-      for (let x = 0; x < 64; x++) {
-        cpu.pset(x + _x, y + _y, x * 4, y * 4, _z)
+
+
+  private async _test() {
+    let _x = 0
+    let _dx = 1
+    let _y = 0
+    let _dy = 1
+    let _z = 0
+    let _dz = 1
+    let _fps = 0
+    let _nextFps = 0
+    let t = 0
+    while (true) {
+      await this.commitDisplay()
+      t = performance.now()
+      //t = await this.waitForVsync()
+      _fps++
+      if (t >= _nextFps) {
+        console.log(_fps + " FPS")
+        _fps = 0
+        _nextFps += 1000
+      }
+      _x += _dx
+      _y += _dy
+      _z += _dz
+      for (let y = 0; y < 64; y++) {
+        for (let x = 0; x < 64; x++) {
+          this.pset(x + _x, y + _y, x * 4, y * 4, _z)
+        }
+      }
+      if (this.displayBitmap) {
+        if (_x >= this.displayBitmap.width - 64) _dx = -1
+        if (_x <= 0) _dx = 1
+        if (_y >= this.displayBitmap.height - 64) _dy = -1
+        if (_y <= 0) _dy = 1
+        if (_z >= 255) _dz = -1
+        if (_z <= 0) _dz = 1
       }
     }
-    if (cpu.displayBitmap) {
-      if (_x >= cpu.displayBitmap.width - 64) _dx = -1
-      if (_x <= 0) _dx = 1
-      if (_y >= cpu.displayBitmap.height - 64) _dy = -1
-      if (_y <= 0) _dy = 1
-      if (_z >= 255) _dz = -1
-      if (_z <= 0) _dz = 1
-    }
+    //setTimeout(colorCube)
   }
-  //setTimeout(colorCube)
+
 }
 
-let cpu = new WebCpu()
+new WebCpu()

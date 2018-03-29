@@ -28,6 +28,7 @@ Central processing unit for browsers See [Sys](../interfaces/__classes_sys_.sys.
 
 ### Methods
 
+* [commitDisplay](_web_cpu_.webcpu.md#commitdisplay)
 * [fillRect](_web_cpu_.webcpu.md#fillrect)
 * [log](_web_cpu_.webcpu.md#log)
 * [pget](_web_cpu_.webcpu.md#pget)
@@ -135,6 +136,28 @@ ___
 
 
 ## Methods
+<a id="commitdisplay"></a>
+
+###  commitDisplay
+
+► **commitDisplay**(): `Promise`.<`undefined`⎮`Object`>
+
+
+
+*Defined in [web-cpu.ts:127](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-cpu.ts#L127)*
+
+
+
+
+
+**Returns:** `Promise`.<`undefined`⎮`Object`>
+
+
+
+
+
+___
+
 <a id="fillrect"></a>
 
 ###  fillRect
