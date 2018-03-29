@@ -1,14 +1,24 @@
 fantasy-terminal {
+  align-items: center;
   background-color: black;
-  display:block;
-  text-align: center;
+  display:flex;
+  justify-content: center;
+  overflow: hidden;
+  
+  max-height: 100vh;
 
   canvas {
-    display: block;
-    image-rendering: -moz-crisp-edges;
-    image-rendering: -webkit-crisp-edges;
-    image-rendering: pixelated;
-    image-rendering: crisp-edges;
-    margin: auto;
+    //display: block !important;
+    image-rendering: -moz-crisp-edges !important;
+    image-rendering: -webkit-crisp-edges !important;
+    image-rendering: pixelated !important;
+    image-rendering: crisp-edges !important;
+    //margin: auto !important;
+    vertical-align: middle;
+
+    min-width: none !important;
+    max-width: none !important;
+    min-height: none !important;
+    max-height: none !important;
   }
 }

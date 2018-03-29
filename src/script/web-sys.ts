@@ -16,11 +16,11 @@ class WebSys {
     this._vsync()
   }
 
-  setDisplayMode(mode: "text" | "bitmap", width: number, height: number) {
+  setDisplayMode(mode: "text" | "bitmap", width: number, height: number, displayWidth = width, displayHeight = height) {
     if (!this._worker) return
     this._displayMode = mode
-    this._displayWidth = width
-    this._displayHeight = height
+    this._displayWidth = displayWidth
+    this._displayHeight = displayHeight
     delete this._displayBitmap
     delete this._displayCanvas
     delete this._displayContext
@@ -30,7 +30,7 @@ class WebSys {
         break
 
       case "bitmap":
-        this._displayBitmap = new ImageData(this.displayWidth, this.displayHeight)
+        this._displayBitmap = new ImageData(width, height)
         this._initCanvas()
         break
 
@@ -57,7 +57,7 @@ class WebSys {
   private _displayContainer?: HTMLElement
   private _displayCanvas?: HTMLCanvasElement
   private _displayContext?: CanvasRenderingContext2D
-  private _displayScale: number = 1
+  private _displayScale: number = 8
   private _worker?: Worker
   private _vsyncCallbacks: Function[] = []
 
@@ -67,46 +67,46 @@ class WebSys {
       ; (<HTMLElement>document.querySelector("head")).insertBefore(style, document.querySelector("head *"))
     this._container.innerHTML = '<div class="display"></div><div class="input"></div>'
     this._displayContainer = <HTMLElement>this._container.querySelector(".display")
-    addEventListener("resize", this._resizeCanvas.bind(this))
+    addEventListener("resize", () => { this._resizeCanvas(false) })
   }
 
   private _initCanvas() {
     if (!this._displayContainer) throw "No display container!"
-    this._displayContainer.innerHTML = '<canvas style=""></canvas>'
+    if (!this.displayBitmap) throw "No display bitmap!"
+    this._displayContainer.innerHTML = '<canvas></canvas>'
     this._displayCanvas = <HTMLCanvasElement>this._displayContainer.querySelector("canvas")
-    this._displayCanvas.width = this.displayWidth
-    this._displayCanvas.height = this.displayHeight
+    this._displayCanvas.width = this.displayBitmap.width
+    this._displayCanvas.height = this.displayBitmap.height
     this._displayContext = <CanvasRenderingContext2D>this._displayCanvas.getContext("2d")
-    this._resizeCanvas()
+    this._resizeCanvas(false)
   }
 
-  private _resizeCanvas() {
+  private _resizeCanvas(checkHeight = true) {
     if (!this._displayCanvas) return
-    this._displayCanvas.style.display = "none"
+    if (!checkHeight) {
+      this._displayCanvas.style.display = "none"
+      this._displayScale = 1
+    }
     let terminalWidth = this._container.offsetWidth * devicePixelRatio
+    let terminalHeight = this._container.offsetHeight * devicePixelRatio
     while (this.displayWidth * this._displayScale < terminalWidth) this._displayScale++
     while (this.displayWidth * this._displayScale > terminalWidth) this._displayScale--
+    if (checkHeight) while (this.displayHeight * this._displayScale > terminalHeight) this._displayScale--
     if (this._displayScale < 1) {
       this._displayScale = 1
       let divide = 1
       while (this.displayWidth * this._displayScale > terminalWidth) this._displayScale = (1 / ++divide)
+      if (checkHeight) while (this.displayHeight * this._displayScale > terminalHeight) this._displayScale = (1 / ++divide)
     }
     this._displayCanvas.style.width = (this._displayCanvas.width * this._displayScale) / devicePixelRatio + "px"
     this._displayCanvas.style.height = (this._displayCanvas.height * this._displayScale) / devicePixelRatio + "px"
-    this._displayCanvas.style.display = "block"
-    requestAnimationFrame(this._resizeCanvasHeight.bind(this))
-  }
-  private _resizeCanvasHeight() {
-    if (!this._displayCanvas) return
-    let terminalHeight = this._container.offsetHeight * devicePixelRatio
-    while (this.displayHeight * this._displayScale > terminalHeight) this._displayScale--
-    if (this._displayScale < 1) {
-      this._displayScale = 1
-      let divide = 1
-      while (this.displayHeight * this._displayScale > terminalHeight) this._displayScale = (1 / ++divide)
-    }
-    this._displayCanvas.style.width = (this._displayCanvas.width * this._displayScale) / devicePixelRatio + "px"
-    this._displayCanvas.style.height = (this._displayCanvas.height * this._displayScale) / devicePixelRatio + "px"
+    this._displayCanvas.style.marginLeft = this._displayCanvas.style.marginRight =
+      (this.displayWidth - this._displayCanvas.width) / 2 * this._displayScale / devicePixelRatio + "px"
+    this._displayCanvas.style.marginTop = this._displayCanvas.style.marginBottom =
+      (this.displayHeight - this._displayCanvas.height) / 2 * this._displayScale / devicePixelRatio + "px"
+    this._displayCanvas.style.display = "inline-block"
+    if (!checkHeight)
+      requestAnimationFrame(this._resizeCanvas.bind(this))
   }
 
   private _initWorker() {

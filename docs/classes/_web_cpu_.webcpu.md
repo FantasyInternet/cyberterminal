@@ -145,7 +145,7 @@ ___
 
 
 
-*Defined in [web-cpu.ts:133](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-cpu.ts#L133)*
+*Defined in [web-cpu.ts:131](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-cpu.ts#L131)*
 
 
 
@@ -169,7 +169,7 @@ ___
 
 *Implementation of [Sys](../interfaces/__classes_sys_.sys.md).[fillRect](../interfaces/__classes_sys_.sys.md#fillrect)*
 
-*Defined in [web-cpu.ts:86](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-cpu.ts#L86)*
+*Defined in [web-cpu.ts:84](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-cpu.ts#L84)*
 
 
 
@@ -207,7 +207,7 @@ ___
 
 *Implementation of [Sys](../interfaces/__classes_sys_.sys.md).[log](../interfaces/__classes_sys_.sys.md#log)*
 
-*Defined in [web-cpu.ts:26](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-cpu.ts#L26)*
+*Defined in [web-cpu.ts:24](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-cpu.ts#L24)*
 
 
 
@@ -239,7 +239,7 @@ ___
 
 *Implementation of [Sys](../interfaces/__classes_sys_.sys.md).[pget](../interfaces/__classes_sys_.sys.md#pget)*
 
-*Defined in [web-cpu.ts:75](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-cpu.ts#L75)*
+*Defined in [web-cpu.ts:73](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-cpu.ts#L73)*
 
 
 
@@ -272,7 +272,7 @@ ___
 
 *Implementation of [Sys](../interfaces/__classes_sys_.sys.md).[pset](../interfaces/__classes_sys_.sys.md#pset)*
 
-*Defined in [web-cpu.ts:55](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-cpu.ts#L55)*
+*Defined in [web-cpu.ts:53](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-cpu.ts#L53)*
 
 
 
@@ -302,23 +302,23 @@ ___
 
 ###  setDisplayMode
 
-► **setDisplayMode**(mode: *"text"⎮"bitmap"*, width: *`number`*, height: *`number`*): `void`
+► **setDisplayMode**(mode: *"text"⎮"bitmap"*, width: *`number`*, height: *`number`*, displayWidth?: *`number`*, displayHeight?: *`number`*): `void`
 
 
 
-*Implementation of [Sys](../interfaces/__classes_sys_.sys.md).[setDisplayMode](../interfaces/__classes_sys_.sys.md#setdisplaymode)*
-
-*Defined in [web-cpu.ts:30](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-cpu.ts#L30)*
+*Defined in [web-cpu.ts:28](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-cpu.ts#L28)*
 
 
 
 **Parameters:**
 
-| Param | Type | Description |
-| ------ | ------ | ------ |
-| mode | "text"⎮"bitmap"   |  - |
-| width | `number`   |  - |
-| height | `number`   |  - |
+| Param | Type | Default value | Description |
+| ------ | ------ | ------ | ------ |
+| mode | "text"⎮"bitmap"  | - |   - |
+| width | `number`  | - |   - |
+| height | `number`  | - |   - |
+| displayWidth | `number`  |  width |   - |
+| displayHeight | `number`  |  height |   - |
 
 
 
@@ -340,7 +340,7 @@ ___
 
 
 
-*Defined in [web-cpu.ts:122](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-cpu.ts#L122)*
+*Defined in [web-cpu.ts:120](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-cpu.ts#L120)*
 
 
 
@@ -370,7 +370,7 @@ ___
 
 
 
-*Defined in [web-cpu.ts:128](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-cpu.ts#L128)*
+*Defined in [web-cpu.ts:126](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-cpu.ts#L126)*
 
 
 

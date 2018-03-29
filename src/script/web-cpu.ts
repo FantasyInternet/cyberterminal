@@ -13,25 +13,23 @@ class WebCpu implements Sys {
   constructor() {
     console.log("The web worker is working!")
     this._initCom()
-    this.setDisplayMode("bitmap", 320, 180)
+    this.setDisplayMode("bitmap", 320, 180, 160, 90)
     for (let i = 0; i < 100; i++) {
       this.pset(i, i / 2, 255, 0, 255)
     }
     this.fillRect(80, 45, 79, 44, 0, 255, 127)
-    this._commitBitmap(true)
-    setTimeout(this._commitBitmap.bind(this), 3000)
-    setTimeout(this._test.bind(this), 5000)
+    setTimeout(this._test.bind(this), 1000)
   }
 
   log(msg: any) {
     console.log(msg)
   }
 
-  setDisplayMode(mode: "text" | "bitmap", width: number, height: number) {
-    this._sysCall("setDisplayMode", mode, width, height)
+  setDisplayMode(mode: "text" | "bitmap", width: number, height: number, displayWidth = width, displayHeight = height) {
+    this._sysCall("setDisplayMode", mode, width, height, displayWidth, displayHeight)
     this._displayMode = mode
-    this._displayWidth = width
-    this._displayHeight = height
+    this._displayWidth = displayWidth
+    this._displayHeight = displayHeight
     delete this._displayBitmap
     switch (this.displayMode) {
       case "text":
@@ -39,7 +37,7 @@ class WebCpu implements Sys {
         break
 
       case "bitmap":
-        this._displayBitmap = new ImageData(this.displayWidth, this.displayHeight)
+        this._displayBitmap = new ImageData(width, height)
         //this.fillRect(0, 0, this._displayBitmap.width, this._displayBitmap.height, 0, 0, 0)
         break
 
@@ -248,6 +246,15 @@ class WebCpu implements Sys {
     let _nextFps = 0
     let t = 0
     while (true) {
+      this.fillRect(0, 0, 80, 180, 200, 100, 100)
+      this.fillRect(320 - 80, 0, 80, 180, 200, 100, 100)
+      this.fillRect(0, 0, 320, 45, 200, 100, 100)
+      this.fillRect(0, 180 - 45, 320, 45, 200, 100, 100)
+
+      this.fillRect(80, 0, 1, 180, 0, 0, 0)
+      this.fillRect(320 - 81, 0, 1, 180, 0, 0, 0)
+      this.fillRect(0, 45, 320, 1, 0, 0, 0)
+      this.fillRect(0, 180 - 46, 320, 1, 0, 0, 0)
       t = performance.now()
       t = await this.commitDisplay()
       //t = await this.waitForVsync()

@@ -139,7 +139,7 @@ ___
 
 ###  setDisplayMode
 
-► **setDisplayMode**(mode: *"text"⎮"bitmap"*, width: *`number`*, height: *`number`*): `void`
+► **setDisplayMode**(mode: *"text"⎮"bitmap"*, width: *`number`*, height: *`number`*, displayWidth?: *`number`*, displayHeight?: *`number`*): `void`
 
 
 
@@ -149,11 +149,13 @@ ___
 
 **Parameters:**
 
-| Param | Type | Description |
-| ------ | ------ | ------ |
-| mode | "text"⎮"bitmap"   |  - |
-| width | `number`   |  - |
-| height | `number`   |  - |
+| Param | Type | Default value | Description |
+| ------ | ------ | ------ | ------ |
+| mode | "text"⎮"bitmap"  | - |   - |
+| width | `number`  | - |   - |
+| height | `number`  | - |   - |
+| displayWidth | `number`  |  width |   - |
+| displayHeight | `number`  |  height |   - |
 
 
 
