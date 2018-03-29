@@ -84,6 +84,8 @@ class WebSys {
   private _resizeCanvas(checkHeight = true) {
     if (!this._displayCanvas) return
     if (!checkHeight) {
+      ; (<any>this._displayCanvas.style)["imageRendering"] = "-moz-crisp-edges"
+        ; (<any>this._displayCanvas.style)["imageRendering"] = "pixelated"
       this._displayCanvas.style.display = "none"
       this._displayScale = 1
     }
@@ -93,6 +95,7 @@ class WebSys {
     while (this.displayWidth * this._displayScale > terminalWidth) this._displayScale--
     if (checkHeight) while (this.displayHeight * this._displayScale > terminalHeight) this._displayScale--
     if (this._displayScale < 1) {
+      ; (<any>this._displayCanvas.style)["imageRendering"] = ""
       this._displayScale = 1
       let divide = 1
       while (this.displayWidth * this._displayScale > terminalWidth) this._displayScale = (1 / ++divide)
