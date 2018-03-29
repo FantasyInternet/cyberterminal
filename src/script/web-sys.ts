@@ -82,14 +82,15 @@ class WebSys {
   private _resizeCanvas() {
     if (!this._displayCanvas) return
     let scale = 1
-    while (this.displayWidth * scale < this._container.offsetWidth) scale++
-    while (this.displayWidth * scale > this._container.offsetWidth) scale--
+    let terminalWidth = this._container.offsetWidth * devicePixelRatio
+    while (this.displayWidth * scale < terminalWidth) scale++
+    while (this.displayWidth * scale > terminalWidth) scale--
     if (scale < 1) {
       let divide = 1
-      while (this.displayWidth * (1 / divide) > this._container.offsetWidth) scale = (1 / ++divide)
+      while (this.displayWidth * (1 / divide) > terminalWidth) scale = (1 / ++divide)
     }
-    this._displayCanvas.style.width = (this._displayCanvas.width * scale) + "px"
-    this._displayCanvas.style.height = (this._displayCanvas.height * scale) + "px"
+    this._displayCanvas.style.width = (this._displayCanvas.width * scale) / devicePixelRatio + "px"
+    this._displayCanvas.style.height = (this._displayCanvas.height * scale) / devicePixelRatio + "px"
   }
 
   private _initWorker() {
