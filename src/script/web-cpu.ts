@@ -40,7 +40,7 @@ class WebCpu implements Sys {
 
       case "bitmap":
         this._displayBitmap = new ImageData(this.displayWidth, this.displayHeight)
-        this.fillRect(0, 0, this._displayBitmap.width, this._displayBitmap.height, 0, 0, 0)
+        //this.fillRect(0, 0, this._displayBitmap.width, this._displayBitmap.height, 0, 0, 0)
         break
 
       default:

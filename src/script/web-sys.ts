@@ -1,5 +1,5 @@
 /// <reference path="./_classes/Sys" />
-
+import css from "./_style"
 
 /**
  * Sys implementation for web browsers.
@@ -61,18 +61,35 @@ class WebSys {
   private _vsyncCallbacks: Function[] = []
 
   private _initContainer() {
-    this._container.setAttribute("style", "display:block;")
+    let style = document.createElement("style")
+    style.textContent = css
+      ; (<HTMLElement>document.querySelector("head")).insertBefore(style, document.querySelector("head *"))
     this._container.innerHTML = '<div class="display"></div><div class="input"></div>'
     this._displayContainer = <HTMLElement>this._container.querySelector(".display")
+    addEventListener("resize", this._resizeCanvas.bind(this))
   }
 
   private _initCanvas() {
     if (!this._displayContainer) throw "No display container!"
-    this._displayContainer.innerHTML = '<canvas style="image-rendering: -moz-crisp-edges;image-rendering: -webkit-crisp-edges;image-rendering: pixelated;image-rendering: crisp-edges;"></canvas>'
+    this._displayContainer.innerHTML = '<canvas style=""></canvas>'
     this._displayCanvas = <HTMLCanvasElement>this._displayContainer.querySelector("canvas")
     this._displayCanvas.width = this.displayWidth
     this._displayCanvas.height = this.displayHeight
     this._displayContext = <CanvasRenderingContext2D>this._displayCanvas.getContext("2d")
+    this._resizeCanvas()
+  }
+
+  private _resizeCanvas() {
+    if (!this._displayCanvas) return
+    let scale = 1
+    while (this.displayWidth * scale < this._container.offsetWidth) scale++
+    while (this.displayWidth * scale > this._container.offsetWidth) scale--
+    if (scale < 1) {
+      let divide = 1
+      while (this.displayWidth * (1 / divide) > this._container.offsetWidth) scale = (1 / ++divide)
+    }
+    this._displayCanvas.style.width = (this._displayCanvas.width * scale) + "px"
+    this._displayCanvas.style.height = (this._displayCanvas.height * scale) + "px"
   }
 
   private _initWorker() {

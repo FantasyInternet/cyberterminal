@@ -1,0 +1,1 @@
+export default "fantasy-terminal{background-color:black;display:block;text-align:center}fantasy-terminal canvas{display:block;image-rendering:-moz-crisp-edges;image-rendering:-webkit-crisp-edges;image-rendering:pixelated;image-rendering:crisp-edges;margin:auto}"
