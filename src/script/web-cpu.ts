@@ -13,7 +13,7 @@ class WebCpu implements Sys {
   constructor() {
     console.log("The web worker is working!")
     this._initCom()
-    this.setDisplayMode("bitmap", 320, 180, 160, 90)
+    this.setDisplayMode("bitmap", 320, 180)
     for (let i = 0; i < 100; i++) {
       this.pset(i, i / 2, 255, 0, 255)
     }
