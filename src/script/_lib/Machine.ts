@@ -1,16 +1,14 @@
-/// <reference path="./_classes/Sys" />
-
 /**
  * Central processing unit for browsers
  * See [Sys](../interfaces/__classes_sys_.sys.md) for documentation
  */
-class WebCpu implements Sys {
+export default class Machine {
   get displayMode() { return this._displayMode }
   get displayWidth() { return this._displayWidth }
   get displayHeight() { return this._displayHeight }
   get displayBitmap() { return this._displayBitmap }
 
-  constructor() {
+  constructor(public url: string) {
     console.log("The web worker is working!")
     this._initCom()
     this.setDisplayMode("bitmap", 320, 180)
@@ -285,5 +283,3 @@ class WebCpu implements Sys {
   }
 
 }
-
-new WebCpu()

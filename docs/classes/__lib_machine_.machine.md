@@ -1,41 +1,42 @@
-[cyberterminal](../README.md) > ["web-cpu"](../modules/_web_cpu_.md) > [WebCpu](../classes/_web_cpu_.webcpu.md)
+[cyberterminal](../README.md) > ["_lib/Machine"](../modules/__lib_machine_.md) > [Machine](../classes/__lib_machine_.machine.md)
 
 
 
-# Class: WebCpu
+# Class: Machine
 
 
 Central processing unit for browsers See [Sys](../interfaces/__classes_sys_.sys.md) for documentation
-
-## Implements
-
-* [Sys](../interfaces/__classes_sys_.sys.md)
 
 ## Index
 
 ### Constructors
 
-* [constructor](_web_cpu_.webcpu.md#constructor)
+* [constructor](__lib_machine_.machine.md#constructor)
+
+
+### Properties
+
+* [url](__lib_machine_.machine.md#url)
 
 
 ### Accessors
 
-* [displayBitmap](_web_cpu_.webcpu.md#displaybitmap)
-* [displayHeight](_web_cpu_.webcpu.md#displayheight)
-* [displayMode](_web_cpu_.webcpu.md#displaymode)
-* [displayWidth](_web_cpu_.webcpu.md#displaywidth)
+* [displayBitmap](__lib_machine_.machine.md#displaybitmap)
+* [displayHeight](__lib_machine_.machine.md#displayheight)
+* [displayMode](__lib_machine_.machine.md#displaymode)
+* [displayWidth](__lib_machine_.machine.md#displaywidth)
 
 
 ### Methods
 
-* [commitDisplay](_web_cpu_.webcpu.md#commitdisplay)
-* [fillRect](_web_cpu_.webcpu.md#fillrect)
-* [log](_web_cpu_.webcpu.md#log)
-* [pget](_web_cpu_.webcpu.md#pget)
-* [pset](_web_cpu_.webcpu.md#pset)
-* [setDisplayMode](_web_cpu_.webcpu.md#setdisplaymode)
-* [wait](_web_cpu_.webcpu.md#wait)
-* [waitForVsync](_web_cpu_.webcpu.md#waitforvsync)
+* [commitDisplay](__lib_machine_.machine.md#commitdisplay)
+* [fillRect](__lib_machine_.machine.md#fillrect)
+* [log](__lib_machine_.machine.md#log)
+* [pget](__lib_machine_.machine.md#pget)
+* [pset](__lib_machine_.machine.md#pset)
+* [setDisplayMode](__lib_machine_.machine.md#setdisplaymode)
+* [wait](__lib_machine_.machine.md#wait)
+* [waitForVsync](__lib_machine_.machine.md#waitforvsync)
 
 
 
@@ -44,18 +45,42 @@ Central processing unit for browsers See [Sys](../interfaces/__classes_sys_.sys.
 <a id="constructor"></a>
 
 
-### ⊕ **new WebCpu**(): [WebCpu](_web_cpu_.webcpu.md)
+### ⊕ **new Machine**(url: *`string`*): [Machine](__lib_machine_.machine.md)
 
 
-*Defined in [web-cpu.ts:11](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-cpu.ts#L11)*
-
-
+*Defined in _lib/Machine.ts:9*
 
 
 
-**Returns:** [WebCpu](_web_cpu_.webcpu.md)
+**Parameters:**
+
+| Param | Type | Description |
+| ------ | ------ | ------ |
+| url | `string`   |  - |
+
+
+
+
+
+**Returns:** [Machine](__lib_machine_.machine.md)
 
 ---
+
+
+## Properties
+<a id="url"></a>
+
+###  url
+
+**●  url**:  *`string`* 
+
+*Defined in _lib/Machine.ts:11*
+
+
+
+
+
+___
 
 
 ## Accessors
@@ -66,7 +91,7 @@ Central processing unit for browsers See [Sys](../interfaces/__classes_sys_.sys.
 
 getdisplayBitmap(): `undefined`⎮`ImageData`
 
-*Defined in [web-cpu.ts:11](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-cpu.ts#L11)*
+*Defined in _lib/Machine.ts:9*
 
 
 
@@ -85,7 +110,7 @@ ___
 
 getdisplayHeight(): `number`
 
-*Defined in [web-cpu.ts:10](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-cpu.ts#L10)*
+*Defined in _lib/Machine.ts:8*
 
 
 
@@ -104,7 +129,7 @@ ___
 
 getdisplayMode(): `string`
 
-*Defined in [web-cpu.ts:8](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-cpu.ts#L8)*
+*Defined in _lib/Machine.ts:6*
 
 
 
@@ -123,7 +148,7 @@ ___
 
 getdisplayWidth(): `number`
 
-*Defined in [web-cpu.ts:9](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-cpu.ts#L9)*
+*Defined in _lib/Machine.ts:7*
 
 
 
@@ -145,7 +170,7 @@ ___
 
 
 
-*Defined in [web-cpu.ts:131](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-cpu.ts#L131)*
+*Defined in _lib/Machine.ts:129*
 
 
 
@@ -167,9 +192,7 @@ ___
 
 
 
-*Implementation of [Sys](../interfaces/__classes_sys_.sys.md).[fillRect](../interfaces/__classes_sys_.sys.md#fillrect)*
-
-*Defined in [web-cpu.ts:84](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-cpu.ts#L84)*
+*Defined in _lib/Machine.ts:82*
 
 
 
@@ -205,9 +228,7 @@ ___
 
 
 
-*Implementation of [Sys](../interfaces/__classes_sys_.sys.md).[log](../interfaces/__classes_sys_.sys.md#log)*
-
-*Defined in [web-cpu.ts:24](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-cpu.ts#L24)*
+*Defined in _lib/Machine.ts:22*
 
 
 
@@ -237,9 +258,7 @@ ___
 
 
 
-*Implementation of [Sys](../interfaces/__classes_sys_.sys.md).[pget](../interfaces/__classes_sys_.sys.md#pget)*
-
-*Defined in [web-cpu.ts:73](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-cpu.ts#L73)*
+*Defined in _lib/Machine.ts:71*
 
 
 
@@ -270,9 +289,7 @@ ___
 
 
 
-*Implementation of [Sys](../interfaces/__classes_sys_.sys.md).[pset](../interfaces/__classes_sys_.sys.md#pset)*
-
-*Defined in [web-cpu.ts:53](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-cpu.ts#L53)*
+*Defined in _lib/Machine.ts:51*
 
 
 
@@ -306,7 +323,7 @@ ___
 
 
 
-*Defined in [web-cpu.ts:28](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-cpu.ts#L28)*
+*Defined in _lib/Machine.ts:26*
 
 
 
@@ -340,7 +357,7 @@ ___
 
 
 
-*Defined in [web-cpu.ts:120](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-cpu.ts#L120)*
+*Defined in _lib/Machine.ts:118*
 
 
 
@@ -370,7 +387,7 @@ ___
 
 
 
-*Defined in [web-cpu.ts:126](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/web-cpu.ts#L126)*
+*Defined in _lib/Machine.ts:124*
 
 
 

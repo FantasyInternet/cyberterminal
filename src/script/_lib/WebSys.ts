@@ -1,23 +1,24 @@
-/// <reference path="./_classes/Sys" />
-import css from "./_style"
+import css from "./css"
 
 /**
  * Sys implementation for web browsers.
+ * See [Sys](../interfaces/__lib_sys_.sys.md) for documentation
  */
-class WebSys {
+export default class WebSys implements Sys {
   get displayMode() { return this._displayMode }
   get displayWidth() { return this._displayWidth }
   get displayHeight() { return this._displayHeight }
   get displayBitmap() { return this._displayBitmap }
 
-  constructor(private _container: HTMLElement) {
+  constructor() {
+    let scripts = document.querySelectorAll("script")
+    this._scriptSrc = (<HTMLScriptElement>scripts[scripts.length - 1]).src
     this._initContainer()
-    this._initWorker()
+    //this._initWorker()
     this._vsync()
   }
 
   setDisplayMode(mode: "text" | "bitmap", width: number, height: number, displayWidth = width, displayHeight = height) {
-    if (!this._worker) return
     this._displayMode = mode
     this._displayWidth = displayWidth
     this._displayHeight = displayHeight
@@ -49,7 +50,14 @@ class WebSys {
     })
   }
 
+  createMachine() {
+    return new WebMachineWorker(this._scriptSrc)
+  }
+
+
   /** _privates */
+  private _scriptSrc: string = "./cyberterminal.js"
+  private _container: HTMLElement = <HTMLElement>document.querySelector("fantasy-terminal")
   private _displayMode: string = ""
   private _displayWidth: number = 0
   private _displayHeight: number = 0
@@ -58,7 +66,6 @@ class WebSys {
   private _displayCanvas?: HTMLCanvasElement
   private _displayContext?: CanvasRenderingContext2D
   private _displayScale: number = 8
-  private _worker?: Worker
   private _raf: any
   private _vsyncCallbacks: Function[] = []
 
@@ -113,63 +120,6 @@ class WebSys {
       requestAnimationFrame(this._resizeCanvas.bind(this))
   }
 
-  private _initWorker() {
-    this._worker = new Worker("./script/web-cpu.js")
-    this._worker.addEventListener("message", this._onMessage.bind(this))
-  }
-
-  private _onMessage(e: MessageEvent) {
-    if (!this._worker) return
-    //console.log("worker:", e)
-    switch (e.data.cmd) {
-      case "call":
-        let value
-        try {
-          e.data.success = true
-          value = (<any>this)[e.data.method].apply(this, e.data.arguments)
-        } catch (error) {
-          e.data.success = false
-          value = error
-        }
-        if (e.data.reqId != null) {
-          e.data.cmd = "response"
-          if (value instanceof Promise) {
-            value.then((value) => {
-              if (!this._worker) return
-              e.data.value = value
-              this._worker.postMessage(e.data)
-            }, (value) => {
-              if (!this._worker) return
-              e.data.success = false
-              e.data.value = value
-              this._worker.postMessage(e.data)
-            })
-          } else {
-            e.data.value = value
-            this._worker.postMessage(e.data)
-          }
-        }
-        break
-
-      case "imagedata":
-        if (this._displayBitmap) {
-          let buffer = e.data.buffer
-          if (!buffer) throw "No buffer received!"
-          let data = new Uint8ClampedArray(buffer)
-          this._displayBitmap.data.set(data, 0)
-          this._worker.postMessage({
-            cmd: "imagedata",
-            width: this._displayBitmap.width,
-            height: this._displayBitmap.height,
-            buffer: buffer
-          }, [buffer])
-        }
-        break
-
-      default:
-        break
-    }
-  }
 
   private _vsync(t: number = 0) {
     cancelAnimationFrame(this._raf)
@@ -181,4 +131,21 @@ class WebSys {
     while (cb = this._vsyncCallbacks.pop()) cb(t)
   }
 }
-(<any>window)["Sys"] = new WebSys(<HTMLElement>document.querySelector("fantasy-terminal"))
+
+class WebMachineWorker implements MachineWorker {
+  worker: Worker
+
+  constructor(src: string) {
+    this.worker = new Worker(src)
+  }
+
+  send(msg: any, transferables?: any[] | undefined) {
+    this.worker.postMessage(msg, transferables)
+  }
+
+  onMessage(listener: Function) {
+    this.worker.addEventListener("message", (e) => {
+      return listener(e.data, this)
+    })
+  }
+}
