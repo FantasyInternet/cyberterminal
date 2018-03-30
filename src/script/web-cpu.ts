@@ -255,7 +255,7 @@ class WebCpu implements Sys {
       this.fillRect(320 - 81, 0, 1, 180, 0, 0, 0)
       this.fillRect(0, 45, 320, 1, 0, 0, 0)
       this.fillRect(0, 180 - 46, 320, 1, 0, 0, 0)
-      t = performance.now()
+      //t = performance.now()
       t = await this.commitDisplay()
       //t = await this.waitForVsync()
       _fps++

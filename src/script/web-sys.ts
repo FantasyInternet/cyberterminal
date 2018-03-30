@@ -59,6 +59,7 @@ class WebSys {
   private _displayContext?: CanvasRenderingContext2D
   private _displayScale: number = 8
   private _worker?: Worker
+  private _raf: any
   private _vsyncCallbacks: Function[] = []
 
   private _initContainer() {
@@ -171,10 +172,11 @@ class WebSys {
   }
 
   private _vsync(t: number = 0) {
+    cancelAnimationFrame(this._raf)
+    this._raf = requestAnimationFrame(this._vsync.bind(this))
     if (this._displayContext && this.displayBitmap) {
       this._displayContext.putImageData(this.displayBitmap, 0, 0)
     }
-    requestAnimationFrame(this._vsync.bind(this))
     let cb
     while (cb = this._vsyncCallbacks.pop()) cb(t)
   }
