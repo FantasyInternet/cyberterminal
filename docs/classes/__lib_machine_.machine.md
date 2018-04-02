@@ -35,6 +35,8 @@ Central processing unit for browsers See [Sys](../interfaces/__classes_sys_.sys.
 * [palette](__lib_machine_.machine.md#palette)
 * [pget](__lib_machine_.machine.md#pget)
 * [pset](__lib_machine_.machine.md#pset)
+* [read](__lib_machine_.machine.md#read)
+* [run](__lib_machine_.machine.md#run)
 * [setDisplayMode](__lib_machine_.machine.md#setdisplaymode)
 * [wait](__lib_machine_.machine.md#wait)
 * [waitForVsync](__lib_machine_.machine.md#waitforvsync)
@@ -171,7 +173,7 @@ ___
 
 
 
-*Defined in [_lib/Machine.ts:168](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L168)*
+*Defined in [_lib/Machine.ts:163](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L163)*
 
 
 
@@ -193,7 +195,7 @@ ___
 
 
 
-*Defined in [_lib/Machine.ts:98](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L98)*
+*Defined in [_lib/Machine.ts:93](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L93)*
 
 
 
@@ -229,7 +231,7 @@ ___
 
 
 
-*Defined in [_lib/Machine.ts:22](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L22)*
+*Defined in [_lib/Machine.ts:20](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L20)*
 
 
 
@@ -259,7 +261,7 @@ ___
 
 
 
-*Defined in [_lib/Machine.ts:143](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L143)*
+*Defined in [_lib/Machine.ts:138](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L138)*
 
 
 
@@ -292,7 +294,7 @@ ___
 
 
 
-*Defined in [_lib/Machine.ts:83](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L83)*
+*Defined in [_lib/Machine.ts:78](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L78)*
 
 
 
@@ -323,7 +325,7 @@ ___
 
 
 
-*Defined in [_lib/Machine.ts:58](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L58)*
+*Defined in [_lib/Machine.ts:53](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L53)*
 
 
 
@@ -349,6 +351,66 @@ ___
 
 ___
 
+<a id="read"></a>
+
+###  read
+
+► **read**(filename: *`string`*): `Promise`.<`any`>
+
+
+
+*Defined in [_lib/Machine.ts:178](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L178)*
+
+
+
+**Parameters:**
+
+| Param | Type | Description |
+| ------ | ------ | ------ |
+| filename | `string`   |  - |
+
+
+
+
+
+**Returns:** `Promise`.<`any`>
+
+
+
+
+
+___
+
+<a id="run"></a>
+
+###  run
+
+► **run**(js: *`string`*): `any`
+
+
+
+*Defined in [_lib/Machine.ts:182](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L182)*
+
+
+
+**Parameters:**
+
+| Param | Type | Description |
+| ------ | ------ | ------ |
+| js | `string`   |  - |
+
+
+
+
+
+**Returns:** `any`
+
+
+
+
+
+___
+
 <a id="setdisplaymode"></a>
 
 ###  setDisplayMode
@@ -357,7 +419,7 @@ ___
 
 
 
-*Defined in [_lib/Machine.ts:26](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L26)*
+*Defined in [_lib/Machine.ts:24](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L24)*
 
 
 
@@ -391,7 +453,7 @@ ___
 
 
 
-*Defined in [_lib/Machine.ts:157](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L157)*
+*Defined in [_lib/Machine.ts:152](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L152)*
 
 
 
@@ -421,7 +483,7 @@ ___
 
 
 
-*Defined in [_lib/Machine.ts:163](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L163)*
+*Defined in [_lib/Machine.ts:158](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L158)*
 
 
 

@@ -17,6 +17,7 @@ Follow development of this app [live on Twitch!](https://www.twitch.tv/codeartis
 * ["_lib/MachineWorker"](modules/__lib_machineworker_.md)
 * ["_lib/Sys"](modules/__lib_sys_.md)
 * ["_lib/WebSys"](modules/__lib_websys_.md)
+* ["bouncing_colors"](modules/_bouncing_colors_.md)
 
 
 

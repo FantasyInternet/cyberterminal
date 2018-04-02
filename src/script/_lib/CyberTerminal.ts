@@ -20,7 +20,11 @@ export default class CyberTerminal {
         let value
         try {
           message.success = true
-          value = (<any>this.sys)[message.method].apply(this.sys, message.arguments)
+          if ((<any>this)[message.method]) {
+            value = (<any>this)[message.method].apply(this, message.arguments)
+          } else {
+            value = (<any>this.sys)[message.method].apply(this.sys, message.arguments)
+          }
         } catch (error) {
           message.success = false
           value = error

@@ -59,6 +59,10 @@ export default class WebSys implements Sys {
     return new WebMachineWorker(this._scriptSrc)
   }
 
+  async read(filename: string) {
+    return (await fetch(filename)).text()
+  }
+
 
   /** _privates */
   private _scriptSrc: string = "./cyberterminal.js"

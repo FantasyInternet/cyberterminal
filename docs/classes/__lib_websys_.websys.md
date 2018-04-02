@@ -30,6 +30,7 @@ Sys implementation for web browsers. See [Sys](../interfaces/__lib_sys_.sys.md) 
 
 * [createMachine](__lib_websys_.websys.md#createmachine)
 * [drawBitmap](__lib_websys_.websys.md#drawbitmap)
+* [read](__lib_websys_.websys.md#read)
 * [setDisplayMode](__lib_websys_.websys.md#setdisplaymode)
 * [waitForVsync](__lib_websys_.websys.md#waitforvsync)
 
@@ -174,6 +175,36 @@ ___
 
 
 **Returns:** `void`
+
+
+
+
+
+___
+
+<a id="read"></a>
+
+###  read
+
+► **read**(filename: *`string`*): `Promise`.<`string`>
+
+
+
+*Defined in [_lib/WebSys.ts:62](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L62)*
+
+
+
+**Parameters:**
+
+| Param | Type | Description |
+| ------ | ------ | ------ |
+| filename | `string`   |  - |
+
+
+
+
+
+**Returns:** `Promise`.<`string`>
 
 
 
