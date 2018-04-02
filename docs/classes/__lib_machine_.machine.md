@@ -32,6 +32,7 @@ Central processing unit for browsers See [Sys](../interfaces/__classes_sys_.sys.
 * [commitDisplay](__lib_machine_.machine.md#commitdisplay)
 * [fillRect](__lib_machine_.machine.md#fillrect)
 * [log](__lib_machine_.machine.md#log)
+* [palette](__lib_machine_.machine.md#palette)
 * [pget](__lib_machine_.machine.md#pget)
 * [pset](__lib_machine_.machine.md#pset)
 * [setDisplayMode](__lib_machine_.machine.md#setdisplaymode)
@@ -170,7 +171,7 @@ ___
 
 
 
-*Defined in [_lib/Machine.ts:133](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L133)*
+*Defined in [_lib/Machine.ts:168](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L168)*
 
 
 
@@ -188,25 +189,25 @@ ___
 
 ###  fillRect
 
-► **fillRect**(x: *`number`*, y: *`number`*, width: *`number`*, height: *`number`*, r: *`number`*, g: *`number`*, b: *`number`*): `void`
+► **fillRect**(x: *`number`*, y: *`number`*, width: *`number`*, height: *`number`*, r: *`number`*, g?: *`number`*, b?: *`number`*): `void`
 
 
 
-*Defined in [_lib/Machine.ts:86](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L86)*
+*Defined in [_lib/Machine.ts:98](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L98)*
 
 
 
 **Parameters:**
 
-| Param | Type | Description |
-| ------ | ------ | ------ |
-| x | `number`   |  - |
-| y | `number`   |  - |
-| width | `number`   |  - |
-| height | `number`   |  - |
-| r | `number`   |  - |
-| g | `number`   |  - |
-| b | `number`   |  - |
+| Param | Type | Default value | Description |
+| ------ | ------ | ------ | ------ |
+| x | `number`  | - |   - |
+| y | `number`  | - |   - |
+| width | `number`  | - |   - |
+| height | `number`  | - |   - |
+| r | `number`  | - |   - |
+| g | `number`  |  r |   - |
+| b | `number`  |  r |   - |
 
 
 
@@ -250,15 +251,48 @@ ___
 
 ___
 
+<a id="palette"></a>
+
+###  palette
+
+► **palette**(id: *`number`*, r: *`number`*, g: *`number`*, b: *`number`*): `void`
+
+
+
+*Defined in [_lib/Machine.ts:143](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L143)*
+
+
+
+**Parameters:**
+
+| Param | Type | Description |
+| ------ | ------ | ------ |
+| id | `number`   |  - |
+| r | `number`   |  - |
+| g | `number`   |  - |
+| b | `number`   |  - |
+
+
+
+
+
+**Returns:** `void`
+
+
+
+
+
+___
+
 <a id="pget"></a>
 
 ###  pget
 
-► **pget**(x: *`number`*, y: *`number`*): `Uint8ClampedArray`
+► **pget**(x: *`number`*, y: *`number`*): `undefined`⎮`number`⎮`Uint8ClampedArray`
 
 
 
-*Defined in [_lib/Machine.ts:75](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L75)*
+*Defined in [_lib/Machine.ts:83](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L83)*
 
 
 
@@ -273,7 +307,7 @@ ___
 
 
 
-**Returns:** `Uint8ClampedArray`
+**Returns:** `undefined`⎮`number`⎮`Uint8ClampedArray`
 
 
 
@@ -285,23 +319,23 @@ ___
 
 ###  pset
 
-► **pset**(x: *`number`*, y: *`number`*, r: *`number`*, g: *`number`*, b: *`number`*): `void`
+► **pset**(x: *`number`*, y: *`number`*, r: *`number`*, g?: *`number`*, b?: *`number`*): `void`
 
 
 
-*Defined in [_lib/Machine.ts:55](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L55)*
+*Defined in [_lib/Machine.ts:58](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L58)*
 
 
 
 **Parameters:**
 
-| Param | Type | Description |
-| ------ | ------ | ------ |
-| x | `number`   |  - |
-| y | `number`   |  - |
-| r | `number`   |  - |
-| g | `number`   |  - |
-| b | `number`   |  - |
+| Param | Type | Default value | Description |
+| ------ | ------ | ------ | ------ |
+| x | `number`  | - |   - |
+| y | `number`  | - |   - |
+| r | `number`  | - |   - |
+| g | `number`  |  r |   - |
+| b | `number`  |  r |   - |
 
 
 
@@ -357,7 +391,7 @@ ___
 
 
 
-*Defined in [_lib/Machine.ts:122](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L122)*
+*Defined in [_lib/Machine.ts:157](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L157)*
 
 
 
@@ -387,7 +421,7 @@ ___
 
 
 
-*Defined in [_lib/Machine.ts:128](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L128)*
+*Defined in [_lib/Machine.ts:163](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L163)*
 
 
 

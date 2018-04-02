@@ -29,9 +29,6 @@ export default class WebSys implements Sys {
         break
 
       case "indexed":
-        console.error(`${this.displayMode} not yet implemented!`)
-        break
-
       case "rgb":
         this._displayBitmap = new ImageData(width, height)
         this._initCanvas()

@@ -11,7 +11,7 @@ export default class Machine {
   constructor(public url: string) {
     console.log("The web worker is working!")
     this._initCom()
-    this.setDisplayMode("rgb", 320, 180)
+    this.setDisplayMode("indexed", 320, 180)
     for (let i = 0; i < 100; i++) {
       this.pset(i, i / 2, 255, 0, 255)
     }
@@ -35,12 +35,15 @@ export default class Machine {
         break
 
       case "indexed":
-        console.error(`${this.displayMode} not yet implemented!`)
-        break
-
+        this._displayPixmap = new Uint8Array(width * height)
+        this._displayPalette = []
+        for (let i = 0; i < 256; i++) {
+          this._displayPalette.push([0, 0, 0, 0])
+        }
+        //@ts-ignore
+        this._displayPalette.unshift(this._displayPalette.pop())
       case "rgb":
         this._displayBitmap = new ImageData(width, height)
-        //this.fillRect(0, 0, this._displayBitmap.width, this._displayBitmap.height, 0, 0, 0)
         break
 
       default:
@@ -52,7 +55,7 @@ export default class Machine {
     return
   }
 
-  pset(x: number, y: number, r: number, g: number, b: number) {
+  pset(x: number, y: number, r: number, g: number = r, b: number = r) {
     let a = 255
     if (!this.displayBitmap) throw "No bitmap present!"
     let bm = this.displayBitmap
@@ -60,11 +63,16 @@ export default class Machine {
     if (x < 0 || x >= bm.width) throw "Coordinates out of bounds!"
     y = Math.floor(y)
     if (y < 0 || y >= bm.height) throw "Coordinates out of bounds!"
+    let i = (y * bm.width + x) * 4
+    if (this.displayMode === "indexed" && this._displayPalette && this._displayPixmap) {
+      this._displayPixmap[i / 4] = r
+      if (!this._displayPalette[r]) throw "Color not defined!"
+        ;[r, g, b, a] = this._displayPalette[r]
+    }
     r = Math.min(Math.max(0, Math.floor(r)), 255)
     g = Math.min(Math.max(0, Math.floor(g)), 255)
     b = Math.min(Math.max(0, Math.floor(b)), 255)
     a = Math.min(Math.max(0, Math.floor(a)), 255)
-    let i = (y * bm.width + x) * 4
     bm.data[i++] = r
     bm.data[i++] = g
     bm.data[i++] = b
@@ -80,10 +88,14 @@ export default class Machine {
     y = Math.floor(y)
     if (y < 0 || y >= bm.height) throw "Coordinates out of bounds!"
     let i = (y * bm.width + x) * 4
-    return bm.data.slice(i, i + 3)
+    if (this.displayMode === "rgb") {
+      return bm.data.slice(i, i + 4)
+    } else if (this._displayPixmap) {
+      return this._displayPixmap[i / 4]
+    }
   }
 
-  fillRect(x: number, y: number, width: number, height: number, r: number, g: number, b: number) {
+  fillRect(x: number, y: number, width: number, height: number, r: number, g: number = r, b: number = r) {
     let a = 255
     if (!this.displayBitmap) throw "No bitmap present!"
     let bm = this.displayBitmap
@@ -96,11 +108,20 @@ export default class Machine {
     height = Math.floor(height)
     if (height < 0 || y + height > bm.height) throw "Coordinates out of bounds!"
     if (width === 0 || height === 0) return
+    let i = (y * bm.width + x) * 4
+    if (this.displayMode === "indexed" && this._displayPalette && this._displayPixmap) {
+      let _i = i / 4
+      for (let _y = 0; _y < height; _y++) {
+        this._displayPixmap.fill(r, _i, _i + width)
+        _i += bm.width
+      }
+      if (!this._displayPalette[r]) throw "Color not defined!"
+        ;[r, g, b, a] = this._displayPalette[r]
+    }
     r = Math.min(Math.max(0, Math.floor(r)), 255)
     g = Math.min(Math.max(0, Math.floor(g)), 255)
     b = Math.min(Math.max(0, Math.floor(b)), 255)
     a = Math.min(Math.max(0, Math.floor(a)), 255)
-    let i = (y * bm.width + x) * 4
     bm.data[i++] = r
     bm.data[i++] = g
     bm.data[i++] = b
@@ -119,6 +140,20 @@ export default class Machine {
     this._commitBitmap()
   }
 
+  palette(id: number, r: number, g: number, b: number) {
+    if (!this._displayPalette) throw "No palette!"
+    let a = 255
+    if (this._displayPalette[id]) {
+      let i = 0
+      this._displayPalette[id][i++] = r
+      this._displayPalette[id][i++] = g
+      this._displayPalette[id][i++] = b
+      this._displayPalette[id][i++] = a
+    } else {
+      this._displayPalette[id] = [r, g, b, a]
+    }
+  }
+
   async wait(milliseconds: number = 0) {
     return new Promise((resolve) => {
       setTimeout(resolve, milliseconds)
@@ -126,12 +161,13 @@ export default class Machine {
   }
 
   async waitForVsync(): Promise<number> {
-    this._commitBitmap(true)
+    this.commitDisplay()
     return this._sysRequest("waitForVsync")
   }
 
   async commitDisplay(): Promise<number> {
     switch (this.displayMode) {
+      case "indexed":
       case "rgb":
         this._commitBitmap(true)
         break
@@ -149,6 +185,8 @@ export default class Machine {
   private _displayWidth: number = 0
   private _displayHeight: number = 0
   private _displayBitmap?: ImageData
+  private _displayPixmap?: Uint8Array
+  private _displayPalette?: number[][]
   private _transferBuffer?: ArrayBuffer
   private _lastCommit: number = performance.now()
   private _pendingCommits: Function[] = []
@@ -247,6 +285,9 @@ export default class Machine {
     let _fps = 0
     let _nextFps = 0
     let t = 0
+    for (let i = 0; i < 256; i++) {
+      this.palette(i, i, i * 2, i * 3)
+    }
     while (true) {
       this.fillRect(0, 0, 80, 180, 200, 100, 100)
       this.fillRect(320 - 80, 0, 80, 180, 200, 100, 100)
@@ -258,8 +299,8 @@ export default class Machine {
       this.fillRect(0, 45, 320, 1, 0, 0, 0)
       this.fillRect(0, 180 - 46, 320, 1, 0, 0, 0)
       //t = performance.now()
-      t = await this.commitDisplay()
-      //t = await this.waitForVsync()
+      //t = await this.commitDisplay()
+      t = await this.waitForVsync()
       _fps++
       if (t >= _nextFps) {
         console.log(_fps + " FPS")
