@@ -35,7 +35,7 @@
 ### ⊕ **new WebMachineWorker**(src: *`string`*): [WebMachineWorker](__lib_websys_.webmachineworker.md)
 
 
-*Defined in [_lib/WebSys.ts:128](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L128)*
+*Defined in [_lib/WebSys.ts:132](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L132)*
 
 
 
@@ -61,7 +61,7 @@
 
 **●  worker**:  *`Worker`* 
 
-*Defined in [_lib/WebSys.ts:128](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L128)*
+*Defined in [_lib/WebSys.ts:132](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L132)*
 
 
 
@@ -81,7 +81,7 @@ ___
 
 *Implementation of [MachineWorker](../interfaces/__lib_machineworker_.machineworker.md).[onMessage](../interfaces/__lib_machineworker_.machineworker.md#onmessage)*
 
-*Defined in [_lib/WebSys.ts:138](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L138)*
+*Defined in [_lib/WebSys.ts:142](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L142)*
 
 
 
@@ -111,7 +111,7 @@ ___
 
 
 
-*Defined in [_lib/WebSys.ts:134](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L134)*
+*Defined in [_lib/WebSys.ts:138](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L138)*
 
 
 

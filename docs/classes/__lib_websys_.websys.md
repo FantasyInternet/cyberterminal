@@ -143,7 +143,7 @@ ___
 
 *Implementation of [Sys](../interfaces/__lib_sys_.sys.md).[createMachine](../interfaces/__lib_sys_.sys.md#createmachine)*
 
-*Defined in [_lib/WebSys.ts:57](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L57)*
+*Defined in [_lib/WebSys.ts:61](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L61)*
 
 
 
@@ -167,7 +167,7 @@ ___
 
 *Implementation of [Sys](../interfaces/__lib_sys_.sys.md).[drawBitmap](../interfaces/__lib_sys_.sys.md#drawbitmap)*
 
-*Defined in [_lib/WebSys.ts:45](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L45)*
+*Defined in [_lib/WebSys.ts:49](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L49)*
 
 
 
@@ -185,7 +185,7 @@ ___
 
 ###  setDisplayMode
 
-► **setDisplayMode**(mode: *"text"⎮"bitmap"*, width: *`number`*, height: *`number`*, displayWidth?: *`number`*, displayHeight?: *`number`*): `void`
+► **setDisplayMode**(mode: *"text"⎮"indexed"⎮"rgb"*, width: *`number`*, height: *`number`*, displayWidth?: *`number`*, displayHeight?: *`number`*): `void`
 
 
 
@@ -197,7 +197,7 @@ ___
 
 | Param | Type | Default value | Description |
 | ------ | ------ | ------ | ------ |
-| mode | "text"⎮"bitmap"  | - |   - |
+| mode | "text"⎮"indexed"⎮"rgb"  | - |   - |
 | width | `number`  | - |   - |
 | height | `number`  | - |   - |
 | displayWidth | `number`  |  width |   - |
@@ -223,7 +223,7 @@ ___
 
 
 
-*Defined in [_lib/WebSys.ts:51](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L51)*
+*Defined in [_lib/WebSys.ts:55](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L55)*
 
 
 

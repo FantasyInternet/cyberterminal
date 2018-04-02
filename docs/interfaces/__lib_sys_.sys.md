@@ -139,7 +139,7 @@ ___
 
 ###  setDisplayMode
 
-► **setDisplayMode**(mode: *"text"⎮"bitmap"*, width: *`number`*, height: *`number`*): `void`
+► **setDisplayMode**(mode: *"text"⎮"indexed"⎮"rgb"*, width: *`number`*, height: *`number`*): `void`
 
 
 
@@ -154,7 +154,7 @@ Switch display mode.
 
 | Param | Type | Description |
 | ------ | ------ | ------ |
-| mode | "text"⎮"bitmap"   |  Name of mode to switch to |
+| mode | "text"⎮"indexed"⎮"rgb"   |  Name of mode to switch to |
 | width | `number`   |  The width of the display in characters or pixels |
 | height | `number`   |  The height of the display in characters or pixels |
 

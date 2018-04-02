@@ -16,7 +16,7 @@ export default class WebSys implements Sys {
     this._initContainer()
   }
 
-  setDisplayMode(mode: "text" | "bitmap", width: number, height: number, displayWidth = width, displayHeight = height) {
+  setDisplayMode(mode: "text" | "indexed" | "rgb", width: number, height: number, displayWidth = width, displayHeight = height) {
     this._displayMode = mode
     this._displayWidth = displayWidth
     this._displayHeight = displayHeight
@@ -28,7 +28,11 @@ export default class WebSys implements Sys {
         console.error(`${this.displayMode} not yet implemented!`)
         break
 
-      case "bitmap":
+      case "indexed":
+        console.error(`${this.displayMode} not yet implemented!`)
+        break
+
+      case "rgb":
         this._displayBitmap = new ImageData(width, height)
         this._initCanvas()
         break

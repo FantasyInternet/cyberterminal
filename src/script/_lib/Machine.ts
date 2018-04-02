@@ -11,7 +11,7 @@ export default class Machine {
   constructor(public url: string) {
     console.log("The web worker is working!")
     this._initCom()
-    this.setDisplayMode("bitmap", 320, 180)
+    this.setDisplayMode("rgb", 320, 180)
     for (let i = 0; i < 100; i++) {
       this.pset(i, i / 2, 255, 0, 255)
     }
@@ -23,7 +23,7 @@ export default class Machine {
     console.log(msg)
   }
 
-  setDisplayMode(mode: "text" | "bitmap", width: number, height: number, displayWidth = width, displayHeight = height) {
+  setDisplayMode(mode: "text" | "indexed" | "rgb", width: number, height: number, displayWidth = width, displayHeight = height) {
     this._sysCall("setDisplayMode", mode, width, height, displayWidth, displayHeight)
     this._displayMode = mode
     this._displayWidth = displayWidth
@@ -34,7 +34,11 @@ export default class Machine {
         console.error(`${this.displayMode} not yet implemented!`)
         break
 
-      case "bitmap":
+      case "indexed":
+        console.error(`${this.displayMode} not yet implemented!`)
+        break
+
+      case "rgb":
         this._displayBitmap = new ImageData(width, height)
         //this.fillRect(0, 0, this._displayBitmap.width, this._displayBitmap.height, 0, 0, 0)
         break
@@ -128,7 +132,7 @@ export default class Machine {
 
   async commitDisplay(): Promise<number> {
     switch (this.displayMode) {
-      case "bitmap":
+      case "rgb":
         this._commitBitmap(true)
         break
 

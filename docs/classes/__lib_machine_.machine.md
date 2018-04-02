@@ -170,7 +170,7 @@ ___
 
 
 
-*Defined in [_lib/Machine.ts:129](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L129)*
+*Defined in [_lib/Machine.ts:133](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L133)*
 
 
 
@@ -192,7 +192,7 @@ ___
 
 
 
-*Defined in [_lib/Machine.ts:82](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L82)*
+*Defined in [_lib/Machine.ts:86](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L86)*
 
 
 
@@ -258,7 +258,7 @@ ___
 
 
 
-*Defined in [_lib/Machine.ts:71](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L71)*
+*Defined in [_lib/Machine.ts:75](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L75)*
 
 
 
@@ -289,7 +289,7 @@ ___
 
 
 
-*Defined in [_lib/Machine.ts:51](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L51)*
+*Defined in [_lib/Machine.ts:55](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L55)*
 
 
 
@@ -319,7 +319,7 @@ ___
 
 ###  setDisplayMode
 
-► **setDisplayMode**(mode: *"text"⎮"bitmap"*, width: *`number`*, height: *`number`*, displayWidth?: *`number`*, displayHeight?: *`number`*): `void`
+► **setDisplayMode**(mode: *"text"⎮"indexed"⎮"rgb"*, width: *`number`*, height: *`number`*, displayWidth?: *`number`*, displayHeight?: *`number`*): `void`
 
 
 
@@ -331,7 +331,7 @@ ___
 
 | Param | Type | Default value | Description |
 | ------ | ------ | ------ | ------ |
-| mode | "text"⎮"bitmap"  | - |   - |
+| mode | "text"⎮"indexed"⎮"rgb"  | - |   - |
 | width | `number`  | - |   - |
 | height | `number`  | - |   - |
 | displayWidth | `number`  |  width |   - |
@@ -357,7 +357,7 @@ ___
 
 
 
-*Defined in [_lib/Machine.ts:118](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L118)*
+*Defined in [_lib/Machine.ts:122](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L122)*
 
 
 
@@ -387,7 +387,7 @@ ___
 
 
 
-*Defined in [_lib/Machine.ts:124](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L124)*
+*Defined in [_lib/Machine.ts:128](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L128)*
 
 
 
