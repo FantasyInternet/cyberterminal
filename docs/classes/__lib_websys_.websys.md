@@ -29,6 +29,7 @@ Sys implementation for web browsers. See [Sys](../interfaces/__lib_sys_.sys.md) 
 ### Methods
 
 * [createMachine](__lib_websys_.websys.md#createmachine)
+* [drawBitmap](__lib_websys_.websys.md#drawbitmap)
 * [setDisplayMode](__lib_websys_.websys.md#setdisplaymode)
 * [waitForVsync](__lib_websys_.websys.md#waitforvsync)
 
@@ -142,13 +143,37 @@ ___
 
 *Implementation of [Sys](../interfaces/__lib_sys_.sys.md).[createMachine](../interfaces/__lib_sys_.sys.md#createmachine)*
 
-*Defined in [_lib/WebSys.ts:53](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L53)*
+*Defined in [_lib/WebSys.ts:57](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L57)*
 
 
 
 
 
 **Returns:** [WebMachineWorker](__lib_websys_.webmachineworker.md)
+
+
+
+
+
+___
+
+<a id="drawbitmap"></a>
+
+###  drawBitmap
+
+► **drawBitmap**(): `void`
+
+
+
+*Implementation of [Sys](../interfaces/__lib_sys_.sys.md).[drawBitmap](../interfaces/__lib_sys_.sys.md#drawbitmap)*
+
+*Defined in [_lib/WebSys.ts:45](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L45)*
+
+
+
+
+
+**Returns:** `void`
 
 
 
@@ -164,7 +189,7 @@ ___
 
 
 
-*Defined in [_lib/WebSys.ts:21](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L21)*
+*Defined in [_lib/WebSys.ts:19](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L19)*
 
 
 
@@ -198,7 +223,7 @@ ___
 
 
 
-*Defined in [_lib/WebSys.ts:47](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L47)*
+*Defined in [_lib/WebSys.ts:51](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L51)*
 
 
 

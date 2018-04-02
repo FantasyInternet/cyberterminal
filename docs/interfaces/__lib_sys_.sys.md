@@ -91,7 +91,7 @@ ___
 
 
 
-*Defined in [_lib/Sys.ts:26](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L26)*
+*Defined in [_lib/Sys.ts:31](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L31)*
 
 
 
@@ -103,6 +103,31 @@ Create a machine.
 **Returns:** [MachineWorker](__lib_machineworker_.machineworker.md)
 the worker running the machine
 
+
+
+
+
+
+___
+
+<a id="drawbitmap"></a>
+
+###  drawBitmap
+
+► **drawBitmap**(): `void`
+
+
+
+*Defined in [_lib/Sys.ts:25](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L25)*
+
+
+
+Draw current bitmap to screen.
+
+
+
+
+**Returns:** `void`
 
 
 

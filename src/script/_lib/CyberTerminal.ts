@@ -55,6 +55,7 @@ export default class CyberTerminal {
             height: this.sys.displayBitmap.height,
             buffer: buffer
           }, [buffer])
+          this.sys.drawBitmap()
         }
         break
 

@@ -14,8 +14,6 @@ export default class WebSys implements Sys {
     let scripts = document.querySelectorAll("script")
     this._scriptSrc = (<HTMLScriptElement>scripts[scripts.length - 1]).src
     this._initContainer()
-    //this._initWorker()
-    this._vsync()
   }
 
   setDisplayMode(mode: "text" | "bitmap", width: number, height: number, displayWidth = width, displayHeight = height) {
@@ -44,9 +42,15 @@ export default class WebSys implements Sys {
     return
   }
 
+  drawBitmap() {
+    if (this._displayContext && this.displayBitmap) {
+      this._displayContext.putImageData(this.displayBitmap, 0, 0)
+    }
+  }
+
   async waitForVsync() {
     return new Promise((resolve, reject) => {
-      this._vsyncCallbacks.push(resolve)
+      requestAnimationFrame(resolve)
     })
   }
 
@@ -66,8 +70,6 @@ export default class WebSys implements Sys {
   private _displayCanvas?: HTMLCanvasElement
   private _displayContext?: CanvasRenderingContext2D
   private _displayScale: number = 8
-  private _raf: any
-  private _vsyncCallbacks: Function[] = []
 
   private _initContainer() {
     let style = document.createElement("style")
@@ -120,16 +122,6 @@ export default class WebSys implements Sys {
       requestAnimationFrame(this._resizeCanvas.bind(this))
   }
 
-
-  private _vsync(t: number = 0) {
-    cancelAnimationFrame(this._raf)
-    this._raf = requestAnimationFrame(this._vsync.bind(this))
-    if (this._displayContext && this.displayBitmap) {
-      this._displayContext.putImageData(this.displayBitmap, 0, 0)
-    }
-    let cb
-    while (cb = this._vsyncCallbacks.pop()) cb(t)
-  }
 }
 
 class WebMachineWorker implements MachineWorker {

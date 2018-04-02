@@ -20,6 +20,11 @@ declare interface Sys {
   setDisplayMode(mode: "text" | "bitmap", width: number, height: number): void
 
   /**
+   * Draw current bitmap to screen.
+   */
+  drawBitmap(): void
+
+  /**
    * Create a machine.
    * @returns the worker running the machine
    */
