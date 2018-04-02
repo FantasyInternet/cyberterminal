@@ -42,7 +42,7 @@ Sys implementation for web browsers. See [Sys](../interfaces/__lib_sys_.sys.md) 
 ### ⊕ **new WebSys**(): [WebSys](__lib_websys_.websys.md)
 
 
-*Defined in _lib/WebSys.ts:11*
+*Defined in [_lib/WebSys.ts:11](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L11)*
 
 
 
@@ -61,7 +61,7 @@ Sys implementation for web browsers. See [Sys](../interfaces/__lib_sys_.sys.md) 
 
 getdisplayBitmap(): `undefined`⎮`ImageData`
 
-*Defined in _lib/WebSys.ts:11*
+*Defined in [_lib/WebSys.ts:11](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L11)*
 
 
 
@@ -80,7 +80,7 @@ ___
 
 getdisplayHeight(): `number`
 
-*Defined in _lib/WebSys.ts:10*
+*Defined in [_lib/WebSys.ts:10](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L10)*
 
 
 
@@ -99,7 +99,7 @@ ___
 
 getdisplayMode(): `string`
 
-*Defined in _lib/WebSys.ts:8*
+*Defined in [_lib/WebSys.ts:8](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L8)*
 
 
 
@@ -118,7 +118,7 @@ ___
 
 getdisplayWidth(): `number`
 
-*Defined in _lib/WebSys.ts:9*
+*Defined in [_lib/WebSys.ts:9](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L9)*
 
 
 
@@ -142,7 +142,7 @@ ___
 
 *Implementation of [Sys](../interfaces/__lib_sys_.sys.md).[createMachine](../interfaces/__lib_sys_.sys.md#createmachine)*
 
-*Defined in _lib/WebSys.ts:53*
+*Defined in [_lib/WebSys.ts:53](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L53)*
 
 
 
@@ -164,7 +164,7 @@ ___
 
 
 
-*Defined in _lib/WebSys.ts:21*
+*Defined in [_lib/WebSys.ts:21](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L21)*
 
 
 
@@ -198,7 +198,7 @@ ___
 
 
 
-*Defined in _lib/WebSys.ts:47*
+*Defined in [_lib/WebSys.ts:47](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L47)*
 
 
 

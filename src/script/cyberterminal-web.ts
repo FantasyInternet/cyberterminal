@@ -7,9 +7,11 @@ import Machine from "./_lib/Machine"
  */
 
 try {
-  ; (<any>window)["cyberTerminal"] = new CyberTerminal(new WebSys())
+  //@ts-ignore
+  window.cyberTerminal = new CyberTerminal(new WebSys())
   console.log("Starting CyberTerminal")
 } catch (error) {
-  ; (<any>self)["machine"] = new Machine("./")
+  //@ts-ignore
+  self.machine = new Machine("./")
   console.log("Starting new Machine")
 }

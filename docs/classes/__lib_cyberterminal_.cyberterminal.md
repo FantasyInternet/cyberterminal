@@ -33,7 +33,7 @@ Terminal app
 ### ⊕ **new CyberTerminal**(sys: *[Sys](../interfaces/__lib_sys_.sys.md)*): [CyberTerminal](__lib_cyberterminal_.cyberterminal.md)
 
 
-*Defined in _lib/CyberTerminal.ts:4*
+*Defined in [_lib/CyberTerminal.ts:4](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L4)*
 
 
 
@@ -59,7 +59,7 @@ Terminal app
 
 **●  sys**:  *[Sys](../interfaces/__lib_sys_.sys.md)* 
 
-*Defined in _lib/CyberTerminal.ts:5*
+*Defined in [_lib/CyberTerminal.ts:5](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L5)*
 
 
 
@@ -77,7 +77,7 @@ ___
 
 
 
-*Defined in _lib/CyberTerminal.ts:9*
+*Defined in [_lib/CyberTerminal.ts:9](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L9)*
 
 
 

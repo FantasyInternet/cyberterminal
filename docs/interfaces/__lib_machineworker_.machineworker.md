@@ -21,7 +21,7 @@ Interface to MachineWorker
 
 
 
-*Defined in _lib/MachineWorker.ts:16*
+*Defined in [_lib/MachineWorker.ts:16](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/MachineWorker.ts#L16)*
 
 
 
@@ -54,7 +54,7 @@ ___
 
 
 
-*Defined in _lib/MachineWorker.ts:10*
+*Defined in [_lib/MachineWorker.ts:10](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/MachineWorker.ts#L10)*
 
 
 
