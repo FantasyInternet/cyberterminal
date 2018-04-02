@@ -11,8 +11,7 @@ export default class Machine {
   constructor(public url: string) {
     console.log("The web worker is working!")
     this._initCom()
-    this.read("./script/bouncing_colors.js").then((code: string) => {
-      console.log(code)
+    this.read("./my_program.js").then((code: string) => {
       this.run(code)
     })
   }
@@ -179,21 +178,15 @@ export default class Machine {
     return this._sysRequest("read", filename)
   }
 
-  run(js: string) {
-    let fn = new Function(
-      "setDisplayMode",
-      "palette",
-      "fillRect",
-      "waitForVsync",
-      "pset",
-      "getDisplayBitmap", js)
-    return fn(
-      this.setDisplayMode.bind(this),
-      this.palette.bind(this),
-      this.fillRect.bind(this),
-      this.waitForVsync.bind(this),
-      this.pset.bind(this),
-      () => this.displayBitmap)
+  run(js: string, api = this._generateRomApi()) {
+    let names: string[] = []
+    let vals: any[] = []
+    for (let name in api) {
+      names.push(name)
+      vals.push(api[name])
+    }
+    let fn = new Function(...names, js)
+    return fn(...vals)
   }
 
   /* _privates */
@@ -289,5 +282,14 @@ export default class Machine {
     this._lastCommit = performance.now()
   }
 
-
+  private _generateRomApi() {
+    let api: any = {}
+    for (let name of Object.getOwnPropertyNames(Machine.prototype)) {
+      let val = (<any>this)[name]
+      if (name.substr(0, 1) !== "_" && typeof val === "function") {
+        api[name] = val.bind(this)
+      }
+    }
+    return api
+  }
 }

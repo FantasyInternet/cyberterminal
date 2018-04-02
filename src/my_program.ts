@@ -1,4 +1,4 @@
-/// <reference path="./_lib/rom_api" />
+/// <reference path="./script/_lib/rom_api" />
 
 
 async function init() {
@@ -11,7 +11,9 @@ async function init() {
   let _fps = 0
   let _nextFps = 0
   let t = 0
-  setDisplayMode("indexed", 320, 180)
+  let w = 320
+  let h = 180
+  setDisplayMode("indexed", w, h)
   for (let i = 0; i < 256; i++) {
     palette(i, i, i * 2, i * 3)
   }
@@ -26,7 +28,7 @@ async function init() {
     fillRect(0, 45, 320, 1, 0, 0, 0)
     fillRect(0, 180 - 46, 320, 1, 0, 0, 0)
     //t = performance.now()
-    //t = await this.commitDisplay()
+    //t = await commitDisplay()
     t = await waitForVsync()
     _fps++
     if (t >= _nextFps) {
@@ -42,15 +44,12 @@ async function init() {
         pset(x + _x, y + _y, x * 4, y * 4, _z)
       }
     }
-    let displayBitmap = getDisplayBitmap()
-    if (displayBitmap) {
-      if (_x >= displayBitmap.width - 64) _dx = -1
-      if (_x <= 0) _dx = 1
-      if (_y >= displayBitmap.height - 64) _dy = -1
-      if (_y <= 0) _dy = 1
-      if (_z >= 255) _dz = -1
-      if (_z <= 0) _dz = 1
-    }
+    if (_x >= w - 64) _dx = -1
+    if (_x <= 0) _dx = 1
+    if (_y >= h - 64) _dy = -1
+    if (_y <= 0) _dy = 1
+    if (_z >= 255) _dz = -1
+    if (_z <= 0) _dz = 1
   }
 }
 init()
