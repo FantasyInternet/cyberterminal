@@ -1,4 +1,4 @@
-[cyberterminal](../README.md) > ["script/_lib/Sys"](../modules/_script__lib_sys_.md) > [Sys](../interfaces/_script__lib_sys_.sys.md)
+[cyberterminal](../README.md) > ["_lib/Sys"](../modules/__lib_sys_.md) > [Sys](../interfaces/__lib_sys_.sys.md)
 
 
 
@@ -9,7 +9,7 @@ Unified interface to system I/O
 
 ## Implemented by
 
-* [WebSys](../classes/_script__lib_websys_.websys.md)
+* [WebSys](../classes/__lib_websys_.websys.md)
 
 
 ## Properties
@@ -19,7 +19,7 @@ Unified interface to system I/O
 
 **●  displayBitmap**:  *`ImageData`* 
 
-*Defined in [script/_lib/Sys.ts:12](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L12)*
+*Defined in [_lib/Sys.ts:12](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L12)*
 
 
 
@@ -36,7 +36,7 @@ ___
 
 **●  displayHeight**:  *`number`* 
 
-*Defined in [script/_lib/Sys.ts:10](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L10)*
+*Defined in [_lib/Sys.ts:10](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L10)*
 
 
 
@@ -53,7 +53,7 @@ ___
 
 **●  displayMode**:  *`string`* 
 
-*Defined in [script/_lib/Sys.ts:6](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L6)*
+*Defined in [_lib/Sys.ts:6](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L6)*
 
 
 
@@ -70,7 +70,7 @@ ___
 
 **●  displayWidth**:  *`number`* 
 
-*Defined in [script/_lib/Sys.ts:8](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L8)*
+*Defined in [_lib/Sys.ts:8](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L8)*
 
 
 
@@ -87,11 +87,11 @@ ___
 
 ###  createMachine
 
-► **createMachine**(): [MachineWorker](_script__lib_machineworker_.machineworker.md)
+► **createMachine**(): [MachineWorker](__lib_machineworker_.machineworker.md)
 
 
 
-*Defined in [script/_lib/Sys.ts:31](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L31)*
+*Defined in [_lib/Sys.ts:31](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L31)*
 
 
 
@@ -100,7 +100,7 @@ Create a machine.
 
 
 
-**Returns:** [MachineWorker](_script__lib_machineworker_.machineworker.md)
+**Returns:** [MachineWorker](__lib_machineworker_.machineworker.md)
 the worker running the machine
 
 
@@ -118,7 +118,7 @@ ___
 
 
 
-*Defined in [script/_lib/Sys.ts:25](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L25)*
+*Defined in [_lib/Sys.ts:25](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L25)*
 
 
 
@@ -143,7 +143,7 @@ ___
 
 
 
-*Defined in [script/_lib/Sys.ts:20](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L20)*
+*Defined in [_lib/Sys.ts:20](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L20)*
 
 
 

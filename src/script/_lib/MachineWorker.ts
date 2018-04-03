@@ -14,4 +14,9 @@ interface MachineWorker {
    * @param listener Callback function to call whenever a message is received
    */
   onMessage(listener: Function): void
+
+  /**
+   * Terminate the machine!
+   */
+  terminate(): void
 }

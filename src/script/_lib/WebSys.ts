@@ -60,7 +60,9 @@ export default class WebSys implements Sys {
   }
 
   async read(filename: string) {
-    return (await fetch(filename)).text()
+    //@ts-ignore
+    return document.querySelector("textarea").value
+    //return (await fetch(filename)).text()
   }
 
 
@@ -144,5 +146,9 @@ class WebMachineWorker implements MachineWorker {
     this.worker.addEventListener("message", (e) => {
       return listener(e.data, this)
     })
+  }
+
+  terminate() {
+    return this.worker.terminate()
   }
 }

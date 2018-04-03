@@ -8,8 +8,26 @@ import Machine from "./_lib/Machine"
 
 try {
   //@ts-ignore
-  window.cyberTerminal = new CyberTerminal(new WebSys())
+  let terminal = window.cyberTerminal = new CyberTerminal(new WebSys())
   console.log("Starting CyberTerminal")
+  setTimeout(() => {
+    let coding = false
+    let editor = <HTMLTextAreaElement>document.querySelector("textarea")
+    editor.addEventListener("blur", () => {
+      coding = false
+      window.scrollTo(0, 0)
+      terminal.resetMachine()
+    })
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        if (coding = !coding) {
+          editor.focus()
+        } else {
+          editor.blur()
+        }
+      }
+    })
+  }, 1024)
 } catch (error) {
   //@ts-ignore
   self.machine = new Machine("./")

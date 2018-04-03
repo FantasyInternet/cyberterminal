@@ -2,13 +2,18 @@
  * Terminal app
  */
 export default class CyberTerminal {
+  machineWorker?: MachineWorker
+
   constructor(public sys: Sys) {
-    this.addMachine()
+    this.resetMachine()
   }
 
-  addMachine() {
-    let machineWorker = this.sys.createMachine()
-    machineWorker.onMessage(this._onMessage.bind(this))
+  resetMachine() {
+    if (this.machineWorker) {
+      this.machineWorker.terminate()
+    }
+    this.machineWorker = this.sys.createMachine()
+    this.machineWorker.onMessage(this._onMessage.bind(this))
   }
 
 
