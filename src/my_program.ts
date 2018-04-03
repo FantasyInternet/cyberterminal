@@ -14,10 +14,10 @@ async function init() {
   let w = 320
   let h = 180
   setDisplayMode("indexed", w, h)
-  for (let i = 0; i < 256; i++) {
-    palette(i, i, i * 2, i * 3)
-  }
   while (true) {
+    for (let i = 0; i < 256; i++) {
+      palette((i + _z) % 256, i, i, i)
+    }
     fillRect(0, 0, 80, 180, 200, 100, 100)
     fillRect(320 - 80, 0, 80, 180, 200, 100, 100)
     fillRect(0, 0, 320, 45, 200, 100, 100)

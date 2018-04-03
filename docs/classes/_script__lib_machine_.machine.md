@@ -173,7 +173,7 @@ ___
 
 
 
-*Defined in [script/_lib/Machine.ts:162](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L162)*
+*Defined in [script/_lib/Machine.ts:172](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L172)*
 
 
 
@@ -195,7 +195,7 @@ ___
 
 
 
-*Defined in [script/_lib/Machine.ts:92](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L92)*
+*Defined in [script/_lib/Machine.ts:94](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L94)*
 
 
 
@@ -261,7 +261,7 @@ ___
 
 
 
-*Defined in [script/_lib/Machine.ts:137](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L137)*
+*Defined in [script/_lib/Machine.ts:141](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L141)*
 
 
 
@@ -294,7 +294,7 @@ ___
 
 
 
-*Defined in [script/_lib/Machine.ts:77](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L77)*
+*Defined in [script/_lib/Machine.ts:79](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L79)*
 
 
 
@@ -359,7 +359,7 @@ ___
 
 
 
-*Defined in [script/_lib/Machine.ts:177](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L177)*
+*Defined in [script/_lib/Machine.ts:187](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L187)*
 
 
 
@@ -389,7 +389,7 @@ ___
 
 
 
-*Defined in [script/_lib/Machine.ts:181](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L181)*
+*Defined in [script/_lib/Machine.ts:191](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L191)*
 
 
 
@@ -454,7 +454,7 @@ ___
 
 
 
-*Defined in [script/_lib/Machine.ts:151](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L151)*
+*Defined in [script/_lib/Machine.ts:161](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L161)*
 
 
 
@@ -484,7 +484,7 @@ ___
 
 
 
-*Defined in [script/_lib/Machine.ts:157](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L157)*
+*Defined in [script/_lib/Machine.ts:167](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L167)*
 
 
 

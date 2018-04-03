@@ -58,7 +58,9 @@ export default class Machine {
     y = Math.floor(y)
     if (y < 0 || y >= bm.height) throw "Coordinates out of bounds!"
     let i = (y * bm.width + x) * 4
-    if (this.displayMode === "indexed" && this._displayPalette && this._displayPixmap) {
+    if (this.displayMode === "indexed") {
+      if (!this._displayPixmap) throw "No pixmap!"
+      if (!this._displayPalette) throw "No palette!"
       this._displayPixmap[i / 4] = r
       if (!this._displayPalette[r]) throw "Color not defined!"
         ;[r, g, b, a] = this._displayPalette[r]
@@ -103,7 +105,9 @@ export default class Machine {
     if (height < 0 || y + height > bm.height) throw "Coordinates out of bounds!"
     if (width === 0 || height === 0) return
     let i = (y * bm.width + x) * 4
-    if (this.displayMode === "indexed" && this._displayPalette && this._displayPixmap) {
+    if (this.displayMode === "indexed") {
+      if (!this._displayPixmap) throw "No pixmap!"
+      if (!this._displayPalette) throw "No palette!"
       let _i = i / 4
       for (let _y = 0; _y < height; _y++) {
         this._displayPixmap.fill(r, _i, _i + width)
@@ -135,6 +139,8 @@ export default class Machine {
   }
 
   palette(id: number, r: number, g: number, b: number) {
+    if (!this._displayBitmap) throw "No bitmap!"
+    if (!this._displayPixmap) throw "No pixmap!"
     if (!this._displayPalette) throw "No palette!"
     let a = 255
     if (this._displayPalette[id]) {
@@ -145,6 +151,10 @@ export default class Machine {
       this._displayPalette[id][i++] = a
     } else {
       this._displayPalette[id] = [r, g, b, a]
+    }
+    let p = -1
+    while ((p = this._displayPixmap.indexOf(id, p + 1)) >= 0) {
+      this._displayBitmap.data.set(this._displayPalette[id], p * 4)
     }
   }
 
