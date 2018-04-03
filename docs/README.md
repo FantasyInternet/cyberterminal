@@ -28,6 +28,7 @@ This project is still in _very_ early development so the API is _very_ basic.. T
 * ["script/_lib/MachineWorker"](modules/_script__lib_machineworker_.md)
 * ["script/_lib/Sys"](modules/_script__lib_sys_.md)
 * ["script/_lib/WebSys"](modules/_script__lib_websys_.md)
+* ["script/_lib/sandbox"](modules/_script__lib_sandbox_.md)
 
 
 

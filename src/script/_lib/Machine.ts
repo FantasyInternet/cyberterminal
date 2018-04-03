@@ -1,3 +1,5 @@
+import sandbox from "./sandbox"
+
 /**
  * Central processing unit for browsers
  * See [Sys](../interfaces/__classes_sys_.sys.md) for documentation
@@ -189,14 +191,7 @@ export default class Machine {
   }
 
   run(js: string, api = this._generateRomApi()) {
-    let names: string[] = []
-    let vals: any[] = []
-    for (let name in api) {
-      names.push(name)
-      vals.push(api[name])
-    }
-    let fn = new Function(...names, js)
-    return fn(...vals)
+    return sandbox(js, api)
   }
 
   /* _privates */
@@ -297,9 +292,35 @@ export default class Machine {
     for (let name of Object.getOwnPropertyNames(Machine.prototype)) {
       let val = (<any>this)[name]
       if (name.substr(0, 1) !== "_" && typeof val === "function") {
-        api[name] = val.bind(this)
+        api[name] = this._copyFunction(val.bind(this))
       }
     }
+    for (let name of ["Promise"]) {
+      api[name] = this._copyClass(eval(`(${name})`))
+    }
+    for (let name of ["Math"]) {
+      api[name] = this._copyObject(eval(`(${name})`))
+    }
     return api
+  }
+
+  private _copyClass(_class: any) {
+    return class {
+      constructor(...a: any[]) {
+        return new _class(...a)
+      }
+    }
+  }
+
+  private _copyObject(_obj: any) {
+    let obj: any = {}
+    for (let name of Object.getOwnPropertyNames(_obj)) {
+      obj[name] = _obj[name]
+    }
+    return obj
+  }
+
+  private _copyFunction(_fn: Function) {
+    return (...a: any[]) => _fn(...a)
   }
 }

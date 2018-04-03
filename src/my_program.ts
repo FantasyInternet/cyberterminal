@@ -8,7 +8,7 @@ async function init() {
   let _dy = 1
   let _z = 0
   let _dz = 1
-  let _fps = 0
+  let _fps = Math.random()
   let _nextFps = 0
   let t = 0
   let w = 320
@@ -32,7 +32,7 @@ async function init() {
     t = await waitForVsync()
     _fps++
     if (t >= _nextFps) {
-      console.log(_fps + " FPS")
+      log(_fps + " FPS")
       _fps = 0
       _nextFps += 1000
     }
