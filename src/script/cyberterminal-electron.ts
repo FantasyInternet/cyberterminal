@@ -1,14 +1,14 @@
-import WebSys from "./_lib/WebSys"
+import ElectronSys from "./_lib/ElectronSys"
 import CyberTerminal from "./_lib/CyberTerminal"
 import Machine from "./_lib/Machine"
 
 /**
- * Entry point for browser version
+ * Entry point for electron app
  */
 
 if (typeof window !== "undefined") {
   //@ts-ignore
-  let terminal = window.cyberTerminal = new CyberTerminal(new WebSys())
+  let terminal = window.cyberTerminal = new CyberTerminal(new ElectronSys())
   console.log("Starting CyberTerminal")
 } else {
   //@ts-ignore

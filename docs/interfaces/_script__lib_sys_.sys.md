@@ -9,6 +9,7 @@ Unified interface to system I/O
 
 ## Implemented by
 
+* [ElectronSys](../classes/_script__lib_electronsys_.electronsys.md)
 * [WebSys](../classes/_script__lib_websys_.websys.md)
 
 
