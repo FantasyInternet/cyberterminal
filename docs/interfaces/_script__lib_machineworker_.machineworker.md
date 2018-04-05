@@ -1,4 +1,4 @@
-[cyberterminal](../README.md) > ["_lib/MachineWorker"](../modules/__lib_machineworker_.md) > [MachineWorker](../interfaces/__lib_machineworker_.machineworker.md)
+[cyberterminal](../README.md) > ["script/_lib/MachineWorker"](../modules/_script__lib_machineworker_.md) > [MachineWorker](../interfaces/_script__lib_machineworker_.machineworker.md)
 
 
 
@@ -9,7 +9,7 @@ Interface to MachineWorker
 
 ## Implemented by
 
-* [WebMachineWorker](../classes/__lib_websys_.webmachineworker.md)
+* [WebMachineWorker](../classes/_script__lib_websys_.webmachineworker.md)
 
 
 ## Methods
@@ -21,7 +21,7 @@ Interface to MachineWorker
 
 
 
-*Defined in [_lib/MachineWorker.ts:16](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/MachineWorker.ts#L16)*
+*Defined in [script/_lib/MachineWorker.ts:16](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/MachineWorker.ts#L16)*
 
 
 
@@ -54,7 +54,7 @@ ___
 
 
 
-*Defined in [_lib/MachineWorker.ts:10](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/MachineWorker.ts#L10)*
+*Defined in [script/_lib/MachineWorker.ts:10](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/MachineWorker.ts#L10)*
 
 
 
@@ -88,7 +88,7 @@ ___
 
 
 
-*Defined in [_lib/MachineWorker.ts:21](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/MachineWorker.ts#L21)*
+*Defined in [script/_lib/MachineWorker.ts:21](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/MachineWorker.ts#L21)*
 
 
 

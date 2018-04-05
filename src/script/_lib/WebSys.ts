@@ -61,8 +61,7 @@ export default class WebSys implements Sys {
 
   async read(filename: string) {
     //@ts-ignore
-    return document.querySelector("textarea").value
-    //return (await fetch(filename)).text()
+    return (await fetch(filename)).text()
   }
 
 

@@ -1,6 +1,6 @@
 {
   "name": "cyberterminal",
-  "version": "0.0.13",
+  "version": "0.0.15",
   "private": true,
   "build": {
     "appId": "ninja.codeartistic",

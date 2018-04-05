@@ -22,12 +22,13 @@ This project is still in _very_ early development so the API is _very_ basic.. T
 
 ### External modules
 
-* ["_lib/CyberTerminal"](modules/__lib_cyberterminal_.md)
-* ["_lib/Machine"](modules/__lib_machine_.md)
-* ["_lib/MachineWorker"](modules/__lib_machineworker_.md)
-* ["_lib/Sys"](modules/__lib_sys_.md)
-* ["_lib/WebSys"](modules/__lib_websys_.md)
-* ["_lib/sandbox"](modules/__lib_sandbox_.md)
+* ["my_program"](modules/_my_program_.md)
+* ["script/_lib/CyberTerminal"](modules/_script__lib_cyberterminal_.md)
+* ["script/_lib/Machine"](modules/_script__lib_machine_.md)
+* ["script/_lib/MachineWorker"](modules/_script__lib_machineworker_.md)
+* ["script/_lib/Sys"](modules/_script__lib_sys_.md)
+* ["script/_lib/WebSys"](modules/_script__lib_websys_.md)
+* ["script/_lib/sandbox"](modules/_script__lib_sandbox_.md)
 
 
 

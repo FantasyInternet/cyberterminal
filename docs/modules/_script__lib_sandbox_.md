@@ -1,16 +1,16 @@
-[cyberterminal](../README.md) > ["_lib/sandbox"](../modules/__lib_sandbox_.md)
+[cyberterminal](../README.md) > ["script/_lib/sandbox"](../modules/_script__lib_sandbox_.md)
 
 
 
-# External module: "_lib/sandbox"
+# External module: "script/_lib/sandbox"
 
 ## Index
 
 ### Functions
 
-* [extractNames](__lib_sandbox_.md#extractnames)
-* [sandbox](__lib_sandbox_.md#sandbox)
-* [unicodeUnescape](__lib_sandbox_.md#unicodeunescape)
+* [extractNames](_script__lib_sandbox_.md#extractnames)
+* [sandbox](_script__lib_sandbox_.md#sandbox)
+* [unicodeUnescape](_script__lib_sandbox_.md#unicodeunescape)
 
 
 
@@ -24,7 +24,7 @@
 
 
 
-*Defined in [_lib/sandbox.ts:26](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/sandbox.ts#L26)*
+*Defined in [script/_lib/sandbox.ts:26](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/sandbox.ts#L26)*
 
 
 
@@ -55,7 +55,7 @@ ___
 
 
 
-*Defined in [_lib/sandbox.ts:1](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/sandbox.ts#L1)*
+*Defined in [script/_lib/sandbox.ts:1](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/sandbox.ts#L1)*
 
 
 
@@ -86,7 +86,7 @@ ___
 
 
 
-*Defined in [_lib/sandbox.ts:49](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/sandbox.ts#L49)*
+*Defined in [script/_lib/sandbox.ts:49](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/sandbox.ts#L49)*
 
 
 
