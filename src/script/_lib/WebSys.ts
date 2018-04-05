@@ -59,9 +59,19 @@ export default class WebSys implements Sys {
     return new WebMachineWorker(this._scriptSrc)
   }
 
-  async read(filename: string) {
+  async read(filename: string, options: any = {}) {
     //@ts-ignore
-    return (await fetch(filename)).text()
+    let res = await fetch(filename)
+    switch (options.type) {
+      case "binary":
+        return res.arrayBuffer()
+
+      case "text":
+        return res.text()
+
+      default:
+        throw "Unknown type!"
+    }
   }
 
 

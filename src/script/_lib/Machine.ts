@@ -1,5 +1,3 @@
-import sandbox from "./sandbox"
-
 /**
  * Central processing unit for browsers
  * See [Sys](../interfaces/__classes_sys_.sys.md) for documentation
@@ -13,7 +11,7 @@ export default class Machine {
   constructor(public url: string) {
     console.log("The web worker is working!")
     this._initCom()
-    this.read("./my_program.js").then((code: string) => {
+    this.read("./script/fib.wasm", { type: "binary" }).then((code: ArrayBuffer) => {
       this.run(code)
     })
   }
@@ -186,12 +184,22 @@ export default class Machine {
     })
   }
 
-  async read(filename: string) {
-    return this._sysRequest("read", filename)
+  async read(filename: string, options: any = {}) {
+    return this._sysRequest("read", filename, options)
   }
 
-  run(js: string, api = this._generateRomApi()) {
-    return sandbox(js, api)
+  async run(wasm: ArrayBuffer, api = this._generateRomApi()) {
+    console.log("instatiating", wasm)
+    //@ts-ignore
+    let vm = await WebAssembly.instantiate(wasm, { api })
+    console.log("instatiated", vm.instance.exports)
+    this.setDisplayMode("rgb", 320, 200)
+    //this.fillRect(20, 30, 40, 50, 255, 255, 255)
+    vm.instance.exports.init()
+    while (true) {
+      await this.waitForVsync()
+      vm.instance.exports.step()
+    }
   }
 
   /* _privates */

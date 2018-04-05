@@ -186,7 +186,7 @@ ___
 
 ###  read
 
-► **read**(filename: *`string`*): `Promise`.<`string`>
+► **read**(filename: *`string`*, options?: *`any`*): `Promise`.<`string`⎮`ArrayBuffer`>
 
 
 
@@ -196,15 +196,16 @@ ___
 
 **Parameters:**
 
-| Param | Type | Description |
-| ------ | ------ | ------ |
-| filename | `string`   |  - |
+| Param | Type | Default value | Description |
+| ------ | ------ | ------ | ------ |
+| filename | `string`  | - |   - |
+| options | `any`  |  {} |   - |
 
 
 
 
 
-**Returns:** `Promise`.<`string`>
+**Returns:** `Promise`.<`string`⎮`ArrayBuffer`>
 
 
 

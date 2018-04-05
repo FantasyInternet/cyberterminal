@@ -22,7 +22,7 @@
 
 
 
-*Defined in my_program.ts:4*
+*Defined in [my_program.ts:4](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/my_program.ts#L4)*
 
 
 

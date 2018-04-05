@@ -1,7 +1,26 @@
-export function fibonacci(n: i32): i32 {
-  if (n <= 0) return 0
+import {
+  log: LogType,
+  fillRect: FillRectType
+} from 'api';
+type LogType = (i32) => void;
+type FillRectType = (i32, i32, i32, i32, i32, i32, i32) => void;
 
-  if (n == 1) return 1
+export function init() {
+  log(424242);
+  fillRect(0, 0, 320, 200, 127, 127, 127);
+}
 
-  return fibonacci(n - 1) + fibonacci(n - 2)
+let x: i32 = 0;
+let y: i32 = 0;
+let dx: i32 = 1;
+let dy: i32 = 1;
+export function step() {
+  fillRect(x, y, 10, 10, 0, 0, 0);
+  if (x <= 0) { dx = 1; }
+  if (y <= 0) { dy = 1; }
+  if (x >= 310) { dx = -1; }
+  if (y >= 190) { dy = -1; }
+  x += dx;
+  y += dy;
+  fillRect(x, y, 10, 10, 255, 255, 255);
 }

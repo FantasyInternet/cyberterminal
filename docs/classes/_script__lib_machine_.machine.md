@@ -51,7 +51,7 @@ Central processing unit for browsers See [Sys](../interfaces/__classes_sys_.sys.
 ### ⊕ **new Machine**(url: *`string`*): [Machine](_script__lib_machine_.machine.md)
 
 
-*Defined in [script/_lib/Machine.ts:11](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L11)*
+*Defined in [script/_lib/Machine.ts:9](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L9)*
 
 
 
@@ -77,7 +77,7 @@ Central processing unit for browsers See [Sys](../interfaces/__classes_sys_.sys.
 
 **●  url**:  *`string`* 
 
-*Defined in [script/_lib/Machine.ts:13](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L13)*
+*Defined in [script/_lib/Machine.ts:11](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L11)*
 
 
 
@@ -94,7 +94,7 @@ ___
 
 getdisplayBitmap(): `undefined`⎮`ImageData`
 
-*Defined in [script/_lib/Machine.ts:11](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L11)*
+*Defined in [script/_lib/Machine.ts:9](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L9)*
 
 
 
@@ -113,7 +113,7 @@ ___
 
 getdisplayHeight(): `number`
 
-*Defined in [script/_lib/Machine.ts:10](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L10)*
+*Defined in [script/_lib/Machine.ts:8](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L8)*
 
 
 
@@ -132,7 +132,7 @@ ___
 
 getdisplayMode(): `string`
 
-*Defined in [script/_lib/Machine.ts:8](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L8)*
+*Defined in [script/_lib/Machine.ts:6](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L6)*
 
 
 
@@ -151,7 +151,7 @@ ___
 
 getdisplayWidth(): `number`
 
-*Defined in [script/_lib/Machine.ts:9](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L9)*
+*Defined in [script/_lib/Machine.ts:7](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L7)*
 
 
 
@@ -173,7 +173,7 @@ ___
 
 
 
-*Defined in [script/_lib/Machine.ts:174](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L174)*
+*Defined in [script/_lib/Machine.ts:172](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L172)*
 
 
 
@@ -195,7 +195,7 @@ ___
 
 
 
-*Defined in [script/_lib/Machine.ts:96](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L96)*
+*Defined in [script/_lib/Machine.ts:94](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L94)*
 
 
 
@@ -231,7 +231,7 @@ ___
 
 
 
-*Defined in [script/_lib/Machine.ts:21](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L21)*
+*Defined in [script/_lib/Machine.ts:19](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L19)*
 
 
 
@@ -261,7 +261,7 @@ ___
 
 
 
-*Defined in [script/_lib/Machine.ts:143](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L143)*
+*Defined in [script/_lib/Machine.ts:141](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L141)*
 
 
 
@@ -294,7 +294,7 @@ ___
 
 
 
-*Defined in [script/_lib/Machine.ts:81](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L81)*
+*Defined in [script/_lib/Machine.ts:79](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L79)*
 
 
 
@@ -325,7 +325,7 @@ ___
 
 
 
-*Defined in [script/_lib/Machine.ts:54](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L54)*
+*Defined in [script/_lib/Machine.ts:52](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L52)*
 
 
 
@@ -355,19 +355,20 @@ ___
 
 ###  read
 
-► **read**(filename: *`string`*): `Promise`.<`any`>
+► **read**(filename: *`string`*, options?: *`any`*): `Promise`.<`any`>
 
 
 
-*Defined in [script/_lib/Machine.ts:189](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L189)*
+*Defined in [script/_lib/Machine.ts:187](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L187)*
 
 
 
 **Parameters:**
 
-| Param | Type | Description |
-| ------ | ------ | ------ |
-| filename | `string`   |  - |
+| Param | Type | Default value | Description |
+| ------ | ------ | ------ | ------ |
+| filename | `string`  | - |   - |
+| options | `any`  |  {} |   - |
 
 
 
@@ -385,11 +386,11 @@ ___
 
 ###  run
 
-► **run**(js: *`string`*, api?: *`any`*): `any`
+► **run**(wasm: *`ArrayBuffer`*, api?: *`any`*): `Promise`.<`void`>
 
 
 
-*Defined in [script/_lib/Machine.ts:193](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L193)*
+*Defined in [script/_lib/Machine.ts:191](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L191)*
 
 
 
@@ -397,14 +398,14 @@ ___
 
 | Param | Type | Default value | Description |
 | ------ | ------ | ------ | ------ |
-| js | `string`  | - |   - |
+| wasm | `ArrayBuffer`  | - |   - |
 | api | `any`  |  this._generateRomApi() |   - |
 
 
 
 
 
-**Returns:** `any`
+**Returns:** `Promise`.<`void`>
 
 
 
@@ -420,7 +421,7 @@ ___
 
 
 
-*Defined in [script/_lib/Machine.ts:25](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L25)*
+*Defined in [script/_lib/Machine.ts:23](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L23)*
 
 
 
@@ -454,7 +455,7 @@ ___
 
 
 
-*Defined in [script/_lib/Machine.ts:163](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L163)*
+*Defined in [script/_lib/Machine.ts:161](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L161)*
 
 
 
@@ -484,7 +485,7 @@ ___
 
 
 
-*Defined in [script/_lib/Machine.ts:169](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L169)*
+*Defined in [script/_lib/Machine.ts:167](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L167)*
 
 
 
