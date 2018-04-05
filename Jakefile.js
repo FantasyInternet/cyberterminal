@@ -13,6 +13,7 @@ let os = require("os"),
   browserify = require("browserify"),
   tsify = require("tsify"),
   jsmin = require("jsmin").jsmin,
+  walt = require("walt-compiler").default,
   FtpClient = require("ftp"),
   md5 = require("md5")
 
@@ -20,7 +21,7 @@ let os = require("os"),
 * Jakefile.js
 * For building web apps
 *
-* @date 26-mar-2018
+* @date 05-apr-2018
 */
 let srcDir = "./src/",
   outDir = "./build/",
@@ -30,7 +31,7 @@ let srcDir = "./src/",
   reloadServer,
   watchThrottle = {}
 
-task("default", ["clean", "html:pug", "html:md", "css:less", "js:ts", "static:json", "static:all"])
+task("default", ["clean", "html:pug", "html:md", "css:less", "js:ts", "js:walt", "static:json", "static:all"])
 
 task("watch", function () {
   http.get("http://localhost:8000/").on("error", function () { })
@@ -40,6 +41,7 @@ task("watch", function () {
   startWatching(".md", "html:md")
   startWatching(".less", "css:less")
   startWatching(".ts", "js:ts")
+  startWatching(".walt", "js:walt")
   startWatching(".json", "static:json")
   startWatching("", "static:all")
 
@@ -277,6 +279,22 @@ namespace("js", function () {
 
     })
   })
+  task("walt", function () {
+    console.log("\nCompiling Walt...")
+    let filesLeft = fileTypeList(".walt").length
+    if (!filesLeft) { console.log("...dONE!"); complete(); }
+    fileTypeList(".walt").forEach(function (inFile) {
+      let outFile = outputFile(inFile, ".wasm"),
+        output = "" + fs.readFileSync(inFile)
+      console.log(inFile, "->", outFile)
+
+      output = walt(output)
+
+      jake.mkdirP(path.dirname(outFile))
+      fs.writeFileSync(outFile, new Uint8Array(output))
+    })
+    console.log("...dONE!")
+  })
 })
 
 namespace("static", function () {
@@ -315,7 +333,7 @@ namespace("static", function () {
 
   task("all", function () {
     console.log("\nCopying static files...")
-    fileTypeList([".pug", ".md", ".less", ".ts"])
+    fileTypeList([".pug", ".md", ".less", ".ts", ".walt"])
     staticFiles.resolve()
     excludeIgnoredFiles(staticFiles.toArray()).forEach(function (inFile) {
       let outFile = outputFile(inFile)

@@ -1,6 +1,6 @@
 {
   "name": "cyberterminal",
-  "version": "0.0.10",
+  "version": "0.0.13",
   "private": true,
   "build": {
     "appId": "ninja.codeartistic",
@@ -48,7 +48,8 @@
     "tsify": "^3.0.4",
     "typedoc": "^0.11.1",
     "typedoc-plugin-markdown": "^1.0.14",
-    "typescript": "^2.7.2"
+    "typescript": "^2.7.2",
+    "walt-compiler": "^0.4.3"
   },
   "dependencies": {
     "statify": "^2.0.1"
