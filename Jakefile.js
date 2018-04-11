@@ -14,6 +14,7 @@ let os = require("os"),
   tsify = require("tsify"),
   jsmin = require("jsmin").jsmin,
   walt = require("walt-compiler").default,
+  wabt = require("wabt"),
   FtpClient = require("ftp"),
   md5 = require("md5")
 
@@ -21,7 +22,7 @@ let os = require("os"),
 * Jakefile.js
 * For building web apps
 *
-* @date 05-apr-2018
+* @date 10-apr-2018
 */
 let srcDir = "./src/",
   outDir = "./build/",
@@ -31,7 +32,7 @@ let srcDir = "./src/",
   reloadServer,
   watchThrottle = {}
 
-task("default", ["clean", "html:pug", "html:md", "css:less", "js:ts", "js:walt", "static:json", "static:all"])
+task("default", ["clean", "html:pug", "html:md", "css:less", "js:ts", "wasm:walt", "wasm:wast", "static:json", "static:all"])
 
 task("watch", function () {
   http.get("http://localhost:8000/").on("error", function () { })
@@ -41,7 +42,8 @@ task("watch", function () {
   startWatching(".md", "html:md")
   startWatching(".less", "css:less")
   startWatching(".ts", "js:ts")
-  startWatching(".walt", "js:walt")
+  startWatching(".walt", "wasm:walt")
+  startWatching(".wast", "wasm:wast")
   startWatching(".json", "static:json")
   startWatching("", "static:all")
 
@@ -279,10 +281,30 @@ namespace("js", function () {
 
     })
   })
+})
+
+namespace("wasm", function () {
+  let wabt_opts = {
+
+  }
+
+  task("wast", function () {
+    console.log("\nCompiling Wast...")
+    fileTypeList([".wast", ".wat"]).forEach(function (inFile) {
+      let outFile = outputFile(inFile, ".wasm"),
+        output = "" + fs.readFileSync(inFile)
+      console.log(inFile, "->", outFile)
+
+      let module = wabt.parseWat(inFile, output)
+      output = module.toBinary(wabt_opts).buffer
+
+      jake.mkdirP(path.dirname(outFile))
+      fs.writeFileSync(outFile, new Uint8Array(output))
+    })
+    console.log("...dONE!")
+  })
   task("walt", function () {
     console.log("\nCompiling Walt...")
-    let filesLeft = fileTypeList(".walt").length
-    if (!filesLeft) { console.log("...dONE!"); complete(); }
     fileTypeList(".walt").forEach(function (inFile) {
       let outFile = outputFile(inFile, ".wasm"),
         output = "" + fs.readFileSync(inFile)
@@ -333,7 +355,7 @@ namespace("static", function () {
 
   task("all", function () {
     console.log("\nCopying static files...")
-    fileTypeList([".pug", ".md", ".less", ".ts", ".walt"])
+    fileTypeList([".pug", ".md", ".less", ".ts", ".walt", ".wast"])
     staticFiles.resolve()
     excludeIgnoredFiles(staticFiles.toArray()).forEach(function (inFile) {
       let outFile = outputFile(inFile)

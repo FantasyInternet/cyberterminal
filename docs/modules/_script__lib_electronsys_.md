@@ -25,7 +25,7 @@
 
 **●  fs**:  *`any`* 
 
-*Defined in script/_lib/ElectronSys.ts:3*
+*Defined in [script/_lib/ElectronSys.ts:3](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/ElectronSys.ts#L3)*
 
 
 

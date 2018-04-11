@@ -219,7 +219,7 @@ ___
 
 *Overrides [WebSys](_script__lib_websys_.websys.md).[read](_script__lib_websys_.websys.md#read)*
 
-*Defined in script/_lib/ElectronSys.ts:11*
+*Defined in [script/_lib/ElectronSys.ts:11](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/ElectronSys.ts#L11)*
 
 
 
