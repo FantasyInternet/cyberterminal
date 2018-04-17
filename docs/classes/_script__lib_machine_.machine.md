@@ -30,11 +30,13 @@ Central processing unit for browsers See [Sys](../interfaces/__classes_sys_.sys.
 ### Methods
 
 * [commitDisplay](_script__lib_machine_.machine.md#commitdisplay)
-* [fillRect](_script__lib_machine_.machine.md#fillrect)
 * [log](_script__lib_machine_.machine.md#log)
-* [palette](_script__lib_machine_.machine.md#palette)
-* [pget](_script__lib_machine_.machine.md#pget)
-* [pset](_script__lib_machine_.machine.md#pset)
+* [popArrayBuffer](_script__lib_machine_.machine.md#poparraybuffer)
+* [popString](_script__lib_machine_.machine.md#popstring)
+* [popToMemory](_script__lib_machine_.machine.md#poptomemory)
+* [pushArrayBuffer](_script__lib_machine_.machine.md#pusharraybuffer)
+* [pushFromMemory](_script__lib_machine_.machine.md#pushfrommemory)
+* [pushString](_script__lib_machine_.machine.md#pushstring)
 * [read](_script__lib_machine_.machine.md#read)
 * [run](_script__lib_machine_.machine.md#run)
 * [setDisplayMode](_script__lib_machine_.machine.md#setdisplaymode)
@@ -173,7 +175,7 @@ ___
 
 
 
-*Defined in [script/_lib/Machine.ts:172](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L172)*
+*Defined in [script/_lib/Machine.ts:207](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L207)*
 
 
 
@@ -187,47 +189,11 @@ ___
 
 ___
 
-<a id="fillrect"></a>
-
-###  fillRect
-
-► **fillRect**(x: *`number`*, y: *`number`*, width: *`number`*, height: *`number`*, r: *`number`*, g?: *`number`*, b?: *`number`*): `void`
-
-
-
-*Defined in [script/_lib/Machine.ts:94](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L94)*
-
-
-
-**Parameters:**
-
-| Param | Type | Default value | Description |
-| ------ | ------ | ------ | ------ |
-| x | `number`  | - |   - |
-| y | `number`  | - |   - |
-| width | `number`  | - |   - |
-| height | `number`  | - |   - |
-| r | `number`  | - |   - |
-| g | `number`  |  r |   - |
-| b | `number`  |  r |   - |
-
-
-
-
-
-**Returns:** `void`
-
-
-
-
-
-___
-
 <a id="log"></a>
 
 ###  log
 
-► **log**(msg: *`any`*): `void`
+► **log**(): `void`
 
 
 
@@ -235,11 +201,77 @@ ___
 
 
 
+
+
+**Returns:** `void`
+
+
+
+
+
+___
+
+<a id="poparraybuffer"></a>
+
+###  popArrayBuffer
+
+► **popArrayBuffer**(): `undefined`⎮`ArrayBuffer`
+
+
+
+*Defined in [script/_lib/Machine.ts:179](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L179)*
+
+
+
+
+
+**Returns:** `undefined`⎮`ArrayBuffer`
+
+
+
+
+
+___
+
+<a id="popstring"></a>
+
+###  popString
+
+► **popString**(): `any`
+
+
+
+*Defined in [script/_lib/Machine.ts:190](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L190)*
+
+
+
+
+
+**Returns:** `any`
+
+
+
+
+
+___
+
+<a id="poptomemory"></a>
+
+###  popToMemory
+
+► **popToMemory**(offset: *`number`*): `void`
+
+
+
+*Defined in [script/_lib/Machine.ts:167](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L167)*
+
+
+
 **Parameters:**
 
 | Param | Type | Description |
 | ------ | ------ | ------ |
-| msg | `any`   |  - |
+| offset | `number`   |  - |
 
 
 
@@ -253,15 +285,15 @@ ___
 
 ___
 
-<a id="palette"></a>
+<a id="pusharraybuffer"></a>
 
-###  palette
+###  pushArrayBuffer
 
-► **palette**(id: *`number`*, r: *`number`*, g: *`number`*, b: *`number`*): `void`
+► **pushArrayBuffer**(arbuf: *`ArrayBuffer`*): `number`
 
 
 
-*Defined in [script/_lib/Machine.ts:141](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L141)*
+*Defined in [script/_lib/Machine.ts:175](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L175)*
 
 
 
@@ -269,10 +301,38 @@ ___
 
 | Param | Type | Description |
 | ------ | ------ | ------ |
-| id | `number`   |  - |
-| r | `number`   |  - |
-| g | `number`   |  - |
-| b | `number`   |  - |
+| arbuf | `ArrayBuffer`   |  - |
+
+
+
+
+
+**Returns:** `number`
+
+
+
+
+
+___
+
+<a id="pushfrommemory"></a>
+
+###  pushFromMemory
+
+► **pushFromMemory**(offset: *`number`*, length: *`number`*): `void`
+
+
+
+*Defined in [script/_lib/Machine.ts:161](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L161)*
+
+
+
+**Parameters:**
+
+| Param | Type | Description |
+| ------ | ------ | ------ |
+| offset | `number`   |  - |
+| length | `number`   |  - |
 
 
 
@@ -286,15 +346,15 @@ ___
 
 ___
 
-<a id="pget"></a>
+<a id="pushstring"></a>
 
-###  pget
+###  pushString
 
-► **pget**(x: *`number`*, y: *`number`*): `undefined`⎮`number`⎮`Uint8ClampedArray`
+► **pushString**(str: *`string`*): `any`
 
 
 
-*Defined in [script/_lib/Machine.ts:79](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L79)*
+*Defined in [script/_lib/Machine.ts:183](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L183)*
 
 
 
@@ -302,48 +362,13 @@ ___
 
 | Param | Type | Description |
 | ------ | ------ | ------ |
-| x | `number`   |  - |
-| y | `number`   |  - |
+| str | `string`   |  - |
 
 
 
 
 
-**Returns:** `undefined`⎮`number`⎮`Uint8ClampedArray`
-
-
-
-
-
-___
-
-<a id="pset"></a>
-
-###  pset
-
-► **pset**(x: *`number`*, y: *`number`*, r: *`number`*, g?: *`number`*, b?: *`number`*): `void`
-
-
-
-*Defined in [script/_lib/Machine.ts:52](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L52)*
-
-
-
-**Parameters:**
-
-| Param | Type | Default value | Description |
-| ------ | ------ | ------ | ------ |
-| x | `number`  | - |   - |
-| y | `number`  | - |   - |
-| r | `number`  | - |   - |
-| g | `number`  |  r |   - |
-| b | `number`  |  r |   - |
-
-
-
-
-
-**Returns:** `void`
+**Returns:** `any`
 
 
 
@@ -359,7 +384,7 @@ ___
 
 
 
-*Defined in [script/_lib/Machine.ts:187](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L187)*
+*Defined in [script/_lib/Machine.ts:222](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L222)*
 
 
 
@@ -390,7 +415,7 @@ ___
 
 
 
-*Defined in [script/_lib/Machine.ts:191](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L191)*
+*Defined in [script/_lib/Machine.ts:226](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L226)*
 
 
 
@@ -417,7 +442,7 @@ ___
 
 ###  setDisplayMode
 
-► **setDisplayMode**(mode: *"text"⎮"indexed"⎮"rgb"*, width: *`number`*, height: *`number`*, displayWidth?: *`number`*, displayHeight?: *`number`*): `void`
+► **setDisplayMode**(width: *`number`*, height: *`number`*, displayWidth?: *`number`*, displayHeight?: *`number`*): `void`
 
 
 
@@ -429,7 +454,6 @@ ___
 
 | Param | Type | Default value | Description |
 | ------ | ------ | ------ | ------ |
-| mode | "text"⎮"indexed"⎮"rgb"  | - |   - |
 | width | `number`  | - |   - |
 | height | `number`  | - |   - |
 | displayWidth | `number`  |  width |   - |
@@ -455,7 +479,7 @@ ___
 
 
 
-*Defined in [script/_lib/Machine.ts:161](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L161)*
+*Defined in [script/_lib/Machine.ts:196](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L196)*
 
 
 
@@ -485,7 +509,7 @@ ___
 
 
 
-*Defined in [script/_lib/Machine.ts:167](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L167)*
+*Defined in [script/_lib/Machine.ts:202](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L202)*
 
 
 

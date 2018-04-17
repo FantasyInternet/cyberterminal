@@ -16,13 +16,13 @@ export default class Machine {
     })
   }
 
-  log(msg: any) {
-    console.log(msg)
+  log() {
+    console.log("WASM:", this.popString())
   }
 
-  setDisplayMode(mode: "text" | "indexed" | "rgb", width: number, height: number, displayWidth = width, displayHeight = height) {
-    this._sysCall("setDisplayMode", mode, width, height, displayWidth, displayHeight)
-    this._displayMode = mode
+  setDisplayMode(/*mode: "text" | "indexed" | "rgb",*/ width: number, height: number, displayWidth = width, displayHeight = height) {
+    this._sysCall("setDisplayMode", "rgb", width, height, displayWidth, displayHeight)
+    this._displayMode = "rgb"
     this._displayWidth = displayWidth
     this._displayHeight = displayHeight
     delete this._displayBitmap
@@ -49,7 +49,7 @@ export default class Machine {
     return
   }
 
-  pset(x: number, y: number, r: number, g: number = r, b: number = r) {
+  /*pset(x: number, y: number, r: number, g: number = r, b: number = r) {
     let a = 255
     if (!this.displayBitmap) throw "No bitmap present!"
     let bm = this.displayBitmap
@@ -156,6 +156,41 @@ export default class Machine {
     while ((p = this._displayPixmap.indexOf(id, p + 1)) >= 0) {
       this._displayBitmap.data.set(this._displayPalette[id], p * 4)
     }
+  }*/
+
+  pushFromMemory(offset: number, length: number) {
+    if (!this._vm) throw "No VM!"
+    let ar = new Uint8Array(length)
+    ar.set(new Uint8Array( this._vm.instance.exports.memory.buffer.slice(offset, offset + length)))
+    this._bufferStack.push(ar.buffer)
+  }
+  popToMemory(offset: number) {
+    if (!this._vm) throw "No VM!"
+    if (!this._bufferStack.length) throw "Buffer stack is empty!"
+    let ar = new Uint8Array(this._vm.instance.exports.memory.buffer)
+    //@ts-ignore
+    ar.set(this._bufferStack.pop(), offset)
+  }
+
+  pushArrayBuffer(arbuf: ArrayBuffer) {
+    this._bufferStack.push(arbuf)
+    return arbuf.byteLength
+  }
+  popArrayBuffer() {
+    return this._bufferStack.pop()
+  }
+
+  pushString(str: string) {
+    //@ts-ignore
+    let enc = new TextEncoder()
+    let buf = enc.encode(str).buffer
+    this._bufferStack.push(buf)
+    return buf.byteLength
+  }
+  popString() {
+    //@ts-ignore
+    let dec = new TextDecoder("utf-8")
+    return dec.decode(this._bufferStack.pop())
   }
 
   async wait(milliseconds: number = 0) {
@@ -191,14 +226,15 @@ export default class Machine {
   async run(wasm: ArrayBuffer, api = this._generateRomApi()) {
     console.log("instatiating", wasm)
     //@ts-ignore
-    let vm = await WebAssembly.instantiate(wasm, { api })
-    console.log("instatiated", vm.instance.exports)
-    this.setDisplayMode("rgb", 320, 200)
+    this._vm = await WebAssembly.instantiate(wasm, { api })
+    console.log("instatiated", this._vm.instance.exports)
+    //this.setDisplayMode( 320, 200)
     //this.fillRect(20, 30, 40, 50, 255, 255, 255)
-    vm.instance.exports.init()
+    this._vm.instance.exports.init()
+    console.log("stepping")
     while (true) {
       await this.commitDisplay()
-      vm.instance.exports.step()
+      this._vm.instance.exports.step()
     }
   }
 
@@ -213,6 +249,8 @@ export default class Machine {
   private _lastCommit: number = performance.now()
   private _pendingCommits: Function[] = []
   private _pendingRequests: any[] = []
+  private _vm: any = {}
+  private _bufferStack: ArrayBuffer[] = []
 
   private _initCom() {
     self.addEventListener("message", this._onMessage.bind(this))
