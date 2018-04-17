@@ -11,7 +11,7 @@ export default class Machine {
   constructor(public url: string) {
     console.log("The web worker is working!")
     this._initCom()
-    this.read("./script/fib.wasm", { type: "binary" }).then((code: ArrayBuffer) => {
+    this.read("./script/pong.wasm", { type: "binary" }).then((code: ArrayBuffer) => {
       this.run(code)
     })
   }
@@ -197,7 +197,7 @@ export default class Machine {
     //this.fillRect(20, 30, 40, 50, 255, 255, 255)
     vm.instance.exports.init()
     while (true) {
-      await this.waitForVsync()
+      await this.commitDisplay()
       vm.instance.exports.step()
     }
   }
