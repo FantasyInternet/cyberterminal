@@ -24,12 +24,12 @@
     (i32.div_u (i32.load (get_global $partIndexOffset)) (i32.const 4))
   )
   (func $getPartOffset (param $id i32) (result i32)
-    (if (i32.eq (get_local $id) (i32.const 0)) (then
-      (get_global $partIndexOffset)
-    )(else
-      (i32.load (i32.add (get_global $partIndexOffset) (i32.mul (get_local $id) (i32.const 4))))
+    (local $offset i32)
+    (set_local $offset (get_global $partIndexOffset))
+    (if (i32.gt_u (get_local $id) (i32.const 0)) (then
+      (set_local $offset (i32.load (i32.add (get_global $partIndexOffset) (i32.mul (get_local $id) (i32.const 4)))))
     ))
-    (i32.add (i32.const 4))
+    (i32.add (get_local $offset) (i32.const 4))
   )
   (func $getPartLength (param $id i32) (result i32)
     (i32.load (i32.sub (call $getPartOffset (get_local $id)) (i32.const 4)))
