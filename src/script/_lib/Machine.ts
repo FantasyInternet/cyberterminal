@@ -9,7 +9,6 @@ export default class Machine {
   get displayBitmap() { return this._displayBitmap }
 
   constructor(public url: string) {
-    console.log("The web worker is working!")
     this._initCom()
     this.read("./script/pong.wasm", { type: "binary" }).then((code: ArrayBuffer) => {
       this.run(code)
@@ -158,10 +157,15 @@ export default class Machine {
     }
   }*/
 
+  displayMemory(offset: number, length: number, destination: number = 0) {
+    if (!this._vm) throw "No VM!"
+    if (!this._displayBitmap) throw "No bitmap to commit!"
+    this._displayBitmap.data.set(new Uint8Array(this._vm.instance.exports.memory.buffer.slice(offset, offset + length)), destination)
+  }
   pushFromMemory(offset: number, length: number) {
     if (!this._vm) throw "No VM!"
     let ar = new Uint8Array(length)
-    ar.set(new Uint8Array( this._vm.instance.exports.memory.buffer.slice(offset, offset + length)))
+    ar.set(new Uint8Array(this._vm.instance.exports.memory.buffer.slice(offset, offset + length)))
     this._bufferStack.push(ar.buffer)
   }
   popToMemory(offset: number) {

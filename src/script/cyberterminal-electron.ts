@@ -9,9 +9,7 @@ import Machine from "./_lib/Machine"
 if (typeof window !== "undefined") {
   //@ts-ignore
   let terminal = window.cyberTerminal = new CyberTerminal(new ElectronSys())
-  console.log("Starting CyberTerminal")
 } else {
   //@ts-ignore
   self.machine = new Machine("./")
-  console.log("Starting new Machine")
 }
