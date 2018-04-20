@@ -43,6 +43,7 @@ Sys implementation for electron app. See [Sys](../interfaces/__lib_sys_.sys.md) 
 
 * [createMachine](_script__lib_electronsys_.electronsys.md#createmachine)
 * [drawBitmap](_script__lib_electronsys_.electronsys.md#drawbitmap)
+* [onGameInput](_script__lib_electronsys_.electronsys.md#ongameinput)
 * [read](_script__lib_electronsys_.electronsys.md#read)
 * [setDisplayMode](_script__lib_electronsys_.electronsys.md#setdisplaymode)
 * [waitForVsync](_script__lib_electronsys_.electronsys.md#waitforvsync)
@@ -169,7 +170,7 @@ ___
 
 *Inherited from [WebSys](_script__lib_websys_.websys.md).[createMachine](_script__lib_websys_.websys.md#createmachine)*
 
-*Defined in [script/_lib/WebSys.ts:58](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L58)*
+*Defined in [script/_lib/WebSys.ts:59](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L59)*
 
 
 
@@ -195,7 +196,40 @@ ___
 
 *Inherited from [WebSys](_script__lib_websys_.websys.md).[drawBitmap](_script__lib_websys_.websys.md#drawbitmap)*
 
-*Defined in [script/_lib/WebSys.ts:46](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L46)*
+*Defined in [script/_lib/WebSys.ts:47](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L47)*
+
+
+
+
+
+**Returns:** `void`
+
+
+
+
+
+___
+
+<a id="ongameinput"></a>
+
+###  onGameInput
+
+► **onGameInput**(fn: *`Function`*, remove?: *`boolean`*): `void`
+
+
+
+*Inherited from [WebSys](_script__lib_websys_.websys.md).[onGameInput](_script__lib_websys_.websys.md#ongameinput)*
+
+*Defined in [script/_lib/WebSys.ts:78](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L78)*
+
+
+
+**Parameters:**
+
+| Param | Type | Default value | Description |
+| ------ | ------ | ------ | ------ |
+| fn | `Function`  | - |   - |
+| remove | `boolean`  | false |   - |
 
 
 
@@ -252,7 +286,7 @@ ___
 
 *Inherited from [WebSys](_script__lib_websys_.websys.md).[setDisplayMode](_script__lib_websys_.websys.md#setdisplaymode)*
 
-*Defined in [script/_lib/WebSys.ts:19](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L19)*
+*Defined in [script/_lib/WebSys.ts:20](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L20)*
 
 
 
@@ -288,7 +322,7 @@ ___
 
 *Inherited from [WebSys](_script__lib_websys_.websys.md).[waitForVsync](_script__lib_websys_.websys.md#waitforvsync)*
 
-*Defined in [script/_lib/WebSys.ts:52](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L52)*
+*Defined in [script/_lib/WebSys.ts:53](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L53)*
 
 
 

@@ -31,6 +31,12 @@ Central processing unit for browsers See [Sys](../interfaces/__classes_sys_.sys.
 
 * [commitDisplay](_script__lib_machine_.machine.md#commitdisplay)
 * [displayMemory](_script__lib_machine_.machine.md#displaymemory)
+* [getGameAxisX](_script__lib_machine_.machine.md#getgameaxisx)
+* [getGameAxisY](_script__lib_machine_.machine.md#getgameaxisy)
+* [getGameButtonA](_script__lib_machine_.machine.md#getgamebuttona)
+* [getGameButtonB](_script__lib_machine_.machine.md#getgamebuttonb)
+* [getGameButtonX](_script__lib_machine_.machine.md#getgamebuttonx)
+* [getGameButtonY](_script__lib_machine_.machine.md#getgamebuttony)
 * [log](_script__lib_machine_.machine.md#log)
 * [popArrayBuffer](_script__lib_machine_.machine.md#poparraybuffer)
 * [popString](_script__lib_machine_.machine.md#popstring)
@@ -215,6 +221,138 @@ ___
 
 
 **Returns:** `void`
+
+
+
+
+
+___
+
+<a id="getgameaxisx"></a>
+
+###  getGameAxisX
+
+► **getGameAxisX**(): `any`
+
+
+
+*Defined in [script/_lib/Machine.ts:250](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L250)*
+
+
+
+
+
+**Returns:** `any`
+
+
+
+
+
+___
+
+<a id="getgameaxisy"></a>
+
+###  getGameAxisY
+
+► **getGameAxisY**(): `any`
+
+
+
+*Defined in [script/_lib/Machine.ts:251](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L251)*
+
+
+
+
+
+**Returns:** `any`
+
+
+
+
+
+___
+
+<a id="getgamebuttona"></a>
+
+###  getGameButtonA
+
+► **getGameButtonA**(): `any`
+
+
+
+*Defined in [script/_lib/Machine.ts:252](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L252)*
+
+
+
+
+
+**Returns:** `any`
+
+
+
+
+
+___
+
+<a id="getgamebuttonb"></a>
+
+###  getGameButtonB
+
+► **getGameButtonB**(): `any`
+
+
+
+*Defined in [script/_lib/Machine.ts:253](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L253)*
+
+
+
+
+
+**Returns:** `any`
+
+
+
+
+
+___
+
+<a id="getgamebuttonx"></a>
+
+###  getGameButtonX
+
+► **getGameButtonX**(): `any`
+
+
+
+*Defined in [script/_lib/Machine.ts:254](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L254)*
+
+
+
+
+
+**Returns:** `any`
+
+
+
+
+
+___
+
+<a id="getgamebuttony"></a>
+
+###  getGameButtonY
+
+► **getGameButtonY**(): `any`
+
+
+
+*Defined in [script/_lib/Machine.ts:255](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L255)*
+
+
+
+
+
+**Returns:** `any`
 
 
 

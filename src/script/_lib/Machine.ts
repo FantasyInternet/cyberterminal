@@ -237,15 +237,22 @@ export default class Machine {
     this._vm.instance.exports.init()
     console.log("stepping")
     let nextFrame = performance.now()
-    let frameInterval = 1000 / 60
+    let frameInterval = 1000 / 30
     while (true) {
       if (performance.now() > nextFrame) {
-        await this.commitDisplay()
+        this._vm.instance.exports.step(performance.now())
         nextFrame += frameInterval
       }
-      this._vm.instance.exports.step(performance.now())
+      await this.waitForVsync()
     }
   }
+
+  getGameAxisX() { return this._gameInputState.axis.x }
+  getGameAxisY() { return this._gameInputState.axis.y }
+  getGameButtonA() { return this._gameInputState.buttons.a }
+  getGameButtonB() { return this._gameInputState.buttons.b }
+  getGameButtonX() { return this._gameInputState.buttons.x }
+  getGameButtonY() { return this._gameInputState.buttons.y }
 
   /* _privates */
   private _displayMode: string = ""
@@ -260,6 +267,10 @@ export default class Machine {
   private _pendingRequests: any[] = []
   private _vm: any = {}
   private _bufferStack: ArrayBuffer[] = []
+  private _gameInputState: any = {
+    axis: { x: 0, y: 0 },
+    buttons: { a: false, b: false, x: false, y: false }
+  }
 
   private _initCom() {
     self.addEventListener("message", this._onMessage.bind(this))
@@ -283,6 +294,10 @@ export default class Machine {
           }
           this._pendingRequests[e.data.reqId] = undefined
         }
+        break
+
+      case "gameInput":
+        this._gameInputState = e.data.state
         break
 
       default:

@@ -136,6 +136,39 @@ Draw current bitmap to screen.
 
 ___
 
+<a id="ongameinput"></a>
+
+###  onGameInput
+
+► **onGameInput**(fn: *`Function`*): `void`
+
+
+
+*Defined in [script/_lib/Sys.ts:37](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L37)*
+
+
+
+Register a listener for game input events.
+
+
+**Parameters:**
+
+| Param | Type | Description |
+| ------ | ------ | ------ |
+| fn | `Function`   |  Function to call whenever game input state changes |
+
+
+
+
+
+**Returns:** `void`
+
+
+
+
+
+___
+
 <a id="setdisplaymode"></a>
 
 ###  setDisplayMode

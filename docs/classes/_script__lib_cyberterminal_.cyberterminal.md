@@ -92,7 +92,7 @@ ___
 
 
 
-*Defined in [script/_lib/CyberTerminal.ts:11](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L11)*
+*Defined in [script/_lib/CyberTerminal.ts:12](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L12)*
 
 
 

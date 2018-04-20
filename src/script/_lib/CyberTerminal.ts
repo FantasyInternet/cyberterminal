@@ -5,6 +5,7 @@ export default class CyberTerminal {
   machineWorker?: MachineWorker
 
   constructor(public sys: Sys) {
+    this.sys.onGameInput(this._onGameInput.bind(this))
     this.resetMachine()
   }
 
@@ -71,5 +72,14 @@ export default class CyberTerminal {
       default:
         break
     }
+  }
+
+  private _onGameInput(state: any) {
+    let msg = {
+      cmd: "gameInput",
+      state: state
+    }
+    if (!this.machineWorker) return
+    this.machineWorker.send(msg)
   }
 }

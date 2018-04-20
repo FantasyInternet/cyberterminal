@@ -29,4 +29,10 @@ declare interface Sys {
    * @returns the worker running the machine
    */
   createMachine(): MachineWorker
+
+  /**
+   * Register a listener for game input events.
+   * @param fn Function to call whenever game input state changes
+   */
+  onGameInput(fn: Function): void
 }
