@@ -243,7 +243,7 @@ export default class Machine {
         await this.commitDisplay()
         nextFrame += frameInterval
       }
-      this._vm.instance.exports.step()
+      this._vm.instance.exports.step(performance.now())
     }
   }
 
