@@ -5,7 +5,7 @@
   (import "api" "setDisplayMode" (func $setDisplayMode (param i32) (param i32) ))
   (import "api" "displayMemory" (func $displayMemory (param i32) (param i32) ))
   ;;(import "api" "fillRect" (func $fillRect (param i32) (param i32) (param i32) (param i32) (param i32) (param i32) (param i32)))
-  (memory $memory 16)
+  (memory $memory 1)
   (export "memory" (memory $memory))
   (data (i32.const 10) "Hello world from WASM!")
   (global $display (mut i32) (i32.const -1))
@@ -196,7 +196,7 @@
     (if (i32.ge_u (get_global $b) (i32.const 255))
       (then (set_global $db (i32.const -1))))
     (call $pset (get_global $x) (get_global $y) (get_global $r) (get_global $g) (get_global $b))
-    (call $displayMemory (call $getPartOffset (get_global $display)) (call $getPartLength (get_global $display)))
+    (if (i32.eq (get_global $x) (i32.const 0)) (call $displayMemory (call $getPartOffset (get_global $display)) (call $getPartLength (get_global $display))))
   )
   (export "step" (func $step))
 

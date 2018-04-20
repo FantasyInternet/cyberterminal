@@ -236,8 +236,13 @@ export default class Machine {
     //this.fillRect(20, 30, 40, 50, 255, 255, 255)
     this._vm.instance.exports.init()
     console.log("stepping")
+    let nextFrame = performance.now()
+    let frameInterval = 1000 / 60
     while (true) {
-      await this.commitDisplay()
+      if (performance.now() > nextFrame) {
+        await this.commitDisplay()
+        nextFrame += frameInterval
+      }
       this._vm.instance.exports.step()
     }
   }
