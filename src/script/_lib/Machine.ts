@@ -237,7 +237,7 @@ export default class Machine {
     this._vm.instance.exports.init()
     console.log("stepping")
     let nextFrame = performance.now()
-    let frameInterval = 1000 / 30
+    let frameInterval = 1000 / 60
     while (true) {
       if (performance.now() > nextFrame) {
         this._vm.instance.exports.step(performance.now())
