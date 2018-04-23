@@ -145,43 +145,84 @@
   )
 
   (func $init
-    (local $i i32)
     (local $displayOffset i32)
     (call $setDisplayMode (get_global $displayWidth) (get_global $displayHeight))
     (call $log (call $pushFromMemory (i32.const 10) (i32.const 22)))
     (set_global $display (call $createPart (i32.mul (i32.const 4) (i32.mul (get_global $displayWidth) (get_global $displayHeight)))))
     (set_local $displayOffset (call $getPartOffset (get_global $display)))
-    (set_local $i (i32.const 0))
-    (loop
-      (i32.store (i32.add (get_local $displayOffset) (get_local $i)) (get_local $i))
-      (set_local $i (i32.add (get_local $i) (i32.const 1)))
-      (br_if 0 (i32.lt_u (get_local $i) (i32.const 256000)))
-    )
     (call $displayMemory (get_local $displayOffset) (call $getPartLength (get_global $display)))
 
+    (set_global $bgColor (call $rgb (i32.const 0) (i32.const 0) (i32.const 0)))
     (set_global $ballColor (call $rgb (i32.const 255) (i32.const 255) (i32.const 255)))
+    (set_global $leftColor (call $rgb (i32.const 0) (i32.const 0) (i32.const 255)))
+    (set_global $rightColor (call $rgb (i32.const 255) (i32.const 0) (i32.const 0)))
   )
   (export "init" (func $init))
 
   (global $left (mut i32) (i32.const 100))
+  (global $leftV (mut i32) (i32.const 0))
+  (global $leftColor (mut i32) (i32.const 100))
   (global $right (mut i32) (i32.const 100))
+  (global $rightV (mut i32) (i32.const 0))
+  (global $rightColor (mut i32) (i32.const 100))
   (global $ballX (mut i32) (i32.const 160))
   (global $ballY (mut i32) (i32.const 100))
   (global $ballVX (mut i32) (i32.const 1))
-  (global $ballVY (mut i32) (i32.const 1))
+  (global $ballVY (mut i32) (i32.const 0))
+  (global $bgColor (mut i32) (i32.const 0))
   (global $ballColor (mut i32) (i32.const 0))
   (func $step (param $t f64)
+    (call $rect (i32.sub (get_global $ballX) (i32.const 4)) (i32.sub (get_global $ballY) (i32.const 4)) (i32.const 8) (i32.const 8) (get_global $bgColor))
+    (call $rect (i32.const 0)   (i32.sub (get_global $left)  (i32.const 16)) (i32.const 8) (i32.const 32) (get_global $bgColor))
+    (call $rect (i32.const 312) (i32.sub (get_global $right) (i32.const 16)) (i32.const 8) (i32.const 32) (get_global $bgColor))
     (set_global $ballX (i32.add (get_global $ballX) (get_global $ballVX)))
     (set_global $ballY (i32.add (get_global $ballY) (get_global $ballVY)))
-    (if (i32.le_s (get_global $ballX) (i32.const 0)) (then
-      (set_global $ballVX (i32.mul (get_global $ballVX) (i32.const -1)))))
+    (set_global $left  (i32.add (get_global $left)  (get_global $leftV)))
+    (set_global $right (i32.add (get_global $right) (get_global $rightV)))
+    (if (i32.le_s (get_global $ballX) (i32.const 8)) (then
+      (if (i32.and (i32.ge_s (get_global $ballY) (i32.sub (get_global $left) (i32.const 16))) (i32.le_s (get_global $ballY) (i32.add (get_global $left) (i32.const 16)))) (then
+        (set_global $ballVX (i32.mul (get_global $ballVX) (i32.const -1)))
+        (set_global $ballVY (i32.add (get_global $ballVY) (get_global $leftV)))
+      )(else
+        (set_global $ballX (i32.const 310))
+        (set_global $ballY (get_global $right))
+        (set_global $ballVY (i32.div_s (get_global $ballVY) (i32.const 2)))
+      ))
+    ))
+    (if (i32.ge_s (get_global $ballX) (i32.const 312)) (then
+      (if (i32.and (i32.ge_s (get_global $ballY) (i32.sub (get_global $right) (i32.const 16))) (i32.le_s (get_global $ballY) (i32.add (get_global $right) (i32.const 16)))) (then
+        (set_global $ballVX (i32.mul (get_global $ballVX) (i32.const -1)))
+        (set_global $ballVY (i32.add (get_global $ballVY) (get_global $rightV)))
+      )(else
+        (set_global $ballX (i32.const 10))
+        (set_global $ballY (get_global $left))
+        (set_global $ballVY (i32.div_s (get_global $ballVY) (i32.const 2)))
+      ))
+    ))
     (if (i32.le_s (get_global $ballY) (i32.const 0)) (then
       (set_global $ballVY (i32.mul (get_global $ballVY) (i32.const -1)))))
-    (if (i32.ge_s (get_global $ballX) (get_global $displayWidth)) (then
-      (set_global $ballVX (i32.mul (get_global $ballVX) (i32.const -1)))))
     (if (i32.ge_s (get_global $ballY) (get_global $displayHeight)) (then
       (set_global $ballVY (i32.mul (get_global $ballVY) (i32.const -1)))))
-    (call $rect (get_global $ballX) (get_global $ballY) (i32.const 8) (i32.const 8) (get_global $ballColor))
+    ;; (if (i32.lt_s (get_global $ballVX) (i32.const 0)) (then
+    ;;   (set_global $rightV (i32.const 0))
+    ;;   (if (i32.lt_s (get_global $ballY) (get_global $left)) (then
+    ;;     (set_global $leftV (i32.const -1))
+    ;;   )(else
+    ;;     (set_global $leftV (i32.const 1))
+    ;;   ))
+    ;; )(else
+    (set_global $leftV (i32.trunc_s/f32 (call $getGameAxisY)))
+    (set_global $rightV (i32.const 0))
+    (if (i32.ge_s (get_global $ballX) (i32.const 160)) (then
+      (if (i32.lt_s (get_global $ballY) (get_global $right)) (then
+        (set_global $rightV (i32.const -1))
+      )(else
+        (set_global $rightV (i32.const 1))
+      ))
+    ))
+    (call $rect (i32.sub (get_global $ballX) (i32.const 4)) (i32.sub (get_global $ballY) (i32.const 4)) (i32.const 8) (i32.const 8) (get_global $ballColor))
+    (call $rect (i32.const 0)   (i32.sub (get_global $left)  (i32.const 16)) (i32.const 8) (i32.const 32) (get_global $leftColor))
+    (call $rect (i32.const 312) (i32.sub (get_global $right) (i32.const 16)) (i32.const 8) (i32.const 32) (get_global $rightColor))
     (call $displayMemory (call $getPartOffset (get_global $display)) (call $getPartLength (get_global $display)))
   )
   (export "step" (func $step))
@@ -221,11 +262,21 @@
     ;;(local $displayLength i32)
     (local $i i32)
     (local $j i32)
-    (br_if 0 (i32.ge_u (get_local $x) (get_global $displayWidth)))
-    (br_if 0 (i32.ge_u (get_local $y) (get_global $displayHeight)))
-    (if (i32.gt_u (i32.add (get_local $x) (get_local $w)) (get_global $displayWidth)) (then
+    (br_if 0 (i32.ge_s (get_local $x) (get_global $displayWidth)))
+    (br_if 0 (i32.ge_s (get_local $y) (get_global $displayHeight)))
+    (br_if 0 (i32.lt_s (i32.add (get_local $x) (get_local $w)) (i32.const 0)))
+    (br_if 0 (i32.lt_s (i32.add (get_local $y) (get_local $h)) (i32.const 0)))
+    (if (i32.lt_s (get_local $x) (i32.const 0)) (then
+      (set_local $w (i32.add (get_local $w) (get_local $x)))
+      (set_local $x (i32.const 0))
+    ))
+    (if (i32.lt_s (get_local $y) (i32.const 0)) (then
+      (set_local $h (i32.add (get_local $h) (get_local $y)))
+      (set_local $y (i32.const 0))
+    ))
+    (if (i32.gt_s (i32.add (get_local $x) (get_local $w)) (get_global $displayWidth)) (then
       (set_local $w (i32.sub (get_global $displayWidth) (get_local $x)))))
-    (if (i32.gt_u (i32.add (get_local $y) (get_local $h)) (get_global $displayHeight)) (then
+    (if (i32.gt_s (i32.add (get_local $y) (get_local $h)) (get_global $displayHeight)) (then
       (set_local $h (i32.sub (get_global $displayHeight) (get_local $y)))))
     (set_local $displayOffset (call $getPartOffset (get_global $display)))
     ;;(set_local $displayLength (call $getPartLength (get_global $display)))
