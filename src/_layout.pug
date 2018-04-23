@@ -9,7 +9,7 @@ html
       - title += " - " + appTitle
     else
       - title = appTitle
-    title= title
+    title= title + " " + pkg.version
     meta(name="twitter:card", content="summary")
     meta(name="twitter:site" content=twitter)
     meta(name="twitter:title" content=title)

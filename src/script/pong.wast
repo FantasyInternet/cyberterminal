@@ -180,7 +180,7 @@
     (set_global $left  (i32.add (get_global $left)  (get_global $leftV)))
     (set_global $right (i32.add (get_global $right) (get_global $rightV)))
     (if (i32.le_s (get_global $ballX) (i32.const 8)) (then
-      (if (i32.and (i32.ge_s (get_global $ballY) (i32.sub (get_global $left) (i32.const 16))) (i32.le_s (get_global $ballY) (i32.add (get_global $left) (i32.const 16)))) (then
+      (if (i32.and (i32.ge_s (get_global $ballY) (i32.sub (get_global $left) (i32.const 20))) (i32.le_s (get_global $ballY) (i32.add (get_global $left) (i32.const 20)))) (then
         (set_global $ballVX (i32.mul (get_global $ballVX) (i32.const -1)))
         (set_global $ballVY (i32.add (get_global $ballVY) (get_global $leftV)))
       )(else
@@ -190,7 +190,7 @@
       ))
     ))
     (if (i32.ge_s (get_global $ballX) (i32.const 312)) (then
-      (if (i32.and (i32.ge_s (get_global $ballY) (i32.sub (get_global $right) (i32.const 16))) (i32.le_s (get_global $ballY) (i32.add (get_global $right) (i32.const 16)))) (then
+      (if (i32.and (i32.ge_s (get_global $ballY) (i32.sub (get_global $right) (i32.const 20))) (i32.le_s (get_global $ballY) (i32.add (get_global $right) (i32.const 20)))) (then
         (set_global $ballVX (i32.mul (get_global $ballVX) (i32.const -1)))
         (set_global $ballVY (i32.add (get_global $ballVY) (get_global $rightV)))
       )(else
@@ -199,9 +199,9 @@
         (set_global $ballVY (i32.div_s (get_global $ballVY) (i32.const 2)))
       ))
     ))
-    (if (i32.le_s (get_global $ballY) (i32.const 0)) (then
+    (if (i32.and (i32.le_s (get_global $ballY) (i32.const 0)) (i32.lt_s (get_global $ballVY) (i32.const 0))) (then
       (set_global $ballVY (i32.mul (get_global $ballVY) (i32.const -1)))))
-    (if (i32.ge_s (get_global $ballY) (get_global $displayHeight)) (then
+    (if (i32.and (i32.ge_s (get_global $ballY) (get_global $displayHeight)) (i32.gt_s (get_global $ballVY) (i32.const 0))) (then
       (set_global $ballVY (i32.mul (get_global $ballVY) (i32.const -1)))))
     ;; (if (i32.lt_s (get_global $ballVX) (i32.const 0)) (then
     ;;   (set_global $rightV (i32.const 0))
@@ -212,6 +212,7 @@
     ;;   ))
     ;; )(else
     (set_global $leftV (i32.trunc_s/f32 (call $getGameAxisY)))
+    (if (call $getGameButtonY) (set_global $left (get_global $right)))
     (set_global $rightV (i32.const 0))
     (if (i32.ge_s (get_global $ballX) (i32.const 160)) (then
       (if (i32.lt_s (get_global $ballY) (get_global $right)) (then

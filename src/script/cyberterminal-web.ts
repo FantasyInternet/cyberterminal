@@ -8,7 +8,7 @@ import Machine from "./_lib/Machine"
 
 if (typeof window !== "undefined") {
   //@ts-ignore
-  let terminal = window.cyberTerminal = new CyberTerminal(new WebSys())
+  window.cyberTerminal = new CyberTerminal(new WebSys())
 } else {
   //@ts-ignore
   self.machine = new Machine("./")
