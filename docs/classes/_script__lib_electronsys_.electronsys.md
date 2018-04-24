@@ -31,6 +31,11 @@ Sys implementation for electron app. See [Sys](../interfaces/__lib_sys_.sys.md) 
 * [constructor](_script__lib_electronsys_.electronsys.md#constructor)
 
 
+### Properties
+
+* [gameInput](_script__lib_electronsys_.electronsys.md#gameinput)
+
+
 ### Accessors
 
 * [displayBitmap](_script__lib_electronsys_.electronsys.md#displaybitmap)
@@ -43,7 +48,6 @@ Sys implementation for electron app. See [Sys](../interfaces/__lib_sys_.sys.md) 
 
 * [createMachine](_script__lib_electronsys_.electronsys.md#createmachine)
 * [drawBitmap](_script__lib_electronsys_.electronsys.md#drawbitmap)
-* [onGameInput](_script__lib_electronsys_.electronsys.md#ongameinput)
 * [read](_script__lib_electronsys_.electronsys.md#read)
 * [setDisplayMode](_script__lib_electronsys_.electronsys.md#setdisplaymode)
 * [waitForVsync](_script__lib_electronsys_.electronsys.md#waitforvsync)
@@ -60,7 +64,7 @@ Sys implementation for electron app. See [Sys](../interfaces/__lib_sys_.sys.md) 
 
 *Inherited from [WebSys](_script__lib_websys_.websys.md).[constructor](_script__lib_websys_.websys.md#constructor)*
 
-*Defined in [script/_lib/WebSys.ts:11](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L11)*
+*Defined in [script/_lib/WebSys.ts:14](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L14)*
 
 
 
@@ -69,6 +73,26 @@ Sys implementation for electron app. See [Sys](../interfaces/__lib_sys_.sys.md) 
 **Returns:** [ElectronSys](_script__lib_electronsys_.electronsys.md)
 
 ---
+
+
+## Properties
+<a id="gameinput"></a>
+
+###  gameInput
+
+**●  gameInput**:  *[GameInput](_script__lib_gameinput_.gameinput.md)*  =  new GameInput()
+
+*Implementation of [Sys](../interfaces/_script__lib_sys_.sys.md).[gameInput](../interfaces/_script__lib_sys_.sys.md#gameinput)*
+
+*Inherited from [WebSys](_script__lib_websys_.websys.md).[gameInput](_script__lib_websys_.websys.md#gameinput)*
+
+*Defined in [script/_lib/WebSys.ts:10](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L10)*
+
+
+
+
+
+___
 
 
 ## Accessors
@@ -81,7 +105,7 @@ getdisplayBitmap(): `undefined`⎮`ImageData`
 
 *Inherited from [WebSys](_script__lib_websys_.websys.md).[displayBitmap](_script__lib_websys_.websys.md#displaybitmap)*
 
-*Defined in [script/_lib/WebSys.ts:11](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L11)*
+*Defined in [script/_lib/WebSys.ts:14](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L14)*
 
 
 
@@ -102,7 +126,7 @@ getdisplayHeight(): `number`
 
 *Inherited from [WebSys](_script__lib_websys_.websys.md).[displayHeight](_script__lib_websys_.websys.md#displayheight)*
 
-*Defined in [script/_lib/WebSys.ts:10](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L10)*
+*Defined in [script/_lib/WebSys.ts:13](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L13)*
 
 
 
@@ -123,7 +147,7 @@ getdisplayMode(): `string`
 
 *Inherited from [WebSys](_script__lib_websys_.websys.md).[displayMode](_script__lib_websys_.websys.md#displaymode)*
 
-*Defined in [script/_lib/WebSys.ts:8](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L8)*
+*Defined in [script/_lib/WebSys.ts:11](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L11)*
 
 
 
@@ -144,7 +168,7 @@ getdisplayWidth(): `number`
 
 *Inherited from [WebSys](_script__lib_websys_.websys.md).[displayWidth](_script__lib_websys_.websys.md#displaywidth)*
 
-*Defined in [script/_lib/WebSys.ts:9](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L9)*
+*Defined in [script/_lib/WebSys.ts:12](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L12)*
 
 
 
@@ -170,7 +194,7 @@ ___
 
 *Inherited from [WebSys](_script__lib_websys_.websys.md).[createMachine](_script__lib_websys_.websys.md#createmachine)*
 
-*Defined in [script/_lib/WebSys.ts:59](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L59)*
+*Defined in [script/_lib/WebSys.ts:61](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L61)*
 
 
 
@@ -196,40 +220,7 @@ ___
 
 *Inherited from [WebSys](_script__lib_websys_.websys.md).[drawBitmap](_script__lib_websys_.websys.md#drawbitmap)*
 
-*Defined in [script/_lib/WebSys.ts:47](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L47)*
-
-
-
-
-
-**Returns:** `void`
-
-
-
-
-
-___
-
-<a id="ongameinput"></a>
-
-###  onGameInput
-
-► **onGameInput**(fn: *`Function`*, remove?: *`boolean`*): `void`
-
-
-
-*Inherited from [WebSys](_script__lib_websys_.websys.md).[onGameInput](_script__lib_websys_.websys.md#ongameinput)*
-
-*Defined in [script/_lib/WebSys.ts:78](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L78)*
-
-
-
-**Parameters:**
-
-| Param | Type | Default value | Description |
-| ------ | ------ | ------ | ------ |
-| fn | `Function`  | - |   - |
-| remove | `boolean`  | false |   - |
+*Defined in [script/_lib/WebSys.ts:49](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L49)*
 
 
 
@@ -286,7 +277,7 @@ ___
 
 *Inherited from [WebSys](_script__lib_websys_.websys.md).[setDisplayMode](_script__lib_websys_.websys.md#setdisplaymode)*
 
-*Defined in [script/_lib/WebSys.ts:20](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L20)*
+*Defined in [script/_lib/WebSys.ts:22](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L22)*
 
 
 
@@ -322,7 +313,7 @@ ___
 
 *Inherited from [WebSys](_script__lib_websys_.websys.md).[waitForVsync](_script__lib_websys_.websys.md#waitforvsync)*
 
-*Defined in [script/_lib/WebSys.ts:53](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L53)*
+*Defined in [script/_lib/WebSys.ts:55](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L55)*
 
 
 

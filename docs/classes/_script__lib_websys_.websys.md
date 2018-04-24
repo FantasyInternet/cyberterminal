@@ -31,6 +31,11 @@ Sys implementation for web browsers. See [Sys](../interfaces/__lib_sys_.sys.md) 
 * [constructor](_script__lib_websys_.websys.md#constructor)
 
 
+### Properties
+
+* [gameInput](_script__lib_websys_.websys.md#gameinput)
+
+
 ### Accessors
 
 * [displayBitmap](_script__lib_websys_.websys.md#displaybitmap)
@@ -43,7 +48,6 @@ Sys implementation for web browsers. See [Sys](../interfaces/__lib_sys_.sys.md) 
 
 * [createMachine](_script__lib_websys_.websys.md#createmachine)
 * [drawBitmap](_script__lib_websys_.websys.md#drawbitmap)
-* [onGameInput](_script__lib_websys_.websys.md#ongameinput)
 * [read](_script__lib_websys_.websys.md#read)
 * [setDisplayMode](_script__lib_websys_.websys.md#setdisplaymode)
 * [waitForVsync](_script__lib_websys_.websys.md#waitforvsync)
@@ -58,7 +62,7 @@ Sys implementation for web browsers. See [Sys](../interfaces/__lib_sys_.sys.md) 
 ### ⊕ **new WebSys**(): [WebSys](_script__lib_websys_.websys.md)
 
 
-*Defined in [script/_lib/WebSys.ts:11](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L11)*
+*Defined in [script/_lib/WebSys.ts:14](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L14)*
 
 
 
@@ -69,6 +73,24 @@ Sys implementation for web browsers. See [Sys](../interfaces/__lib_sys_.sys.md) 
 ---
 
 
+## Properties
+<a id="gameinput"></a>
+
+###  gameInput
+
+**●  gameInput**:  *[GameInput](_script__lib_gameinput_.gameinput.md)*  =  new GameInput()
+
+*Implementation of [Sys](../interfaces/_script__lib_sys_.sys.md).[gameInput](../interfaces/_script__lib_sys_.sys.md#gameinput)*
+
+*Defined in [script/_lib/WebSys.ts:10](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L10)*
+
+
+
+
+
+___
+
+
 ## Accessors
 <a id="displaybitmap"></a>
 
@@ -77,7 +99,7 @@ Sys implementation for web browsers. See [Sys](../interfaces/__lib_sys_.sys.md) 
 
 getdisplayBitmap(): `undefined`⎮`ImageData`
 
-*Defined in [script/_lib/WebSys.ts:11](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L11)*
+*Defined in [script/_lib/WebSys.ts:14](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L14)*
 
 
 
@@ -96,7 +118,7 @@ ___
 
 getdisplayHeight(): `number`
 
-*Defined in [script/_lib/WebSys.ts:10](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L10)*
+*Defined in [script/_lib/WebSys.ts:13](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L13)*
 
 
 
@@ -115,7 +137,7 @@ ___
 
 getdisplayMode(): `string`
 
-*Defined in [script/_lib/WebSys.ts:8](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L8)*
+*Defined in [script/_lib/WebSys.ts:11](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L11)*
 
 
 
@@ -134,7 +156,7 @@ ___
 
 getdisplayWidth(): `number`
 
-*Defined in [script/_lib/WebSys.ts:9](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L9)*
+*Defined in [script/_lib/WebSys.ts:12](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L12)*
 
 
 
@@ -158,7 +180,7 @@ ___
 
 *Implementation of [Sys](../interfaces/_script__lib_sys_.sys.md).[createMachine](../interfaces/_script__lib_sys_.sys.md#createmachine)*
 
-*Defined in [script/_lib/WebSys.ts:59](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L59)*
+*Defined in [script/_lib/WebSys.ts:61](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L61)*
 
 
 
@@ -182,38 +204,7 @@ ___
 
 *Implementation of [Sys](../interfaces/_script__lib_sys_.sys.md).[drawBitmap](../interfaces/_script__lib_sys_.sys.md#drawbitmap)*
 
-*Defined in [script/_lib/WebSys.ts:47](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L47)*
-
-
-
-
-
-**Returns:** `void`
-
-
-
-
-
-___
-
-<a id="ongameinput"></a>
-
-###  onGameInput
-
-► **onGameInput**(fn: *`Function`*, remove?: *`boolean`*): `void`
-
-
-
-*Defined in [script/_lib/WebSys.ts:78](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L78)*
-
-
-
-**Parameters:**
-
-| Param | Type | Default value | Description |
-| ------ | ------ | ------ | ------ |
-| fn | `Function`  | - |   - |
-| remove | `boolean`  | false |   - |
+*Defined in [script/_lib/WebSys.ts:49](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L49)*
 
 
 
@@ -235,7 +226,7 @@ ___
 
 
 
-*Defined in [script/_lib/WebSys.ts:63](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L63)*
+*Defined in [script/_lib/WebSys.ts:65](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L65)*
 
 
 
@@ -266,7 +257,7 @@ ___
 
 
 
-*Defined in [script/_lib/WebSys.ts:20](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L20)*
+*Defined in [script/_lib/WebSys.ts:22](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L22)*
 
 
 
@@ -300,7 +291,7 @@ ___
 
 
 
-*Defined in [script/_lib/WebSys.ts:53](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L53)*
+*Defined in [script/_lib/WebSys.ts:55](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L55)*
 
 
 

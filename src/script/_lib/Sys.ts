@@ -1,7 +1,9 @@
+import GameInput from "./GameInput"
+
 /**
  * Unified interface to system I/O
  */
-declare interface Sys {
+export default interface Sys {
   /** Name of current display mode. */
   displayMode: string
   /** The current width of the display in characters or pixels. */
@@ -10,6 +12,8 @@ declare interface Sys {
   displayHeight: number
   /** The current display bitmap. */
   displayBitmap?: ImageData
+  /** Game input state. */
+  gameInput: GameInput
 
   /**
    * Switch display mode.
@@ -30,9 +34,4 @@ declare interface Sys {
    */
   createMachine(): MachineWorker
 
-  /**
-   * Register a listener for game input events.
-   * @param fn Function to call whenever game input state changes
-   */
-  onGameInput(fn: Function): void
 }

@@ -1,3 +1,5 @@
+import Sys from "./Sys"
+
 /**
  * Terminal app
  */
@@ -5,7 +7,7 @@ export default class CyberTerminal {
   machineWorker?: MachineWorker
 
   constructor(public sys: Sys) {
-    this.sys.onGameInput(this._onGameInput.bind(this))
+    this.sys.gameInput.addEventListener(this._onGameInput.bind(this))
     this.resetMachine()
   }
 

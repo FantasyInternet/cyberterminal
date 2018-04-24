@@ -34,7 +34,7 @@ Terminal app
 ### ⊕ **new CyberTerminal**(sys: *[Sys](../interfaces/_script__lib_sys_.sys.md)*): [CyberTerminal](_script__lib_cyberterminal_.cyberterminal.md)
 
 
-*Defined in [script/_lib/CyberTerminal.ts:5](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L5)*
+*Defined in [script/_lib/CyberTerminal.ts:7](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L7)*
 
 
 
@@ -60,7 +60,7 @@ Terminal app
 
 **●  machineWorker**:  *[MachineWorker](../interfaces/_script__lib_machineworker_.machineworker.md)* 
 
-*Defined in [script/_lib/CyberTerminal.ts:5](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L5)*
+*Defined in [script/_lib/CyberTerminal.ts:7](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L7)*
 
 
 
@@ -74,7 +74,7 @@ ___
 
 **●  sys**:  *[Sys](../interfaces/_script__lib_sys_.sys.md)* 
 
-*Defined in [script/_lib/CyberTerminal.ts:7](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L7)*
+*Defined in [script/_lib/CyberTerminal.ts:9](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L9)*
 
 
 
@@ -92,7 +92,7 @@ ___
 
 
 
-*Defined in [script/_lib/CyberTerminal.ts:12](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L12)*
+*Defined in [script/_lib/CyberTerminal.ts:14](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L14)*
 
 
 

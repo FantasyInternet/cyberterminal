@@ -20,7 +20,7 @@ Unified interface to system I/O
 
 **●  displayBitmap**:  *`ImageData`* 
 
-*Defined in [script/_lib/Sys.ts:12](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L12)*
+*Defined in [script/_lib/Sys.ts:14](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L14)*
 
 
 
@@ -37,7 +37,7 @@ ___
 
 **●  displayHeight**:  *`number`* 
 
-*Defined in [script/_lib/Sys.ts:10](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L10)*
+*Defined in [script/_lib/Sys.ts:12](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L12)*
 
 
 
@@ -54,7 +54,7 @@ ___
 
 **●  displayMode**:  *`string`* 
 
-*Defined in [script/_lib/Sys.ts:6](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L6)*
+*Defined in [script/_lib/Sys.ts:8](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L8)*
 
 
 
@@ -71,11 +71,28 @@ ___
 
 **●  displayWidth**:  *`number`* 
 
-*Defined in [script/_lib/Sys.ts:8](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L8)*
+*Defined in [script/_lib/Sys.ts:10](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L10)*
 
 
 
 The current width of the display in characters or pixels.
+
+
+
+
+___
+
+<a id="gameinput"></a>
+
+###  gameInput
+
+**●  gameInput**:  *[GameInput](../classes/_script__lib_gameinput_.gameinput.md)* 
+
+*Defined in [script/_lib/Sys.ts:16](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L16)*
+
+
+
+Game input state.
 
 
 
@@ -92,7 +109,7 @@ ___
 
 
 
-*Defined in [script/_lib/Sys.ts:31](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L31)*
+*Defined in [script/_lib/Sys.ts:35](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L35)*
 
 
 
@@ -119,44 +136,11 @@ ___
 
 
 
-*Defined in [script/_lib/Sys.ts:25](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L25)*
+*Defined in [script/_lib/Sys.ts:29](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L29)*
 
 
 
 Draw current bitmap to screen.
-
-
-
-
-**Returns:** `void`
-
-
-
-
-
-___
-
-<a id="ongameinput"></a>
-
-###  onGameInput
-
-► **onGameInput**(fn: *`Function`*): `void`
-
-
-
-*Defined in [script/_lib/Sys.ts:37](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L37)*
-
-
-
-Register a listener for game input events.
-
-
-**Parameters:**
-
-| Param | Type | Description |
-| ------ | ------ | ------ |
-| fn | `Function`   |  Function to call whenever game input state changes |
-
 
 
 
@@ -177,7 +161,7 @@ ___
 
 
 
-*Defined in [script/_lib/Sys.ts:20](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L20)*
+*Defined in [script/_lib/Sys.ts:24](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L24)*
 
 
 

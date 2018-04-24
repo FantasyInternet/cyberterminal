@@ -1,10 +1,13 @@
 import css from "./css"
+import GameInput from "./GameInput"
+import Sys from "./Sys"
 
 /**
  * Sys implementation for web browsers.
  * See [Sys](../interfaces/__lib_sys_.sys.md) for documentation
  */
 export default class WebSys implements Sys {
+  gameInput: GameInput = new GameInput()
   get displayMode() { return this._displayMode }
   get displayWidth() { return this._displayWidth }
   get displayHeight() { return this._displayHeight }
@@ -14,7 +17,6 @@ export default class WebSys implements Sys {
     let scripts = document.querySelectorAll("script")
     this._scriptSrc = (<HTMLScriptElement>scripts[scripts.length - 1]).src
     this._initContainer()
-    this._initGameInput()
   }
 
   setDisplayMode(mode: "text" | "indexed" | "rgb", width: number, height: number, displayWidth = width, displayHeight = height) {
@@ -75,18 +77,6 @@ export default class WebSys implements Sys {
     }
   }
 
-  onGameInput(fn: Function, remove: boolean = false) {
-    let i = this._gameInputListeners.indexOf(fn)
-    if (remove) {
-      if (i >= 0) {
-        this._gameInputListeners.splice(i, 1)
-      }
-    } else {
-      if (i < 0) {
-        this._gameInputListeners.push(fn)
-      }
-    }
-  }
 
 
   /** _privates */
@@ -100,7 +90,6 @@ export default class WebSys implements Sys {
   private _displayCanvas?: HTMLCanvasElement
   private _displayContext?: CanvasRenderingContext2D
   private _displayScale: number = 8
-  private _gameInputListeners: Function[] = []
 
   private _initContainer() {
     let style = document.createElement("style")
@@ -153,85 +142,7 @@ export default class WebSys implements Sys {
       requestAnimationFrame(this._resizeCanvas.bind(this))
   }
 
-  private _initGameInput() {
-    let state = {
-      axis: { x: 0, y: 0 },
-      buttons: { a: false, b: false, x: false, y: false }
-    }
-    let sendstate = () => {
-      this._gameInputListeners.forEach((fn: Function) => {
-        fn(state)
-      })
-    }
-    document.addEventListener("keydown", (e: KeyboardEvent) => {
-      switch (e.key) {
-        case "ArrowRight":
-          state.axis.x = 1
-          break
-        case "ArrowLeft":
-          state.axis.x = -1
-          break
-        case "ArrowDown":
-          state.axis.y = 1
-          break
-        case "ArrowUp":
-          state.axis.y = -1
-          break
 
-        case "a":
-          state.buttons.a = true
-          break
-        case "b":
-          state.buttons.b = true
-          break
-        case "x":
-          state.buttons.x = true
-          break
-        case "y":
-          state.buttons.y = true
-          break
-
-        default:
-          console.log(e)
-          break
-      }
-      sendstate()
-    })
-    document.addEventListener("keyup", (e: KeyboardEvent) => {
-      switch (e.key) {
-        case "ArrowRight":
-          state.axis.x = Math.min(state.axis.x, 0)
-          break
-        case "ArrowLeft":
-          state.axis.x = Math.max(state.axis.x, 0)
-          break
-        case "ArrowDown":
-          state.axis.y = Math.min(state.axis.y, 0)
-          break
-        case "ArrowUp":
-          state.axis.y = Math.max(state.axis.y, 0)
-          break
-
-        case "a":
-          state.buttons.a = false
-          break
-        case "b":
-          state.buttons.b = false
-          break
-        case "x":
-          state.buttons.x = false
-          break
-        case "y":
-          state.buttons.y = false
-          break
-
-        default:
-          console.log(e)
-          break
-      }
-      sendstate()
-    })
-  }
 
 }
 
