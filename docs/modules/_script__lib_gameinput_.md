@@ -1,7 +1,5 @@
 [cyberterminal](../README.md) > ["script/_lib/GameInput"](../modules/_script__lib_gameinput_.md)
 
-
-
 # External module: "script/_lib/GameInput"
 
 ## Index
@@ -10,6 +8,5 @@
 
 * [GameInput](../classes/_script__lib_gameinput_.gameinput.md)
 
-
-
 ---
+

@@ -1,14 +1,12 @@
 
 CyberTerminal
 =============
+
 A fantasy internet terminal.
 
 Made by [codeartistic.ninja](http://the.codeartistic.ninja/)
 
 Follow development of this app [live on Twitch!](https://www.twitch.tv/codeartisticninja)
-
-
-
 
 ## Index
 
@@ -24,7 +22,9 @@ Follow development of this app [live on Twitch!](https://www.twitch.tv/codeartis
 * ["script/_lib/MouseInput"](modules/_script__lib_mouseinput_.md)
 * ["script/_lib/Sys"](modules/_script__lib_sys_.md)
 * ["script/_lib/WebSys"](modules/_script__lib_websys_.md)
-
-
+* ["script/_lib/css"](modules/_script__lib_css_.md)
+* ["script/cyberterminal-electron"](modules/_script_cyberterminal_electron_.md)
+* ["script/cyberterminal-web"](modules/_script_cyberterminal_web_.md)
 
 ---
+
