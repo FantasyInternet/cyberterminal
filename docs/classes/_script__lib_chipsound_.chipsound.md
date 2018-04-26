@@ -26,7 +26,7 @@ Class responsible for creating bleeps and bloops! 🎶
 
 
 
-*Defined in script/_lib/ChipSound.ts:5*
+*Defined in [script/_lib/ChipSound.ts:5](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/ChipSound.ts#L5)*
 
 
 
@@ -59,7 +59,7 @@ ___
 
 
 
-*Defined in script/_lib/ChipSound.ts:29*
+*Defined in [script/_lib/ChipSound.ts:29](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/ChipSound.ts#L29)*
 
 
 

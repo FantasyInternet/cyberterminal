@@ -1,6 +1,11 @@
 {
   "name": "cyberterminal",
-  "version": "0.0.31",
+  "version": "0.0.32",
+  "description": "A fantasy internet client",
+  "author": {
+    "name": "codeartisticninja",
+    "url": "http://codeartistic.ninja/"
+  },
   "private": true,
   "build": {
     "appId": "ninja.codeartistic",
