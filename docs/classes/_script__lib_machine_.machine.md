@@ -37,6 +37,9 @@ Central processing unit for browsers See [Sys](../interfaces/__classes_sys_.sys.
 * [getGameButtonB](_script__lib_machine_.machine.md#getgamebuttonb)
 * [getGameButtonX](_script__lib_machine_.machine.md#getgamebuttonx)
 * [getGameButtonY](_script__lib_machine_.machine.md#getgamebuttony)
+* [getMousePressed](_script__lib_machine_.machine.md#getmousepressed)
+* [getMouseX](_script__lib_machine_.machine.md#getmousex)
+* [getMouseY](_script__lib_machine_.machine.md#getmousey)
 * [log](_script__lib_machine_.machine.md#log)
 * [popArrayBuffer](_script__lib_machine_.machine.md#poparraybuffer)
 * [popString](_script__lib_machine_.machine.md#popstring)
@@ -238,7 +241,7 @@ ___
 
 
 
-*Defined in [script/_lib/Machine.ts:250](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L250)*
+*Defined in [script/_lib/Machine.ts:253](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L253)*
 
 
 
@@ -260,7 +263,7 @@ ___
 
 
 
-*Defined in [script/_lib/Machine.ts:251](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L251)*
+*Defined in [script/_lib/Machine.ts:254](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L254)*
 
 
 
@@ -282,7 +285,7 @@ ___
 
 
 
-*Defined in [script/_lib/Machine.ts:252](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L252)*
+*Defined in [script/_lib/Machine.ts:255](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L255)*
 
 
 
@@ -304,7 +307,7 @@ ___
 
 
 
-*Defined in [script/_lib/Machine.ts:253](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L253)*
+*Defined in [script/_lib/Machine.ts:256](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L256)*
 
 
 
@@ -326,7 +329,7 @@ ___
 
 
 
-*Defined in [script/_lib/Machine.ts:254](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L254)*
+*Defined in [script/_lib/Machine.ts:257](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L257)*
 
 
 
@@ -348,7 +351,73 @@ ___
 
 
 
-*Defined in [script/_lib/Machine.ts:255](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L255)*
+*Defined in [script/_lib/Machine.ts:258](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L258)*
+
+
+
+
+
+**Returns:** `any`
+
+
+
+
+
+___
+
+<a id="getmousepressed"></a>
+
+###  getMousePressed
+
+► **getMousePressed**(): `any`
+
+
+
+*Defined in [script/_lib/Machine.ts:252](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L252)*
+
+
+
+
+
+**Returns:** `any`
+
+
+
+
+
+___
+
+<a id="getmousex"></a>
+
+###  getMouseX
+
+► **getMouseX**(): `any`
+
+
+
+*Defined in [script/_lib/Machine.ts:250](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L250)*
+
+
+
+
+
+**Returns:** `any`
+
+
+
+
+
+___
+
+<a id="getmousey"></a>
+
+###  getMouseY
+
+► **getMouseY**(): `any`
+
+
+
+*Defined in [script/_lib/Machine.ts:251](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L251)*
 
 
 
@@ -652,7 +721,7 @@ ___
 
 
 
-*Defined in [script/_lib/Machine.ts:257](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L257)*
+*Defined in [script/_lib/Machine.ts:260](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L260)*
 
 
 
@@ -674,7 +743,7 @@ ___
 
 
 
-*Defined in [script/_lib/Machine.ts:258](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L258)*
+*Defined in [script/_lib/Machine.ts:261](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L261)*
 
 
 

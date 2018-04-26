@@ -1,5 +1,6 @@
 import GameInput from "./GameInput"
 import ChipSound from "./ChipSound"
+import MouseInput from "./MouseInput"
 
 /**
  * Unified interface to system I/O
@@ -15,6 +16,8 @@ export default interface Sys {
   displayBitmap?: ImageData
   /** Tone generator. */
   chipSound: ChipSound
+  /** Mouse input state. */
+  mouseInput: MouseInput
   /** Game input state. */
   gameInput: GameInput
 

@@ -7,6 +7,7 @@ export default class CyberTerminal {
   machineWorker?: MachineWorker
 
   constructor(public sys: Sys) {
+    this.sys.mouseInput.addEventListener(this._onMouseInput.bind(this))
     this.sys.gameInput.addEventListener(this._onGameInput.bind(this))
     this.resetMachine()
   }
@@ -83,6 +84,14 @@ export default class CyberTerminal {
     }
   }
 
+  private _onMouseInput(state: any) {
+    let msg = {
+      cmd: "mouseInput",
+      state: state
+    }
+    if (!this.machineWorker) return
+    this.machineWorker.send(msg)
+  }
   private _onGameInput(state: any) {
     let msg = {
       cmd: "gameInput",

@@ -1,1 +1,1 @@
-export default "fantasy-terminal{align-items:center;background-color:black;display:flex;justify-content:center;overflow:hidden;max-height:100vh}fantasy-terminal canvas{min-width:none!important;max-width:none!important;min-height:none!important;max-height:none!important}"
+export default "fantasy-terminal{align-items:center;background-color:black;display:flex;justify-content:center;overflow:hidden;max-height:100vh}fantasy-terminal canvas{cursor:none;touch-action:none;min-width:none!important;max-width:none!important;min-height:none!important;max-height:none!important}"

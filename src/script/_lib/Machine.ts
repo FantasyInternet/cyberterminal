@@ -247,6 +247,9 @@ export default class Machine {
     }
   }
 
+  getMouseX() { return this._mouseInputState.x }
+  getMouseY() { return this._mouseInputState.y }
+  getMousePressed() { return this._mouseInputState.pressed }
   getGameAxisX() { return this._gameInputState.axis.x }
   getGameAxisY() { return this._gameInputState.axis.y }
   getGameButtonA() { return this._gameInputState.buttons.a }
@@ -270,6 +273,9 @@ export default class Machine {
   private _pendingRequests: any[] = []
   private _vm: any = {}
   private _bufferStack: ArrayBuffer[] = []
+  private _mouseInputState: any = {
+    x: 0, y: 0, pressed: false
+  }
   private _gameInputState: any = {
     axis: { x: 0, y: 0 },
     buttons: { a: false, b: false, x: false, y: false }
@@ -299,6 +305,9 @@ export default class Machine {
         }
         break
 
+      case "mouseInput":
+        this._mouseInputState = e.data.state
+        break
       case "gameInput":
         this._gameInputState = e.data.state
         break

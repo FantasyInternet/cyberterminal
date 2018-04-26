@@ -41,7 +41,7 @@ export default class GameInput {
           console.log(e)
           break
       }
-      this._sendGameInputState()
+      this._sendState()
     })
     document.addEventListener("keyup", (e: KeyboardEvent) => {
       let ctrl = this._keyMap[e.code]
@@ -72,7 +72,7 @@ export default class GameInput {
           this.state.buttons.y = false
           break
       }
-      this._sendGameInputState()
+      this._sendState()
       switch (e.code) {
         case "KeyD":
           this._keyMap["KeyA"] = "left"
@@ -97,29 +97,29 @@ export default class GameInput {
   }
 
   addEventListener(fn: Function) {
-    let i = this._gameInputListeners.indexOf(fn)
+    let i = this._listeners.indexOf(fn)
     if (i < 0) {
-      this._gameInputListeners.push(fn)
+      this._listeners.push(fn)
     }
   }
 
   removeEventListener(fn: Function) {
-    let i = this._gameInputListeners.indexOf(fn)
+    let i = this._listeners.indexOf(fn)
     if (i >= 0) {
-      this._gameInputListeners.splice(i, 1)
+      this._listeners.splice(i, 1)
     }
   }
 
   /** _privates */
-  private _gameInputListeners: Function[] = []
+  private _listeners: Function[] = []
   private _lastState?: string
   private _keyMap: { [index: string]: string } = this._getKeyMap()
 
-  private _sendGameInputState() {
+  private _sendState() {
     let newState = JSON.stringify(this.state)
     if (this._lastState !== newState) {
       this._lastState = newState
-      this._gameInputListeners.forEach((fn: Function) => {
+      this._listeners.forEach((fn: Function) => {
         fn(this.state)
       })
     }

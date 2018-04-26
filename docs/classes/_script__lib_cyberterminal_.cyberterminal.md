@@ -94,7 +94,7 @@ ___
 
 
 
-*Defined in [script/_lib/CyberTerminal.ts:14](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L14)*
+*Defined in [script/_lib/CyberTerminal.ts:15](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L15)*
 
 
 
@@ -116,7 +116,7 @@ ___
 
 
 
-*Defined in [script/_lib/CyberTerminal.ts:22](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L22)*
+*Defined in [script/_lib/CyberTerminal.ts:23](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L23)*
 
 
 
@@ -138,7 +138,7 @@ ___
 
 
 
-*Defined in [script/_lib/CyberTerminal.ts:25](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L25)*
+*Defined in [script/_lib/CyberTerminal.ts:26](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L26)*
 
 
 

@@ -21,6 +21,7 @@ Follow development of this app [live on Twitch!](https://www.twitch.tv/codeartis
 * ["script/_lib/GameInput"](modules/_script__lib_gameinput_.md)
 * ["script/_lib/Machine"](modules/_script__lib_machine_.md)
 * ["script/_lib/MachineWorker"](modules/_script__lib_machineworker_.md)
+* ["script/_lib/MouseInput"](modules/_script__lib_mouseinput_.md)
 * ["script/_lib/Sys"](modules/_script__lib_sys_.md)
 * ["script/_lib/WebSys"](modules/_script__lib_websys_.md)
 

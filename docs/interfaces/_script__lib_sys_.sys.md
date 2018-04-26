@@ -20,7 +20,7 @@ Unified interface to system I/O
 
 **●  chipSound**:  *[ChipSound](../classes/_script__lib_chipsound_.chipsound.md)* 
 
-*Defined in [script/_lib/Sys.ts:17](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L17)*
+*Defined in [script/_lib/Sys.ts:18](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L18)*
 
 
 
@@ -37,7 +37,7 @@ ___
 
 **●  displayBitmap**:  *`ImageData`* 
 
-*Defined in [script/_lib/Sys.ts:15](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L15)*
+*Defined in [script/_lib/Sys.ts:16](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L16)*
 
 
 
@@ -54,7 +54,7 @@ ___
 
 **●  displayHeight**:  *`number`* 
 
-*Defined in [script/_lib/Sys.ts:13](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L13)*
+*Defined in [script/_lib/Sys.ts:14](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L14)*
 
 
 
@@ -71,7 +71,7 @@ ___
 
 **●  displayMode**:  *`string`* 
 
-*Defined in [script/_lib/Sys.ts:9](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L9)*
+*Defined in [script/_lib/Sys.ts:10](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L10)*
 
 
 
@@ -88,7 +88,7 @@ ___
 
 **●  displayWidth**:  *`number`* 
 
-*Defined in [script/_lib/Sys.ts:11](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L11)*
+*Defined in [script/_lib/Sys.ts:12](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L12)*
 
 
 
@@ -105,11 +105,28 @@ ___
 
 **●  gameInput**:  *[GameInput](../classes/_script__lib_gameinput_.gameinput.md)* 
 
-*Defined in [script/_lib/Sys.ts:19](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L19)*
+*Defined in [script/_lib/Sys.ts:22](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L22)*
 
 
 
 Game input state.
+
+
+
+
+___
+
+<a id="mouseinput"></a>
+
+###  mouseInput
+
+**●  mouseInput**:  *[MouseInput](../classes/_script__lib_mouseinput_.mouseinput.md)* 
+
+*Defined in [script/_lib/Sys.ts:20](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L20)*
+
+
+
+Mouse input state.
 
 
 
@@ -126,7 +143,7 @@ ___
 
 
 
-*Defined in [script/_lib/Sys.ts:38](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L38)*
+*Defined in [script/_lib/Sys.ts:41](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L41)*
 
 
 
@@ -153,7 +170,7 @@ ___
 
 
 
-*Defined in [script/_lib/Sys.ts:32](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L32)*
+*Defined in [script/_lib/Sys.ts:35](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L35)*
 
 
 
@@ -178,7 +195,7 @@ ___
 
 
 
-*Defined in [script/_lib/Sys.ts:27](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L27)*
+*Defined in [script/_lib/Sys.ts:30](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L30)*
 
 
 

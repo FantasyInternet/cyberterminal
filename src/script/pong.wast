@@ -4,6 +4,9 @@
   (import "api" "log" (func $log))
   (import "api" "setDisplayMode" (func $setDisplayMode (param i32) (param i32) ))
   (import "api" "displayMemory" (func $displayMemory (param i32) (param i32) ))
+  (import "api" "getMouseX" (func $getMouseX (result i32) ))
+  (import "api" "getMouseY" (func $getMouseY (result i32) ))
+  (import "api" "getMousePressed" (func $getMousePressed (result i32) ))
   (import "api" "getGameAxisX" (func $getGameAxisX (result f32) ))
   (import "api" "getGameAxisY" (func $getGameAxisY (result f32) ))
   (import "api" "getGameButtonA" (func $getGameButtonA (result i32) ))
@@ -179,9 +182,7 @@
     (if (i32.eq (get_global $beep) (i32.const 0)) (then
       (call $stopTone (i32.const 0) )
     ))
-    (call $rect (i32.sub (get_global $ballX) (i32.const 4)) (i32.sub (get_global $ballY) (i32.const 4)) (i32.const 8) (i32.const 8) (get_global $bgColor))
-    (call $rect (i32.const 0)   (i32.sub (get_global $left)  (i32.const 16)) (i32.const 8) (i32.const 32) (get_global $bgColor))
-    (call $rect (i32.const 312) (i32.sub (get_global $right) (i32.const 16)) (i32.const 8) (i32.const 32) (get_global $bgColor))
+    (call $rect (i32.const 0) (i32.const 0) (get_global $displayWidth) (get_global $displayHeight) (get_global $bgColor))
     (set_global $ballX (i32.add (get_global $ballX) (get_global $ballVX)))
     (set_global $ballY (i32.add (get_global $ballY) (get_global $ballVY)))
     (set_global $left  (i32.add (get_global $left)  (get_global $leftV)))
@@ -241,6 +242,11 @@
       )(else
         (set_global $rightV (i32.const 1))
       ))
+    ))
+    (if (call $getMousePressed) (then
+      (call $rect (call $getMouseX) (call $getMouseY) (i32.const 8) (i32.const 8) (get_global $ballColor))
+    )(else
+      (call $rect (call $getMouseX) (call $getMouseY) (i32.const 8) (i32.const 8) (get_global $leftColor))
     ))
     (call $rect (i32.sub (get_global $ballX) (i32.const 4)) (i32.sub (get_global $ballY) (i32.const 4)) (i32.const 8) (i32.const 8) (get_global $ballColor))
     (call $rect (i32.const 0)   (i32.sub (get_global $left)  (i32.const 16)) (i32.const 8) (i32.const 32) (get_global $leftColor))

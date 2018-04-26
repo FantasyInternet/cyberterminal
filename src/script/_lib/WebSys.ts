@@ -2,6 +2,7 @@ import css from "./css"
 import GameInput from "./GameInput"
 import Sys from "./Sys"
 import ChipSound from "./ChipSound"
+import MouseInput from "./MouseInput"
 
 /**
  * Sys implementation for web browsers.
@@ -9,6 +10,7 @@ import ChipSound from "./ChipSound"
  */
 export default class WebSys implements Sys {
   chipSound: ChipSound = new ChipSound()
+  mouseInput: MouseInput = new MouseInput()
   gameInput: GameInput = new GameInput()
   get displayMode() { return this._displayMode }
   get displayWidth() { return this._displayWidth }
@@ -110,6 +112,7 @@ export default class WebSys implements Sys {
     this._displayCanvas.width = this.displayBitmap.width
     this._displayCanvas.height = this.displayBitmap.height
     this._displayContext = <CanvasRenderingContext2D>this._displayCanvas.getContext("2d")
+    this.mouseInput.element = this._displayCanvas
     this._resizeCanvas(false)
   }
 
@@ -142,6 +145,8 @@ export default class WebSys implements Sys {
     this._displayCanvas.style.display = "inline-block"
     if (!checkHeight)
       requestAnimationFrame(this._resizeCanvas.bind(this))
+    else
+      this.mouseInput.scale = this._displayScale
   }
 
 
