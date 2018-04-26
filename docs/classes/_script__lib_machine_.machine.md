@@ -47,6 +47,8 @@ Central processing unit for browsers See [Sys](../interfaces/__classes_sys_.sys.
 * [read](_script__lib_machine_.machine.md#read)
 * [run](_script__lib_machine_.machine.md#run)
 * [setDisplayMode](_script__lib_machine_.machine.md#setdisplaymode)
+* [startTone](_script__lib_machine_.machine.md#starttone)
+* [stopTone](_script__lib_machine_.machine.md#stoptone)
 * [wait](_script__lib_machine_.machine.md#wait)
 * [waitForVsync](_script__lib_machine_.machine.md#waitforvsync)
 
@@ -629,6 +631,50 @@ ___
 | height | `number`  | - |   - |
 | displayWidth | `number`  |  width |   - |
 | displayHeight | `number`  |  height |   - |
+
+
+
+
+
+**Returns:** `void`
+
+
+
+
+
+___
+
+<a id="starttone"></a>
+
+###  startTone
+
+► **startTone**(): `void`
+
+
+
+*Defined in [script/_lib/Machine.ts:257](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L257)*
+
+
+
+
+
+**Returns:** `void`
+
+
+
+
+
+___
+
+<a id="stoptone"></a>
+
+###  stopTone
+
+► **stopTone**(): `void`
+
+
+
+*Defined in [script/_lib/Machine.ts:258](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L258)*
 
 
 

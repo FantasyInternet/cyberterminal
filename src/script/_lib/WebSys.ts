@@ -1,12 +1,14 @@
 import css from "./css"
 import GameInput from "./GameInput"
 import Sys from "./Sys"
+import ChipSound from "./ChipSound"
 
 /**
  * Sys implementation for web browsers.
  * See [Sys](../interfaces/__lib_sys_.sys.md) for documentation
  */
 export default class WebSys implements Sys {
+  chipSound: ChipSound = new ChipSound()
   gameInput: GameInput = new GameInput()
   get displayMode() { return this._displayMode }
   get displayWidth() { return this._displayWidth }

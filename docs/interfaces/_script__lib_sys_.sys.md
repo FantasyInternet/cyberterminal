@@ -14,13 +14,30 @@ Unified interface to system I/O
 
 
 ## Properties
+<a id="chipsound"></a>
+
+###  chipSound
+
+**●  chipSound**:  *[ChipSound](../classes/_script__lib_chipsound_.chipsound.md)* 
+
+*Defined in [script/_lib/Sys.ts:17](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L17)*
+
+
+
+Tone generator.
+
+
+
+
+___
+
 <a id="displaybitmap"></a>
 
 ### «Optional» displayBitmap
 
 **●  displayBitmap**:  *`ImageData`* 
 
-*Defined in [script/_lib/Sys.ts:14](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L14)*
+*Defined in [script/_lib/Sys.ts:15](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L15)*
 
 
 
@@ -37,7 +54,7 @@ ___
 
 **●  displayHeight**:  *`number`* 
 
-*Defined in [script/_lib/Sys.ts:12](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L12)*
+*Defined in [script/_lib/Sys.ts:13](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L13)*
 
 
 
@@ -54,7 +71,7 @@ ___
 
 **●  displayMode**:  *`string`* 
 
-*Defined in [script/_lib/Sys.ts:8](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L8)*
+*Defined in [script/_lib/Sys.ts:9](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L9)*
 
 
 
@@ -71,7 +88,7 @@ ___
 
 **●  displayWidth**:  *`number`* 
 
-*Defined in [script/_lib/Sys.ts:10](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L10)*
+*Defined in [script/_lib/Sys.ts:11](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L11)*
 
 
 
@@ -88,7 +105,7 @@ ___
 
 **●  gameInput**:  *[GameInput](../classes/_script__lib_gameinput_.gameinput.md)* 
 
-*Defined in [script/_lib/Sys.ts:16](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L16)*
+*Defined in [script/_lib/Sys.ts:19](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L19)*
 
 
 
@@ -109,7 +126,7 @@ ___
 
 
 
-*Defined in [script/_lib/Sys.ts:35](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L35)*
+*Defined in [script/_lib/Sys.ts:38](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L38)*
 
 
 
@@ -136,7 +153,7 @@ ___
 
 
 
-*Defined in [script/_lib/Sys.ts:29](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L29)*
+*Defined in [script/_lib/Sys.ts:32](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L32)*
 
 
 
@@ -161,7 +178,7 @@ ___
 
 
 
-*Defined in [script/_lib/Sys.ts:24](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L24)*
+*Defined in [script/_lib/Sys.ts:27](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L27)*
 
 
 

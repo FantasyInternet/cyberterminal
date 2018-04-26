@@ -10,6 +10,8 @@
   (import "api" "getGameButtonB" (func $getGameButtonB (result i32) ))
   (import "api" "getGameButtonX" (func $getGameButtonX (result i32) ))
   (import "api" "getGameButtonY" (func $getGameButtonY (result i32) ))
+  (import "api" "startTone" (func $startTone (param i32) (param i32) ))
+  (import "api" "stopTone" (func $stopTone (param i32) ))
   ;;(import "api" "fillRect" (func $fillRect (param i32) (param i32) (param i32) (param i32) (param i32) (param i32) (param i32)))
   (memory $memory 1)
   (export "memory" (memory $memory))
@@ -171,7 +173,12 @@
   (global $ballVY (mut i32) (i32.const 0))
   (global $bgColor (mut i32) (i32.const 0))
   (global $ballColor (mut i32) (i32.const 0))
+  (global $beep (mut i32) (i32.const 1))
   (func $step (param $t f64)
+    (set_global $beep (i32.sub (get_global $beep) (i32.const 1)))
+    (if (i32.eq (get_global $beep) (i32.const 0)) (then
+      (call $stopTone (i32.const 0) )
+    ))
     (call $rect (i32.sub (get_global $ballX) (i32.const 4)) (i32.sub (get_global $ballY) (i32.const 4)) (i32.const 8) (i32.const 8) (get_global $bgColor))
     (call $rect (i32.const 0)   (i32.sub (get_global $left)  (i32.const 16)) (i32.const 8) (i32.const 32) (get_global $bgColor))
     (call $rect (i32.const 312) (i32.sub (get_global $right) (i32.const 16)) (i32.const 8) (i32.const 32) (get_global $bgColor))
@@ -183,26 +190,40 @@
       (if (i32.and (i32.ge_s (get_global $ballY) (i32.sub (get_global $left) (i32.const 20))) (i32.le_s (get_global $ballY) (i32.add (get_global $left) (i32.const 20)))) (then
         (set_global $ballVX (i32.mul (get_global $ballVX) (i32.const -1)))
         (set_global $ballVY (i32.add (get_global $ballVY) (get_global $leftV)))
+        (call $startTone (i32.const 0) (i32.const 440))
+        (set_global $beep (i32.const 4))
       )(else
         (set_global $ballX (i32.const 310))
         (set_global $ballY (get_global $right))
         (set_global $ballVY (i32.div_s (get_global $ballVY) (i32.const 2)))
+        (call $startTone (i32.const 0) (i32.const 110))
+        (set_global $beep (i32.const 30))
       ))
     ))
     (if (i32.ge_s (get_global $ballX) (i32.const 312)) (then
       (if (i32.and (i32.ge_s (get_global $ballY) (i32.sub (get_global $right) (i32.const 20))) (i32.le_s (get_global $ballY) (i32.add (get_global $right) (i32.const 20)))) (then
         (set_global $ballVX (i32.mul (get_global $ballVX) (i32.const -1)))
         (set_global $ballVY (i32.add (get_global $ballVY) (get_global $rightV)))
+        (call $startTone (i32.const 0) (i32.const 440))
+        (set_global $beep (i32.const 4))
       )(else
         (set_global $ballX (i32.const 10))
         (set_global $ballY (get_global $left))
         (set_global $ballVY (i32.div_s (get_global $ballVY) (i32.const 2)))
+        (call $startTone (i32.const 0) (i32.const 110))
+        (set_global $beep (i32.const 30))
       ))
     ))
     (if (i32.and (i32.le_s (get_global $ballY) (i32.const 0)) (i32.lt_s (get_global $ballVY) (i32.const 0))) (then
-      (set_global $ballVY (i32.mul (get_global $ballVY) (i32.const -1)))))
+      (set_global $ballVY (i32.mul (get_global $ballVY) (i32.const -1)))
+      (call $startTone (i32.const 0) (i32.const 220))
+      (set_global $beep (i32.const 4))
+    ))
     (if (i32.and (i32.ge_s (get_global $ballY) (get_global $displayHeight)) (i32.gt_s (get_global $ballVY) (i32.const 0))) (then
-      (set_global $ballVY (i32.mul (get_global $ballVY) (i32.const -1)))))
+      (set_global $ballVY (i32.mul (get_global $ballVY) (i32.const -1)))
+      (call $startTone (i32.const 0) (i32.const 220))
+      (set_global $beep (i32.const 4))
+    ))
     ;; (if (i32.lt_s (get_global $ballVX) (i32.const 0)) (then
     ;;   (set_global $rightV (i32.const 0))
     ;;   (if (i32.lt_s (get_global $ballY) (get_global $left)) (then

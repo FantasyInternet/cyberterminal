@@ -19,6 +19,13 @@ export default class CyberTerminal {
     this.machineWorker.onMessage(this._onMessage.bind(this))
   }
 
+  startTone() {
+    this.sys.chipSound.startTone.apply(this.sys.chipSound, arguments)
+  }
+  stopTone() {
+    this.sys.chipSound.stopTone.apply(this.sys.chipSound, arguments)
+  }
+
 
   /* _privates */
 

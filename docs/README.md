@@ -15,6 +15,7 @@ Follow development of this app [live on Twitch!](https://www.twitch.tv/codeartis
 ### External modules
 
 * ["my_program"](modules/_my_program_.md)
+* ["script/_lib/ChipSound"](modules/_script__lib_chipsound_.md)
 * ["script/_lib/CyberTerminal"](modules/_script__lib_cyberterminal_.md)
 * ["script/_lib/ElectronSys"](modules/_script__lib_electronsys_.md)
 * ["script/_lib/GameInput"](modules/_script__lib_gameinput_.md)

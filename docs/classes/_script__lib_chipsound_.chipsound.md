@@ -1,0 +1,84 @@
+[cyberterminal](../README.md) > ["script/_lib/ChipSound"](../modules/_script__lib_chipsound_.md) > [ChipSound](../classes/_script__lib_chipsound_.chipsound.md)
+
+
+
+# Class: ChipSound
+
+
+Class responsible for creating bleeps and bloops! 🎶
+
+## Index
+
+### Methods
+
+* [startTone](_script__lib_chipsound_.chipsound.md#starttone)
+* [stopTone](_script__lib_chipsound_.chipsound.md#stoptone)
+
+
+
+---
+## Methods
+<a id="starttone"></a>
+
+###  startTone
+
+► **startTone**(channel: *`number`*, frequency: *`number`*, volume?: *`number`*, type?: *"sine"⎮"square"⎮"sawtooth"⎮"triangle"*): `void`
+
+
+
+*Defined in script/_lib/ChipSound.ts:5*
+
+
+
+**Parameters:**
+
+| Param | Type | Default value | Description |
+| ------ | ------ | ------ | ------ |
+| channel | `number`  | - |   - |
+| frequency | `number`  | - |   - |
+| volume | `number`  | 1 |   - |
+| type | "sine"⎮"square"⎮"sawtooth"⎮"triangle"  | &quot;sine&quot; |   - |
+
+
+
+
+
+**Returns:** `void`
+
+
+
+
+
+___
+
+<a id="stoptone"></a>
+
+###  stopTone
+
+► **stopTone**(channel: *`number`*): `void`
+
+
+
+*Defined in script/_lib/ChipSound.ts:29*
+
+
+
+**Parameters:**
+
+| Param | Type | Description |
+| ------ | ------ | ------ |
+| channel | `number`   |  - |
+
+
+
+
+
+**Returns:** `void`
+
+
+
+
+
+___
+
+

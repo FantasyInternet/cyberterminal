@@ -254,6 +254,9 @@ export default class Machine {
   getGameButtonX() { return this._gameInputState.buttons.x }
   getGameButtonY() { return this._gameInputState.buttons.y }
 
+  startTone() { this._sysRequest("startTone", ...arguments) }
+  stopTone() { this._sysRequest("stopTone", ...arguments) }
+
   /* _privates */
   private _displayMode: string = ""
   private _displayWidth: number = 0

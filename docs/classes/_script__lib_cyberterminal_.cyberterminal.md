@@ -23,6 +23,8 @@ Terminal app
 ### Methods
 
 * [resetMachine](_script__lib_cyberterminal_.cyberterminal.md#resetmachine)
+* [startTone](_script__lib_cyberterminal_.cyberterminal.md#starttone)
+* [stopTone](_script__lib_cyberterminal_.cyberterminal.md#stoptone)
 
 
 
@@ -93,6 +95,50 @@ ___
 
 
 *Defined in [script/_lib/CyberTerminal.ts:14](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L14)*
+
+
+
+
+
+**Returns:** `void`
+
+
+
+
+
+___
+
+<a id="starttone"></a>
+
+###  startTone
+
+► **startTone**(): `void`
+
+
+
+*Defined in [script/_lib/CyberTerminal.ts:22](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L22)*
+
+
+
+
+
+**Returns:** `void`
+
+
+
+
+
+___
+
+<a id="stoptone"></a>
+
+###  stopTone
+
+► **stopTone**(): `void`
+
+
+
+*Defined in [script/_lib/CyberTerminal.ts:25](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L25)*
 
 
 

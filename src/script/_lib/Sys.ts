@@ -1,4 +1,5 @@
 import GameInput from "./GameInput"
+import ChipSound from "./ChipSound"
 
 /**
  * Unified interface to system I/O
@@ -12,6 +13,8 @@ export default interface Sys {
   displayHeight: number
   /** The current display bitmap. */
   displayBitmap?: ImageData
+  /** Tone generator. */
+  chipSound: ChipSound
   /** Game input state. */
   gameInput: GameInput
 

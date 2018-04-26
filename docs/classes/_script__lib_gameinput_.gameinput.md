@@ -35,7 +35,7 @@ Class for taking care of game input
 ### ⊕ **new GameInput**(): [GameInput](_script__lib_gameinput_.gameinput.md)
 
 
-*Defined in script/_lib/GameInput.ts:8*
+*Defined in [script/_lib/GameInput.ts:8](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/GameInput.ts#L8)*
 
 
 
@@ -55,7 +55,7 @@ Class for taking care of game input
 
 
 
-*Defined in script/_lib/GameInput.ts:128*
+*Defined in [script/_lib/GameInput.ts:128](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/GameInput.ts#L128)*
 
 
 
@@ -77,7 +77,7 @@ ___
 
 
 
-*Defined in script/_lib/GameInput.ts:99*
+*Defined in [script/_lib/GameInput.ts:99](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/GameInput.ts#L99)*
 
 
 
@@ -107,7 +107,7 @@ ___
 
 
 
-*Defined in script/_lib/GameInput.ts:106*
+*Defined in [script/_lib/GameInput.ts:106](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/GameInput.ts#L106)*
 
 
 
@@ -141,7 +141,7 @@ ___
 
 ** axis**:  *`object`* 
 
-*Defined in script/_lib/GameInput.ts:6*
+*Defined in [script/_lib/GameInput.ts:6](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/GameInput.ts#L6)*
 
 
 
@@ -152,7 +152,7 @@ ___
 
 **●  x**:  *`number`*  = 0
 
-*Defined in script/_lib/GameInput.ts:6*
+*Defined in [script/_lib/GameInput.ts:6](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/GameInput.ts#L6)*
 
 
 
@@ -165,7 +165,7 @@ ___
 
 **●  y**:  *`number`*  = 0
 
-*Defined in script/_lib/GameInput.ts:6*
+*Defined in [script/_lib/GameInput.ts:6](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/GameInput.ts#L6)*
 
 
 
@@ -180,7 +180,7 @@ ___
 
 ** buttons**:  *`object`* 
 
-*Defined in script/_lib/GameInput.ts:7*
+*Defined in [script/_lib/GameInput.ts:7](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/GameInput.ts#L7)*
 
 
 
@@ -191,7 +191,7 @@ ___
 
 **●  a**:  *`boolean`*  = false
 
-*Defined in script/_lib/GameInput.ts:7*
+*Defined in [script/_lib/GameInput.ts:7](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/GameInput.ts#L7)*
 
 
 
@@ -204,7 +204,7 @@ ___
 
 **●  b**:  *`boolean`*  = false
 
-*Defined in script/_lib/GameInput.ts:7*
+*Defined in [script/_lib/GameInput.ts:7](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/GameInput.ts#L7)*
 
 
 
@@ -217,7 +217,7 @@ ___
 
 **●  x**:  *`boolean`*  = false
 
-*Defined in script/_lib/GameInput.ts:7*
+*Defined in [script/_lib/GameInput.ts:7](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/GameInput.ts#L7)*
 
 
 
@@ -230,7 +230,7 @@ ___
 
 **●  y**:  *`boolean`*  = false
 
-*Defined in script/_lib/GameInput.ts:7*
+*Defined in [script/_lib/GameInput.ts:7](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/GameInput.ts#L7)*
 
 
 
