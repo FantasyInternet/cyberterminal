@@ -1,6 +1,6 @@
 {
   "name": "cyberterminal",
-  "version": "0.0.36",
+  "version": "0.0.37",
   "description": "A fantasy internet client",
   "author": {
     "name": "codeartisticninja",
@@ -17,7 +17,8 @@
       "target": [
         "nsis",
         "portable"
-      ]
+      ],
+      "icon": "images/icon.png"
     },
     "mac": {
       "category": "your.app.category.type"
