@@ -149,7 +149,7 @@
     (get_local $id)
   )
 
-  (func $init
+  (func $setup
     (local $displayOffset i32)
     (call $setDisplayMode (get_global $displayWidth) (get_global $displayHeight))
     (call $log (call $pushFromMemory (i32.const 10) (i32.const 22)))
@@ -162,7 +162,7 @@
     (set_global $leftColor (call $rgb (i32.const 0) (i32.const 0) (i32.const 255)))
     (set_global $rightColor (call $rgb (i32.const 255) (i32.const 0) (i32.const 0)))
   )
-  (export "init" (func $init))
+  (export "setup" (func $setup))
 
   (global $left (mut i32) (i32.const 100))
   (global $leftV (mut i32) (i32.const 0))
@@ -177,7 +177,7 @@
   (global $bgColor (mut i32) (i32.const 0))
   (global $ballColor (mut i32) (i32.const 0))
   (global $beep (mut i32) (i32.const 1))
-  (func $step (param $t f64)
+  (func $update (param $t f64)
     (set_global $beep (i32.sub (get_global $beep) (i32.const 1)))
     (if (i32.eq (get_global $beep) (i32.const 0)) (then
       (call $stopTone (i32.const 0) )
@@ -243,6 +243,9 @@
         (set_global $rightV (i32.const 1))
       ))
     ))
+  )
+  (export "update" (func $update))
+  (func $draw (param $t f64)
     (if (call $getMousePressed) (then
       (call $rect (call $getMouseX) (call $getMouseY) (i32.const 8) (i32.const 8) (get_global $ballColor))
     )(else
@@ -253,7 +256,7 @@
     (call $rect (i32.const 312) (i32.sub (get_global $right) (i32.const 16)) (i32.const 8) (i32.const 32) (get_global $rightColor))
     (call $displayMemory (call $getPartOffset (get_global $display)) (call $getPartLength (get_global $display)))
   )
-  (export "step" (func $step))
+  (export "draw" (func $draw))
 
 
   ;; graphics

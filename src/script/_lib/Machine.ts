@@ -234,14 +234,18 @@ export default class Machine {
     console.log("instatiated", this._vm.instance.exports)
     //this.setDisplayMode( 320, 200)
     //this.fillRect(20, 30, 40, 50, 255, 255, 255)
-    this._vm.instance.exports.init()
+    this._vm.instance.exports.setup()
     console.log("stepping")
-    let nextFrame = performance.now()
+    let nextFrame = 0
     let frameInterval = 1000 / 60
     while (true) {
+      if (performance.now() > nextFrame + 1024) nextFrame = performance.now()
       if (performance.now() > nextFrame) {
-        this._vm.instance.exports.step(performance.now())
-        nextFrame += frameInterval
+        while (performance.now() > nextFrame) {
+          this._vm.instance.exports.update(nextFrame)
+          nextFrame += frameInterval
+        }
+        this._vm.instance.exports.draw(nextFrame)
       }
       await this.waitForVsync()
     }
