@@ -173,7 +173,7 @@ ___
 
 ###  read
 
-▸ **read**(filename: *`string`*, options?: *`any`*): `Promise`<`string` |`ArrayBuffer`>
+▸ **read**(filename: *`string`*, options?: *`any`*): `Promise`<`Object`>
 
 *Defined in [script/_lib/WebSys.ts:69](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L69)*
 
@@ -184,7 +184,7 @@ ___
 | filename | `string` | - | 
 | `Default value` options | `any` |  {} | 
 
-**Returns:** `Promise`<`string` |`ArrayBuffer`>
+**Returns:** `Promise`<`Object`>
 
 ___
 <a id="setdisplaymode"></a>

@@ -10,16 +10,19 @@ export default class Machine {
 
   constructor(public url: string) {
     this._initCom()
-    this.read("./script/pong.wasm", { type: "binary" }).then((code: ArrayBuffer) => {
-      this.run(code)
+    this._pushString("./script/pong.wasm")
+    this.read(() => {
+      this.run()
     })
   }
 
+  /* ROM API  */
+
   log() {
-    console.log("WASM:", this.popString())
+    console.log("📟", this._popString())
   }
 
-  setDisplayMode(/*mode: "text" | "indexed" | "rgb",*/ width: number, height: number, displayWidth = width, displayHeight = height) {
+  setDisplayMode(/*mode: "text" | "rgb",*/ width: number, height: number, displayWidth = width, displayHeight = height) {
     this._sysCall("setDisplayMode", "rgb", width, height, displayWidth, displayHeight)
     this._displayMode = "rgb"
     this._displayWidth = displayWidth
@@ -30,11 +33,6 @@ export default class Machine {
         console.error(`${this.displayMode} not yet implemented!`)
         break
 
-      case "indexed":
-        this._displayPixmap = new Uint8Array(width * height)
-        this._displayPalette = []
-        //@ts-ignore
-        this._displayPalette.unshift(this._displayPalette.pop())
       case "rgb":
         this._displayBitmap = new ImageData(width, height)
         break
@@ -48,206 +46,132 @@ export default class Machine {
     return
   }
 
-  /*pset(x: number, y: number, r: number, g: number = r, b: number = r) {
-    let a = 255
-    if (!this.displayBitmap) throw "No bitmap present!"
-    let bm = this.displayBitmap
-    x = Math.floor(x)
-    if (x < 0 || x >= bm.width) throw "Coordinates out of bounds!"
-    y = Math.floor(y)
-    if (y < 0 || y >= bm.height) throw "Coordinates out of bounds!"
-    let i = (y * bm.width + x) * 4
-    if (this.displayMode === "indexed") {
-      if (!this._displayPixmap) throw "No pixmap!"
-      if (!this._displayPalette) throw "No palette!"
-      this._displayPixmap[i / 4] = r
-      if (!this._displayPalette[r]) throw "Color not defined!"
-        ;[r, g, b, a] = this._displayPalette[r]
-    }
-    r = Math.min(Math.max(0, Math.floor(r)), 255)
-    g = Math.min(Math.max(0, Math.floor(g)), 255)
-    b = Math.min(Math.max(0, Math.floor(b)), 255)
-    a = Math.min(Math.max(0, Math.floor(a)), 255)
-    bm.data[i++] = r
-    bm.data[i++] = g
-    bm.data[i++] = b
-    bm.data[i++] = a
-    this._commitBitmap()
-  }
-
-  pget(x: number, y: number) {
-    if (!this.displayBitmap) throw "No bitmap present!"
-    let bm = this.displayBitmap
-    x = Math.floor(x)
-    if (x < 0 || x >= bm.width) throw "Coordinates out of bounds!"
-    y = Math.floor(y)
-    if (y < 0 || y >= bm.height) throw "Coordinates out of bounds!"
-    let i = (y * bm.width + x) * 4
-    if (this.displayMode === "rgb") {
-      return bm.data.slice(i, i + 4)
-    } else if (this._displayPixmap) {
-      return this._displayPixmap[i / 4]
-    }
-  }
-
-  fillRect(x: number, y: number, width: number, height: number, r: number, g: number = r, b: number = r) {
-    let a = 255
-    if (!this.displayBitmap) throw "No bitmap present!"
-    let bm = this.displayBitmap
-    x = Math.floor(x)
-    if (x < 0 || x > bm.width) throw "Coordinates out of bounds!"
-    y = Math.floor(y)
-    if (y < 0 || y > bm.height) throw "Coordinates out of bounds!"
-    width = Math.floor(width)
-    if (width < 0 || x + width > bm.width) throw "Coordinates out of bounds!"
-    height = Math.floor(height)
-    if (height < 0 || y + height > bm.height) throw "Coordinates out of bounds!"
-    if (width === 0 || height === 0) return
-    let i = (y * bm.width + x) * 4
-    if (this.displayMode === "indexed") {
-      if (!this._displayPixmap) throw "No pixmap!"
-      if (!this._displayPalette) throw "No palette!"
-      let _i = i / 4
-      for (let _y = 0; _y < height; _y++) {
-        this._displayPixmap.fill(r, _i, _i + width)
-        _i += bm.width
-      }
-      if (!this._displayPalette[r]) throw "Color not defined!"
-        ;[r, g, b, a] = this._displayPalette[r]
-    }
-    r = Math.min(Math.max(0, Math.floor(r)), 255)
-    g = Math.min(Math.max(0, Math.floor(g)), 255)
-    b = Math.min(Math.max(0, Math.floor(b)), 255)
-    a = Math.min(Math.max(0, Math.floor(a)), 255)
-    bm.data[i++] = r
-    bm.data[i++] = g
-    bm.data[i++] = b
-    bm.data[i++] = a
-    let bytes = bm.data.slice(i - 4, i)
-    for (let _x = 1; _x < width; _x++) {
-      bm.data.set(bytes, i)
-      i += 4
-    }
-    bytes = bm.data.slice(i - 4 * width, i)
-    i += 4 * (bm.width - width)
-    for (let _y = 1; _y < height; _y++) {
-      bm.data.set(bytes, i)
-      i += 4 * bm.width
-    }
-    this._commitBitmap()
-  }
-
-  palette(id: number, r: number, g: number, b: number) {
-    if (!this._displayBitmap) throw "No bitmap!"
-    if (!this._displayPixmap) throw "No pixmap!"
-    if (!this._displayPalette) throw "No palette!"
-    let a = 255
-    if (this._displayPalette[id]) {
-      let i = 0
-      this._displayPalette[id][i++] = r
-      this._displayPalette[id][i++] = g
-      this._displayPalette[id][i++] = b
-      this._displayPalette[id][i++] = a
-    } else {
-      this._displayPalette[id] = [r, g, b, a]
-    }
-    let p = -1
-    while ((p = this._displayPixmap.indexOf(id, p + 1)) >= 0) {
-      this._displayBitmap.data.set(this._displayPalette[id], p * 4)
-    }
-  }*/
-
   displayMemory(offset: number, length: number, destination: number = 0) {
-    if (!this._vm) throw "No VM!"
+    let process = this._processes[this._activePID]
+    if (!process) throw "No active process!"
     if (!this._displayBitmap) throw "No bitmap to commit!"
-    this._displayBitmap.data.set(new Uint8Array(this._vm.instance.exports.memory.buffer.slice(offset, offset + length)), destination)
+    this._displayBitmap.data.set(new Uint8Array(process.instance.exports.memory.buffer.slice(offset, offset + length)), destination)
   }
   pushFromMemory(offset: number, length: number) {
-    if (!this._vm) throw "No VM!"
+    let process = this._processes[this._activePID]
+    if (!process) throw "No active process!"
     let ar = new Uint8Array(length)
-    ar.set(new Uint8Array(this._vm.instance.exports.memory.buffer.slice(offset, offset + length)))
+    ar.set(new Uint8Array(process.instance.exports.memory.buffer.slice(offset, offset + length)))
     this._bufferStack.push(ar.buffer)
   }
   popToMemory(offset: number) {
-    if (!this._vm) throw "No VM!"
+    let process = this._processes[this._activePID]
+    if (!process) throw "No active process!"
     if (!this._bufferStack.length) throw "Buffer stack is empty!"
-    let ar = new Uint8Array(this._vm.instance.exports.memory.buffer)
+    let ar = new Uint8Array(process.instance.exports.memory.buffer)
     //@ts-ignore
-    ar.set(this._bufferStack.pop(), offset)
+    ar.set(new Uint8Array(this._bufferStack.pop()), offset)
+    console.log("popping to", offset)
   }
 
-  pushArrayBuffer(arbuf: ArrayBuffer) {
-    this._bufferStack.push(arbuf)
-    return arbuf.byteLength
-  }
-  popArrayBuffer() {
-    return this._bufferStack.pop()
+
+  wait(milliseconds: number, callback: number | Function) {
+    if (typeof callback === "number") {
+      let process = this._processes[this._activePID]
+      if (!process) throw "No active process!"
+      callback = process.instance.exports.table.get(callback)
+    }
+    let id = this._asyncCalls++
+    setTimeout(() => {
+      //@ts-ignore
+      callback(id)
+    }, milliseconds)
+    return id
   }
 
-  pushString(str: string) {
-    //@ts-ignore
-    let enc = new TextEncoder()
-    let buf = enc.encode(str).buffer
-    this._bufferStack.push(buf)
-    return buf.byteLength
-  }
-  popString() {
-    //@ts-ignore
-    let dec = new TextDecoder("utf-8")
-    return dec.decode(this._bufferStack.pop())
-  }
-
-  async wait(milliseconds: number = 0) {
-    return new Promise((resolve) => {
-      setTimeout(resolve, milliseconds)
+  waitForVsync(callback: number | Function) {
+    if (typeof callback === "number") {
+      let process = this._processes[this._activePID]
+      if (!process) throw "No active process!"
+      callback = process.instance.exports.table.get(callback)
+    }
+    let id = this._asyncCalls++
+    this.commitDisplay(-1)
+    this._sysRequest("waitForVsync").then((t: number) => {
+      //@ts-ignore
+      callback(t, id)
     })
+    return id
   }
 
-  async waitForVsync(): Promise<number> {
-    this.commitDisplay()
-    return this._sysRequest("waitForVsync")
-  }
-
-  async commitDisplay(): Promise<number> {
+  commitDisplay(callback: number | Function) {
+    if (typeof callback === "number") {
+      let process = this._processes[this._activePID]
+      if (!process) throw "No active process!"
+      callback = process.instance.exports.table.get(callback)
+    }
+    let id = this._asyncCalls++
     switch (this.displayMode) {
       case "indexed":
       case "rgb":
         this._commitBitmap(true)
         break
-
-      default:
-        return this._lastCommit
     }
-    return new Promise<number>((resolve) => {
-      this._pendingCommits.push(resolve)
+    this._pendingCommits.push((t: number) => {
+      //@ts-ignore
+      callback(t, id)
     })
+    return id
   }
 
-  async read(filename: string, options: any = {}) {
-    return this._sysRequest("read", filename, options)
+  read(callback: number | Function) {
+    if (typeof callback === "number") {
+      let process = this._processes[this._activePID]
+      if (!process) throw "No active process!"
+      callback = process.instance.exports.table.get(callback)
+    }
+    let id = this._asyncCalls++
+    let filename = this._popString()
+    this._sysRequest("read", filename, { type: "binary" }).then((data: ArrayBuffer) => {
+      this._pushArrayBuffer(data)
+      //@ts-ignore
+      callback(data.byteLength, id)
+    })
+    return id
+  }
+  readImage(callback: number | Function) {
+    if (typeof callback === "number") {
+      let process = this._processes[this._activePID]
+      if (!process) throw "No active process!"
+      callback = process.instance.exports.table.get(callback)
+    }
+    let id = this._asyncCalls++
+    let filename = this._popString()
+    this._sysRequest("read", filename, { type: "image" }).then((data: ImageData) => {
+      this._pushArrayBuffer(data.data.buffer)
+      //@ts-ignore
+      callback(data.width, data.height, id)
+      console.log("image sent", data)
+    })
+    return id
   }
 
-  async run(wasm: ArrayBuffer, api = this._generateRomApi()) {
-    console.log("instatiating", wasm)
+  async run() {
+    this._activePID = this._processes.length
+    let wasm = this._popArrayBuffer()
+    let api = this._generateRomApi()
     //@ts-ignore
-    this._vm = await WebAssembly.instantiate(wasm, { api })
-    console.log("instatiated", this._vm.instance.exports)
-    //this.setDisplayMode( 320, 200)
-    //this.fillRect(20, 30, 40, 50, 255, 255, 255)
-    this._vm.instance.exports.setup()
-    console.log("stepping")
+    this._processes.push(await WebAssembly.instantiate(wasm, { api }))
+    let process = this._processes[this._activePID]
+    process.instance.exports.setup()
     let nextFrame = 0
     let frameInterval = 1000 / 60
     while (true) {
-      if (performance.now() > nextFrame + 1024) nextFrame = performance.now()
-      if (performance.now() > nextFrame) {
-        while (performance.now() > nextFrame) {
-          this._vm.instance.exports.update(nextFrame)
+      this.commitDisplay(() => { })
+      let t = await this._sysRequest("waitForVsync")
+      if (t > nextFrame + 1024) nextFrame = t
+      if (t > nextFrame) {
+        while (t > nextFrame) {
+          process.instance.exports.update(nextFrame)
           nextFrame += frameInterval
         }
-        this._vm.instance.exports.draw(nextFrame)
+        process.instance.exports.draw(t)
       }
-      await this.waitForVsync()
     }
   }
 
@@ -269,14 +193,15 @@ export default class Machine {
   private _displayWidth: number = 0
   private _displayHeight: number = 0
   private _displayBitmap?: ImageData
-  private _displayPixmap?: Uint8Array
-  private _displayPalette?: number[][]
   private _transferBuffer?: ArrayBuffer
   private _lastCommit: number = performance.now()
   private _pendingCommits: Function[] = []
   private _pendingRequests: any[] = []
-  private _vm: any = {}
+  private _processes: any[] = []
+  private _activePID: number = -1
+  //@ts-ignore
   private _bufferStack: ArrayBuffer[] = []
+  private _asyncCalls: number = 0
   private _mouseInputState: any = {
     x: 0, y: 0, pressed: false
   }
@@ -408,5 +333,25 @@ export default class Machine {
 
   private _copyFunction(_fn: Function) {
     return (...a: any[]) => _fn(...a)
+  }
+  private _pushArrayBuffer(arbuf: ArrayBuffer) {
+    this._bufferStack.push(arbuf)
+    return arbuf.byteLength
+  }
+  private _popArrayBuffer() {
+    return this._bufferStack.pop()
+  }
+
+  private _pushString(str: string) {
+    //@ts-ignore
+    let enc = new TextEncoder()
+    let buf = enc.encode(str).buffer
+    this._bufferStack.push(buf)
+    return buf.byteLength
+  }
+  private _popString() {
+    //@ts-ignore
+    let dec = new TextDecoder("utf-8")
+    return dec.decode(this._bufferStack.pop())
   }
 }

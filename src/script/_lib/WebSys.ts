@@ -76,6 +76,22 @@ export default class WebSys implements Sys {
       case "text":
         return res.text()
 
+      case "image":
+        return new Promise((resolve) => {
+          let blob = res.blob().then((blob) => {
+            let img = new Image()
+            img.src = URL.createObjectURL(blob)
+            img.addEventListener("load", () => {
+              let canvas = document.createElement("canvas")
+              let g = <CanvasRenderingContext2D>canvas.getContext("2d")
+              canvas.width = img.width
+              canvas.height = img.height
+              g.drawImage(img, 0, 0)
+              resolve(g.getImageData(0, 0, img.width, img.height))
+            })
+          })
+        })
+
       default:
         throw "Unknown type!"
     }
