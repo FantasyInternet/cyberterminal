@@ -18,6 +18,21 @@ export default class ElectronSys extends WebSys {
       case "text":
         return "" + res
 
+      case "image":
+        return new Promise((resolve) => {
+          let dataurl = res.toString("base64")
+          let img = new Image()
+          img.src = "data:image/png;base64," + dataurl
+          img.addEventListener("load", () => {
+            let canvas = document.createElement("canvas")
+            let g = <CanvasRenderingContext2D>canvas.getContext("2d")
+            canvas.width = img.width
+            canvas.height = img.height
+            g.drawImage(img, 0, 0)
+            resolve(g.getImageData(0, 0, img.width, img.height))
+          })
+        })
+
       default:
         throw "Unknown type!"
     }
