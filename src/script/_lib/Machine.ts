@@ -66,7 +66,6 @@ export default class Machine {
     let ar = new Uint8Array(process.instance.exports.memory.buffer)
     //@ts-ignore
     ar.set(new Uint8Array(this._bufferStack.pop()), offset)
-    console.log("popping to", offset)
   }
 
 
@@ -146,7 +145,6 @@ export default class Machine {
       this._pushArrayBuffer(data.data.buffer)
       //@ts-ignore
       callback(data.width, data.height, id)
-      console.log("image sent", data)
     })
     return id
   }

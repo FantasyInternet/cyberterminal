@@ -13,32 +13,36 @@ export default class GameInput {
       switch (ctrl) {
         case "left":
           this.state.axis.x = -1
+          e.preventDefault()
           break
         case "right":
           this.state.axis.x = 1
+          e.preventDefault()
           break
         case "up":
           this.state.axis.y = -1
+          e.preventDefault()
           break
         case "down":
           this.state.axis.y = 1
+          e.preventDefault()
           break
 
         case "a":
           this.state.buttons.a = true
+          e.preventDefault()
           break
         case "b":
           this.state.buttons.b = true
+          e.preventDefault()
           break
         case "x":
           this.state.buttons.x = true
+          e.preventDefault()
           break
         case "y":
+          e.preventDefault()
           this.state.buttons.y = true
-          break
-
-        default:
-          console.log(e)
           break
       }
       this._sendState()
