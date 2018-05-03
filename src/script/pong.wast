@@ -158,12 +158,15 @@
   )
 
   (func $setup
-    (call $setDisplayMode (get_global $displayWidth) (get_global $displayHeight))
     (call $log (call $pushFromMemory (i32.const 10) (i32.const 22)))
+    (set_global $sleepyhead    (call $createImg (i32.const 0) (i32.const 0)))
     (set_global $sleepyheadReq (call $readImage (call $pushFromMemory (i32.const  40) (i32.const 23)) (i32.const 1)))
+    (set_global $pointer       (call $createImg (i32.const 0) (i32.const 0)))
     (set_global $pointerReq    (call $readImage (call $pushFromMemory (i32.const  80) (i32.const 20)) (i32.const 1)))
+    (set_global $font          (call $createImg (i32.const 0) (i32.const 0)))
     (set_global $fontReq       (call $readImage (call $pushFromMemory (i32.const 120) (i32.const 17)) (i32.const 1)))
-    (set_global $display (call $createImg (get_global $displayWidth) (get_global $displayHeight)))
+    (set_global $display (call $createImg (i32.const 320) (i32.const 200)))
+    (call $setDisplayMode (call $getImgWidth (get_global $display)) (call $getImgHeight (get_global $display)))
 
     (set_global $bgColor (call $rgb (i32.const 0) (i32.const 0) (i32.const 0)))
     (set_global $ballColor (call $rgb (i32.const 255) (i32.const 255) (i32.const 255)))
@@ -174,33 +177,21 @@
 
   (global $sleepyheadReq (mut i32) (i32.const 0))
   (global $sleepyhead    (mut i32) (i32.const 0))
-  (global $sleepyheadW   (mut i32) (i32.const 0))
-  (global $sleepyheadH   (mut i32) (i32.const 0))
   (global $pointerReq (mut i32) (i32.const 0))
   (global $pointer    (mut i32) (i32.const 0))
-  (global $pointerW   (mut i32) (i32.const 0))
-  (global $pointerH   (mut i32) (i32.const 0))
   (global $fontReq (mut i32) (i32.const 0))
   (global $font    (mut i32) (i32.const 0))
-  (global $fontW   (mut i32) (i32.const 0))
-  (global $fontH   (mut i32) (i32.const 0))
   (func $storeImages (param $w i32) (param $h i32) (param $req i32)
     (if (i32.eq (get_local $req) (get_global $sleepyheadReq)) (then
-      (set_global $sleepyheadW (get_local $w))
-      (set_global $sleepyheadH (get_local $h))
-      (set_global $sleepyhead (call $createImg (get_global $sleepyheadW) (get_global $sleepyheadH)))
+      (set_global $sleepyhead (call $createImg (get_local $w) (get_local $h)))
       (call $popToMemory (i32.add (call $getPartOffset (get_global $sleepyhead)) (i32.const 8)))
     ))
     (if (i32.eq (get_local $req) (get_global $pointerReq)) (then
-      (set_global $pointerW (get_local $w))
-      (set_global $pointerH (get_local $h))
-      (set_global $pointer (call $createImg (get_global $pointerW) (get_global $pointerH)))
+      (set_global $pointer (call $createImg (get_local $w) (get_local $h)))
       (call $popToMemory (i32.add (call $getPartOffset (get_global $pointer)) (i32.const 8)))
     ))
     (if (i32.eq (get_local $req) (get_global $fontReq)) (then
-      (set_global $fontW (get_local $w))
-      (set_global $fontH (get_local $h))
-      (set_global $font (call $createImg (get_global $fontW) (get_global $fontH)))
+      (set_global $font (call $createImg (get_local $w) (get_local $h)))
       (call $popToMemory (i32.add (call $getPartOffset (get_global $font)) (i32.const 8)))
     ))
   )
@@ -262,7 +253,7 @@
       (call $startTone (i32.const 0) (i32.const 220))
       (set_global $beep (i32.const 4))
     ))
-    (if (i32.and (i32.ge_s (get_global $ballY) (get_global $displayHeight)) (i32.gt_s (get_global $ballVY) (i32.const 0))) (then
+    (if (i32.and (i32.ge_s (get_global $ballY) (call $getImgHeight (get_global $display))) (i32.gt_s (get_global $ballVY) (i32.const 0))) (then
       (set_global $ballVY (i32.mul (get_global $ballVY) (i32.const -1)))
       (call $startTone (i32.const 0) (i32.const 220))
       (set_global $beep (i32.const 4))
@@ -288,8 +279,8 @@
   )
   (export "update" (func $update))
   (func $draw (param $t f64)
-    (call $rect (get_global $display) (i32.const 0) (i32.const 0) (get_global $displayWidth) (get_global $displayHeight) (get_global $bgColor))
-    (call $copyImg (get_global $sleepyhead) (i32.const 0) (i32.const 0) (get_global $display) (i32.const 80) (i32.const 16) (get_global $sleepyheadW) (get_global $sleepyheadH))
+    (call $rect (get_global $display) (i32.const 0) (i32.const 0) (call $getImgWidth (get_global $display)) (call $getImgHeight (get_global $display)) (get_global $bgColor))
+    (call $copyImg (get_global $sleepyhead) (i32.const 0) (i32.const 0) (get_global $display) (i32.const 80) (i32.const 16) (call $getImgWidth (get_global $sleepyhead)) (call $getImgHeight (get_global $sleepyhead)))
     (if (call $getMousePressed) (then
       (set_global $ballX (call $getMouseX))
       (set_global $ballY (call $getMouseY))
@@ -299,19 +290,19 @@
     (call $rect (get_global $display) (i32.const 312) (i32.sub (get_global $right) (i32.const 16)) (i32.const 8) (i32.const 32) (get_global $rightColor))
     (set_global $txtX (i32.const 160))
     (set_global $txtY (i32.const 32))
-    (call $print (get_global $display) (i32.const 72))
-    (call $print (get_global $display) (i32.const 101))
-    (call $print (get_global $display) (i32.const 108))
-    (call $print (get_global $display) (i32.const 108))
-    (call $print (get_global $display) (i32.const 111))
-    (call $print (get_global $display) (i32.const 32))
-    (call $print (get_global $display) (i32.const 119))
-    (call $print (get_global $display) (i32.const 111))
-    (call $print (get_global $display) (i32.const 114))
-    (call $print (get_global $display) (i32.const 108))
-    (call $print (get_global $display) (i32.const 100))
-    (call $print (get_global $display) (i32.const 33))
-    (call $copyImg (get_global $pointer) (i32.const 0) (i32.const 0) (get_global $display) (call $getMouseX) (call $getMouseY) (get_global $pointerW) (get_global $pointerH))
+    (call $print (get_global $display) (i32.const 72))  ;; H
+    (call $print (get_global $display) (i32.const 101)) ;; e
+    (call $print (get_global $display) (i32.const 108)) ;; l
+    (call $print (get_global $display) (i32.const 108)) ;; l
+    (call $print (get_global $display) (i32.const 111)) ;; o
+    (call $print (get_global $display) (i32.const 32))  ;; (space)
+    (call $print (get_global $display) (i32.const 119)) ;; w
+    (call $print (get_global $display) (i32.const 111)) ;; o
+    (call $print (get_global $display) (i32.const 114)) ;; r
+    (call $print (get_global $display) (i32.const 108)) ;; l
+    (call $print (get_global $display) (i32.const 100)) ;; d
+    (call $print (get_global $display) (i32.const 33))  ;; !
+    (call $copyImg (get_global $pointer) (i32.const 0) (i32.const 0) (get_global $display) (call $getMouseX) (call $getMouseY) (call $getImgWidth (get_global $pointer)) (call $getImgHeight (get_global $pointer)))
     (call $displayMemory (i32.add (call $getPartOffset (get_global $display)) (i32.const 8)) (i32.sub (call $getPartLength (get_global $display)) (i32.const 8)))
   )
   (export "draw" (func $draw))
@@ -325,8 +316,6 @@
   ;; graphics
 
   (global $display (mut i32) (i32.const -1))
-  (global $displayWidth (mut i32) (i32.const 320))
-  (global $displayHeight (mut i32) (i32.const 200))
   (func $rgb (param $r i32) (param $g i32) (param $b i32) (result i32)
     (local $c i32)
     (set_local $c (i32.const 255))
@@ -347,6 +336,12 @@
     (i32.store (i32.add (get_local $imgOffset) (i32.const 0)) (get_local $w))
     (i32.store (i32.add (get_local $imgOffset) (i32.const 4)) (get_local $h))
     (get_local $img)
+  )
+  (func $getImgWidth (param $img i32) (result i32)
+    (i32.load (call $getPartOffset (get_local $img)))
+  )
+  (func $getImgHeight (param $img i32) (result i32)
+    (i32.load (i32.add (call $getPartOffset (get_local $img)) (i32.const 4)))
   )
 
   (func $pget (param $img i32) (param $x i32) (param $y i32) (result i32)
@@ -405,9 +400,9 @@
       (set_local $y (i32.const 0))
     ))
     (if (i32.gt_s (i32.add (get_local $x) (get_local $w)) (get_local $imgWidth)) (then
-      (set_local $w (i32.sub (get_global $displayWidth) (get_local $x)))))
+      (set_local $w (i32.sub (get_local $imgWidth) (get_local $x)))))
     (if (i32.gt_s (i32.add (get_local $y) (get_local $h)) (get_local $imgHeight)) (then
-      (set_local $h (i32.sub (get_global $displayHeight) (get_local $y)))))
+      (set_local $h (i32.sub (get_local $imgHeight) (get_local $y)))))
     (set_local $i (i32.mul (i32.const 4) (i32.add (get_local $x) (i32.mul (get_local $y) (get_local $imgWidth)))))
     (block (loop
       (br_if 1 (i32.eq (get_local $h) (i32.const 0)))
