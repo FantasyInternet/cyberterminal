@@ -40,4 +40,10 @@ export default interface Sys {
    */
   createMachine(): MachineWorker
 
+  /**
+   * Read a file.
+   * @param filename Name of file to read
+   * @param options Options
+   */
+  read(filename: string, options: any): Promise<any>
 }

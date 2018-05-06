@@ -16,12 +16,14 @@ Terminal app
 
 ### Properties
 
-* [machineWorker](_script__lib_cyberterminal_.cyberterminal.md#machineworker)
+* [machineWorkers](_script__lib_cyberterminal_.cyberterminal.md#machineworkers)
 * [sys](_script__lib_cyberterminal_.cyberterminal.md#sys)
 
 ### Methods
 
-* [resetMachine](_script__lib_cyberterminal_.cyberterminal.md#resetmachine)
+* [addMachine](_script__lib_cyberterminal_.cyberterminal.md#addmachine)
+* [connectTo](_script__lib_cyberterminal_.cyberterminal.md#connectto)
+* [removeMachine](_script__lib_cyberterminal_.cyberterminal.md#removemachine)
 * [startTone](_script__lib_cyberterminal_.cyberterminal.md#starttone)
 * [stopTone](_script__lib_cyberterminal_.cyberterminal.md#stoptone)
 
@@ -49,11 +51,11 @@ ___
 
 ## Properties
 
-<a id="machineworker"></a>
+<a id="machineworkers"></a>
 
-### `<Optional>` machineWorker
+###  machineWorkers
 
-**● machineWorker**: *[MachineWorker](../interfaces/_script__lib_machineworker_.machineworker.md)*
+**● machineWorkers**: *[MachineWorker](../interfaces/_script__lib_machineworker_.machineworker.md)[]* =  []
 
 *Defined in [script/_lib/CyberTerminal.ts:7](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L7)*
 
@@ -70,13 +72,41 @@ ___
 
 ## Methods
 
-<a id="resetmachine"></a>
+<a id="addmachine"></a>
 
-###  resetMachine
+###  addMachine
 
-▸ **resetMachine**(): `void`
+▸ **addMachine**(): [MachineWorker](../interfaces/_script__lib_machineworker_.machineworker.md)
+
+*Defined in [script/_lib/CyberTerminal.ts:24](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L24)*
+
+**Returns:** [MachineWorker](../interfaces/_script__lib_machineworker_.machineworker.md)
+
+___
+<a id="connectto"></a>
+
+###  connectTo
+
+▸ **connectTo**(url: *`string`*): `Promise`<`void`>
 
 *Defined in [script/_lib/CyberTerminal.ts:15](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L15)*
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| url | `string` | 
+
+**Returns:** `Promise`<`void`>
+
+___
+<a id="removemachine"></a>
+
+###  removeMachine
+
+▸ **removeMachine**(): `void`
+
+*Defined in [script/_lib/CyberTerminal.ts:31](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L31)*
 
 **Returns:** `void`
 
@@ -87,7 +117,7 @@ ___
 
 ▸ **startTone**(): `void`
 
-*Defined in [script/_lib/CyberTerminal.ts:23](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L23)*
+*Defined in [script/_lib/CyberTerminal.ts:36](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L36)*
 
 **Returns:** `void`
 
@@ -98,7 +128,7 @@ ___
 
 ▸ **stopTone**(): `void`
 
-*Defined in [script/_lib/CyberTerminal.ts:26](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L26)*
+*Defined in [script/_lib/CyberTerminal.ts:39](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L39)*
 
 **Returns:** `void`
 

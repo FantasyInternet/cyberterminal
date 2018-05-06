@@ -29,6 +29,7 @@ Unified interface to system I/O
 
 * [createMachine](_script__lib_sys_.sys.md#createmachine)
 * [drawBitmap](_script__lib_sys_.sys.md#drawbitmap)
+* [read](_script__lib_sys_.sys.md#read)
 * [setDisplayMode](_script__lib_sys_.sys.md#setdisplaymode)
 
 ---
@@ -140,6 +141,26 @@ ___
 Draw current bitmap to screen.
 
 **Returns:** `void`
+
+___
+<a id="read"></a>
+
+###  read
+
+▸ **read**(filename: *`string`*, options: *`any`*): `Promise`<`any`>
+
+*Defined in [script/_lib/Sys.ts:48](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L48)*
+
+Read a file.
+
+**Parameters:**
+
+| Param | Type | Description |
+| ------ | ------ | ------ |
+| filename | `string` |  Name of file to read |
+| options | `any` |  Options |
+
+**Returns:** `Promise`<`any`>
 
 ___
 <a id="setdisplaymode"></a>

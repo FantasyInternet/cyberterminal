@@ -4,20 +4,33 @@ import Sys from "./Sys"
  * Terminal app
  */
 export default class CyberTerminal {
-  machineWorker?: MachineWorker
+  machineWorkers: MachineWorker[] = []
 
   constructor(public sys: Sys) {
     this.sys.mouseInput.addEventListener(this._onMouseInput.bind(this))
     this.sys.gameInput.addEventListener(this._onGameInput.bind(this))
-    this.resetMachine()
+    this.connectTo(location.toString())
   }
 
-  resetMachine() {
-    if (this.machineWorker) {
-      this.machineWorker.terminate()
-    }
-    this.machineWorker = this.sys.createMachine()
-    this.machineWorker.onMessage(this._onMessage.bind(this))
+  async connectTo(url: string) {
+    let machine = this.addMachine()
+    machine.send({
+      cmd: "boot",
+      wasm: await this._findBoot(url),
+      url: url
+    })
+  }
+
+  addMachine() {
+    let machine = this.sys.createMachine()
+    this.machineWorkers.push(machine)
+    machine.onMessage(this._onMessage.bind(this))
+    return machine
+  }
+
+  removeMachine() {
+    let machine = this.machineWorkers.pop()
+    if (machine) machine.terminate()
   }
 
   startTone() {
@@ -89,15 +102,30 @@ export default class CyberTerminal {
       cmd: "mouseInput",
       state: state
     }
-    if (!this.machineWorker) return
-    this.machineWorker.send(msg)
+    if (!this.machineWorkers.length) return
+    this.machineWorkers[this.machineWorkers.length - 1].send(msg)
   }
   private _onGameInput(state: any) {
     let msg = {
       cmd: "gameInput",
       state: state
     }
-    if (!this.machineWorker) return
-    this.machineWorker.send(msg)
+    if (!this.machineWorkers.length) return
+    this.machineWorkers[this.machineWorkers.length - 1].send(msg)
+  }
+
+  private async _findBoot(url: string) {
+    let parts = url.split("/")
+    let candidate = parts.shift() + "/" + parts.shift() + "/"
+    let wasm: ArrayBuffer | null = null
+    while (parts.length && !wasm) {
+      console.log(candidate += parts.shift() + "/")
+      try {
+        wasm = await this.sys.read(candidate + "boot.wasm", { type: "binary" })
+      } catch (error) {
+        wasm = null
+      }
+    }
+    return wasm
   }
 }

@@ -4,6 +4,8 @@ import Sys from "./Sys"
 import ChipSound from "./ChipSound"
 import MouseInput from "./MouseInput"
 
+let scriptSrc: string
+
 /**
  * Sys implementation for web browsers.
  * See [Sys](../interfaces/__lib_sys_.sys.md) for documentation
@@ -19,7 +21,7 @@ export default class WebSys implements Sys {
 
   constructor() {
     let scripts = document.querySelectorAll("script")
-    this._scriptSrc = (<HTMLScriptElement>scripts[scripts.length - 1]).src
+    scriptSrc = (<HTMLScriptElement>scripts[scripts.length - 1]).src
     this._initContainer()
   }
 
@@ -63,12 +65,13 @@ export default class WebSys implements Sys {
   }
 
   createMachine() {
-    return new WebMachineWorker(this._scriptSrc)
+    return new WebMachineWorker()
   }
 
   async read(filename: string, options: any = {}) {
     //@ts-ignore
     let res = await fetch(filename)
+    if (!res.ok) throw "read error"
     switch (options.type) {
       case "binary":
         return res.arrayBuffer()
@@ -100,7 +103,6 @@ export default class WebSys implements Sys {
 
 
   /** _privates */
-  private _scriptSrc: string = "./cyberterminal.js"
   private _container: HTMLElement = <HTMLElement>document.querySelector("fantasy-terminal")
   private _displayMode: string = ""
   private _displayWidth: number = 0
@@ -172,8 +174,8 @@ export default class WebSys implements Sys {
 class WebMachineWorker implements MachineWorker {
   worker: Worker
 
-  constructor(src: string) {
-    this.worker = new Worker(src)
+  constructor() {
+    this.worker = new Worker(scriptSrc)
   }
 
   send(msg: any, transferables?: any[] | undefined) {

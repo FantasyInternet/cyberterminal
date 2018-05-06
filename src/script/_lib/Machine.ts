@@ -10,10 +10,10 @@ export default class Machine {
 
   constructor(public url: string) {
     this._initCom()
-    this._pushString("./script/pong.wasm")
+    /*this._pushString("./script/pong.wasm")
     this.read(() => {
       this.run()
-    })
+    })*/
   }
 
   /* ROM API  */
@@ -215,6 +215,11 @@ export default class Machine {
   private _onMessage(e: MessageEvent) {
     //console.log("main:", e)
     switch (e.data.cmd) {
+      case "boot":
+        this._pushArrayBuffer(e.data.wasm)
+        this.run()
+        break
+
       case "imagedata":
         this._transferBuffer = e.data.buffer
         let cb
