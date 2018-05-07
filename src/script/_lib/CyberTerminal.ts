@@ -14,11 +14,16 @@ export default class CyberTerminal {
 
   async connectTo(url: string) {
     let machine = this.addMachine()
-    machine.send({
-      cmd: "boot",
-      wasm: await this._findBoot(url),
-      url: url
-    })
+    let wasm = await this._findBoot(url)
+    if (wasm) {
+      machine.send({
+        cmd: "boot",
+        wasm: wasm,
+        url: url
+      })
+    } else {
+      location.assign(url)
+    }
   }
 
   addMachine() {

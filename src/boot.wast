@@ -17,6 +17,7 @@
   (import "api" "startTone" (func $startTone (param i32) (param i32) ))
   (import "api" "stopTone" (func $stopTone (param i32) ))
   (import "api" "readImage" (func $readImage (param i32) (result i32)))
+  (import "api" "connectTo" (func $connectTo))
 
   (table $table 8 anyfunc)
     (export "table" (table $table))
@@ -27,6 +28,7 @@
     (data (i32.const 40) "./images/sleepyhead.png")
     (data (i32.const 80) "./images/pointer.png")
     (data (i32.const 120) "./images/font.png")
+    (data (i32.const 160) "http://codeartistic.ninja")
 
   ;; Memory management
   (global $partIndexOffset (mut i32) (i32.const 0))
@@ -165,6 +167,8 @@
     (set_global $pointerReq    (call $readImage (call $pushFromMemory (i32.const  80) (i32.const 20)) (i32.const 1)))
     (set_global $font          (call $createImg (i32.const 0) (i32.const 0)))
     (set_global $fontReq       (call $readImage (call $pushFromMemory (i32.const 120) (i32.const 17)) (i32.const 1)))
+    (set_global $codeartistic  (call $createPart (i32.const 25)))
+    (call $copyMem (i32.const 160) (call $getPartOffset (get_global $codeartistic)) (call $getPartLength (get_global $codeartistic)))
     (set_global $display (call $createImg (i32.const 320) (i32.const 200)))
     (call $setDisplayMode (call $getImgWidth (get_global $display)) (call $getImgHeight (get_global $display)))
 
@@ -175,6 +179,7 @@
   )
   (export "setup" (func $setup))
 
+  (global $codeartistic (mut i32) (i32.const 0))
   (global $sleepyheadReq (mut i32) (i32.const 0))
   (global $sleepyhead    (mut i32) (i32.const 0))
   (global $pointerReq (mut i32) (i32.const 0))
@@ -268,6 +273,7 @@
     ;; )(else
     (set_global $leftV (i32.trunc_s/f32 (call $getGameAxisY)))
     (if (call $getGameButtonY) (set_global $left (get_global $right)))
+    (if (call $getGameButtonB) (call $connectTo (call $pushFromMemory (call $getPartOffset (get_global $codeartistic)) (call $getPartLength (get_global $codeartistic)))))
     (set_global $rightV (i32.const 0))
     (if (i32.ge_s (get_global $ballX) (i32.const 160)) (then
       (if (i32.lt_s (get_global $ballY) (get_global $right)) (then

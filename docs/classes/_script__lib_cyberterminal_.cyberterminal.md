@@ -78,7 +78,7 @@ ___
 
 ▸ **addMachine**(): [MachineWorker](../interfaces/_script__lib_machineworker_.machineworker.md)
 
-*Defined in [script/_lib/CyberTerminal.ts:24](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L24)*
+*Defined in [script/_lib/CyberTerminal.ts:29](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L29)*
 
 **Returns:** [MachineWorker](../interfaces/_script__lib_machineworker_.machineworker.md)
 
@@ -106,7 +106,7 @@ ___
 
 ▸ **removeMachine**(): `void`
 
-*Defined in [script/_lib/CyberTerminal.ts:31](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L31)*
+*Defined in [script/_lib/CyberTerminal.ts:36](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L36)*
 
 **Returns:** `void`
 
@@ -117,7 +117,7 @@ ___
 
 ▸ **startTone**(): `void`
 
-*Defined in [script/_lib/CyberTerminal.ts:36](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L36)*
+*Defined in [script/_lib/CyberTerminal.ts:41](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L41)*
 
 **Returns:** `void`
 
@@ -128,7 +128,7 @@ ___
 
 ▸ **stopTone**(): `void`
 
-*Defined in [script/_lib/CyberTerminal.ts:39](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L39)*
+*Defined in [script/_lib/CyberTerminal.ts:44](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L44)*
 
 **Returns:** `void`
 

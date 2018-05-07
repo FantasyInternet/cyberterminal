@@ -118,6 +118,10 @@ export default class Machine {
     return id
   }
 
+  connectTo() {
+    let url = (new URL(this._popString(), this._baseUrl)).toString()
+    this._sysRequest("connectTo", url)
+  }
   getBaseUrl() {
     this._pushString(this._baseUrl)
     return this._baseUrl.length
