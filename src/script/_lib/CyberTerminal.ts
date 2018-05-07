@@ -13,6 +13,8 @@ export default class CyberTerminal {
   }
 
   async connectTo(url: string) {
+    if (this._connecting) return
+    this._connecting = true
     let machine = this.addMachine()
     let wasm = await this._findBoot(url)
     if (wasm) {
@@ -21,6 +23,10 @@ export default class CyberTerminal {
         wasm: wasm,
         url: url
       })
+      this._connecting = false
+    } else if (typeof process !== "undefined") {
+      alert("Could not connect to " + url)
+      this._connecting = false
     } else {
       location.assign(url)
     }
@@ -47,6 +53,7 @@ export default class CyberTerminal {
 
 
   /* _privates */
+  private _connecting: boolean = false
 
   private _onMessage(message: any, machineWorker: MachineWorker) {
     switch (message.cmd) {
