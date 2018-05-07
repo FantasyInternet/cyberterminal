@@ -78,7 +78,7 @@ ___
 
 ▸ **addMachine**(): [MachineWorker](../interfaces/_script__lib_machineworker_.machineworker.md)
 
-*Defined in [script/_lib/CyberTerminal.ts:35](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L35)*
+*Defined in [script/_lib/CyberTerminal.ts:44](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L44)*
 
 **Returns:** [MachineWorker](../interfaces/_script__lib_machineworker_.machineworker.md)
 
@@ -87,7 +87,7 @@ ___
 
 ###  connectTo
 
-▸ **connectTo**(url: *`string`*): `Promise`<`void`>
+▸ **connectTo**(url: *`string`*): `Promise`<`undefined` |`Timer`>
 
 *Defined in [script/_lib/CyberTerminal.ts:15](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L15)*
 
@@ -97,7 +97,7 @@ ___
 | ------ | ------ |
 | url | `string` | 
 
-**Returns:** `Promise`<`void`>
+**Returns:** `Promise`<`undefined` |`Timer`>
 
 ___
 <a id="removemachine"></a>
@@ -106,7 +106,7 @@ ___
 
 ▸ **removeMachine**(): `void`
 
-*Defined in [script/_lib/CyberTerminal.ts:42](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L42)*
+*Defined in [script/_lib/CyberTerminal.ts:51](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L51)*
 
 **Returns:** `void`
 
@@ -117,7 +117,7 @@ ___
 
 ▸ **startTone**(): `void`
 
-*Defined in [script/_lib/CyberTerminal.ts:47](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L47)*
+*Defined in [script/_lib/CyberTerminal.ts:56](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L56)*
 
 **Returns:** `void`
 
@@ -128,7 +128,7 @@ ___
 
 ▸ **stopTone**(): `void`
 
-*Defined in [script/_lib/CyberTerminal.ts:50](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L50)*
+*Defined in [script/_lib/CyberTerminal.ts:59](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L59)*
 
 **Returns:** `void`
 
