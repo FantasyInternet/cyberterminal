@@ -23,10 +23,14 @@ export default class CyberTerminal {
         wasm: wasm,
         url: url
       })
-      this._connecting = false
+      setTimeout(() => {
+        this._connecting = false
+      }, 1024);
     } else if (typeof process !== "undefined") {
       alert("Could not connect to " + url)
-      this._connecting = false
+      setTimeout(() => {
+        this._connecting = false
+      }, 1024);
     } else {
       location.assign(url)
     }
