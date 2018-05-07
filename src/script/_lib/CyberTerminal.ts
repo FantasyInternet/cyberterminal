@@ -13,12 +13,7 @@ export default class CyberTerminal {
   }
 
   async connectTo(url: string) {
-    if (this._connecting) {
-      clearTimeout(this._connecting)
-      return this._connecting = setTimeout(() => {
-        this._connecting = null
-      }, 1024)
-    }
+    if (this._connecting) return
     this._connecting = true
     let machine = this.addMachine()
     let wasm = await this._findBoot(url)
@@ -32,6 +27,7 @@ export default class CyberTerminal {
         this._connecting = null
       }, 1024)
     } else if (typeof process !== "undefined") {
+      this.removeMachine()
       alert("Could not connect to " + url)
       this._connecting = setTimeout(() => {
         this._connecting = null
@@ -42,6 +38,8 @@ export default class CyberTerminal {
   }
 
   addMachine() {
+    if (this.machineWorkers.length)
+      this.machineWorkers[this.machineWorkers.length - 1].send({ cmd: "suspend" })
     let machine = this.sys.createMachine()
     this.machineWorkers.push(machine)
     machine.onMessage(this._onMessage.bind(this))
@@ -51,6 +49,8 @@ export default class CyberTerminal {
   removeMachine() {
     let machine = this.machineWorkers.pop()
     if (machine) machine.terminate()
+    if (this.machineWorkers.length)
+      this.machineWorkers[this.machineWorkers.length - 1].send({ cmd: "resume" })
   }
 
   startTone() {

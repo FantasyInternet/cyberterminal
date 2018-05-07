@@ -78,7 +78,7 @@ ___
 
 ▸ **addMachine**(): [MachineWorker](../interfaces/_script__lib_machineworker_.machineworker.md)
 
-*Defined in [script/_lib/CyberTerminal.ts:44](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L44)*
+*Defined in [script/_lib/CyberTerminal.ts:40](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L40)*
 
 **Returns:** [MachineWorker](../interfaces/_script__lib_machineworker_.machineworker.md)
 
@@ -87,7 +87,7 @@ ___
 
 ###  connectTo
 
-▸ **connectTo**(url: *`string`*): `Promise`<`undefined` |`Timer`>
+▸ **connectTo**(url: *`string`*): `Promise`<`void`>
 
 *Defined in [script/_lib/CyberTerminal.ts:15](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L15)*
 
@@ -97,7 +97,7 @@ ___
 | ------ | ------ |
 | url | `string` | 
 
-**Returns:** `Promise`<`undefined` |`Timer`>
+**Returns:** `Promise`<`void`>
 
 ___
 <a id="removemachine"></a>
@@ -106,7 +106,7 @@ ___
 
 ▸ **removeMachine**(): `void`
 
-*Defined in [script/_lib/CyberTerminal.ts:51](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L51)*
+*Defined in [script/_lib/CyberTerminal.ts:49](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L49)*
 
 **Returns:** `void`
 

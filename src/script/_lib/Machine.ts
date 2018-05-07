@@ -14,6 +14,9 @@ export default class Machine {
     this.read(() => {
       this.run()
     })*/
+    setInterval(() => {
+      if (this._tickFill > 0) this._tickFill--
+    }, 256)
   }
 
   /* ROM API  */
@@ -43,6 +46,7 @@ export default class Machine {
         this._displayHeight = 0
         throw "DisplayMode not supported!"
     }
+    this.commitDisplay(() => { })
     return
   }
 
@@ -179,20 +183,9 @@ export default class Machine {
     this._processes.push(await WebAssembly.instantiate(wasm, { api }))
     let process = this._processes[this._activePID]
     process.instance.exports.setup()
-    let nextFrame = 0
-    let frameInterval = 1000 / 60
-    while (true) {
-      this.commitDisplay(() => { })
-      let t = await this._sysRequest("waitForVsync")
-      if (t > nextFrame + 1024) nextFrame = t
-      if (t > nextFrame) {
-        while (t > nextFrame) {
-          process.instance.exports.update(nextFrame)
-          nextFrame += frameInterval
-        }
-        process.instance.exports.draw(t)
-      }
-    }
+    this._nextFrame = performance.now()
+    this._nextUpdate = performance.now()
+    this._tick()
   }
 
   getMouseX() { return this._mouseInputState.x }
@@ -209,6 +202,12 @@ export default class Machine {
   stopTone() { this._sysRequest("stopTone", ...arguments) }
 
   /* _privates */
+  private _active: boolean = false
+  private _nextFrame: number = performance.now()
+  private _frameInterval: number = 1000 / 60
+  private _nextUpdate: number = performance.now()
+  private _updateInterval: number = 1000 / 60
+  private _tickFill: number = 1
   private _displayMode: string = ""
   private _displayWidth: number = 0
   private _displayHeight: number = 0
@@ -232,6 +231,32 @@ export default class Machine {
     buttons: { a: false, b: false, x: false, y: false }
   }
 
+  private _tick() {
+    if (!this._active) return
+    let t = performance.now()
+    let process = this._processes[this._activePID]
+    setTimeout(this._tick.bind(this), this._nextUpdate - t)
+    if (this._transferBuffer) {
+      process.instance.exports.draw(t)
+      this.commitDisplay(() => { })
+    }
+    if (t >= this._nextUpdate) {
+      this._tickFill++
+      if (!this._updateInterval) this._updateInterval = 1
+      while (t >= this._nextUpdate) {
+        process.instance.exports.update(this._nextUpdate)
+        this._nextUpdate += this._updateInterval
+      }
+    }
+    while (performance.now() < this._nextFrame) {
+      if (performance.now() >= this._nextUpdate) {
+        process.instance.exports.update(this._nextUpdate)
+        this._nextUpdate += this._updateInterval
+      }
+    }
+    this._nextFrame += this._frameInterval
+  }
+
   private _initCom() {
     self.addEventListener("message", this._onMessage.bind(this))
   }
@@ -240,10 +265,32 @@ export default class Machine {
     //console.log("main:", e)
     switch (e.data.cmd) {
       case "boot":
+        this._active = true
         this._pushString(e.data.url)
         this.setBaseUrl()
         this._pushArrayBuffer(e.data.wasm)
         this.run()
+        break
+
+      case "suspend":
+        this._active = false
+        this._mouseInputState = {
+          x: 0, y: 0, pressed: false
+        }
+        this._gameInputState = {
+          axis: { x: 0, y: 0 },
+          buttons: { a: false, b: false, x: false, y: false }
+        }
+        break
+
+      case "resume":
+        if (this._displayBitmap) {
+          this.setDisplayMode(this._displayBitmap.width, this._displayBitmap.height, this._displayWidth, this._displayHeight)
+        }
+        this._nextFrame = performance.now()
+        this._nextUpdate = performance.now()
+        this._active = true
+        this._tick()
         break
 
       case "imagedata":
