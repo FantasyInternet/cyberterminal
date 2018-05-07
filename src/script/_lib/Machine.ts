@@ -124,8 +124,15 @@ export default class Machine {
   }
   setBaseUrl() {
     let relurl = this._popString()
-    let url = new URL(relurl, this._baseUrl)
-    this._baseUrl = url.toString()
+    if (this._originUrl) {
+      let url = new URL(relurl, this._baseUrl)
+      if (url.toString().substr(0, this._originUrl.length) !== this._originUrl) throw "cross origin not allowed!"
+      this._baseUrl = url.toString()
+    } else {
+      let url = new URL(relurl)
+      this._baseUrl = url.toString()
+      this._originUrl = this._baseUrl.substr(0, this._baseUrl.indexOf(url.pathname) + 1)
+    }
   }
   read(callback: number | Function) {
     if (typeof callback === "number") {
@@ -134,8 +141,9 @@ export default class Machine {
       callback = process.instance.exports.table.get(callback)
     }
     let id = this._asyncCalls++
-    let filename = new URL(this._popString(), this._baseUrl)
-    this._sysRequest("read", filename.toString(), { type: "binary" }).then((data: ArrayBuffer) => {
+    let filename = (new URL(this._popString(), this._baseUrl)).toString()
+    if (filename.substr(0, this._originUrl.length) !== this._originUrl) throw "cross origin not allowed!"
+    this._sysRequest("read", filename, { type: "binary" }).then((data: ArrayBuffer) => {
       this._pushArrayBuffer(data)
       //@ts-ignore
       callback(data.byteLength, id)
@@ -149,8 +157,9 @@ export default class Machine {
       callback = process.instance.exports.table.get(callback)
     }
     let id = this._asyncCalls++
-    let filename = new URL(this._popString(), this._baseUrl)
-    this._sysRequest("read", filename.toString(), { type: "image" }).then((data: ImageData) => {
+    let filename = (new URL(this._popString(), this._baseUrl)).toString()
+    if (filename.substr(0, this._originUrl.length) !== this._originUrl) throw "cross origin not allowed!"
+    this._sysRequest("read", filename, { type: "image" }).then((data: ImageData) => {
       this._pushArrayBuffer(data.data.buffer)
       //@ts-ignore
       callback(data.width, data.height, id)
@@ -204,7 +213,8 @@ export default class Machine {
   private _lastCommit: number = performance.now()
   private _pendingCommits: Function[] = []
   private _pendingRequests: any[] = []
-  private _baseUrl: string = location.toString()
+  private _baseUrl: string = ""
+  private _originUrl: string = ""
   private _processes: any[] = []
   private _activePID: number = -1
   //@ts-ignore

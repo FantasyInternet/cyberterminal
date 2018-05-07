@@ -10,7 +10,10 @@ export default class ElectronSys extends WebSys {
 
   read(filename: string, options: any = {}) {
     let url = new URL(filename)
-    filename = url.pathname
+    if (url.protocol !== "file:") {
+      return super.read(filename, options)
+    }
+    filename = decodeURI(url.pathname)
     if (process.platform === "win32") filename = filename.substr(1)
     return new Promise((resolve, reject) => {
       //@ts-ignore
