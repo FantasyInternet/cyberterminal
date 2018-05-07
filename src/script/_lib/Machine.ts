@@ -118,6 +118,15 @@ export default class Machine {
     return id
   }
 
+  getBaseUrl() {
+    this._pushString(this._baseUrl)
+    return this._baseUrl.length
+  }
+  setBaseUrl() {
+    let relurl = this._popString()
+    let url = new URL(relurl, this._baseUrl)
+    this._baseUrl = url.toString()
+  }
   read(callback: number | Function) {
     if (typeof callback === "number") {
       let process = this._processes[this._activePID]
@@ -125,8 +134,8 @@ export default class Machine {
       callback = process.instance.exports.table.get(callback)
     }
     let id = this._asyncCalls++
-    let filename = this._popString()
-    this._sysRequest("read", filename, { type: "binary" }).then((data: ArrayBuffer) => {
+    let filename = new URL(this._popString(), this._baseUrl)
+    this._sysRequest("read", filename.toString(), { type: "binary" }).then((data: ArrayBuffer) => {
       this._pushArrayBuffer(data)
       //@ts-ignore
       callback(data.byteLength, id)
@@ -140,8 +149,8 @@ export default class Machine {
       callback = process.instance.exports.table.get(callback)
     }
     let id = this._asyncCalls++
-    let filename = this._popString()
-    this._sysRequest("read", filename, { type: "image" }).then((data: ImageData) => {
+    let filename = new URL(this._popString(), this._baseUrl)
+    this._sysRequest("read", filename.toString(), { type: "image" }).then((data: ImageData) => {
       this._pushArrayBuffer(data.data.buffer)
       //@ts-ignore
       callback(data.width, data.height, id)
@@ -195,6 +204,7 @@ export default class Machine {
   private _lastCommit: number = performance.now()
   private _pendingCommits: Function[] = []
   private _pendingRequests: any[] = []
+  private _baseUrl: string = location.toString()
   private _processes: any[] = []
   private _activePID: number = -1
   //@ts-ignore
@@ -216,6 +226,8 @@ export default class Machine {
     //console.log("main:", e)
     switch (e.data.cmd) {
       case "boot":
+        this._pushString(e.data.url)
+        this.setBaseUrl()
         this._pushArrayBuffer(e.data.wasm)
         this.run()
         break

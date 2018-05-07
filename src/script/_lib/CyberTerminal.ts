@@ -119,7 +119,7 @@ export default class CyberTerminal {
     let candidate = parts.shift() + "/" + parts.shift() + "/"
     let wasm: ArrayBuffer | null = null
     while (parts.length && !wasm) {
-      console.log(candidate += parts.shift() + "/")
+      candidate += parts.shift() + "/"
       try {
         wasm = await this.sys.read(candidate + "boot.wasm", { type: "binary" })
       } catch (error) {

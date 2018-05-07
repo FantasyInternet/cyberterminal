@@ -193,7 +193,7 @@ ___
 
 ###  read
 
-▸ **read**(filename: *`string`*, options?: *`any`*): `Promise`<`any`>
+▸ **read**(filename: *`string`*, options?: *`any`*): `Promise`<`Object`>
 
 *Implementation of [Sys](../interfaces/_script__lib_sys_.sys.md).[read](../interfaces/_script__lib_sys_.sys.md#read)*
 
@@ -208,7 +208,7 @@ ___
 | filename | `string` | - | 
 | `Default value` options | `any` |  {} | 
 
-**Returns:** `Promise`<`any`>
+**Returns:** `Promise`<`Object`>
 
 ___
 <a id="setdisplaymode"></a>

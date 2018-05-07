@@ -71,7 +71,7 @@ export default class WebSys implements Sys {
   async read(filename: string, options: any = {}) {
     //@ts-ignore
     let res = await fetch(filename)
-    if (!res.ok) throw "read error"
+    if (!res.ok) throw "read error!"
     switch (options.type) {
       case "binary":
         return res.arrayBuffer()
