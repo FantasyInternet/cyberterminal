@@ -9,6 +9,7 @@ export default class GameInput {
 
   constructor() {
     document.addEventListener("keydown", (e: KeyboardEvent) => {
+      if (document.querySelector("input:focus, textarea:focus")) return
       let ctrl = this._keyMap[e.code]
       switch (ctrl) {
         case "left":

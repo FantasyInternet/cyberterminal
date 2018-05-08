@@ -48,7 +48,7 @@ ___
 
 ▸ **_getKeyMap**(): `object`
 
-*Defined in [script/_lib/GameInput.ts:132](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/GameInput.ts#L132)*
+*Defined in [script/_lib/GameInput.ts:133](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/GameInput.ts#L133)*
 
 **Returns:** `object`
 
@@ -59,7 +59,7 @@ ___
 
 ▸ **addEventListener**(fn: *`Function`*): `void`
 
-*Defined in [script/_lib/GameInput.ts:103](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/GameInput.ts#L103)*
+*Defined in [script/_lib/GameInput.ts:104](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/GameInput.ts#L104)*
 
 **Parameters:**
 
@@ -76,7 +76,7 @@ ___
 
 ▸ **removeEventListener**(fn: *`Function`*): `void`
 
-*Defined in [script/_lib/GameInput.ts:110](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/GameInput.ts#L110)*
+*Defined in [script/_lib/GameInput.ts:111](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/GameInput.ts#L111)*
 
 **Parameters:**
 

@@ -24,6 +24,7 @@ Unified interface to system I/O
 * [displayWidth](_script__lib_sys_.sys.md#displaywidth)
 * [gameInput](_script__lib_sys_.sys.md#gameinput)
 * [mouseInput](_script__lib_sys_.sys.md#mouseinput)
+* [textInput](_script__lib_sys_.sys.md#textinput)
 
 ### Methods
 
@@ -42,7 +43,7 @@ Unified interface to system I/O
 
 **● chipSound**: *[ChipSound](../classes/_script__lib_chipsound_.chipsound.md)*
 
-*Defined in [script/_lib/Sys.ts:18](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L18)*
+*Defined in [script/_lib/Sys.ts:19](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L19)*
 
 Tone generator.
 
@@ -53,7 +54,7 @@ ___
 
 **● displayBitmap**: *`ImageData`*
 
-*Defined in [script/_lib/Sys.ts:16](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L16)*
+*Defined in [script/_lib/Sys.ts:17](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L17)*
 
 The current display bitmap.
 
@@ -64,7 +65,7 @@ ___
 
 **● displayHeight**: *`number`*
 
-*Defined in [script/_lib/Sys.ts:14](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L14)*
+*Defined in [script/_lib/Sys.ts:15](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L15)*
 
 The current height of the display in characters or pixels.
 
@@ -75,7 +76,7 @@ ___
 
 **● displayMode**: *`string`*
 
-*Defined in [script/_lib/Sys.ts:10](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L10)*
+*Defined in [script/_lib/Sys.ts:11](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L11)*
 
 Name of current display mode.
 
@@ -86,7 +87,7 @@ ___
 
 **● displayWidth**: *`number`*
 
-*Defined in [script/_lib/Sys.ts:12](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L12)*
+*Defined in [script/_lib/Sys.ts:13](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L13)*
 
 The current width of the display in characters or pixels.
 
@@ -97,7 +98,7 @@ ___
 
 **● gameInput**: *[GameInput](../classes/_script__lib_gameinput_.gameinput.md)*
 
-*Defined in [script/_lib/Sys.ts:22](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L22)*
+*Defined in [script/_lib/Sys.ts:25](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L25)*
 
 Game input state.
 
@@ -108,9 +109,20 @@ ___
 
 **● mouseInput**: *[MouseInput](../classes/_script__lib_mouseinput_.mouseinput.md)*
 
-*Defined in [script/_lib/Sys.ts:20](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L20)*
+*Defined in [script/_lib/Sys.ts:23](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L23)*
 
 Mouse input state.
+
+___
+<a id="textinput"></a>
+
+###  textInput
+
+**● textInput**: *[TextInput](../classes/_script__lib_textinput_.textinput.md)*
+
+*Defined in [script/_lib/Sys.ts:21](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L21)*
+
+Text input state.
 
 ___
 
@@ -122,7 +134,7 @@ ___
 
 ▸ **createMachine**(): [MachineWorker](_script__lib_machineworker_.machineworker.md)
 
-*Defined in [script/_lib/Sys.ts:41](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L41)*
+*Defined in [script/_lib/Sys.ts:44](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L44)*
 
 Create a machine.
 
@@ -136,7 +148,7 @@ ___
 
 ▸ **drawBitmap**(): `void`
 
-*Defined in [script/_lib/Sys.ts:35](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L35)*
+*Defined in [script/_lib/Sys.ts:38](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L38)*
 
 Draw current bitmap to screen.
 
@@ -149,7 +161,7 @@ ___
 
 ▸ **read**(filename: *`string`*, options: *`any`*): `Promise`<`any`>
 
-*Defined in [script/_lib/Sys.ts:48](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L48)*
+*Defined in [script/_lib/Sys.ts:51](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L51)*
 
 Read a file.
 
@@ -169,7 +181,7 @@ ___
 
 ▸ **setDisplayMode**(mode: *"text" |"indexed" |"rgb"*, width: *`number`*, height: *`number`*): `void`
 
-*Defined in [script/_lib/Sys.ts:30](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L30)*
+*Defined in [script/_lib/Sys.ts:33](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L33)*
 
 Switch display mode.
 

@@ -53,6 +53,8 @@ export default class MouseInput {
     this._sendState()
   }
   private _mouseDown(e: PointerEvent) {
+    this.state.x = e.offsetX / this.scale * devicePixelRatio
+    this.state.y = e.offsetY / this.scale * devicePixelRatio
     this.state.pressed = true
     this._sendState()
   }

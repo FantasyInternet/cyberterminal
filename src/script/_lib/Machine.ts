@@ -181,7 +181,10 @@ export default class Machine {
     this._tick()
   }
 
-  getMouseX() { return this._mouseInputState.x }
+  getInputText() { return this._pushString(this._textInputState.text) }
+  getInputPosition() { return this._textInputState.pos }
+  getInputSelected() { return this._textInputState.len }
+  getMouseX() { return this._mouseInputState.x; }
   getMouseY() { return this._mouseInputState.y }
   getMousePressed() { return this._mouseInputState.pressed }
   getGameAxisX() { return this._gameInputState.axis.x }
@@ -215,6 +218,9 @@ export default class Machine {
   //@ts-ignore
   private _bufferStack: ArrayBuffer[] = []
   private _asyncCalls: number = 0
+  private _textInputState: any = {
+    text: "", pos: 0, len: 0
+  }
   private _mouseInputState: any = {
     x: 0, y: 0, pressed: false
   }
@@ -302,6 +308,9 @@ export default class Machine {
         }
         break
 
+      case "textInput":
+        this._textInputState = e.data.state
+        break
       case "mouseInput":
         this._mouseInputState = e.data.state
         break

@@ -5,6 +5,9 @@
   (import "api" "wait" (func $wait (param i32) (param i32)))
   (import "api" "setDisplayMode" (func $setDisplayMode (param i32) (param i32) ))
   (import "api" "displayMemory" (func $displayMemory (param i32) (param i32) ))
+  (import "api" "getInputText" (func $getInputText (result i32) ))
+  (import "api" "getInputPosition" (func $getInputPosition (result i32) ))
+  (import "api" "getInputSelected" (func $getInputSelected (result i32) ))
   (import "api" "getMouseX" (func $getMouseX (result i32) ))
   (import "api" "getMouseY" (func $getMouseY (result i32) ))
   (import "api" "getMousePressed" (func $getMousePressed (result i32) ))
@@ -176,6 +179,7 @@
     (set_global $ballColor (call $rgb (i32.const 255) (i32.const 255) (i32.const 255)))
     (set_global $leftColor (call $rgb (i32.const 0) (i32.const 0) (i32.const 255)))
     (set_global $rightColor (call $rgb (i32.const 255) (i32.const 0) (i32.const 0)))
+    (set_global $inputText (call $createPart (i32.const 1)))
   )
   (export "setup" (func $setup))
 
@@ -215,6 +219,7 @@
   (global $bgColor (mut i32) (i32.const 0))
   (global $ballColor (mut i32) (i32.const 0))
   (global $beep (mut i32) (i32.const 1))
+  (global $inputText (mut i32) (i32.const 1))
   (func $update (param $t f64)
     (set_global $beep (i32.sub (get_global $beep) (i32.const 1)))
     (if (i32.eq (get_global $beep) (i32.const 0)) (then
@@ -308,6 +313,13 @@
     (call $print (get_global $display) (i32.const 108)) ;; l
     (call $print (get_global $display) (i32.const 100)) ;; d
     (call $print (get_global $display) (i32.const 33))  ;; !
+
+    (set_global $txtX (i32.const 0))
+    (set_global $txtY (i32.const 128))
+    (call $resizePart (get_global $inputText) (call $getInputText))
+    (call $popToMemory (call $getPartOffset (get_global $inputText)))
+    (call $printStr (get_global $display) (get_global $inputText))
+
     (call $copyImg (get_global $pointer) (i32.const 0) (i32.const 0) (get_global $display) (call $getMouseX) (call $getMouseY) (call $getImgWidth (get_global $pointer)) (call $getImgHeight (get_global $pointer)))
     (call $displayMemory (i32.add (call $getPartOffset (get_global $display)) (i32.const 8)) (i32.sub (call $getPartLength (get_global $display)) (i32.const 8)))
   )
@@ -458,6 +470,25 @@
   (func $print (param $img i32) (param $char i32)
     (call $copyImg (get_global $font) (i32.const 0) (i32.mul (get_local $char) (i32.const 8)) (get_local $img) (get_global $txtX) (get_global $txtY) (i32.const 8) (i32.const 8))
     (set_global $txtX (i32.add (get_global $txtX) (i32.const 8)))
+    (if (i32.eq (get_local $char) (i32.const 10)) (then
+      (set_global $txtX (i32.const 0))
+      (set_global $txtY (i32.add (get_global $txtY) (i32.const 8)))
+    ))
+  )
+
+  (func $printStr (param $img i32) (param $str i32)
+    (local $i i32)
+    (local $len i32)
+    (set_local $i (call $getPartOffset (get_local $str)))
+    (set_local $len (call $getPartLength (get_local $str)))
+    (if (i32.gt_u (get_local $len) (i32.const 0)) (then
+      (loop
+        (call $print (get_local $img) (i32.load8_u (get_local $i)))
+        (set_local $i (i32.add (get_local $i) (i32.const 1)))
+        (set_local $len (i32.sub (get_local $len) (i32.const 1)))
+        (br_if 0 (i32.gt_u (get_local $len) (i32.const 0)))
+      )
+    ))
   )
 
 )

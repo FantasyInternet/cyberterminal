@@ -3,6 +3,7 @@ import GameInput from "./GameInput"
 import Sys from "./Sys"
 import ChipSound from "./ChipSound"
 import MouseInput from "./MouseInput"
+import TextInput from "./TextInput"
 
 let scriptSrc: string
 
@@ -11,9 +12,10 @@ let scriptSrc: string
  * See [Sys](../interfaces/__lib_sys_.sys.md) for documentation
  */
 export default class WebSys implements Sys {
-  chipSound: ChipSound = new ChipSound()
-  mouseInput: MouseInput = new MouseInput()
-  gameInput: GameInput = new GameInput()
+  chipSound: ChipSound
+  textInput: TextInput
+  mouseInput: MouseInput
+  gameInput: GameInput
   get displayMode() { return this._displayMode }
   get displayWidth() { return this._displayWidth }
   get displayHeight() { return this._displayHeight }
@@ -23,6 +25,10 @@ export default class WebSys implements Sys {
     let scripts = document.querySelectorAll("script")
     scriptSrc = (<HTMLScriptElement>scripts[scripts.length - 1]).src
     this._initContainer()
+    this.chipSound = new ChipSound()
+    this.textInput = new TextInput(<HTMLInputElement>this._container.querySelector(".input .text"))
+    this.mouseInput = new MouseInput()
+    this.gameInput = new GameInput()
   }
 
   setDisplayMode(mode: "text" | "indexed" | "rgb", width: number, height: number, displayWidth = width, displayHeight = height) {
@@ -123,7 +129,7 @@ export default class WebSys implements Sys {
     let style = document.createElement("style")
     style.textContent = css
       ; (<HTMLElement>document.querySelector("head")).insertBefore(style, document.querySelector("head *"))
-    this._container.innerHTML = '<div class="display"></div><div class="input"></div>'
+    this._container.innerHTML = '<div class="display"></div><div class="input"><div class="text"></div><div class="mouse"></div><div class="game"></div></div>'
     this._displayContainer = <HTMLElement>this._container.querySelector(".display")
     addEventListener("resize", () => { this._resizeCanvas(false) })
   }
