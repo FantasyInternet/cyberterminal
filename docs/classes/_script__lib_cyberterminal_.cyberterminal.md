@@ -24,8 +24,6 @@ Terminal app
 * [addMachine](_script__lib_cyberterminal_.cyberterminal.md#addmachine)
 * [connectTo](_script__lib_cyberterminal_.cyberterminal.md#connectto)
 * [removeMachine](_script__lib_cyberterminal_.cyberterminal.md#removemachine)
-* [startTone](_script__lib_cyberterminal_.cyberterminal.md#starttone)
-* [stopTone](_script__lib_cyberterminal_.cyberterminal.md#stoptone)
 
 ---
 
@@ -107,28 +105,6 @@ ___
 ▸ **removeMachine**(): `void`
 
 *Defined in [script/_lib/CyberTerminal.ts:45](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L45)*
-
-**Returns:** `void`
-
-___
-<a id="starttone"></a>
-
-###  startTone
-
-▸ **startTone**(): `void`
-
-*Defined in [script/_lib/CyberTerminal.ts:52](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L52)*
-
-**Returns:** `void`
-
-___
-<a id="stoptone"></a>
-
-###  stopTone
-
-▸ **stopTone**(): `void`
-
-*Defined in [script/_lib/CyberTerminal.ts:55](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L55)*
 
 **Returns:** `void`
 

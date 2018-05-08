@@ -49,13 +49,6 @@ export default class CyberTerminal {
       this.machineWorkers[this.machineWorkers.length - 1].send({ cmd: "resume" })
   }
 
-  startTone() {
-    this.sys.chipSound.startTone.apply(this.sys.chipSound, arguments)
-  }
-  stopTone() {
-    this.sys.chipSound.stopTone.apply(this.sys.chipSound, arguments)
-  }
-
 
   /* _privates */
   private _connecting: any

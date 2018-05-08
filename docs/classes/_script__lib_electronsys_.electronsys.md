@@ -39,6 +39,8 @@ Sys implementation for electron app. See [Sys](../interfaces/__lib_sys_.sys.md) 
 * [drawBitmap](_script__lib_electronsys_.electronsys.md#drawbitmap)
 * [read](_script__lib_electronsys_.electronsys.md#read)
 * [setDisplayMode](_script__lib_electronsys_.electronsys.md#setdisplaymode)
+* [startTone](_script__lib_electronsys_.electronsys.md#starttone)
+* [stopTone](_script__lib_electronsys_.electronsys.md#stoptone)
 * [waitForVsync](_script__lib_electronsys_.electronsys.md#waitforvsync)
 
 ---
@@ -233,6 +235,32 @@ ___
 | height | `number` | - | 
 | `Default value` displayWidth | `number` |  width | 
 | `Default value` displayHeight | `number` |  height | 
+
+**Returns:** `void`
+
+___
+<a id="starttone"></a>
+
+###  startTone
+
+▸ **startTone**(): `void`
+
+*Inherited from [WebSys](_script__lib_websys_.websys.md).[startTone](_script__lib_websys_.websys.md#starttone)*
+
+*Defined in [script/_lib/WebSys.ts:103](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L103)*
+
+**Returns:** `void`
+
+___
+<a id="stoptone"></a>
+
+###  stopTone
+
+▸ **stopTone**(): `void`
+
+*Inherited from [WebSys](_script__lib_websys_.websys.md).[stopTone](_script__lib_websys_.websys.md#stoptone)*
+
+*Defined in [script/_lib/WebSys.ts:106](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L106)*
 
 **Returns:** `void`
 

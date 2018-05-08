@@ -39,6 +39,8 @@ Sys implementation for web browsers. See [Sys](../interfaces/__lib_sys_.sys.md) 
 * [drawBitmap](_script__lib_websys_.websys.md#drawbitmap)
 * [read](_script__lib_websys_.websys.md#read)
 * [setDisplayMode](_script__lib_websys_.websys.md#setdisplaymode)
+* [startTone](_script__lib_websys_.websys.md#starttone)
+* [stopTone](_script__lib_websys_.websys.md#stoptone)
 * [waitForVsync](_script__lib_websys_.websys.md#waitforvsync)
 
 ---
@@ -209,6 +211,28 @@ ___
 | height | `number` | - | 
 | `Default value` displayWidth | `number` |  width | 
 | `Default value` displayHeight | `number` |  height | 
+
+**Returns:** `void`
+
+___
+<a id="starttone"></a>
+
+###  startTone
+
+▸ **startTone**(): `void`
+
+*Defined in [script/_lib/WebSys.ts:103](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L103)*
+
+**Returns:** `void`
+
+___
+<a id="stoptone"></a>
+
+###  stopTone
+
+▸ **stopTone**(): `void`
+
+*Defined in [script/_lib/WebSys.ts:106](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L106)*
 
 **Returns:** `void`
 
