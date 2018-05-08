@@ -16,13 +16,9 @@ export default class CyberTerminal {
     if (this._connecting) return
     this._connecting = true
     let machine = this.addMachine()
-    let wasm = await this._findBoot(url)
-    if (wasm) {
-      machine.send({
-        cmd: "boot",
-        wasm: wasm,
-        url: url
-      })
+    let msg = await this._findBoot(url)
+    if (msg.wasm) {
+      machine.send(msg)
       this._connecting = setTimeout(() => {
         this._connecting = null
       }, 1024)
@@ -147,6 +143,11 @@ export default class CyberTerminal {
         wasm = null
       }
     }
-    return wasm
+    return {
+      cmd: "boot",
+      wasm: wasm,
+      url: url,
+      origin: candidate
+    }
   }
 }

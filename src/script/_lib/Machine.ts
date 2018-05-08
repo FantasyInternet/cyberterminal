@@ -10,13 +10,6 @@ export default class Machine {
 
   constructor(public url: string) {
     this._initCom()
-    /*this._pushString("./script/pong.wasm")
-    this.read(() => {
-      this.run()
-    })*/
-    setInterval(() => {
-      if (this._tickFill > 0) this._tickFill--
-    }, 256)
   }
 
   /* ROM API  */
@@ -207,7 +200,6 @@ export default class Machine {
   private _frameInterval: number = 1000 / 60
   private _nextUpdate: number = performance.now()
   private _updateInterval: number = 1000 / 60
-  private _tickFill: number = 1
   private _displayMode: string = ""
   private _displayWidth: number = 0
   private _displayHeight: number = 0
@@ -241,7 +233,6 @@ export default class Machine {
       this.commitDisplay(() => { })
     }
     if (t >= this._nextUpdate) {
-      this._tickFill++
       if (!this._updateInterval) this._updateInterval = 1
       while (t >= this._nextUpdate) {
         process.instance.exports.update(this._nextUpdate)
@@ -268,6 +259,7 @@ export default class Machine {
         this._active = true
         this._pushString(e.data.url)
         this.setBaseUrl()
+        this._originUrl = e.data.origin
         this._pushArrayBuffer(e.data.wasm)
         this.run()
         break
