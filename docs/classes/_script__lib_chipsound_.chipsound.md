@@ -10,12 +10,30 @@ Class responsible for creating bleeps and bloops! 🎶
 
 ## Index
 
+### Constructors
+
+* [constructor](_script__lib_chipsound_.chipsound.md#constructor)
+
 ### Methods
 
 * [startTone](_script__lib_chipsound_.chipsound.md#starttone)
 * [stopTone](_script__lib_chipsound_.chipsound.md#stoptone)
 
 ---
+
+## Constructors
+
+<a id="constructor"></a>
+
+###  constructor
+
+⊕ **new ChipSound**(): [ChipSound](_script__lib_chipsound_.chipsound.md)
+
+*Defined in [script/_lib/ChipSound.ts:4](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/ChipSound.ts#L4)*
+
+**Returns:** [ChipSound](_script__lib_chipsound_.chipsound.md)
+
+___
 
 ## Methods
 
@@ -25,7 +43,7 @@ Class responsible for creating bleeps and bloops! 🎶
 
 ▸ **startTone**(channel: *`number`*, frequency: *`number`*, volume?: *`number`*, type?: *"sine" |"square" |"sawtooth" |"triangle"*): `void`
 
-*Defined in [script/_lib/ChipSound.ts:5](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/ChipSound.ts#L5)*
+*Defined in [script/_lib/ChipSound.ts:19](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/ChipSound.ts#L19)*
 
 **Parameters:**
 
@@ -49,7 +67,7 @@ ___
 
 ▸ **stopTone**(channel: *`number`*): `void`
 
-*Defined in [script/_lib/ChipSound.ts:29](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/ChipSound.ts#L29)*
+*Defined in [script/_lib/ChipSound.ts:43](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/ChipSound.ts#L43)*
 
 **Parameters:**
 

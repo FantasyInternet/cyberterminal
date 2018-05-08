@@ -2,6 +2,20 @@
  * Class responsible for creating bleeps and bloops! 🎶
  */
 export default class ChipSound {
+  constructor() {
+    if (this._ctx.state === "suspended") {
+      let cb = () => {
+        this._ctx.resume()
+        if (this._ctx.state === "running") {
+          document.body.removeEventListener("pointerdown", cb)
+          document.body.removeEventListener("keydown", cb)
+        }
+      }
+      document.body.addEventListener("pointerdown", cb)
+      document.body.addEventListener("keydown", cb)
+    }
+  }
+
   startTone(channel: number, frequency: number, volume: number = 1, type: "sine" | "square" | "sawtooth" | "triangle" = "sine") {
     let chan = this._channels[channel]
     if (!chan) {
