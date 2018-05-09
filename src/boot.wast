@@ -318,7 +318,7 @@
     (set_global $txtY (i32.const 128))
     (call $resizePart (get_global $inputText) (call $getInputText))
     (call $popToMemory (call $getPartOffset (get_global $inputText)))
-    (call $printStr (get_global $display) (get_global $inputText))
+    (call $printInput (get_global $display) (get_global $inputText) (call $getInputPosition) (call $getInputSelected) (get_global $leftColor))
 
     (call $copyImg (get_global $pointer) (i32.const 0) (i32.const 0) (get_global $display) (call $getMouseX) (call $getMouseY) (call $getImgWidth (get_global $pointer)) (call $getImgHeight (get_global $pointer)))
     (call $displayMemory (i32.add (call $getPartOffset (get_global $display)) (i32.const 8)) (i32.sub (call $getPartLength (get_global $display)) (i32.const 8)))
@@ -474,6 +474,15 @@
       (set_global $txtX (i32.const 0))
       (set_global $txtY (i32.add (get_global $txtY) (i32.const 8)))
     ))
+    (if (i32.ge_u (get_global $txtX) (call $getImgWidth (get_local $img))) (then
+      (set_global $txtX (i32.const 0))
+      (set_global $txtY (i32.add (get_global $txtY) (i32.const 8)))
+    ))
+    (if (i32.ge_u (get_global $txtY) (call $getImgHeight (get_local $img))) (then
+      (call $copyImg (get_local $img) (i32.const 0) (i32.const 8) (get_local $img) (i32.const 0) (i32.const 0) (call $getImgWidth (get_local $img)) (i32.sub (call $getImgHeight (get_local $img)) (i32.const 8)))
+      (call $rect (get_local $img) (i32.const 0) (i32.sub (call $getImgHeight (get_local $img)) (i32.const 8)) (call $getImgWidth (get_local $img)) (i32.const 8) (call $pget (get_local $img) (i32.sub (call $getImgWidth (get_local $img)) (i32.const 1)) (i32.sub (call $getImgHeight (get_local $img)) (i32.const 1))))
+      (set_global $txtY (i32.sub (get_global $txtY) (i32.const 8)))
+    ))
   )
 
   (func $printStr (param $img i32) (param $str i32)
@@ -488,6 +497,43 @@
         (set_local $len (i32.sub (get_local $len) (i32.const 1)))
         (br_if 0 (i32.gt_u (get_local $len) (i32.const 0)))
       )
+    ))
+  )
+
+  (func $printInput (param $img i32) (param $str i32) (param $pos i32) (param $sel i32) (param $c i32)
+    (local $i i32)
+    (local $len i32)
+    (set_local $i (call $getPartOffset (get_local $str)))
+    (set_local $len (call $getPartLength (get_local $str)))
+    (if (i32.gt_u (get_local $len) (i32.const 0)) (then
+      (loop
+        (if (i32.eq (get_local $pos) (i32.const 0)) (then
+          (if (i32.gt_u (get_local $sel) (i32.const 0)) (then
+            (call $rect (get_local $img) (get_global $txtX) (get_global $txtY) (i32.const 8) (i32.const 8) (get_local $c))
+            (set_local $sel (i32.sub (get_local $sel) (i32.const 1)))
+          )(else
+            (call $rect (get_local $img) (get_global $txtX) (get_global $txtY) (i32.const 1) (i32.const 8) (get_local $c))
+            (set_local $pos (i32.sub (get_local $pos) (i32.const 1)))
+          ))
+        )(else
+          (set_local $pos (i32.sub (get_local $pos) (i32.const 1)))
+        ))
+        (call $print (get_local $img) (i32.load8_u (get_local $i)))
+        (set_local $i (i32.add (get_local $i) (i32.const 1)))
+        (set_local $len (i32.sub (get_local $len) (i32.const 1)))
+        (br_if 0 (i32.gt_u (get_local $len) (i32.const 0)))
+      )
+      (if (i32.eq (get_local $pos) (i32.const 0)) (then
+        (if (i32.gt_u (get_local $sel) (i32.const 0)) (then
+          (call $rect (get_local $img) (get_global $txtX) (get_global $txtY) (i32.const 8) (i32.const 8) (get_local $c))
+          (set_local $sel (i32.sub (get_local $sel) (i32.const 1)))
+        )(else
+          (call $rect (get_local $img) (get_global $txtX) (get_global $txtY) (i32.const 1) (i32.const 8) (get_local $c))
+          (set_local $pos (i32.sub (get_local $pos) (i32.const 1)))
+        ))
+      )(else
+        (set_local $pos (i32.sub (get_local $pos) (i32.const 1)))
+      ))
     ))
   )
 
