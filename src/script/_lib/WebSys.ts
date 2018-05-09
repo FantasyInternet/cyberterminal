@@ -32,7 +32,7 @@ export default class WebSys implements Sys {
     this.gameInput = new GameInput(this)
   }
 
-  setDisplayMode(mode: "text" | "indexed" | "rgb", width: number, height: number, displayWidth = width, displayHeight = height) {
+  setDisplayMode(mode: "text" | "pixel", width: number, height: number, displayWidth = width, displayHeight = height) {
     this._displayMode = mode
     this._displayWidth = displayWidth
     this._displayHeight = displayHeight
@@ -44,8 +44,7 @@ export default class WebSys implements Sys {
         console.error(`${this.displayMode} not yet implemented!`)
         break
 
-      case "indexed":
-      case "rgb":
+      case "pixel":
         this._displayBitmap = new ImageData(width, height)
         this._initCanvas()
         break

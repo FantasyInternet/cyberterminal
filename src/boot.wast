@@ -3,7 +3,7 @@
   (import "api" "popToMemory" (func $popToMemory (param i32) ))
   (import "api" "log" (func $log))
   (import "api" "wait" (func $wait (param i32) (param i32)))
-  (import "api" "setDisplayMode" (func $setDisplayMode (param i32) (param i32) ))
+  (import "api" "setDisplayMode" (func $setDisplayMode (param i32) (param i32) (param i32) ))
   (import "api" "displayMemory" (func $displayMemory (param i32) (param i32) ))
   (import "api" "getInputText" (func $getInputText (result i32) ))
   (import "api" "getInputPosition" (func $getInputPosition (result i32) ))
@@ -173,7 +173,7 @@
     (set_global $codeartistic  (call $createPart (i32.const 25)))
     (call $copyMem (i32.const 160) (call $getPartOffset (get_global $codeartistic)) (call $getPartLength (get_global $codeartistic)))
     (set_global $display (call $createImg (i32.const 320) (i32.const 200)))
-    (call $setDisplayMode (call $getImgWidth (get_global $display)) (call $getImgHeight (get_global $display)))
+    (call $setDisplayMode (i32.const 1) (call $getImgWidth (get_global $display)) (call $getImgHeight (get_global $display)))
 
     (set_global $bgColor (call $rgb (i32.const 0) (i32.const 0) (i32.const 0)))
     (set_global $ballColor (call $rgb (i32.const 255) (i32.const 255) (i32.const 255)))

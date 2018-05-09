@@ -216,7 +216,7 @@ ___
 
 ###  setDisplayMode
 
-▸ **setDisplayMode**(mode: *"text" |"indexed" |"rgb"*, width: *`number`*, height: *`number`*): `void`
+▸ **setDisplayMode**(mode: *"text" |"pixel"*, width: *`number`*, height: *`number`*): `void`
 
 *Defined in [script/_lib/Sys.ts:35](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L35)*
 
@@ -227,8 +227,7 @@ Switch display mode.
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | mode | "text" |
-"indexed" |
-"rgb"
+"pixel"
  |  Name of mode to switch to |
 | width | `number` |  The width of the display in characters or pixels |
 | height | `number` |  The height of the display in characters or pixels |

@@ -178,7 +178,7 @@ ___
 
 *Implementation of [Sys](../interfaces/_script__lib_sys_.sys.md).[createMachine](../interfaces/_script__lib_sys_.sys.md#createmachine)*
 
-*Defined in [script/_lib/WebSys.ts:74](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L74)*
+*Defined in [script/_lib/WebSys.ts:73](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L73)*
 
 **Returns:** [WebMachineWorker](_script__lib_websys_.webmachineworker.md)
 
@@ -191,7 +191,7 @@ ___
 
 *Implementation of [Sys](../interfaces/_script__lib_sys_.sys.md).[drawBitmap](../interfaces/_script__lib_sys_.sys.md#drawbitmap)*
 
-*Defined in [script/_lib/WebSys.ts:62](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L62)*
+*Defined in [script/_lib/WebSys.ts:61](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L61)*
 
 **Returns:** `void`
 
@@ -204,7 +204,7 @@ ___
 
 *Implementation of [Sys](../interfaces/_script__lib_sys_.sys.md).[focusInput](../interfaces/_script__lib_sys_.sys.md#focusinput)*
 
-*Defined in [script/_lib/WebSys.ts:117](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L117)*
+*Defined in [script/_lib/WebSys.ts:116](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L116)*
 
 **Parameters:**
 
@@ -226,7 +226,7 @@ ___
 
 *Implementation of [Sys](../interfaces/_script__lib_sys_.sys.md).[read](../interfaces/_script__lib_sys_.sys.md#read)*
 
-*Defined in [script/_lib/WebSys.ts:78](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L78)*
+*Defined in [script/_lib/WebSys.ts:77](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L77)*
 
 **Parameters:**
 
@@ -242,7 +242,7 @@ ___
 
 ###  setDisplayMode
 
-▸ **setDisplayMode**(mode: *"text" |"indexed" |"rgb"*, width: *`number`*, height: *`number`*, displayWidth?: *`number`*, displayHeight?: *`number`*): `void`
+▸ **setDisplayMode**(mode: *"text" |"pixel"*, width: *`number`*, height: *`number`*, displayWidth?: *`number`*, displayHeight?: *`number`*): `void`
 
 *Defined in [script/_lib/WebSys.ts:35](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L35)*
 
@@ -251,8 +251,7 @@ ___
 | Param | Type | Default value |
 | ------ | ------ | ------ |
 | mode | "text" |
-"indexed" |
-"rgb"
+"pixel"
  | - | 
 | width | `number` | - | 
 | height | `number` | - | 
@@ -268,7 +267,7 @@ ___
 
 ▸ **startTone**(): `void`
 
-*Defined in [script/_lib/WebSys.ts:110](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L110)*
+*Defined in [script/_lib/WebSys.ts:109](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L109)*
 
 **Returns:** `void`
 
@@ -279,7 +278,7 @@ ___
 
 ▸ **stopTone**(): `void`
 
-*Defined in [script/_lib/WebSys.ts:113](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L113)*
+*Defined in [script/_lib/WebSys.ts:112](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L112)*
 
 **Returns:** `void`
 
@@ -290,7 +289,7 @@ ___
 
 ▸ **waitForVsync**(): `Promise`<`Object`>
 
-*Defined in [script/_lib/WebSys.ts:68](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L68)*
+*Defined in [script/_lib/WebSys.ts:67](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L67)*
 
 **Returns:** `Promise`<`Object`>
 

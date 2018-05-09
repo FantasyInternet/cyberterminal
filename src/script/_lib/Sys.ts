@@ -32,7 +32,7 @@ export default interface Sys {
    * @param width The width of the display in characters or pixels
    * @param height The height of the display in characters or pixels
    */
-  setDisplayMode(mode: "text" | "indexed" | "rgb", width: number, height: number): void
+  setDisplayMode(mode: "text" | "pixel", width: number, height: number): void
 
   /**
    * Draw current bitmap to screen.

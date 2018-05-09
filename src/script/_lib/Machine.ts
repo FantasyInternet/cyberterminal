@@ -18,23 +18,23 @@ export default class Machine {
     console.log("📟", this._popString())
   }
 
-  setDisplayMode(/*mode: "text" | "rgb",*/ width: number, height: number, displayWidth = width, displayHeight = height) {
-    this._sysCall("setDisplayMode", "rgb", width, height, displayWidth, displayHeight)
-    this._displayMode = "rgb"
+  setDisplayMode(mode: number, width: number, height: number, displayWidth = width, displayHeight = height) {
+    this._sysCall("setDisplayMode", this._displayModes[mode], width, height, displayWidth, displayHeight)
+    this._displayMode = mode
     this._displayWidth = displayWidth
     this._displayHeight = displayHeight
     delete this._displayBitmap
-    switch (this.displayMode) {
+    switch (this._displayModes[this.displayMode]) {
       case "text":
         console.error(`${this.displayMode} not yet implemented!`)
         break
 
-      case "rgb":
+      case "pixel":
         this._displayBitmap = new ImageData(width, height)
         break
 
       default:
-        this._displayMode = ""
+        this._displayMode = -1
         this._displayWidth = 0
         this._displayHeight = 0
         throw "DisplayMode not supported!"
@@ -102,9 +102,8 @@ export default class Machine {
       callback = process.instance.exports.table.get(callback)
     }
     let id = this._asyncCalls++
-    switch (this.displayMode) {
-      case "indexed":
-      case "rgb":
+    switch (this._displayModes[this.displayMode]) {
+      case "pixel":
         this._commitBitmap(true)
         break
     }
@@ -218,7 +217,8 @@ export default class Machine {
   private _frameInterval: number = 1000 / 60
   private _nextUpdate: number = performance.now()
   private _updateInterval: number = 1000 / 60
-  private _displayMode: string = ""
+  private _displayModes: string[] = ["text", "pixel"]
+  private _displayMode: number = -1
   private _displayWidth: number = 0
   private _displayHeight: number = 0
   private _displayBitmap?: ImageData
@@ -298,7 +298,7 @@ export default class Machine {
 
       case "resume":
         if (this._displayBitmap) {
-          this.setDisplayMode(this._displayBitmap.width, this._displayBitmap.height, this._displayWidth, this._displayHeight)
+          this.setDisplayMode(this._displayMode, this._displayBitmap.width, this._displayBitmap.height, this._displayWidth, this._displayHeight)
         }
         this._nextFrame = performance.now()
         this._nextUpdate = performance.now()
