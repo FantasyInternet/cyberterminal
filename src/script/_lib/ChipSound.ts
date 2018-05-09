@@ -16,7 +16,7 @@ export default class ChipSound {
     }
   }
 
-  startTone(channel: number, frequency: number, volume: number = 1, type: "sine" | "square" | "sawtooth" | "triangle" = "sine") {
+  startTone(channel: number, frequency: number, volume: number = 1, type: "sine" | "square" | "sawtooth" | "triangle" = "square") {
     let chan = this._channels[channel]
     if (!chan) {
       chan = {

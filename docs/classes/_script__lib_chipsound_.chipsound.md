@@ -56,7 +56,7 @@ ___
 "square" |
 "sawtooth" |
 "triangle"
- | &quot;sine&quot; | 
+ | &quot;square&quot; | 
 
 **Returns:** `void`
 

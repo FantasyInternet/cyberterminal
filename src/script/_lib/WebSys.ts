@@ -16,6 +16,7 @@ export default class WebSys implements Sys {
   textInput: TextInput
   mouseInput: MouseInput
   gameInput: GameInput
+  inputPriority: string[] = ["text", "mouse", "game"]
   get displayMode() { return this._displayMode }
   get displayWidth() { return this._displayWidth }
   get displayHeight() { return this._displayHeight }
@@ -26,9 +27,9 @@ export default class WebSys implements Sys {
     scriptSrc = (<HTMLScriptElement>scripts[scripts.length - 1]).src
     this._initContainer()
     this.chipSound = new ChipSound()
-    this.textInput = new TextInput(<HTMLInputElement>this._container.querySelector(".input .text"))
-    this.mouseInput = new MouseInput()
-    this.gameInput = new GameInput()
+    this.textInput = new TextInput(this, <HTMLInputElement>this._container.querySelector(".input .text"))
+    this.mouseInput = new MouseInput(this)
+    this.gameInput = new GameInput(this)
   }
 
   setDisplayMode(mode: "text" | "indexed" | "rgb", width: number, height: number, displayWidth = width, displayHeight = height) {
@@ -111,6 +112,24 @@ export default class WebSys implements Sys {
   }
   stopTone() {
     this.chipSound.stopTone.apply(this.chipSound, arguments)
+  }
+
+  prioritizeInput(input: "text" | "mouse" | "game") {
+    let i = this.inputPriority.indexOf(input)
+    if (i >= 0) {
+      this.inputPriority.splice(i, 1)
+      this.inputPriority.unshift(input)
+    }
+    for (let i = 0; i < this.inputPriority.length; i++) {
+      if (i) {
+        //@ts-ignore
+        this[this.inputPriority[i] + "Input"].blur()
+      } else {
+        //@ts-ignore
+        this[this.inputPriority[i] + "Input"].focus()
+      }
+    }
+    return this.inputPriority
   }
 
 

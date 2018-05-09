@@ -1,3 +1,5 @@
+import Sys from "./Sys"
+
 /**
  * Class for taking care of mouse input
  */
@@ -16,6 +18,14 @@ export default class MouseInput {
     this._element.addEventListener("pointermove", this._mouseMove.bind(this))
     this._element.addEventListener("pointerdown", this._mouseDown.bind(this))
     this._element.addEventListener("pointerup", this._mouseUp.bind(this))
+  }
+
+  constructor(public sys: Sys) { }
+
+  focus() { }
+  blur() {
+    this.state.pressed = false
+    this._sendState()
   }
 
   addEventListener(fn: Function) {
@@ -53,6 +63,7 @@ export default class MouseInput {
     this._sendState()
   }
   private _mouseDown(e: PointerEvent) {
+    this.sys.prioritizeInput("mouse")
     this.state.x = e.offsetX / this.scale * devicePixelRatio
     this.state.y = e.offsetY / this.scale * devicePixelRatio
     this.state.pressed = true

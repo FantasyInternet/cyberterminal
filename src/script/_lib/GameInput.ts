@@ -1,3 +1,5 @@
+import Sys from "./Sys"
+
 /**
  * Class for taking care of game input
  */
@@ -7,9 +9,10 @@ export default class GameInput {
     buttons: { a: false, b: false, x: false, y: false }
   }
 
-  constructor() {
+  constructor(public sys: Sys) {
     document.addEventListener("keydown", (e: KeyboardEvent) => {
-      if (document.querySelector("input:focus, textarea:focus")) return
+      if (this.sys.inputPriority.indexOf("game") > this.sys.inputPriority.indexOf("text")) return this.sys.prioritizeInput("text")
+      if (e.altKey && e.code === "KeyT") return this.sys.prioritizeInput("text")
       let ctrl = this._keyMap[e.code]
       switch (ctrl) {
         case "left":
@@ -99,6 +102,17 @@ export default class GameInput {
           break
       }
     })
+  }
+
+  focus() { }
+  blur() {
+    this.state.axis.x =
+      this.state.axis.y = 0
+    this.state.buttons.a =
+      this.state.buttons.b =
+      this.state.buttons.x =
+      this.state.buttons.y = false
+    this._sendState()
   }
 
   addEventListener(fn: Function) {

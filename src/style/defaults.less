@@ -26,6 +26,17 @@ fantasy-terminal {
   }
 
   .input {
-    position: absolute;
+    position: absolute !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    
+    .text {
+      position: absolute !important;
+      bottom: 100vh !important;
+      textarea, input {
+        position: static !important;
+      }
+    }
   }
 }

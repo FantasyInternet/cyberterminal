@@ -23,6 +23,8 @@ export default interface Sys {
   mouseInput: MouseInput
   /** Game input state. */
   gameInput: GameInput
+  /** Inputs in prioritized order, highest to lowest. */
+  inputPriority: string[]
 
   /**
    * Switch display mode.
@@ -38,6 +40,21 @@ export default interface Sys {
   drawBitmap(): void
 
   /**
+   * Start tone oscillator
+   * @param channel Audio channel to use
+   * @param frequency Frequency of tone
+   * @param volume Volume of tone (0-1)
+   * @param type Wave type
+   */
+  startTone(channel: number, frequency: number, volume: number, type: "sine" | "square" | "sawtooth" | "triangle"): void
+
+  /**
+   * Stop tone oscillator
+   * @param channel Audio channel
+   */
+  stopTone(channel: number): void
+
+  /**
    * Create a machine.
    * @returns the worker running the machine
    */
@@ -49,4 +66,10 @@ export default interface Sys {
    * @param options Options
    */
   read(filename: string, options: any): Promise<any>
+
+  /**
+   * Focus on given type of input.
+   * @param input The type of input to prioritize
+   */
+  prioritizeInput(input: "text" | "mouse" | "game"): string[]
 }

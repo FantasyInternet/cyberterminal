@@ -1,3 +1,5 @@
+import Sys from "./Sys"
+
 /**
  * Class for taking care of text input
  */
@@ -8,11 +10,19 @@ export default class TextInput {
     len: 0
   }
 
-  constructor(private _element: HTMLElement) {
+  constructor(public sys: Sys, private _element: HTMLElement) {
     _element.innerHTML = '<textarea></textarea>'
     this._multiline = <HTMLTextAreaElement>_element.querySelector("textarea")
     this._multiline.addEventListener("keydown", this._keyDown.bind(this))
+    this._multiline.addEventListener("keyup", this._keyDown.bind(this))
     this._input = this._multiline
+  }
+
+  focus() {
+    this._input.focus()
+  }
+  blur() {
+    this._input.blur()
   }
 
   setState(state: any) {
@@ -53,6 +63,7 @@ export default class TextInput {
   }
 
   private _keyDown(e?: KeyboardEvent) {
+    if (e && e.altKey && e.code === "KeyG") this.sys.prioritizeInput("game")
     requestAnimationFrame(() => {
       this.state.text = (<HTMLInputElement>this._input).value
       this.state.pos = (<HTMLInputElement>this._input).selectionStart || 0

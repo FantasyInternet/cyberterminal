@@ -36,7 +36,7 @@
 
 ⊕ **new WebMachineWorker**(): [WebMachineWorker](_script__lib_websys_.webmachineworker.md)
 
-*Defined in [script/_lib/WebSys.ts:187](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L187)*
+*Defined in [script/_lib/WebSys.ts:206](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L206)*
 
 **Returns:** [WebMachineWorker](_script__lib_websys_.webmachineworker.md)
 
@@ -50,7 +50,7 @@ ___
 
 **● worker**: *`Worker`*
 
-*Defined in [script/_lib/WebSys.ts:187](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L187)*
+*Defined in [script/_lib/WebSys.ts:206](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L206)*
 
 ___
 
@@ -64,7 +64,7 @@ ___
 
 *Implementation of [MachineWorker](../interfaces/_script__lib_machineworker_.machineworker.md).[onMessage](../interfaces/_script__lib_machineworker_.machineworker.md#onmessage)*
 
-*Defined in [script/_lib/WebSys.ts:197](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L197)*
+*Defined in [script/_lib/WebSys.ts:216](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L216)*
 
 **Parameters:**
 
@@ -81,7 +81,7 @@ ___
 
 ▸ **send**(msg: *`any`*, transferables?: *`any`[] |`undefined`*): `void`
 
-*Defined in [script/_lib/WebSys.ts:193](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L193)*
+*Defined in [script/_lib/WebSys.ts:212](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L212)*
 
 **Parameters:**
 
@@ -103,7 +103,7 @@ ___
 
 *Implementation of [MachineWorker](../interfaces/_script__lib_machineworker_.machineworker.md).[terminate](../interfaces/_script__lib_machineworker_.machineworker.md#terminate)*
 
-*Defined in [script/_lib/WebSys.ts:203](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L203)*
+*Defined in [script/_lib/WebSys.ts:222](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L222)*
 
 **Returns:** `void`
 

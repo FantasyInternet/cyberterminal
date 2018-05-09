@@ -23,6 +23,7 @@ Unified interface to system I/O
 * [displayMode](_script__lib_sys_.sys.md#displaymode)
 * [displayWidth](_script__lib_sys_.sys.md#displaywidth)
 * [gameInput](_script__lib_sys_.sys.md#gameinput)
+* [inputPriority](_script__lib_sys_.sys.md#inputpriority)
 * [mouseInput](_script__lib_sys_.sys.md#mouseinput)
 * [textInput](_script__lib_sys_.sys.md#textinput)
 
@@ -30,8 +31,11 @@ Unified interface to system I/O
 
 * [createMachine](_script__lib_sys_.sys.md#createmachine)
 * [drawBitmap](_script__lib_sys_.sys.md#drawbitmap)
+* [prioritizeInput](_script__lib_sys_.sys.md#prioritizeinput)
 * [read](_script__lib_sys_.sys.md#read)
 * [setDisplayMode](_script__lib_sys_.sys.md#setdisplaymode)
+* [startTone](_script__lib_sys_.sys.md#starttone)
+* [stopTone](_script__lib_sys_.sys.md#stoptone)
 
 ---
 
@@ -103,6 +107,17 @@ ___
 Game input state.
 
 ___
+<a id="inputpriority"></a>
+
+###  inputPriority
+
+**● inputPriority**: *`string`[]*
+
+*Defined in [script/_lib/Sys.ts:27](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L27)*
+
+Inputs in prioritized order, highest to lowest.
+
+___
 <a id="mouseinput"></a>
 
 ###  mouseInput
@@ -134,7 +149,7 @@ ___
 
 ▸ **createMachine**(): [MachineWorker](_script__lib_machineworker_.machineworker.md)
 
-*Defined in [script/_lib/Sys.ts:44](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L44)*
+*Defined in [script/_lib/Sys.ts:61](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L61)*
 
 Create a machine.
 
@@ -148,11 +163,33 @@ ___
 
 ▸ **drawBitmap**(): `void`
 
-*Defined in [script/_lib/Sys.ts:38](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L38)*
+*Defined in [script/_lib/Sys.ts:40](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L40)*
 
 Draw current bitmap to screen.
 
 **Returns:** `void`
+
+___
+<a id="prioritizeinput"></a>
+
+###  prioritizeInput
+
+▸ **prioritizeInput**(input: *"text" |"mouse" |"game"*): `string`[]
+
+*Defined in [script/_lib/Sys.ts:74](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L74)*
+
+Focus on given type of input.
+
+**Parameters:**
+
+| Param | Type | Description |
+| ------ | ------ | ------ |
+| input | "text" |
+"mouse" |
+"game"
+ |  The type of input to prioritize |
+
+**Returns:** `string`[]
 
 ___
 <a id="read"></a>
@@ -161,7 +198,7 @@ ___
 
 ▸ **read**(filename: *`string`*, options: *`any`*): `Promise`<`any`>
 
-*Defined in [script/_lib/Sys.ts:51](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L51)*
+*Defined in [script/_lib/Sys.ts:68](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L68)*
 
 Read a file.
 
@@ -181,7 +218,7 @@ ___
 
 ▸ **setDisplayMode**(mode: *"text" |"indexed" |"rgb"*, width: *`number`*, height: *`number`*): `void`
 
-*Defined in [script/_lib/Sys.ts:33](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L33)*
+*Defined in [script/_lib/Sys.ts:35](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L35)*
 
 Switch display mode.
 
@@ -195,6 +232,51 @@ Switch display mode.
  |  Name of mode to switch to |
 | width | `number` |  The width of the display in characters or pixels |
 | height | `number` |  The height of the display in characters or pixels |
+
+**Returns:** `void`
+
+___
+<a id="starttone"></a>
+
+###  startTone
+
+▸ **startTone**(channel: *`number`*, frequency: *`number`*, volume: *`number`*, type: *"sine" |"square" |"sawtooth" |"triangle"*): `void`
+
+*Defined in [script/_lib/Sys.ts:49](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L49)*
+
+Start tone oscillator
+
+**Parameters:**
+
+| Param | Type | Description |
+| ------ | ------ | ------ |
+| channel | `number` |  Audio channel to use |
+| frequency | `number` |  Frequency of tone |
+| volume | `number` |  Volume of tone (0-1) |
+| type | "sine" |
+"square" |
+"sawtooth" |
+"triangle"
+ |  Wave type |
+
+**Returns:** `void`
+
+___
+<a id="stoptone"></a>
+
+###  stopTone
+
+▸ **stopTone**(channel: *`number`*): `void`
+
+*Defined in [script/_lib/Sys.ts:55](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L55)*
+
+Stop tone oscillator
+
+**Parameters:**
+
+| Param | Type | Description |
+| ------ | ------ | ------ |
+| channel | `number` |  Audio channel |
 
 **Returns:** `void`
 
