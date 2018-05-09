@@ -15,6 +15,16 @@ export default class TextInput {
     this._multiline = <HTMLTextAreaElement>_element.querySelector("textarea")
     this._multiline.addEventListener("keydown", this._keyDown.bind(this))
     this._multiline.addEventListener("keyup", this._keyDown.bind(this))
+    this._multiline.addEventListener("keydown", function (e) {
+      if (e.code === "Tab") {
+        let start = this.selectionStart,
+          end = this.selectionEnd,
+          value = this.value
+        this.value = value.substr(0, start) + "\t" + value.substr(end)
+        this.selectionStart = this.selectionEnd = start + 1
+        e.preventDefault()
+      }
+    })
     this._input = this._multiline
   }
 
@@ -26,9 +36,9 @@ export default class TextInput {
   }
 
   setState(state: any) {
-    (<HTMLInputElement>this._input).value = state.text
-      (<HTMLInputElement>this._input).selectionStart = state.pos
-        (<HTMLInputElement>this._input).selectionEnd = state.pos + state.len
+    ; (<HTMLInputElement>this._input).value = state.text
+      ; (<HTMLInputElement>this._input).selectionStart = state.pos
+      ; (<HTMLInputElement>this._input).selectionEnd = state.pos + state.len
     this._keyDown()
   }
 

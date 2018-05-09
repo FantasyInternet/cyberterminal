@@ -73,7 +73,7 @@ ___
 
 ▸ **addEventListener**(fn: *`Function`*): `void`
 
-*Defined in [script/_lib/TextInput.ts:35](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/TextInput.ts#L35)*
+*Defined in [script/_lib/TextInput.ts:45](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/TextInput.ts#L45)*
 
 **Parameters:**
 
@@ -90,7 +90,7 @@ ___
 
 ▸ **blur**(): `void`
 
-*Defined in [script/_lib/TextInput.ts:24](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/TextInput.ts#L24)*
+*Defined in [script/_lib/TextInput.ts:34](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/TextInput.ts#L34)*
 
 **Returns:** `void`
 
@@ -101,7 +101,7 @@ ___
 
 ▸ **focus**(): `void`
 
-*Defined in [script/_lib/TextInput.ts:21](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/TextInput.ts#L21)*
+*Defined in [script/_lib/TextInput.ts:31](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/TextInput.ts#L31)*
 
 **Returns:** `void`
 
@@ -112,7 +112,7 @@ ___
 
 ▸ **removeEventListener**(fn: *`Function`*): `void`
 
-*Defined in [script/_lib/TextInput.ts:42](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/TextInput.ts#L42)*
+*Defined in [script/_lib/TextInput.ts:52](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/TextInput.ts#L52)*
 
 **Parameters:**
 
@@ -129,7 +129,7 @@ ___
 
 ▸ **setState**(state: *`any`*): `void`
 
-*Defined in [script/_lib/TextInput.ts:28](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/TextInput.ts#L28)*
+*Defined in [script/_lib/TextInput.ts:38](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/TextInput.ts#L38)*
 
 **Parameters:**
 

@@ -470,6 +470,12 @@
   (func $print (param $img i32) (param $char i32)
     (call $copyImg (get_global $font) (i32.const 0) (i32.mul (get_local $char) (i32.const 8)) (get_local $img) (get_global $txtX) (get_global $txtY) (i32.const 8) (i32.const 8))
     (set_global $txtX (i32.add (get_global $txtX) (i32.const 8)))
+    (if (i32.eq (get_local $char) (i32.const 9)) (then
+      (set_global $txtX (i32.sub (get_global $txtX) (i32.const 8)))
+      (set_global $txtX (i32.div_u (get_global $txtX) (i32.const 32)))
+      (set_global $txtX (i32.mul (get_global $txtX) (i32.const 32)))
+      (set_global $txtX (i32.add (get_global $txtX) (i32.const 32)))
+    ))
     (if (i32.eq (get_local $char) (i32.const 10)) (then
       (set_global $txtX (i32.const 0))
       (set_global $txtY (i32.add (get_global $txtY) (i32.const 8)))
