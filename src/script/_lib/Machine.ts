@@ -198,6 +198,10 @@ export default class Machine {
   getInputText() { return this._pushString(this._textInputState.text) }
   getInputPosition() { return this._textInputState.pos }
   getInputSelected() { return this._textInputState.len }
+  setTextInput(position: number, selection: number) {
+    let text = this._popString()
+    this._sysRequest("setTextInput", text, position, selection)
+  }
   getMouseX() { return this._mouseInputState.x; }
   getMouseY() { return this._mouseInputState.y }
   getMousePressed() { return this._mouseInputState.pressed }

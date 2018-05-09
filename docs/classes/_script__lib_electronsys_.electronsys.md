@@ -42,6 +42,7 @@ Sys implementation for electron app. See [Sys](../interfaces/__lib_sys_.sys.md) 
 * [focusInput](_script__lib_electronsys_.electronsys.md#focusinput)
 * [read](_script__lib_electronsys_.electronsys.md#read)
 * [setDisplayMode](_script__lib_electronsys_.electronsys.md#setdisplaymode)
+* [setTextInput](_script__lib_electronsys_.electronsys.md#settextinput)
 * [startTone](_script__lib_electronsys_.electronsys.md#starttone)
 * [stopTone](_script__lib_electronsys_.electronsys.md#stoptone)
 * [waitForVsync](_script__lib_electronsys_.electronsys.md#waitforvsync)
@@ -287,6 +288,29 @@ ___
 | height | `number` | - | 
 | `Default value` displayWidth | `number` |  width | 
 | `Default value` displayHeight | `number` |  height | 
+
+**Returns:** `void`
+
+___
+<a id="settextinput"></a>
+
+###  setTextInput
+
+▸ **setTextInput**(text: *`string`*, pos: *`number`*, len: *`number`*): `void`
+
+*Implementation of [Sys](../interfaces/_script__lib_sys_.sys.md).[setTextInput](../interfaces/_script__lib_sys_.sys.md#settextinput)*
+
+*Inherited from [WebSys](_script__lib_websys_.websys.md).[setTextInput](_script__lib_websys_.websys.md#settextinput)*
+
+*Defined in [script/_lib/WebSys.ts:134](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L134)*
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| text | `string` | 
+| pos | `number` | 
+| len | `number` | 
 
 **Returns:** `void`
 

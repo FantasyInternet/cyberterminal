@@ -72,4 +72,12 @@ export default interface Sys {
    * @param input The type of input to prioritize
    */
   focusInput(input: "text" | "mouse" | "game"): string[]
+
+  /**
+   * Set the state of the text input.
+   * @param text Text to put into editor
+   * @param pos Cursor position
+   * @param len Selection length
+   */
+  setTextInput(text: string, pos: number, len: number): void
 }

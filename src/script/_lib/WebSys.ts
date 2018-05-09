@@ -131,6 +131,14 @@ export default class WebSys implements Sys {
     return this.inputPriority
   }
 
+  setTextInput(text: string, pos: number, len: number) {
+    this.textInput.setState({
+      text: text,
+      pos: pos,
+      len: len
+    })
+  }
+
 
   /** _privates */
   private _container: HTMLElement = <HTMLElement>document.querySelector("fantasy-terminal")

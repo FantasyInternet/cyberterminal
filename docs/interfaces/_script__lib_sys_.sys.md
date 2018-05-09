@@ -34,6 +34,7 @@ Unified interface to system I/O
 * [focusInput](_script__lib_sys_.sys.md#focusinput)
 * [read](_script__lib_sys_.sys.md#read)
 * [setDisplayMode](_script__lib_sys_.sys.md#setdisplaymode)
+* [setTextInput](_script__lib_sys_.sys.md#settextinput)
 * [startTone](_script__lib_sys_.sys.md#starttone)
 * [stopTone](_script__lib_sys_.sys.md#stoptone)
 
@@ -231,6 +232,27 @@ Switch display mode.
  |  Name of mode to switch to |
 | width | `number` |  The width of the display in characters or pixels |
 | height | `number` |  The height of the display in characters or pixels |
+
+**Returns:** `void`
+
+___
+<a id="settextinput"></a>
+
+###  setTextInput
+
+▸ **setTextInput**(text: *`string`*, pos: *`number`*, len: *`number`*): `void`
+
+*Defined in [script/_lib/Sys.ts:82](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L82)*
+
+Set the state of the text input.
+
+**Parameters:**
+
+| Param | Type | Description |
+| ------ | ------ | ------ |
+| text | `string` |  Text to put into editor |
+| pos | `number` |  Cursor position |
+| len | `number` |  Selection length |
 
 **Returns:** `void`
 
