@@ -24,7 +24,7 @@
 
 **● autoStop**: *`any`*
 
-*Defined in [script/_lib/ChipSound.ts:62](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/ChipSound.ts#L62)*
+*Defined in [script/_lib/ChipSound.ts:68](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/ChipSound.ts#L68)*
 
 ___
 <a id="gain"></a>
@@ -33,7 +33,7 @@ ___
 
 **● gain**: *`GainNode`*
 
-*Defined in [script/_lib/ChipSound.ts:61](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/ChipSound.ts#L61)*
+*Defined in [script/_lib/ChipSound.ts:67](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/ChipSound.ts#L67)*
 
 ___
 <a id="oscillator"></a>
@@ -42,7 +42,7 @@ ___
 
 **● oscillator**: *`OscillatorNode`*
 
-*Defined in [script/_lib/ChipSound.ts:60](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/ChipSound.ts#L60)*
+*Defined in [script/_lib/ChipSound.ts:66](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/ChipSound.ts#L66)*
 
 ___
 

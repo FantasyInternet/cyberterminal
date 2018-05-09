@@ -71,5 +71,5 @@ export default interface Sys {
    * Focus on given type of input.
    * @param input The type of input to prioritize
    */
-  prioritizeInput(input: "text" | "mouse" | "game"): string[]
+  focusInput(input: "text" | "mouse" | "game"): string[]
 }

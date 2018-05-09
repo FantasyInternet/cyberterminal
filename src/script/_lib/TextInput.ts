@@ -63,7 +63,7 @@ export default class TextInput {
   }
 
   private _keyDown(e?: KeyboardEvent) {
-    if (e && e.altKey && e.code === "KeyG") this.sys.prioritizeInput("game")
+    if (e && e.altKey && e.code === "KeyG") this.sys.focusInput("game")
     requestAnimationFrame(() => {
       this.state.text = (<HTMLInputElement>this._input).value
       this.state.pos = (<HTMLInputElement>this._input).selectionStart || 0

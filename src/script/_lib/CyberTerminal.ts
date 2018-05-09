@@ -11,6 +11,16 @@ export default class CyberTerminal {
     this.sys.mouseInput.addEventListener(this._onMouseInput.bind(this))
     this.sys.gameInput.addEventListener(this._onGameInput.bind(this))
     this.connectTo(location.toString())
+    document.addEventListener("visibilitychange", () => {
+      if (this.machineWorkers.length) {
+        if (document.visibilityState === "visible") {
+          this.machineWorkers[this.machineWorkers.length - 1].send({ cmd: "resume" })
+        } else {
+          this.machineWorkers[this.machineWorkers.length - 1].send({ cmd: "suspend" })
+          this.sys.chipSound.stopAll()
+        }
+      }
+    })
   }
 
   async connectTo(url: string) {
@@ -40,6 +50,7 @@ export default class CyberTerminal {
     let machine = this.sys.createMachine()
     this.machineWorkers.push(machine)
     machine.onMessage(this._onMessage.bind(this))
+    this.sys.chipSound.stopAll()
     return machine
   }
 
@@ -48,6 +59,7 @@ export default class CyberTerminal {
     if (machine) machine.terminate()
     if (this.machineWorkers.length)
       this.machineWorkers[this.machineWorkers.length - 1].send({ cmd: "resume" })
+    this.sys.chipSound.stopAll()
   }
 
 

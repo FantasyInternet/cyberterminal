@@ -114,7 +114,7 @@ export default class WebSys implements Sys {
     this.chipSound.stopTone.apply(this.chipSound, arguments)
   }
 
-  prioritizeInput(input: "text" | "mouse" | "game") {
+  focusInput(input: "text" | "mouse" | "game") {
     let i = this.inputPriority.indexOf(input)
     if (i >= 0) {
       this.inputPriority.splice(i, 1)

@@ -17,6 +17,7 @@ Class responsible for creating bleeps and bloops! 🎶
 ### Methods
 
 * [startTone](_script__lib_chipsound_.chipsound.md#starttone)
+* [stopAll](_script__lib_chipsound_.chipsound.md#stopall)
 * [stopTone](_script__lib_chipsound_.chipsound.md#stoptone)
 
 ---
@@ -57,6 +58,17 @@ ___
 "sawtooth" |
 "triangle"
  | &quot;square&quot; | 
+
+**Returns:** `void`
+
+___
+<a id="stopall"></a>
+
+###  stopAll
+
+▸ **stopAll**(): `void`
+
+*Defined in [script/_lib/ChipSound.ts:54](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/ChipSound.ts#L54)*
 
 **Returns:** `void`
 

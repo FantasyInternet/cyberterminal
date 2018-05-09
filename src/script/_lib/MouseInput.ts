@@ -63,7 +63,7 @@ export default class MouseInput {
     this._sendState()
   }
   private _mouseDown(e: PointerEvent) {
-    this.sys.prioritizeInput("mouse")
+    this.sys.focusInput("mouse")
     this.state.x = e.offsetX / this.scale * devicePixelRatio
     this.state.y = e.offsetY / this.scale * devicePixelRatio
     this.state.pressed = true

@@ -181,6 +181,21 @@ export default class Machine {
     this._tick()
   }
 
+  focusInput(input: number) {
+    switch (input) {
+      case 1:
+        this._sysRequest("focusInput", "text")
+        break
+
+      case 2:
+        this._sysRequest("focusInput", "mouse")
+        break
+
+      case 3:
+        this._sysRequest("focusInput", "game")
+        break
+    }
+  }
   getInputText() { return this._pushString(this._textInputState.text) }
   getInputPosition() { return this._textInputState.pos }
   getInputSelected() { return this._textInputState.len }

@@ -31,7 +31,7 @@ Unified interface to system I/O
 
 * [createMachine](_script__lib_sys_.sys.md#createmachine)
 * [drawBitmap](_script__lib_sys_.sys.md#drawbitmap)
-* [prioritizeInput](_script__lib_sys_.sys.md#prioritizeinput)
+* [focusInput](_script__lib_sys_.sys.md#focusinput)
 * [read](_script__lib_sys_.sys.md#read)
 * [setDisplayMode](_script__lib_sys_.sys.md#setdisplaymode)
 * [startTone](_script__lib_sys_.sys.md#starttone)
@@ -170,11 +170,11 @@ Draw current bitmap to screen.
 **Returns:** `void`
 
 ___
-<a id="prioritizeinput"></a>
+<a id="focusinput"></a>
 
-###  prioritizeInput
+###  focusInput
 
-▸ **prioritizeInput**(input: *"text" |"mouse" |"game"*): `string`[]
+▸ **focusInput**(input: *"text" |"mouse" |"game"*): `string`[]
 
 *Defined in [script/_lib/Sys.ts:74](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L74)*
 

@@ -39,7 +39,7 @@ Sys implementation for electron app. See [Sys](../interfaces/__lib_sys_.sys.md) 
 
 * [createMachine](_script__lib_electronsys_.electronsys.md#createmachine)
 * [drawBitmap](_script__lib_electronsys_.electronsys.md#drawbitmap)
-* [prioritizeInput](_script__lib_electronsys_.electronsys.md#prioritizeinput)
+* [focusInput](_script__lib_electronsys_.electronsys.md#focusinput)
 * [read](_script__lib_electronsys_.electronsys.md#read)
 * [setDisplayMode](_script__lib_electronsys_.electronsys.md#setdisplaymode)
 * [startTone](_script__lib_electronsys_.electronsys.md#starttone)
@@ -220,15 +220,15 @@ ___
 **Returns:** `void`
 
 ___
-<a id="prioritizeinput"></a>
+<a id="focusinput"></a>
 
-###  prioritizeInput
+###  focusInput
 
-▸ **prioritizeInput**(input: *"text" |"mouse" |"game"*): `string`[]
+▸ **focusInput**(input: *"text" |"mouse" |"game"*): `string`[]
 
-*Implementation of [Sys](../interfaces/_script__lib_sys_.sys.md).[prioritizeInput](../interfaces/_script__lib_sys_.sys.md#prioritizeinput)*
+*Implementation of [Sys](../interfaces/_script__lib_sys_.sys.md).[focusInput](../interfaces/_script__lib_sys_.sys.md#focusinput)*
 
-*Inherited from [WebSys](_script__lib_websys_.websys.md).[prioritizeInput](_script__lib_websys_.websys.md#prioritizeinput)*
+*Inherited from [WebSys](_script__lib_websys_.websys.md).[focusInput](_script__lib_websys_.websys.md#focusinput)*
 
 *Defined in [script/_lib/WebSys.ts:117](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L117)*
 

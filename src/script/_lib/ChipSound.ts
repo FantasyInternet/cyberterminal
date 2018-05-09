@@ -51,6 +51,12 @@ export default class ChipSound {
     }
   }
 
+  stopAll() {
+    for (let i = 0; i < this._channels.length; i++) {
+      this.stopTone(i)
+    }
+  }
+
   /** _privates */
   private _channels: Channel[] = []
   private _ctx: AudioContext = new AudioContext()

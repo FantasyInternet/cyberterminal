@@ -39,7 +39,7 @@ Sys implementation for web browsers. See [Sys](../interfaces/__lib_sys_.sys.md) 
 
 * [createMachine](_script__lib_websys_.websys.md#createmachine)
 * [drawBitmap](_script__lib_websys_.websys.md#drawbitmap)
-* [prioritizeInput](_script__lib_websys_.websys.md#prioritizeinput)
+* [focusInput](_script__lib_websys_.websys.md#focusinput)
 * [read](_script__lib_websys_.websys.md#read)
 * [setDisplayMode](_script__lib_websys_.websys.md#setdisplaymode)
 * [startTone](_script__lib_websys_.websys.md#starttone)
@@ -196,13 +196,13 @@ ___
 **Returns:** `void`
 
 ___
-<a id="prioritizeinput"></a>
+<a id="focusinput"></a>
 
-###  prioritizeInput
+###  focusInput
 
-▸ **prioritizeInput**(input: *"text" |"mouse" |"game"*): `string`[]
+▸ **focusInput**(input: *"text" |"mouse" |"game"*): `string`[]
 
-*Implementation of [Sys](../interfaces/_script__lib_sys_.sys.md).[prioritizeInput](../interfaces/_script__lib_sys_.sys.md#prioritizeinput)*
+*Implementation of [Sys](../interfaces/_script__lib_sys_.sys.md).[focusInput](../interfaces/_script__lib_sys_.sys.md#focusinput)*
 
 *Defined in [script/_lib/WebSys.ts:117](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L117)*
 

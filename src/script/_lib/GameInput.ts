@@ -11,8 +11,8 @@ export default class GameInput {
 
   constructor(public sys: Sys) {
     document.addEventListener("keydown", (e: KeyboardEvent) => {
-      if (this.sys.inputPriority.indexOf("game") > this.sys.inputPriority.indexOf("text")) return this.sys.prioritizeInput("text")
-      if (e.altKey && e.code === "KeyT") return this.sys.prioritizeInput("text")
+      if (this.sys.inputPriority.indexOf("game") > this.sys.inputPriority.indexOf("text")) return this.sys.focusInput("text")
+      if (e.altKey && e.code === "KeyT") return this.sys.focusInput("text")
       let ctrl = this._keyMap[e.code]
       switch (ctrl) {
         case "left":
