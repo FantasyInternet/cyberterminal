@@ -48,5 +48,20 @@ export default class ElectronSys extends WebSys {
       })
     })
   }
+  write(filename: string, data: string | ArrayBuffer) {
+    let url = new URL(filename)
+    if (url.protocol !== "file:") {
+      return super.write(filename, data)
+    }
+    filename = decodeURI(url.pathname)
+    if (process.platform === "win32") filename = filename.substr(1)
+    return new Promise<boolean>((resolve, reject) => {
+      //@ts-ignore
+      fs.writeFile(filename, data, (err, res) => {
+        if (err) reject("write error!")
+        else resolve(true)
+      })
+    })
+  }
 
 }

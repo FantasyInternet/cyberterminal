@@ -37,6 +37,7 @@ Unified interface to system I/O
 * [setTextInput](_script__lib_sys_.sys.md#settextinput)
 * [startTone](_script__lib_sys_.sys.md#starttone)
 * [stopTone](_script__lib_sys_.sys.md#stoptone)
+* [write](_script__lib_sys_.sys.md#write)
 
 ---
 
@@ -177,7 +178,7 @@ ___
 
 ▸ **focusInput**(input: *"text" |"mouse" |"game"*): `string`[]
 
-*Defined in [script/_lib/Sys.ts:74](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L74)*
+*Defined in [script/_lib/Sys.ts:81](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L81)*
 
 Focus on given type of input.
 
@@ -242,7 +243,7 @@ ___
 
 ▸ **setTextInput**(text: *`string`*, pos: *`number`*, len: *`number`*): `void`
 
-*Defined in [script/_lib/Sys.ts:82](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L82)*
+*Defined in [script/_lib/Sys.ts:89](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L89)*
 
 Set the state of the text input.
 
@@ -300,6 +301,28 @@ Stop tone oscillator
 | channel | `number` |  Audio channel |
 
 **Returns:** `void`
+
+___
+<a id="write"></a>
+
+###  write
+
+▸ **write**(filename: *`string`*, data: *`string` |`ArrayBuffer`*): `Promise`<`boolean`>
+
+*Defined in [script/_lib/Sys.ts:75](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L75)*
+
+Write to a file.
+
+**Parameters:**
+
+| Param | Type | Description |
+| ------ | ------ | ------ |
+| filename | `string` |  Name of file to write to |
+| data | `string` |
+`ArrayBuffer`
+ |  Data to write |
+
+**Returns:** `Promise`<`boolean`>
 
 ___
 

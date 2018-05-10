@@ -46,6 +46,7 @@ Sys implementation for web browsers. See [Sys](../interfaces/__lib_sys_.sys.md) 
 * [startTone](_script__lib_websys_.websys.md#starttone)
 * [stopTone](_script__lib_websys_.websys.md#stoptone)
 * [waitForVsync](_script__lib_websys_.websys.md#waitforvsync)
+* [write](_script__lib_websys_.websys.md#write)
 
 ---
 
@@ -205,7 +206,7 @@ ___
 
 *Implementation of [Sys](../interfaces/_script__lib_sys_.sys.md).[focusInput](../interfaces/_script__lib_sys_.sys.md#focusinput)*
 
-*Defined in [script/_lib/WebSys.ts:116](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L116)*
+*Defined in [script/_lib/WebSys.ts:126](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L126)*
 
 **Parameters:**
 
@@ -270,7 +271,7 @@ ___
 
 *Implementation of [Sys](../interfaces/_script__lib_sys_.sys.md).[setTextInput](../interfaces/_script__lib_sys_.sys.md#settextinput)*
 
-*Defined in [script/_lib/WebSys.ts:134](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L134)*
+*Defined in [script/_lib/WebSys.ts:144](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L144)*
 
 **Parameters:**
 
@@ -289,7 +290,7 @@ ___
 
 ▸ **startTone**(): `void`
 
-*Defined in [script/_lib/WebSys.ts:109](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L109)*
+*Defined in [script/_lib/WebSys.ts:119](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L119)*
 
 **Returns:** `void`
 
@@ -300,7 +301,7 @@ ___
 
 ▸ **stopTone**(): `void`
 
-*Defined in [script/_lib/WebSys.ts:112](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L112)*
+*Defined in [script/_lib/WebSys.ts:122](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L122)*
 
 **Returns:** `void`
 
@@ -314,6 +315,28 @@ ___
 *Defined in [script/_lib/WebSys.ts:67](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L67)*
 
 **Returns:** `Promise`<`Object`>
+
+___
+<a id="write"></a>
+
+###  write
+
+▸ **write**(filename: *`string`*, data: *`string` |`ArrayBuffer`*): `Promise`<`boolean`>
+
+*Implementation of [Sys](../interfaces/_script__lib_sys_.sys.md).[write](../interfaces/_script__lib_sys_.sys.md#write)*
+
+*Defined in [script/_lib/WebSys.ts:109](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L109)*
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| filename | `string` | 
+| data | `string` |
+`ArrayBuffer`
+ | 
+
+**Returns:** `Promise`<`boolean`>
 
 ___
 

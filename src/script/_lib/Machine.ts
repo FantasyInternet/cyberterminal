@@ -166,6 +166,22 @@ export default class Machine {
     })
     return id
   }
+  write(callback: number | Function) {
+    if (typeof callback === "number") {
+      let process = this._processes[this._activePID]
+      if (!process) throw "No active process!"
+      callback = process.instance.exports.table.get(callback)
+    }
+    let id = this._asyncCalls++
+    let data = this._popArrayBuffer()
+    let filename = (new URL(this._popString(), this._baseUrl)).toString()
+    if (filename.substr(0, this._originUrl.length) !== this._originUrl) throw "cross origin not allowed!"
+    this._sysRequest("write", filename, data).then((success: boolean) => {
+      //@ts-ignore
+      callback(success, id)
+    })
+    return id
+  }
 
   async run() {
     this._activePID = this._processes.length

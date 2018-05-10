@@ -106,6 +106,16 @@ export default class WebSys implements Sys {
     }
   }
 
+  async write(filename: string, data: string | ArrayBuffer) {
+    //@ts-ignore
+    let res = await fetch(filename, {
+      method: "PUT",
+      body: new Blob([data])
+    })
+    if (!res.ok) throw "write error!"
+    return res.ok
+  }
+
   startTone() {
     this.chipSound.startTone.apply(this.chipSound, arguments)
   }

@@ -68,6 +68,13 @@ export default interface Sys {
   read(filename: string, options: any): Promise<any>
 
   /**
+   * Write to a file.
+   * @param filename Name of file to write to
+   * @param data Data to write
+   */
+  write(filename: string, data: string | ArrayBuffer): Promise<boolean>
+
+  /**
    * Focus on given type of input.
    * @param input The type of input to prioritize
    */
