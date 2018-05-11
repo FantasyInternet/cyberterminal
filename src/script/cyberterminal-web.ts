@@ -11,5 +11,5 @@ if (typeof window !== "undefined") {
   window.cyberTerminal = new CyberTerminal(new WebSys())
 } else {
   //@ts-ignore
-  self.machine = new Machine("./")
+  self.machine = new Machine()
 }

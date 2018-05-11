@@ -8,7 +8,7 @@ export default class Machine {
   get displayHeight() { return this._displayHeight }
   get displayBitmap() { return this._displayBitmap }
 
-  constructor(public url: string) {
+  constructor() {
     this._initCom()
   }
 
@@ -119,8 +119,7 @@ export default class Machine {
     this._sysRequest("connectTo", url)
   }
   getBaseUrl() {
-    this._pushString(this._baseUrl)
-    return this._baseUrl.length
+    return this._pushString(this._baseUrl)
   }
   setBaseUrl() {
     let relurl = this._popString()
@@ -183,7 +182,7 @@ export default class Machine {
     return id
   }
 
-  async run() {
+  async _run() {
     this._activePID = this._processes.length
     let wasm = this._popArrayBuffer()
     let api = this._generateRomApi()
@@ -217,8 +216,11 @@ export default class Machine {
   setTextInput(position: number, selection: number) {
     let text = this._popString()
     this._sysRequest("setTextInput", text, position, selection)
+    this._textInputState.text = text
+    this._textInputState.pos = position
+    this._textInputState.len = selection
   }
-  getMouseX() { return this._mouseInputState.x; }
+  getMouseX() { return this._mouseInputState.x }
   getMouseY() { return this._mouseInputState.y }
   getMousePressed() { return this._mouseInputState.pressed }
   getGameAxisX() { return this._gameInputState.axis.x }
@@ -302,7 +304,7 @@ export default class Machine {
         this.setBaseUrl()
         this._originUrl = e.data.origin
         this._pushArrayBuffer(e.data.wasm)
-        this.run()
+        this._run()
         break
 
       case "suspend":
@@ -414,15 +416,9 @@ export default class Machine {
     let api: any = {}
     for (let name of Object.getOwnPropertyNames(Machine.prototype)) {
       let val = (<any>this)[name]
-      if (name.substr(0, 1) !== "_" && typeof val === "function") {
+      if (name.substr(0, 1) !== "_" && name !== "constructor" && typeof val === "function") {
         api[name] = this._copyFunction(val.bind(this))
       }
-    }
-    for (let name of ["Promise"]) {
-      api[name] = this._copyClass(eval(`(${name})`))
-    }
-    for (let name of ["Math"]) {
-      api[name] = this._copyObject(eval(`(${name})`))
     }
     return api
   }
