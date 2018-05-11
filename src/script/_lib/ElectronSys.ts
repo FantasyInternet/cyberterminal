@@ -56,6 +56,15 @@ export default class ElectronSys extends WebSys {
     filename = decodeURI(url.pathname)
     if (process.platform === "win32") filename = filename.substr(1)
     return new Promise<boolean>((resolve, reject) => {
+      let parts = filename.split("/")
+      let path = parts.shift()
+      while (parts.length) {
+        try {
+          //@ts-ignore
+          fs.mkdirSync(path)
+        } catch (error) { }
+        path += "/" + parts.shift()
+      }
       //@ts-ignore
       fs.writeFile(filename, data, (err, res) => {
         if (err) reject("write error!")
