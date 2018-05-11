@@ -38,6 +38,7 @@ Sys implementation for electron app. See [Sys](../interfaces/__lib_sys_.sys.md) 
 ### Methods
 
 * [createMachine](_script__lib_electronsys_.electronsys.md#createmachine)
+* [delete](_script__lib_electronsys_.electronsys.md#delete)
 * [drawBitmap](_script__lib_electronsys_.electronsys.md#drawbitmap)
 * [focusInput](_script__lib_electronsys_.electronsys.md#focusinput)
 * [read](_script__lib_electronsys_.electronsys.md#read)
@@ -207,6 +208,27 @@ ___
 **Returns:** [WebMachineWorker](_script__lib_websys_.webmachineworker.md)
 
 ___
+<a id="delete"></a>
+
+###  delete
+
+▸ **delete**(filename: *`string`*): `Promise`<`boolean`>
+
+*Implementation of [Sys](../interfaces/_script__lib_sys_.sys.md).[delete](../interfaces/_script__lib_sys_.sys.md#delete)*
+
+*Overrides [WebSys](_script__lib_websys_.websys.md).[delete](_script__lib_websys_.websys.md#delete)*
+
+*Defined in [script/_lib/ElectronSys.ts:75](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/ElectronSys.ts#L75)*
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| filename | `string` | 
+
+**Returns:** `Promise`<`boolean`>
+
+___
 <a id="drawbitmap"></a>
 
 ###  drawBitmap
@@ -232,7 +254,7 @@ ___
 
 *Inherited from [WebSys](_script__lib_websys_.websys.md).[focusInput](_script__lib_websys_.websys.md#focusinput)*
 
-*Defined in [script/_lib/WebSys.ts:126](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L126)*
+*Defined in [script/_lib/WebSys.ts:135](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L135)*
 
 **Parameters:**
 
@@ -303,7 +325,7 @@ ___
 
 *Inherited from [WebSys](_script__lib_websys_.websys.md).[setTextInput](_script__lib_websys_.websys.md#settextinput)*
 
-*Defined in [script/_lib/WebSys.ts:144](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L144)*
+*Defined in [script/_lib/WebSys.ts:153](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L153)*
 
 **Parameters:**
 
@@ -324,7 +346,7 @@ ___
 
 *Inherited from [WebSys](_script__lib_websys_.websys.md).[startTone](_script__lib_websys_.websys.md#starttone)*
 
-*Defined in [script/_lib/WebSys.ts:119](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L119)*
+*Defined in [script/_lib/WebSys.ts:128](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L128)*
 
 **Returns:** `void`
 
@@ -337,7 +359,7 @@ ___
 
 *Inherited from [WebSys](_script__lib_websys_.websys.md).[stopTone](_script__lib_websys_.websys.md#stoptone)*
 
-*Defined in [script/_lib/WebSys.ts:122](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L122)*
+*Defined in [script/_lib/WebSys.ts:131](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L131)*
 
 **Returns:** `void`
 

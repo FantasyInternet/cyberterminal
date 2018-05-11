@@ -38,6 +38,7 @@ Sys implementation for web browsers. See [Sys](../interfaces/__lib_sys_.sys.md) 
 ### Methods
 
 * [createMachine](_script__lib_websys_.websys.md#createmachine)
+* [delete](_script__lib_websys_.websys.md#delete)
 * [drawBitmap](_script__lib_websys_.websys.md#drawbitmap)
 * [focusInput](_script__lib_websys_.websys.md#focusinput)
 * [read](_script__lib_websys_.websys.md#read)
@@ -185,6 +186,25 @@ ___
 **Returns:** [WebMachineWorker](_script__lib_websys_.webmachineworker.md)
 
 ___
+<a id="delete"></a>
+
+###  delete
+
+▸ **delete**(filename: *`string`*): `Promise`<`boolean`>
+
+*Implementation of [Sys](../interfaces/_script__lib_sys_.sys.md).[delete](../interfaces/_script__lib_sys_.sys.md#delete)*
+
+*Defined in [script/_lib/WebSys.ts:119](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L119)*
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| filename | `string` | 
+
+**Returns:** `Promise`<`boolean`>
+
+___
 <a id="drawbitmap"></a>
 
 ###  drawBitmap
@@ -206,7 +226,7 @@ ___
 
 *Implementation of [Sys](../interfaces/_script__lib_sys_.sys.md).[focusInput](../interfaces/_script__lib_sys_.sys.md#focusinput)*
 
-*Defined in [script/_lib/WebSys.ts:126](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L126)*
+*Defined in [script/_lib/WebSys.ts:135](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L135)*
 
 **Parameters:**
 
@@ -271,7 +291,7 @@ ___
 
 *Implementation of [Sys](../interfaces/_script__lib_sys_.sys.md).[setTextInput](../interfaces/_script__lib_sys_.sys.md#settextinput)*
 
-*Defined in [script/_lib/WebSys.ts:144](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L144)*
+*Defined in [script/_lib/WebSys.ts:153](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L153)*
 
 **Parameters:**
 
@@ -290,7 +310,7 @@ ___
 
 ▸ **startTone**(): `void`
 
-*Defined in [script/_lib/WebSys.ts:119](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L119)*
+*Defined in [script/_lib/WebSys.ts:128](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L128)*
 
 **Returns:** `void`
 
@@ -301,7 +321,7 @@ ___
 
 ▸ **stopTone**(): `void`
 
-*Defined in [script/_lib/WebSys.ts:122](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L122)*
+*Defined in [script/_lib/WebSys.ts:131](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L131)*
 
 **Returns:** `void`
 

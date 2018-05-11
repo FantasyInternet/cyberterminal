@@ -116,6 +116,15 @@ export default class WebSys implements Sys {
     return res.ok
   }
 
+  async delete(filename: string) {
+    //@ts-ignore
+    let res = await fetch(filename, {
+      method: "DELETE"
+    })
+    if (!res.ok) throw "delete error!"
+    return res.ok
+  }
+
   startTone() {
     this.chipSound.startTone.apply(this.chipSound, arguments)
   }

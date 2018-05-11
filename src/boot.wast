@@ -29,15 +29,18 @@
   ;; Pop URL from buffer stack and set it as base URL.
   (import "api" "setBaseUrl" (func $setBaseUrl ))
 
-  ;; Pop path from buffer stand, read it and push the contents to buffer stack. Returns a request ID.
+  ;; Pop path from buffer stack, read it and push the contents to buffer stack. Returns a request ID.
   ;; Callback can expect length in bytes and same request ID as parameter.
   (import "api" "read" (func $read (param $tableIndex i32) (result i32)))
-  ;; Pop path from buffer stand, read it and push the pixel data to buffer stack. Returns a request ID.
+  ;; Pop path from buffer stack, read it and push the pixel data to buffer stack. Returns a request ID.
   ;; Callback can expect width and height in pixels and same request ID as parameter.
   (import "api" "readImage" (func $readImage (param $tableIndex i32) (result i32)))
-  ;; Pop data and path from buffer stand and write it to file. Returns a request ID.
+  ;; Pop data and path from buffer stack and write it to file. Returns a request ID.
   ;; Callback can expect success boolean and same request ID as parameter.
   (import "api" "write" (func $write (param $tableIndex i32) (result i32)))
+  ;; Pop path from buffer stack and delete it. Returns a request ID.
+  ;; Callback can expect success boolean and same request ID as parameter.
+  (import "api" "delete" (func $delete (param $tableIndex i32) (result i32)))
 
   ;; Prioritize  given type of input. 1=text, 2=mouse, 3=game.
   (import "api" "focusInput" (func $focusInput (param $input i32)))

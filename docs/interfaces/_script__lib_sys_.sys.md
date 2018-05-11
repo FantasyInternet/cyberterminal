@@ -30,6 +30,7 @@ Unified interface to system I/O
 ### Methods
 
 * [createMachine](_script__lib_sys_.sys.md#createmachine)
+* [delete](_script__lib_sys_.sys.md#delete)
 * [drawBitmap](_script__lib_sys_.sys.md#drawbitmap)
 * [focusInput](_script__lib_sys_.sys.md#focusinput)
 * [read](_script__lib_sys_.sys.md#read)
@@ -159,6 +160,25 @@ Create a machine.
 the worker running the machine
 
 ___
+<a id="delete"></a>
+
+###  delete
+
+▸ **delete**(filename: *`string`*): `Promise`<`boolean`>
+
+*Defined in [script/_lib/Sys.ts:81](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L81)*
+
+Delete a file.
+
+**Parameters:**
+
+| Param | Type | Description |
+| ------ | ------ | ------ |
+| filename | `string` |  Name of file to delete |
+
+**Returns:** `Promise`<`boolean`>
+
+___
 <a id="drawbitmap"></a>
 
 ###  drawBitmap
@@ -178,7 +198,7 @@ ___
 
 ▸ **focusInput**(input: *"text" |"mouse" |"game"*): `string`[]
 
-*Defined in [script/_lib/Sys.ts:81](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L81)*
+*Defined in [script/_lib/Sys.ts:87](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L87)*
 
 Focus on given type of input.
 
@@ -243,7 +263,7 @@ ___
 
 ▸ **setTextInput**(text: *`string`*, pos: *`number`*, len: *`number`*): `void`
 
-*Defined in [script/_lib/Sys.ts:89](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L89)*
+*Defined in [script/_lib/Sys.ts:95](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L95)*
 
 Set the state of the text input.
 

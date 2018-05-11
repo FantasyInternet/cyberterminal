@@ -75,6 +75,12 @@ export default interface Sys {
   write(filename: string, data: string | ArrayBuffer): Promise<boolean>
 
   /**
+   * Delete a file.
+   * @param filename Name of file to delete
+   */
+  delete(filename: string): Promise<boolean>
+
+  /**
    * Focus on given type of input.
    * @param input The type of input to prioritize
    */

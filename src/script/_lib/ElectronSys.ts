@@ -72,5 +72,20 @@ export default class ElectronSys extends WebSys {
       })
     })
   }
+  delete(filename: string) {
+    let url = new URL(filename)
+    if (url.protocol !== "file:") {
+      return super.delete(filename)
+    }
+    filename = decodeURI(url.pathname)
+    if (process.platform === "win32") filename = filename.substr(1)
+    return new Promise<boolean>((resolve, reject) => {
+      //@ts-ignore
+      fs.unlink(filename, (err) => {
+        if (err) reject("delete error!")
+        else resolve(true)
+      })
+    })
+  }
 
 }
