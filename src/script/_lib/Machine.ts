@@ -197,17 +197,35 @@ export default class Machine {
     return id
   }
 
-  async _run() {
-    this._activePID = this._processes.length
+  setUpdateInterval(milliseconds: number) {
+    this._updateInterval = milliseconds
+  }
+  loadProcess() {
     let wasm = this._popArrayBuffer()
-    let api = this._generateRomApi()
+    let api = this._processes.length ? this._generateProcessApi() : this._generateRomApi()
+    let pid = this._processes.length
+    this._processes.push(null)
     //@ts-ignore
-    this._processes.push(await WebAssembly.instantiate(wasm, { api }))
+    WebAssembly.instantiate(wasm, { api }).then((process) => {
+      this._activePID = pid
+      this._processes[pid] = process
+      process.instance.exports.setup()
+      this._nextFrame = this._nextUpdate = performance.now()
+      if (this._activePID === 0) this._tick()
+      this._activePID = 0
+    })
+    return pid
+  }
+  updateProcess(pid: number) {
+    let oldpid = this._activePID
+    this._activePID = pid
     let process = this._processes[this._activePID]
-    process.instance.exports.setup()
-    this._nextFrame = performance.now()
-    this._nextUpdate = performance.now()
-    this._tick()
+    if (process) process.instance.export.update(performance.now())
+    this._activePID = oldpid
+  }
+  killProcess(pid: number) {
+    this._processes[this._activePID] = null
+    this._activePID = 0
   }
 
   focusInput(input: number) {
@@ -291,7 +309,7 @@ export default class Machine {
       this.commitDisplay(() => { })
     }
     if (t >= this._nextUpdate) {
-      if (!this._updateInterval) this._updateInterval = 1
+      if (this._updateInterval <= 0) this._updateInterval = 1
       while (t >= this._nextUpdate) {
         process.instance.exports.update(this._nextUpdate)
         this._nextUpdate += this._updateInterval
@@ -319,7 +337,7 @@ export default class Machine {
         this.setBaseUrl()
         this._originUrl = e.data.origin
         this._pushArrayBuffer(e.data.wasm)
-        this._run()
+        this.loadProcess()
         break
 
       case "suspend":
@@ -433,6 +451,18 @@ export default class Machine {
       let val = (<any>this)[name]
       if (name.substr(0, 1) !== "_" && name !== "constructor" && typeof val === "function") {
         api[name] = this._copyFunction(val.bind(this))
+      }
+    }
+    return api
+  }
+
+  private _generateProcessApi() {
+    let api: any = {}
+    let exports = this._processes[0].instance.exports
+    for (let name of Object.getOwnPropertyNames(exports)) {
+      let val = (<any>exports)[name]
+      if (name.substr(0, 4) === "api." && typeof val === "function") {
+        api[name] = val
       }
     }
     return api

@@ -22,7 +22,7 @@ let os = require("os"),
 * Jakefile.js
 * For building web apps
 *
-* @date 10-apr-2018
+* @date 11-may-2018
 */
 let srcDir = "./src/",
   outDir = "./build/",
@@ -143,6 +143,16 @@ task("clean", function () {
   excludeIgnoredFiles(files).forEach(function (file) {
     jake.rmRf(file)
   })
+  if (fs.existsSync("./.git/hooks")) {
+    let hooks = ["applypatch-msg", "post-update", "prepare-commit-msg", "pre-receive",
+      "commit-msg", "pre-applypatch", "pre-push", "update",
+      "fsmonitor-watchman", "pre-commit", "pre-rebase"]
+    for (let hook of hooks) {
+      if (fs.existsSync("./" + hook)) {
+        jake.cpR("./" + hook, "./.git/hooks/" + hook)
+      }
+    }
+  }
   console.log("...dONE!")
 })
 

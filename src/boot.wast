@@ -38,7 +38,7 @@
   ;; Pop data and path from buffer stack and write it to file. Returns a request ID.
   ;; Callback can expect success boolean and same request ID as parameter.
   (import "api" "write" (func $write (param $tableIndex i32) (result i32)))
-  ;; Pop path from buffer stack and delete it. Returns a request ID.
+  ;; Pop path from buffer stack and delete the file. Returns a request ID.
   ;; Callback can expect success boolean and same request ID as parameter.
   (import "api" "delete" (func $delete (param $tableIndex i32) (result i32)))
 
@@ -78,6 +78,16 @@
   (import "api" "startTone" (func $startTone (param $channel i32) (param $frequency i32) (param $volume f32)))
   ;; Stop generating a tone.
   (import "api" "stopTone" (func $stopTone (param $channel i32)))
+
+  ;; Set update interval.
+  (import "api" "setUpdateInterval" (func $setUpdateInterval (param $milliseconds i32)))
+  ;; Pop wasm binary code from buffer stack and load it. Returns new process ID.
+  ;; All exports from boot.wasm starting with "api." are forwarded to the process.
+  (import "api" "loadProcess" (func $loadProcess (result i32)))
+  ;; Update a process, keeping it alive.
+  (import "api" "updateProcess" (func $updateProcess (param $pid i32)))
+  ;; Kill a process.
+  (import "api" "killProcess" (func $killProcess (param $pid i32)))
 
 
   ;; Table for callback functions.
