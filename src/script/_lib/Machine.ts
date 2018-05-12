@@ -347,12 +347,12 @@ export default class Machine {
         this._nextUpdate += this._updateInterval
       }
     }
-    while (performance.now() < this._nextFrame) {
+    /*while (performance.now() < this._nextFrame) {
       if (performance.now() >= this._nextUpdate) {
         process.instance.exports.update(this._nextUpdate)
         this._nextUpdate += this._updateInterval
       }
-    }
+    }*/
     this._nextFrame += this._frameInterval
   }
 
