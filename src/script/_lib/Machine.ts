@@ -117,6 +117,11 @@ export default class Machine {
   connectTo() {
     let url = (new URL(this._popString(), this._baseUrl)).toString()
     this._sysRequest("connectTo", url)
+    this._active = false
+  }
+  shutdown() {
+    this._sysRequest("removeMachine")
+    this._active = false
   }
   getBaseUrl() {
     return this._pushString(this._baseUrl)
@@ -223,9 +228,25 @@ export default class Machine {
     if (process) process.instance.export.update(performance.now())
     this._activePID = oldpid
   }
+  callbackProcess(pid: number, tableIndex: number, ...a: any[]) {
+    let oldpid = this._activePID
+    this._activePID = pid
+    let process = this._processes[this._activePID]
+    if (process) process.instance.export.table.get(tableIndex)(...a)
+    this._activePID = oldpid
+  }
   killProcess(pid: number) {
-    this._processes[this._activePID] = null
+    this._processes[pid] = null
     this._activePID = 0
+  }
+  transferMemory(srcPid: number, srcOffset: number, length: number, destPid: number, destOffset: number) {
+    let srcProcess = this._processes[srcPid]
+    let destProcess = this._processes[destPid]
+
+    if (!srcProcess) throw "No active process!"
+    let ar = new Uint8Array(destProcess.instance.exports.memory.buffer)
+    ar.set(new Uint8Array(srcProcess.instance.exports.memory.buffer.slice(srcOffset, srcOffset + length)), destOffset)
+    this._bufferStack.push(ar.buffer)
   }
 
   focusInput(input: number) {
@@ -302,7 +323,7 @@ export default class Machine {
   private _tick() {
     if (!this._active) return
     let t = performance.now()
-    let process = this._processes[this._activePID]
+    let process = this._processes[0]
     setTimeout(this._tick.bind(this), this._nextUpdate - t)
     if (this._transferBuffer) {
       process.instance.exports.draw(t)

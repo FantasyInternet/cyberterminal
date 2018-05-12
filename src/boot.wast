@@ -24,6 +24,8 @@
 
   ;; Pop URL from buffer stack and connect to it.
   (import "api" "connectTo" (func $connectTo ))
+  ;; Shut down this connection
+  (import "api" "shutdown" (func $shutdown ))
   ;; Push base URL to buffer stack and return its length in bytes.  
   (import "api" "getBaseUrl" (func $getBaseUrl (result i32)))
   ;; Pop URL from buffer stack and set it as base URL.
@@ -86,8 +88,12 @@
   (import "api" "loadProcess" (func $loadProcess (result i32)))
   ;; Update a process, keeping it alive.
   (import "api" "updateProcess" (func $updateProcess (param $pid i32)))
+  ;; Call back a process. Any parameters beyond the first two will be forwarded to the callback function.
+  (import "api" "callbackProcess" (func $callbackProcess (param $pid i32) (param $tableIndex i32) (param $param i32)))
   ;; Kill a process.
   (import "api" "killProcess" (func $killProcess (param $pid i32)))
+  ;; Transfer a chunk of memory from one process to another
+  (import "api" "transferMemory" (func $transferMemory (param $srcPid i32) (param $srcOffset i32) (param $length i32) (param $destPid i32) (param $destOffset i32)))
 
 
   ;; Table for callback functions.
