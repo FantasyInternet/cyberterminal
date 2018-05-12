@@ -95,6 +95,12 @@
   ;; Transfer a chunk of memory from one process to another
   (import "api" "transferMemory" (func $transferMemory (param $srcPid i32) (param $srcOffset i32) (param $length i32) (param $destPid i32) (param $destOffset i32)))
 
+  ;; transpile wa(s)t into wasm on the buffer stack and return byte length.
+  (import "api" "wabt" (func $wabt (result i32)))
+
+  ;; All JavaScript Math functions are available.
+  (import "Math" "random" (func $random (result f32)))
+
 
   ;; Table for callback functions.
   (table $table 8 anyfunc)
@@ -158,6 +164,8 @@
     (call $resizePart (get_global $inputText) (call $getInputText))
     (call $popToMemory (call $getPartOffset (get_global $inputText)))
     (call $printInput (get_global $display) (get_global $inputText) (call $getInputPosition) (call $getInputSelected) (i32.const 0xff666666))
+
+    (call $rect (get_global $display) (i32.trunc_u/f32 (f32.mul (call $random) (f32.const 300))) (i32.trunc_u/f32 (f32.mul (call $random) (f32.const 128))) (i32.const 8) (i32.const 8) (i32.const 0xff00ff00))
 
     (call $copyImg (get_global $pointer) (i32.const 0) (i32.const 0) (get_global $display) (call $getMouseX) (call $getMouseY) (call $getImgWidth (get_global $pointer)) (call $getImgHeight (get_global $pointer)))
     (call $displayMemory (i32.add (call $getPartOffset (get_global $display)) (i32.const 8)) (i32.sub (call $getPartLength (get_global $display)) (i32.const 8)) (i32.const 0))

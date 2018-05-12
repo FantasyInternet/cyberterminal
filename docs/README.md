@@ -24,6 +24,7 @@ Follow development of this app [live on Twitch!](https://www.twitch.tv/codeartis
 * ["script/_lib/TextInput"](modules/_script__lib_textinput_.md)
 * ["script/_lib/WebSys"](modules/_script__lib_websys_.md)
 * ["script/_lib/css"](modules/_script__lib_css_.md)
+* ["script/_lib/wabt"](modules/_script__lib_wabt_.md)
 * ["script/cyberterminal-electron"](modules/_script_cyberterminal_electron_.md)
 * ["script/cyberterminal-web"](modules/_script_cyberterminal_web_.md)
 

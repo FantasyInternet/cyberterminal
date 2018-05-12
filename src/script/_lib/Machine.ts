@@ -1,3 +1,5 @@
+import wabt from "./wabt"
+
 /**
  * Central processing unit for browsers
  * See [Sys](../interfaces/__classes_sys_.sys.md) for documentation
@@ -211,7 +213,7 @@ export default class Machine {
     let pid = this._processes.length
     this._processes.push(null)
     //@ts-ignore
-    WebAssembly.instantiate(wasm, { api }).then((process) => {
+    WebAssembly.instantiate(wasm, { api, Math }).then((process) => {
       this._activePID = pid
       this._processes[pid] = process
       process.instance.exports.setup()
@@ -286,6 +288,12 @@ export default class Machine {
 
   startTone() { this._sysRequest("startTone", ...arguments) }
   stopTone() { this._sysRequest("stopTone", ...arguments) }
+
+  wabt() {
+    let wast = this._popString()
+    let module = wabt.parseWat("idunno.wast", wast)
+    return this._pushArrayBuffer(module.toBinary({}).buffer)
+  }
 
   /* _privates */
   private _active: boolean = false
