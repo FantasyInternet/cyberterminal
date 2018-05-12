@@ -269,12 +269,15 @@ export default class Machine {
   getInputText() { return this._pushString(this._textInputState.text) }
   getInputPosition() { return this._textInputState.pos }
   getInputSelected() { return this._textInputState.len }
-  setTextInput(position: number, selection: number) {
+  setInputText() {
     let text = this._popString()
-    this._sysRequest("setTextInput", text, position, selection)
+    this._sysRequest("setTextInput", text, this._textInputState.pos || 0, this._textInputState.len || 0)
     this._textInputState.text = text
-    this._textInputState.pos = position
-    this._textInputState.len = selection
+  }
+  setInputPosition(position: number = 0, selection: number = 0) {
+    this._sysRequest("setTextInput", this._textInputState.text, position || 0, selection || 0)
+    this._textInputState.pos = position || 0
+    this._textInputState.len = selection || 0
   }
   getMouseX() { return this._mouseInputState.x }
   getMouseY() { return this._mouseInputState.y }

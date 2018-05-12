@@ -53,8 +53,10 @@
   (import "api" "getInputPosition" (func $getInputPosition (result i32)))
   ;; Get number of characters selected in text input.
   (import "api" "getInputSelected" (func $getInputSelected (result i32)))
-  ;; Pop text from buffer stack and set text, position and selection of text input.
-  (import "api" "setTextInput" (func $setTextInput (param $position i32) (param $selected i32)))
+  ;; Pop text from buffer stack and set text of text input.
+  (import "api" "setInputText" (func $setInputText))
+  ;; Set position and (optionally) selection of text input.
+  (import "api" "setInputPosition" (func $setInputPosition (param $position i32) (param $selected i32)))
 
   ;; Get X coordinate of mouse input.
   (import "api" "getMouseX" (func $getMouseX (result i32)))
@@ -115,9 +117,9 @@
   ;; Global variables
   (global $pointerReq (mut i32) (i32.const 0))
   (global $pointer    (mut i32) (i32.const 0))
-  (global $fontReq (mut i32) (i32.const 0))
-  (global $font    (mut i32) (i32.const 0))
-  (global $inputText (mut i32) (i32.const 1))
+  (global $fontReq    (mut i32) (i32.const 0))
+  (global $font       (mut i32) (i32.const 0))
+  (global $inputText  (mut i32) (i32.const 1))
 
   ;; Setup function is called once on start.
   (func $setup
@@ -131,7 +133,8 @@
 
     (call $focusInput (i32.const 1))
     (set_global $inputText (call $createPart (i32.const 0)))
-    (call $setTextInput (call $getBaseUrl) (i32.const 0))
+    (call $setInputText (call $getBaseUrl))
+    (return)
   )
   (export "setup" (func $setup))
 
@@ -150,8 +153,13 @@
 
   ;; Update function is called once every interval.
   (func $update (param $t f64)
+    (if (call $getMousePressed) (then
+      (call $setInputPosition (i32.div_u (call $getMouseX) (i32.const 8)) (i32.const 0))
+    ))
     (if (i32.eq (i32.load8_u (i32.add (call $getPartOffset (get_global $inputText)) (i32.sub (call $getInputPosition) (i32.const 1)))) (i32.const 10)) (then
-      (call $connectTo (call $pushFromMemory (call $getPartOffset (get_global $inputText)) (i32.sub (call $getInputPosition) (i32.const 1))))
+      (call $setInputText (call $pushFromMemory (call $getPartOffset (get_global $inputText)) (i32.sub (call $getInputPosition) (i32.const 1))))
+      (call $connectTo (call $getInputText))
+      (return)
     ))
   )
   (export "update" (func $update))
@@ -164,8 +172,6 @@
     (call $resizePart (get_global $inputText) (call $getInputText))
     (call $popToMemory (call $getPartOffset (get_global $inputText)))
     (call $printInput (get_global $display) (get_global $inputText) (call $getInputPosition) (call $getInputSelected) (i32.const 0xff666666))
-
-    (call $rect (get_global $display) (i32.trunc_u/f32 (f32.mul (call $random) (f32.const 300))) (i32.trunc_u/f32 (f32.mul (call $random) (f32.const 128))) (i32.const 8) (i32.const 8) (i32.const 0xff00ff00))
 
     (call $copyImg (get_global $pointer) (i32.const 0) (i32.const 0) (get_global $display) (call $getMouseX) (call $getMouseY) (call $getImgWidth (get_global $pointer)) (call $getImgHeight (get_global $pointer)))
     (call $displayMemory (i32.add (call $getPartOffset (get_global $display)) (i32.const 8)) (i32.sub (call $getPartLength (get_global $display)) (i32.const 8)) (i32.const 0))
