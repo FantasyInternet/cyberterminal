@@ -216,7 +216,8 @@ export default class Machine {
     WebAssembly.instantiate(wasm, { api, Math }).then((process) => {
       this._activePID = pid
       this._processes[pid] = process
-      process.instance.exports.setup()
+      if (process.instance.exports.setup)
+        process.instance.exports.setup()
       this._nextFrame = this._nextUpdate = performance.now()
       if (this._activePID === 0) this._tick()
       this._activePID = 0
@@ -336,16 +337,19 @@ export default class Machine {
     let t = performance.now()
     let process = this._processes[0]
     setTimeout(this._tick.bind(this), this._nextUpdate - t)
-    if (this._transferBuffer) {
-      process.instance.exports.draw(t)
-      this.commitDisplay(() => { })
-    }
-    if (t >= this._nextUpdate) {
+    let updated = !(process.instance.exports.update)
+    if (t >= this._nextUpdate && process.instance.exports.update) {
       if (this._updateInterval <= 0) this._updateInterval = 1
       while (t >= this._nextUpdate) {
+
         process.instance.exports.update(this._nextUpdate)
+        updated = true
         this._nextUpdate += this._updateInterval
       }
+    }
+    if (this._transferBuffer && updated && process.instance.exports.draw) {
+      process.instance.exports.draw(t)
+      this.commitDisplay(() => { })
     }
     /*while (performance.now() < this._nextFrame) {
       if (performance.now() >= this._nextUpdate) {
@@ -391,6 +395,12 @@ export default class Machine {
         this._nextUpdate = performance.now()
         this._active = true
         this._tick()
+        break
+
+      case "break":
+        if (this._processes.length && this._processes[0].instance.exports.break) {
+          this._processes[0].instance.exports.break()
+        }
         break
 
       case "imagedata":

@@ -4,6 +4,7 @@ import Sys from "./Sys"
 import ChipSound from "./ChipSound"
 import MouseInput from "./MouseInput"
 import TextInput from "./TextInput"
+import Breaker from "./Breaker"
 
 let scriptSrc: string
 
@@ -17,6 +18,7 @@ export default class WebSys implements Sys {
   mouseInput: MouseInput
   gameInput: GameInput
   inputPriority: string[] = ["text", "mouse", "game"]
+  breaker: Breaker
   get displayMode() { return this._displayMode }
   get displayWidth() { return this._displayWidth }
   get displayHeight() { return this._displayHeight }
@@ -30,6 +32,7 @@ export default class WebSys implements Sys {
     this.textInput = new TextInput(this, <HTMLInputElement>this._container.querySelector(".input .text"))
     this.mouseInput = new MouseInput(this)
     this.gameInput = new GameInput(this)
+    this.breaker = new Breaker(this)
   }
 
   setDisplayMode(mode: "text" | "pixel", width: number, height: number, displayWidth = width, displayHeight = height) {

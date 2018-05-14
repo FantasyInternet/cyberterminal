@@ -10,6 +10,7 @@ export default class CyberTerminal {
     this.sys.textInput.addEventListener(this._onTextInput.bind(this))
     this.sys.mouseInput.addEventListener(this._onMouseInput.bind(this))
     this.sys.gameInput.addEventListener(this._onGameInput.bind(this))
+    this.sys.breaker.addEventListener(this._onBreak.bind(this))
     this.connectTo(location.toString())
     document.addEventListener("visibilitychange", () => {
       if (this.machineWorkers.length) {
@@ -143,6 +144,19 @@ export default class CyberTerminal {
     }
     if (!this.machineWorkers.length) return
     this.machineWorkers[this.machineWorkers.length - 1].send(msg)
+  }
+  private _onBreak(state: any) {
+    if (state.level === 1) {
+      let msg = {
+        cmd: "break",
+        state: state
+      }
+      if (!this.machineWorkers.length) return
+      this.machineWorkers[this.machineWorkers.length - 1].send(msg)
+    }
+    if (state.level === 2 && confirm("Disconnect?")) {
+      this.removeMachine()
+    }
   }
 
   private async _findBoot(url: string) {

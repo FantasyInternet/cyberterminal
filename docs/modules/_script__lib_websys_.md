@@ -23,7 +23,7 @@
 
 **● scriptSrc**: *`string`*
 
-*Defined in [script/_lib/WebSys.ts:8](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L8)*
+*Defined in [script/_lib/WebSys.ts:9](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L9)*
 
 ___
 

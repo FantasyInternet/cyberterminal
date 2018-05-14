@@ -17,6 +17,7 @@ Unified interface to system I/O
 
 ### Properties
 
+* [breaker](_script__lib_sys_.sys.md#breaker)
 * [chipSound](_script__lib_sys_.sys.md#chipsound)
 * [displayBitmap](_script__lib_sys_.sys.md#displaybitmap)
 * [displayHeight](_script__lib_sys_.sys.md#displayheight)
@@ -44,13 +45,24 @@ Unified interface to system I/O
 
 ## Properties
 
+<a id="breaker"></a>
+
+###  breaker
+
+**● breaker**: *[Breaker](../classes/_script__lib_breaker_.breaker.md)*
+
+*Defined in [script/_lib/Sys.ts:30](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L30)*
+
+Stop button to break or disconnect current connection.
+
+___
 <a id="chipsound"></a>
 
 ###  chipSound
 
 **● chipSound**: *[ChipSound](../classes/_script__lib_chipsound_.chipsound.md)*
 
-*Defined in [script/_lib/Sys.ts:19](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L19)*
+*Defined in [script/_lib/Sys.ts:20](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L20)*
 
 Tone generator.
 
@@ -61,7 +73,7 @@ ___
 
 **● displayBitmap**: *`ImageData`*
 
-*Defined in [script/_lib/Sys.ts:17](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L17)*
+*Defined in [script/_lib/Sys.ts:18](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L18)*
 
 The current display bitmap.
 
@@ -72,7 +84,7 @@ ___
 
 **● displayHeight**: *`number`*
 
-*Defined in [script/_lib/Sys.ts:15](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L15)*
+*Defined in [script/_lib/Sys.ts:16](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L16)*
 
 The current height of the display in characters or pixels.
 
@@ -83,7 +95,7 @@ ___
 
 **● displayMode**: *`string`*
 
-*Defined in [script/_lib/Sys.ts:11](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L11)*
+*Defined in [script/_lib/Sys.ts:12](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L12)*
 
 Name of current display mode.
 
@@ -94,7 +106,7 @@ ___
 
 **● displayWidth**: *`number`*
 
-*Defined in [script/_lib/Sys.ts:13](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L13)*
+*Defined in [script/_lib/Sys.ts:14](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L14)*
 
 The current width of the display in characters or pixels.
 
@@ -105,7 +117,7 @@ ___
 
 **● gameInput**: *[GameInput](../classes/_script__lib_gameinput_.gameinput.md)*
 
-*Defined in [script/_lib/Sys.ts:25](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L25)*
+*Defined in [script/_lib/Sys.ts:26](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L26)*
 
 Game input state.
 
@@ -116,7 +128,7 @@ ___
 
 **● inputPriority**: *`string`[]*
 
-*Defined in [script/_lib/Sys.ts:27](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L27)*
+*Defined in [script/_lib/Sys.ts:28](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L28)*
 
 Inputs in prioritized order, highest to lowest.
 
@@ -127,7 +139,7 @@ ___
 
 **● mouseInput**: *[MouseInput](../classes/_script__lib_mouseinput_.mouseinput.md)*
 
-*Defined in [script/_lib/Sys.ts:23](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L23)*
+*Defined in [script/_lib/Sys.ts:24](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L24)*
 
 Mouse input state.
 
@@ -138,7 +150,7 @@ ___
 
 **● textInput**: *[TextInput](../classes/_script__lib_textinput_.textinput.md)*
 
-*Defined in [script/_lib/Sys.ts:21](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L21)*
+*Defined in [script/_lib/Sys.ts:22](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L22)*
 
 Text input state.
 
@@ -152,7 +164,7 @@ ___
 
 ▸ **createMachine**(): [MachineWorker](_script__lib_machineworker_.machineworker.md)
 
-*Defined in [script/_lib/Sys.ts:61](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L61)*
+*Defined in [script/_lib/Sys.ts:64](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L64)*
 
 Create a machine.
 
@@ -166,7 +178,7 @@ ___
 
 ▸ **delete**(filename: *`string`*): `Promise`<`boolean`>
 
-*Defined in [script/_lib/Sys.ts:81](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L81)*
+*Defined in [script/_lib/Sys.ts:84](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L84)*
 
 Delete a file.
 
@@ -185,7 +197,7 @@ ___
 
 ▸ **drawBitmap**(): `void`
 
-*Defined in [script/_lib/Sys.ts:40](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L40)*
+*Defined in [script/_lib/Sys.ts:43](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L43)*
 
 Draw current bitmap to screen.
 
@@ -198,7 +210,7 @@ ___
 
 ▸ **focusInput**(input: *"text" |"mouse" |"game"*): `string`[]
 
-*Defined in [script/_lib/Sys.ts:87](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L87)*
+*Defined in [script/_lib/Sys.ts:90](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L90)*
 
 Focus on given type of input.
 
@@ -220,7 +232,7 @@ ___
 
 ▸ **read**(filename: *`string`*, options: *`any`*): `Promise`<`any`>
 
-*Defined in [script/_lib/Sys.ts:68](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L68)*
+*Defined in [script/_lib/Sys.ts:71](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L71)*
 
 Read a file.
 
@@ -240,7 +252,7 @@ ___
 
 ▸ **setDisplayMode**(mode: *"text" |"pixel"*, width: *`number`*, height: *`number`*): `void`
 
-*Defined in [script/_lib/Sys.ts:35](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L35)*
+*Defined in [script/_lib/Sys.ts:38](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L38)*
 
 Switch display mode.
 
@@ -263,7 +275,7 @@ ___
 
 ▸ **setTextInput**(text: *`string`*, pos: *`number`*, len: *`number`*): `void`
 
-*Defined in [script/_lib/Sys.ts:95](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L95)*
+*Defined in [script/_lib/Sys.ts:98](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L98)*
 
 Set the state of the text input.
 
@@ -284,7 +296,7 @@ ___
 
 ▸ **startTone**(channel: *`number`*, frequency: *`number`*, volume: *`number`*, type: *"sine" |"square" |"sawtooth" |"triangle"*): `void`
 
-*Defined in [script/_lib/Sys.ts:49](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L49)*
+*Defined in [script/_lib/Sys.ts:52](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L52)*
 
 Start tone oscillator
 
@@ -310,7 +322,7 @@ ___
 
 ▸ **stopTone**(channel: *`number`*): `void`
 
-*Defined in [script/_lib/Sys.ts:55](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L55)*
+*Defined in [script/_lib/Sys.ts:58](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L58)*
 
 Stop tone oscillator
 
@@ -329,7 +341,7 @@ ___
 
 ▸ **write**(filename: *`string`*, data: *`string` |`ArrayBuffer`*): `Promise`<`boolean`>
 
-*Defined in [script/_lib/Sys.ts:75](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L75)*
+*Defined in [script/_lib/Sys.ts:78](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L78)*
 
 Write to a file.
 

@@ -2,6 +2,7 @@ import GameInput from "./GameInput"
 import ChipSound from "./ChipSound"
 import MouseInput from "./MouseInput"
 import TextInput from "./TextInput"
+import Breaker from "./Breaker"
 
 /**
  * Unified interface to system I/O
@@ -25,6 +26,8 @@ export default interface Sys {
   gameInput: GameInput
   /** Inputs in prioritized order, highest to lowest. */
   inputPriority: string[]
+  /** Stop button to break or disconnect current connection. */
+  breaker: Breaker
 
   /**
    * Switch display mode.
