@@ -66,6 +66,7 @@ export default class CyberTerminal {
 
   /* _privates */
   private _connecting: any
+  private _disconnecting: boolean = false
 
   private _onMessage(message: any, machineWorker: MachineWorker) {
     switch (message.cmd) {
@@ -146,6 +147,20 @@ export default class CyberTerminal {
     this.machineWorkers[this.machineWorkers.length - 1].send(msg)
   }
   private _onBreak(state: any) {
+    if (state.level === 0 && this._disconnecting) {
+      this.sys.stopTone(0)
+      if (confirm("Disconnect?")) {
+        this.removeMachine()
+        if (!this.machineWorkers.length) {
+          if (history.length > 1) {
+            history.back()
+          } else {
+            location.reload(true)
+          }
+        }
+      }
+      this._disconnecting = false
+    }
     if (state.level === 1) {
       let msg = {
         cmd: "break",
@@ -154,8 +169,12 @@ export default class CyberTerminal {
       if (!this.machineWorkers.length) return
       this.machineWorkers[this.machineWorkers.length - 1].send(msg)
     }
-    if (state.level === 2 && confirm("Disconnect?")) {
-      this.removeMachine()
+    if (state.level === 2) {
+      this.sys.startTone(0, 256, 1, "square")
+      setTimeout(() => {
+        this.sys.stopTone(0)
+      }, 128)
+      this._disconnecting = true
     }
   }
 

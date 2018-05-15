@@ -37,7 +37,7 @@ Class for taking care of game input
 
 ⊕ **new Breaker**(sys: *[Sys](../interfaces/_script__lib_sys_.sys.md)*): [Breaker](_script__lib_breaker_.breaker.md)
 
-*Defined in script/_lib/Breaker.ts:9*
+*Defined in [script/_lib/Breaker.ts:9](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Breaker.ts#L9)*
 
 **Parameters:**
 
@@ -57,7 +57,7 @@ ___
 
 **● sys**: *[Sys](../interfaces/_script__lib_sys_.sys.md)*
 
-*Defined in script/_lib/Breaker.ts:11*
+*Defined in [script/_lib/Breaker.ts:11](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Breaker.ts#L11)*
 
 ___
 
@@ -69,7 +69,7 @@ ___
 
 ▸ **addEventListener**(fn: *`Function`*): `void`
 
-*Defined in script/_lib/Breaker.ts:33*
+*Defined in [script/_lib/Breaker.ts:33](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Breaker.ts#L33)*
 
 **Parameters:**
 
@@ -86,7 +86,7 @@ ___
 
 ▸ **removeEventListener**(fn: *`Function`*): `void`
 
-*Defined in script/_lib/Breaker.ts:40*
+*Defined in [script/_lib/Breaker.ts:40](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Breaker.ts#L40)*
 
 **Parameters:**
 
@@ -106,7 +106,7 @@ ___
 
 **state**: *`object`*
 
-*Defined in script/_lib/Breaker.ts:7*
+*Defined in [script/_lib/Breaker.ts:7](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Breaker.ts#L7)*
 
 <a id="state.level"></a>
 
@@ -114,7 +114,7 @@ ___
 
 **● level**: *`number`* = 0
 
-*Defined in script/_lib/Breaker.ts:8*
+*Defined in [script/_lib/Breaker.ts:8](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Breaker.ts#L8)*
 
 ___
 
