@@ -196,6 +196,8 @@ export default class WebSys implements Sys {
   private _displayTextGrid?: HTMLTableElement
   private _displayCursorCol: number = -1
   private _displayCursorRow: number = -1
+  private _displayTextSize: number = 8
+  private _displayTextSizeDelta: number = 0
   private _displayCanvas?: HTMLCanvasElement
   private _displayContext?: CanvasRenderingContext2D
   private _displayScale: number = 8
@@ -206,7 +208,7 @@ export default class WebSys implements Sys {
       ; (<HTMLElement>document.querySelector("head")).insertBefore(style, document.querySelector("head *"))
     this._container.innerHTML = '<div class="display"></div><div class="input"><div class="text"></div><div class="mouse"></div><div class="game"></div></div>'
     this._displayContainer = <HTMLElement>this._container.querySelector(".display")
-    addEventListener("resize", () => { this._resizeCanvas(false) })
+    addEventListener("resize", () => { this._resize() })
   }
 
   private _initCanvas() {
@@ -218,7 +220,7 @@ export default class WebSys implements Sys {
     this._displayCanvas.height = this._displayBitmap.height
     this._displayContext = <CanvasRenderingContext2D>this._displayCanvas.getContext("2d")
     this.mouseInput.element = this._displayCanvas
-    this._resizeCanvas(false)
+    this._resize()
   }
 
   private _initTextGrid(width: number, height: number) {
@@ -238,7 +240,7 @@ export default class WebSys implements Sys {
     this._displayTextGrid = <HTMLTableElement>this._displayContainer.querySelector("table")
     this._displayCursorCol = this._displayCursorRow = 0
     this.mouseInput.element = this._displayTextGrid
-    // this._resizeCanvas(false)
+    this._resize()
   }
 
   private _scrollText() {
@@ -252,6 +254,35 @@ export default class WebSys implements Sys {
       }
       parent.appendChild(row)
       this._displayCursorRow--
+    }
+  }
+
+  private _resize() {
+    switch (this._displayMode) {
+      case "text":
+        this._displayTextSizeDelta = 1
+        this._resizeTextGrid()
+        break
+
+      case "pixel":
+        this._resizeCanvas(false)
+        break
+    }
+  }
+
+  private _resizeTextGrid() {
+    if (!this._displayTextGrid) return
+    let terminalWidth = this._container.offsetWidth
+    let terminalHeight = this._container.offsetHeight
+    if (this._displayTextGrid.offsetWidth > terminalWidth || this._displayTextGrid.offsetHeight > terminalHeight) {
+      if (this._displayTextSizeDelta) this._displayTextSizeDelta = -1
+    } else if (this._displayTextSizeDelta < 0) {
+      this._displayTextSizeDelta = 0
+    }
+    this._displayTextSize += this._displayTextSizeDelta
+    this._displayTextGrid.style.fontSize = this._displayTextSize + "px"
+    if (this._displayTextSizeDelta) {
+      requestAnimationFrame(this._resizeTextGrid.bind(this))
     }
   }
 
@@ -287,10 +318,8 @@ export default class WebSys implements Sys {
     else
       this.mouseInput.scale = this._displayScale
   }
-
-
-
 }
+
 
 class WebMachineWorker implements MachineWorker {
   worker: Worker
