@@ -8,14 +8,6 @@ import Breaker from "./Breaker"
  * Unified interface to system I/O
  */
 export default interface Sys {
-  /** Name of current display mode. */
-  displayMode: string
-  /** The current width of the display in characters or pixels. */
-  displayWidth: number
-  /** The current height of the display in characters or pixels. */
-  displayHeight: number
-  /** The current display bitmap. */
-  displayBitmap?: ImageData
   /** Tone generator. */
   chipSound: ChipSound
   /** Text input state. */
@@ -38,9 +30,14 @@ export default interface Sys {
   setDisplayMode(mode: "text" | "pixel", width: number, height: number): void
 
   /**
-   * Draw current bitmap to screen.
+   * Draw given bitmap to pixel display.
    */
-  drawBitmap(): void
+  drawBitmap(buffer: ArrayBuffer): void
+
+  /**
+   * Print string to text display.
+   */
+  print(str:string):void
 
   /**
    * Start tone oscillator

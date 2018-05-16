@@ -6,9 +6,11 @@
 
   ;; Pop string from buffer stack and log it to console.
   (import "api" "log" (func $log ))
+  ;; Pop string from buffer stack and print it to text display.
+  (import "api" "print" (func $print ))
 
-  ;; Set the display mode, resolution and (optionally) display size (for overscan).
-  (import "api" "setDisplayMode" (func $setDisplayMode (param $mode i32) (param $width i32) (param $height i32) (param $displayWidth i32) (param $displayHeight i32) ))
+  ;; Set the display mode(0=text,1=pixel), resolution and (optionally) display size (for overscan).
+  (import "api" "setDisplayMode" (func $setDisplayMode (param $mode i32) (param $width i32) (param $height i32) (param $visibleWidth i32) (param $visibleHeight i32) ))
   ;; Copy memory range to display buffer ($destOffset optional) and commit display buffer.
   (import "api" "displayMemory" (func $displayMemory (param $offset i32) (param $length i32) (param $destOffset i32)))
 
@@ -123,13 +125,8 @@
 
   ;; Setup function is called once on start.
   (func $setup
-    (set_global $font       (call $createImg (i32.const 0) (i32.const 0)))
-    (set_global $fontReq    (call $readImage (call $pushFromMemory (i32.const 100) (i32.const 17)) (i32.const 1)))
-    (set_global $pointer    (call $createImg (i32.const 0) (i32.const 0)))
-    (set_global $pointerReq (call $readImage (call $pushFromMemory (i32.const 200) (i32.const 20)) (i32.const 1)))
-
-    (set_global $display    (call $createImg (i32.const 320) (i32.const 200)))
-    (call $setDisplayMode (i32.const 1) (call $getImgWidth (get_global $display)) (call $getImgHeight (get_global $display)) (call $getImgWidth (get_global $display)) (call $getImgHeight (get_global $display)))
+    (call $setUpdateInterval (i32.const 32))
+    (call $setDisplayMode (i32.const 0) (i32.const 80) (i32.const 20) (i32.const 80) (i32.const 20))
 
     (call $focusInput (i32.const 1))
     (set_global $inputText (call $createPart (i32.const 0)))
@@ -138,45 +135,29 @@
   )
   (export "setup" (func $setup))
 
-  ;; callback 1
-  (func $storeImages (param $w i32) (param $h i32) (param $req i32)
-    (if (i32.eq (get_local $req) (get_global $fontReq)) (then
-      (set_global $font (call $createImg (get_local $w) (get_local $h)))
-      (call $popToMemory (i32.add (call $getPartOffset (get_global $font)) (i32.const 8)))
-    ))
-    (if (i32.eq (get_local $req) (get_global $pointerReq)) (then
-      (set_global $pointer (call $createImg (get_local $w) (get_local $h)))
-      (call $popToMemory (i32.add (call $getPartOffset (get_global $pointer)) (i32.const 8)))
-    ))
-  )
-  (elem (i32.const 1) $storeImages)
-
   ;; Update function is called once every interval.
   (func $update (param $t f64)
-    (if (call $getMousePressed) (then
-      (call $setInputPosition (i32.div_u (call $getMouseX) (i32.const 8)) (i32.const 0))
-    ))
-    (if (i32.eq (i32.load8_u (i32.add (call $getPartOffset (get_global $inputText)) (i32.sub (call $getInputPosition) (i32.const 1)))) (i32.const 10)) (then
-      (call $setInputText (call $pushFromMemory (call $getPartOffset (get_global $inputText)) (i32.sub (call $getInputPosition) (i32.const 1))))
-      (call $connectTo (call $getInputText))
-      (return)
-    ))
+    (call $resizePart (get_global $inputText) (call $getInputText))
+    (call $print)
+    (call $setInputText)
+    
+    ;; (if (i32.eq (i32.load8_u (i32.add (call $getPartOffset (get_global $inputText)) (i32.sub (call $getInputPosition) (i32.const 1)))) (i32.const 10)) (then
+    ;;   (call $setInputText (call $pushFromMemory (call $getPartOffset (get_global $inputText)) (i32.sub (call $getInputPosition) (i32.const 1))))
+    ;;   (call $connectTo (call $getInputText))
+    ;;   (return)
+    ;; ))
   )
   (export "update" (func $update))
 
   ;; Draw function is called whenever the display needs to be redrawn.
   (func $draw (param $t f64)
-    (call $rect (get_global $display) (i32.const 0) (i32.const 0) (call $getImgWidth (get_global $display)) (call $getImgHeight (get_global $display)) (i32.const 0xff000000))
-    (set_global $txtX (i32.const 0))
-    (set_global $txtY (i32.const 0))
-    (call $resizePart (get_global $inputText) (call $getInputText))
-    (call $popToMemory (call $getPartOffset (get_global $inputText)))
-    (call $printInput (get_global $display) (get_global $inputText) (call $getInputPosition) (call $getInputSelected) (i32.const 0xff666666))
-
-    (call $copyImg (get_global $pointer) (i32.const 0) (i32.const 0) (get_global $display) (call $getMouseX) (call $getMouseY) (call $getImgWidth (get_global $pointer)) (call $getImgHeight (get_global $pointer)))
-    (call $displayMemory (i32.add (call $getPartOffset (get_global $display)) (i32.const 8)) (i32.sub (call $getPartLength (get_global $display)) (i32.const 8)) (i32.const 0))
   )
   (export "draw" (func $draw))
+
+  ;; Break function is called whenever Esc is pressed.
+  (func $break
+  )
+  (export "break" (func $break))
 
   ;; Graphic routines
 
@@ -316,7 +297,7 @@
   (global $txtX (mut i32) (i32.const 0))
   (global $txtY (mut i32) (i32.const 0))
 
-  (func $print (param $img i32) (param $char i32)
+  (func $printChar (param $img i32) (param $char i32)
     (call $copyImg (get_global $font) (i32.const 0) (i32.mul (get_local $char) (i32.const 8)) (get_local $img) (get_global $txtX) (get_global $txtY) (i32.const 8) (i32.const 8))
     (set_global $txtX (i32.add (get_global $txtX) (i32.const 8)))
     (if (i32.eq (get_local $char) (i32.const 9)) (then
@@ -347,7 +328,7 @@
     (set_local $len (call $getPartLength (get_local $str)))
     (if (i32.gt_u (get_local $len) (i32.const 0)) (then
       (loop
-        (call $print (get_local $img) (i32.load8_u (get_local $i)))
+        (call $printChar (get_local $img) (i32.load8_u (get_local $i)))
         (set_local $i (i32.add (get_local $i) (i32.const 1)))
         (set_local $len (i32.sub (get_local $len) (i32.const 1)))
         (br_if 0 (i32.gt_u (get_local $len) (i32.const 0)))
@@ -373,7 +354,7 @@
         )(else
           (set_local $pos (i32.sub (get_local $pos) (i32.const 1)))
         ))
-        (call $print (get_local $img) (i32.load8_u (get_local $i)))
+        (call $printChar (get_local $img) (i32.load8_u (get_local $i)))
         (set_local $i (i32.add (get_local $i) (i32.const 1)))
         (set_local $len (i32.sub (get_local $len) (i32.const 1)))
         (br_if 0 (i32.gt_u (get_local $len) (i32.const 0)))

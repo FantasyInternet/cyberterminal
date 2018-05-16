@@ -102,19 +102,15 @@ export default class CyberTerminal {
         break
 
       case "imagedata":
-        if (this.sys.displayBitmap) {
-          let buffer = message.buffer
-          if (!buffer) throw "No buffer received!"
-          let data = new Uint8ClampedArray(buffer)
-          this.sys.displayBitmap.data.set(data, 0)
-          machineWorker.send({
-            cmd: "imagedata",
-            width: this.sys.displayBitmap.width,
-            height: this.sys.displayBitmap.height,
-            buffer: buffer
-          }, [buffer])
-          this.sys.drawBitmap()
-        }
+        let buffer = message.buffer
+        if (!buffer) throw "No buffer received!"
+        this.sys.drawBitmap(buffer)
+        machineWorker.send({
+          cmd: "imagedata",
+          width: message.width,
+          height: message.height,
+          buffer: buffer
+        }, [buffer])
         break
 
       default:

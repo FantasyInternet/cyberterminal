@@ -1,4 +1,4 @@
-[cyberterminal](../README.md) > ["script/_lib/MachineWorker"](../modules/_script__lib_machineworker_.md) > [MachineWorker](../interfaces/_script__lib_machineworker_.machineworker.md)
+[cyberterminal](../README.md) > ["_lib/MachineWorker"](../modules/__lib_machineworker_.md) > [MachineWorker](../interfaces/__lib_machineworker_.machineworker.md)
 
 # Interface: MachineWorker
 
@@ -10,15 +10,15 @@ Interface to MachineWorker
 
 ## Implemented by
 
-* [WebMachineWorker](../classes/_script__lib_websys_.webmachineworker.md)
+* [WebMachineWorker](../classes/__lib_websys_.webmachineworker.md)
 
 ## Index
 
 ### Methods
 
-* [onMessage](_script__lib_machineworker_.machineworker.md#onmessage)
-* [send](_script__lib_machineworker_.machineworker.md#send)
-* [terminate](_script__lib_machineworker_.machineworker.md#terminate)
+* [onMessage](__lib_machineworker_.machineworker.md#onmessage)
+* [send](__lib_machineworker_.machineworker.md#send)
+* [terminate](__lib_machineworker_.machineworker.md#terminate)
 
 ---
 
@@ -30,7 +30,7 @@ Interface to MachineWorker
 
 ▸ **onMessage**(listener: *`Function`*): `void`
 
-*Defined in [script/_lib/MachineWorker.ts:16](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/MachineWorker.ts#L16)*
+*Defined in [_lib/MachineWorker.ts:16](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/MachineWorker.ts#L16)*
 
 Register an event listener for received messages.
 
@@ -49,7 +49,7 @@ ___
 
 ▸ **send**(msg: *`any`*, transferables?: *`any`[]*): `void`
 
-*Defined in [script/_lib/MachineWorker.ts:10](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/MachineWorker.ts#L10)*
+*Defined in [_lib/MachineWorker.ts:10](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/MachineWorker.ts#L10)*
 
 Send a message to machine.
 
@@ -69,7 +69,7 @@ ___
 
 ▸ **terminate**(): `void`
 
-*Defined in [script/_lib/MachineWorker.ts:21](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/MachineWorker.ts#L21)*
+*Defined in [_lib/MachineWorker.ts:21](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/MachineWorker.ts#L21)*
 
 Terminate the machine!
 

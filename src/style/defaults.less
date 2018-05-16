@@ -1,12 +1,25 @@
 fantasy-terminal {
   align-items: center;
   background-color: black;
+  color:white;
   display:flex;
   justify-content: center;
   overflow: hidden;
   position: relative;
   
   max-height: 100vh;
+
+  table {
+    font-family: monospace;
+
+    td {
+      white-space: pre;
+
+      &.current{
+        border-bottom: 1px solid white;
+      }
+    }
+  }
 
   canvas {
     cursor: none;

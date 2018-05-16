@@ -5,10 +5,6 @@ import wabt from "./wabt"
  * See [Sys](../interfaces/__classes_sys_.sys.md) for documentation
  */
 export default class Machine {
-  get displayMode() { return this._displayMode }
-  get displayWidth() { return this._displayWidth }
-  get displayHeight() { return this._displayHeight }
-  get displayBitmap() { return this._displayBitmap }
 
   constructor() {
     this._initCom()
@@ -20,15 +16,16 @@ export default class Machine {
     console.log("📟", this._popString())
   }
 
-  setDisplayMode(mode: number, width: number, height: number, displayWidth = width, displayHeight = height) {
-    this._sysCall("setDisplayMode", this._displayModes[mode], width, height, displayWidth, displayHeight)
+  setDisplayMode(mode: number, width: number, height: number, visibleWidth = width, visibleHeight = height) {
+    this._sysCall("setDisplayMode", this._displayModes[mode], width, height, visibleWidth, visibleHeight)
     this._displayMode = mode
-    this._displayWidth = displayWidth
-    this._displayHeight = displayHeight
+    this._displayWidth = width
+    this._displayHeight = height
+    this._visibleWidth = visibleWidth
+    this._visibleHeight = visibleHeight
     delete this._displayBitmap
-    switch (this._displayModes[this.displayMode]) {
+    switch (this._displayModes[this._displayMode]) {
       case "text":
-        console.error(`${this.displayMode} not yet implemented!`)
         break
 
       case "pixel":
@@ -37,12 +34,16 @@ export default class Machine {
 
       default:
         this._displayMode = -1
-        this._displayWidth = 0
-        this._displayHeight = 0
+        this._visibleWidth = -1
+        this._visibleHeight = -1
         throw "DisplayMode not supported!"
     }
     this.commitDisplay(() => { })
     return
+  }
+
+  print() {
+    this._sysCall("print", this._popString())
   }
 
   displayMemory(offset: number, length: number, destination: number = 0) {
@@ -104,7 +105,7 @@ export default class Machine {
       callback = process.instance.exports.table.get(callback)
     }
     let id = this._asyncCalls++
-    switch (this._displayModes[this.displayMode]) {
+    switch (this._displayModes[this._displayMode]) {
       case "pixel":
         this._commitBitmap(true)
         break
@@ -118,11 +119,11 @@ export default class Machine {
 
   connectTo() {
     let url = (new URL(this._popString(), this._baseUrl)).toString()
-    this._sysRequest("connectTo", url)
+    this._sysCall("connectTo", url)
     this._active = false
   }
   shutdown() {
-    this._sysRequest("removeMachine")
+    this._sysCall("removeMachine")
     this._active = false
   }
   getBaseUrl() {
@@ -255,15 +256,15 @@ export default class Machine {
   focusInput(input: number) {
     switch (input) {
       case 1:
-        this._sysRequest("focusInput", "text")
+        this._sysCall("focusInput", "text")
         break
 
       case 2:
-        this._sysRequest("focusInput", "mouse")
+        this._sysCall("focusInput", "mouse")
         break
 
       case 3:
-        this._sysRequest("focusInput", "game")
+        this._sysCall("focusInput", "game")
         break
     }
   }
@@ -272,11 +273,11 @@ export default class Machine {
   getInputSelected() { return this._textInputState.len }
   setInputText() {
     let text = this._popString()
-    this._sysRequest("setTextInput", text, this._textInputState.pos || 0, this._textInputState.len || 0)
+    this._sysCall("setTextInput", text, this._textInputState.pos || 0, this._textInputState.len || 0)
     this._textInputState.text = text
   }
   setInputPosition(position: number = 0, selection: number = 0) {
-    this._sysRequest("setTextInput", this._textInputState.text, position || 0, selection || 0)
+    this._sysCall("setTextInput", this._textInputState.text, position || 0, selection || 0)
     this._textInputState.pos = position || 0
     this._textInputState.len = selection || 0
   }
@@ -290,8 +291,8 @@ export default class Machine {
   getGameButtonX() { return this._gameInputState.buttons.x }
   getGameButtonY() { return this._gameInputState.buttons.y }
 
-  startTone() { this._sysRequest("startTone", ...arguments) }
-  stopTone() { this._sysRequest("stopTone", ...arguments) }
+  startTone() { this._sysCall("startTone", ...arguments) }
+  stopTone() { this._sysCall("stopTone", ...arguments) }
 
   wabt() {
     let wast = this._popString()
@@ -307,8 +308,10 @@ export default class Machine {
   private _updateInterval: number = 1000 / 60
   private _displayModes: string[] = ["text", "pixel"]
   private _displayMode: number = -1
-  private _displayWidth: number = 0
-  private _displayHeight: number = 0
+  private _displayWidth: number = -1
+  private _displayHeight: number = -1
+  private _visibleWidth: number = -1
+  private _visibleHeight: number = -1
   private _displayBitmap?: ImageData
   private _transferBuffer?: ArrayBuffer
   private _lastCommit: number = performance.now()
@@ -389,7 +392,7 @@ export default class Machine {
 
       case "resume":
         if (this._displayBitmap) {
-          this.setDisplayMode(this._displayMode, this._displayBitmap.width, this._displayBitmap.height, this._displayWidth, this._displayHeight)
+          this.setDisplayMode(this._displayMode, this._displayBitmap.width, this._displayBitmap.height, this._visibleWidth, this._visibleHeight)
         }
         this._nextFrame = performance.now()
         this._nextUpdate = performance.now()

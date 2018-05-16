@@ -19,10 +19,6 @@ export default class WebSys implements Sys {
   gameInput: GameInput
   inputPriority: string[] = ["text", "mouse", "game"]
   breaker: Breaker
-  get displayMode() { return this._displayMode }
-  get displayWidth() { return this._displayWidth }
-  get displayHeight() { return this._displayHeight }
-  get displayBitmap() { return this._displayBitmap }
 
   constructor() {
     let scripts = document.querySelectorAll("script")
@@ -35,16 +31,18 @@ export default class WebSys implements Sys {
     this.breaker = new Breaker(this)
   }
 
-  setDisplayMode(mode: "text" | "pixel", width: number, height: number, displayWidth = width, displayHeight = height) {
+  setDisplayMode(mode: "text" | "pixel", width: number, height: number, visibleWidth = width, visibleHeight = height) {
     this._displayMode = mode
-    this._displayWidth = displayWidth
-    this._displayHeight = displayHeight
+    this._displayWidth = width
+    this._displayHeight = height
+    this._visibleWidth = visibleWidth
+    this._visibleHeight = visibleHeight
     delete this._displayBitmap
     delete this._displayCanvas
     delete this._displayContext
-    switch (this.displayMode) {
+    switch (this._displayMode) {
       case "text":
-        console.error(`${this.displayMode} not yet implemented!`)
+        this._initTextGrid(width, height)
         break
 
       case "pixel":
@@ -54,16 +52,38 @@ export default class WebSys implements Sys {
 
       default:
         this._displayMode = ""
-        this._displayWidth = 0
-        this._displayHeight = 0
+        this._visibleWidth = -1
+        this._visibleHeight = -1
         throw `DisplayMode ${mode} not supported!`
     }
     return
   }
 
-  drawBitmap() {
-    if (this._displayContext && this.displayBitmap) {
-      this._displayContext.putImageData(this.displayBitmap, 0, 0)
+  drawBitmap(buffer: ArrayBuffer) {
+    if (this._displayContext && this._displayBitmap) {
+      let data = new Uint8ClampedArray(buffer)
+      this._displayBitmap.data.set(data, 0)
+      this._displayContext.putImageData(this._displayBitmap, 0, 0)
+    }
+  }
+
+  print(str: string) {
+    if (this._displayTextGrid) {
+      for (let char of str) {
+        let cell = <HTMLTableCellElement>this._displayTextGrid.querySelector(`tr:nth-child(${this._displayCursorRow + 1}) td:nth-child(${this._displayCursorCol + 1})`)
+        cell.classList.remove("current")
+        cell.textContent = char
+        this._displayCursorCol++
+        if (this._displayCursorCol >= this._displayWidth || char === "\n") {
+          this._displayCursorCol = 0
+          this._displayCursorRow++
+        }
+        if (this._displayCursorRow >= this._displayHeight) {
+          this._scrollText()
+        }
+      }
+      let cell = <HTMLTableCellElement>this._displayTextGrid.querySelector(`tr:nth-child(${this._displayCursorRow + 1}) td:nth-child(${this._displayCursorCol + 1})`)
+      cell.classList.add("current")
     }
   }
 
@@ -165,10 +185,15 @@ export default class WebSys implements Sys {
   /** _privates */
   private _container: HTMLElement = <HTMLElement>document.querySelector("fantasy-terminal")
   private _displayMode: string = ""
-  private _displayWidth: number = 0
-  private _displayHeight: number = 0
+  private _displayWidth: number = -1
+  private _displayHeight: number = -1
+  private _visibleWidth: number = -1
+  private _visibleHeight: number = -1
   private _displayBitmap?: ImageData
   private _displayContainer?: HTMLElement
+  private _displayTextGrid?: HTMLTableElement
+  private _displayCursorCol: number = -1
+  private _displayCursorRow: number = -1
   private _displayCanvas?: HTMLCanvasElement
   private _displayContext?: CanvasRenderingContext2D
   private _displayScale: number = 8
@@ -184,14 +209,48 @@ export default class WebSys implements Sys {
 
   private _initCanvas() {
     if (!this._displayContainer) throw "No display container!"
-    if (!this.displayBitmap) throw "No display bitmap!"
+    if (!this._displayBitmap) throw "No display bitmap!"
     this._displayContainer.innerHTML = '<canvas></canvas>'
     this._displayCanvas = <HTMLCanvasElement>this._displayContainer.querySelector("canvas")
-    this._displayCanvas.width = this.displayBitmap.width
-    this._displayCanvas.height = this.displayBitmap.height
+    this._displayCanvas.width = this._displayBitmap.width
+    this._displayCanvas.height = this._displayBitmap.height
     this._displayContext = <CanvasRenderingContext2D>this._displayCanvas.getContext("2d")
     this.mouseInput.element = this._displayCanvas
     this._resizeCanvas(false)
+  }
+
+  private _initTextGrid(width: number, height: number) {
+    if (!this._displayContainer) throw "No display container!"
+
+    let html = '<table>'
+    for (let row = 0; row < height; row++) {
+      html += '<tr>'
+      for (let col = 0; col < width; col++) {
+        html += '<td>&nbsp;</td>'
+      }
+      html += '</tr>'
+    }
+    html += '</table>'
+
+    this._displayContainer.innerHTML = html
+    this._displayTextGrid = <HTMLTableElement>this._displayContainer.querySelector("table")
+    this._displayCursorCol = this._displayCursorRow = 0
+    this.mouseInput.element = this._displayTextGrid
+    // this._resizeCanvas(false)
+  }
+
+  private _scrollText() {
+    if (this._displayTextGrid) {
+      let row = <HTMLTableRowElement>this._displayTextGrid.querySelector("tr")
+      let parent = (<HTMLTableElement>row.parentElement)
+      parent.removeChild(row)
+      let cols = row.querySelectorAll("td")
+      for (let col of cols) {
+        col.textContent = " "
+      }
+      parent.appendChild(row)
+      this._displayCursorRow--
+    }
   }
 
   private _resizeCanvas(checkHeight = true) {
@@ -204,22 +263,22 @@ export default class WebSys implements Sys {
     }
     let terminalWidth = this._container.offsetWidth * devicePixelRatio
     let terminalHeight = this._container.offsetHeight * devicePixelRatio
-    while (this.displayWidth * this._displayScale < terminalWidth) this._displayScale++
-    while (this.displayWidth * this._displayScale > terminalWidth) this._displayScale--
-    if (checkHeight) while (this.displayHeight * this._displayScale > terminalHeight) this._displayScale--
+    while (this._visibleWidth * this._displayScale < terminalWidth) this._displayScale++
+    while (this._visibleWidth * this._displayScale > terminalWidth) this._displayScale--
+    if (checkHeight) while (this._visibleHeight * this._displayScale > terminalHeight) this._displayScale--
     if (this._displayScale < 1) {
       ; (<any>this._displayCanvas.style)["imageRendering"] = ""
       this._displayScale = 1
       let divide = 1
-      while (this.displayWidth * this._displayScale > terminalWidth) this._displayScale = (1 / ++divide)
-      if (checkHeight) while (this.displayHeight * this._displayScale > terminalHeight) this._displayScale = (1 / ++divide)
+      while (this._visibleWidth * this._displayScale > terminalWidth) this._displayScale = (1 / ++divide)
+      if (checkHeight) while (this._visibleHeight * this._displayScale > terminalHeight) this._displayScale = (1 / ++divide)
     }
     this._displayCanvas.style.width = (this._displayCanvas.width * this._displayScale) / devicePixelRatio + "px"
     this._displayCanvas.style.height = (this._displayCanvas.height * this._displayScale) / devicePixelRatio + "px"
     this._displayCanvas.style.marginLeft = this._displayCanvas.style.marginRight =
-      (this.displayWidth - this._displayCanvas.width) / 2 * this._displayScale / devicePixelRatio + "px"
+      (this._visibleWidth - this._displayCanvas.width) / 2 * this._displayScale / devicePixelRatio + "px"
     this._displayCanvas.style.marginTop = this._displayCanvas.style.marginBottom =
-      (this.displayHeight - this._displayCanvas.height) / 2 * this._displayScale / devicePixelRatio + "px"
+      (this._visibleHeight - this._displayCanvas.height) / 2 * this._displayScale / devicePixelRatio + "px"
     this._displayCanvas.style.display = "inline-block"
     if (!checkHeight)
       requestAnimationFrame(this._resizeCanvas.bind(this))
