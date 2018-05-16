@@ -70,7 +70,8 @@ export default class WebSys implements Sys {
   print(str: string) {
     if (this._displayTextGrid) {
       for (let char of str) {
-        let cell = <HTMLTableCellElement>this._displayTextGrid.querySelector(`tr:nth-child(${this._displayCursorRow + 1}) td:nth-child(${this._displayCursorCol + 1})`)
+        let selector = `tr:nth-child(${this._displayCursorRow + 1})\ntd:nth-child(${this._displayCursorCol + 1})`
+        let cell = <HTMLTableCellElement>this._displayTextGrid.querySelector(selector)
         cell.classList.remove("current")
         cell.textContent = char
         this._displayCursorCol++
@@ -82,7 +83,8 @@ export default class WebSys implements Sys {
           this._scrollText()
         }
       }
-      let cell = <HTMLTableCellElement>this._displayTextGrid.querySelector(`tr:nth-child(${this._displayCursorRow + 1}) td:nth-child(${this._displayCursorCol + 1})`)
+      let selector = `tr:nth-child(${this._displayCursorRow + 1})\ntd:nth-child(${this._displayCursorCol + 1})`
+      let cell = <HTMLTableCellElement>this._displayTextGrid.querySelector(selector)
       cell.classList.add("current")
     }
   }

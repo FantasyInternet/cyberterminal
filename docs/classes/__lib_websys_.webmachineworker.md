@@ -36,7 +36,7 @@
 
 ⊕ **new WebMachineWorker**(): [WebMachineWorker](__lib_websys_.webmachineworker.md)
 
-*Defined in [_lib/WebSys.ts:294](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L294)*
+*Defined in [_lib/WebSys.ts:296](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L296)*
 
 **Returns:** [WebMachineWorker](__lib_websys_.webmachineworker.md)
 
@@ -50,7 +50,7 @@ ___
 
 **● worker**: *`Worker`*
 
-*Defined in [_lib/WebSys.ts:294](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L294)*
+*Defined in [_lib/WebSys.ts:296](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L296)*
 
 ___
 
@@ -64,7 +64,7 @@ ___
 
 *Implementation of [MachineWorker](../interfaces/__lib_machineworker_.machineworker.md).[onMessage](../interfaces/__lib_machineworker_.machineworker.md#onmessage)*
 
-*Defined in [_lib/WebSys.ts:304](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L304)*
+*Defined in [_lib/WebSys.ts:306](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L306)*
 
 **Parameters:**
 
@@ -81,7 +81,7 @@ ___
 
 ▸ **send**(msg: *`any`*, transferables?: *`any`[] |`undefined`*): `void`
 
-*Defined in [_lib/WebSys.ts:300](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L300)*
+*Defined in [_lib/WebSys.ts:302](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L302)*
 
 **Parameters:**
 
@@ -103,7 +103,7 @@ ___
 
 *Implementation of [MachineWorker](../interfaces/__lib_machineworker_.machineworker.md).[terminate](../interfaces/__lib_machineworker_.machineworker.md#terminate)*
 
-*Defined in [_lib/WebSys.ts:310](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L310)*
+*Defined in [_lib/WebSys.ts:312](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L312)*
 
 **Returns:** `void`
 

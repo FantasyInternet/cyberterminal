@@ -139,7 +139,7 @@ ___
 
 *Implementation of [Sys](../interfaces/__lib_sys_.sys.md).[createMachine](../interfaces/__lib_sys_.sys.md#createmachine)*
 
-*Defined in [_lib/WebSys.ts:96](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L96)*
+*Defined in [_lib/WebSys.ts:98](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L98)*
 
 **Returns:** [WebMachineWorker](__lib_websys_.webmachineworker.md)
 
@@ -152,7 +152,7 @@ ___
 
 *Implementation of [Sys](../interfaces/__lib_sys_.sys.md).[delete](../interfaces/__lib_sys_.sys.md#delete)*
 
-*Defined in [_lib/WebSys.ts:142](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L142)*
+*Defined in [_lib/WebSys.ts:144](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L144)*
 
 **Parameters:**
 
@@ -190,7 +190,7 @@ ___
 
 *Implementation of [Sys](../interfaces/__lib_sys_.sys.md).[focusInput](../interfaces/__lib_sys_.sys.md#focusinput)*
 
-*Defined in [_lib/WebSys.ts:158](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L158)*
+*Defined in [_lib/WebSys.ts:160](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L160)*
 
 **Parameters:**
 
@@ -231,7 +231,7 @@ ___
 
 *Implementation of [Sys](../interfaces/__lib_sys_.sys.md).[read](../interfaces/__lib_sys_.sys.md#read)*
 
-*Defined in [_lib/WebSys.ts:100](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L100)*
+*Defined in [_lib/WebSys.ts:102](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L102)*
 
 **Parameters:**
 
@@ -274,7 +274,7 @@ ___
 
 *Implementation of [Sys](../interfaces/__lib_sys_.sys.md).[setTextInput](../interfaces/__lib_sys_.sys.md#settextinput)*
 
-*Defined in [_lib/WebSys.ts:176](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L176)*
+*Defined in [_lib/WebSys.ts:178](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L178)*
 
 **Parameters:**
 
@@ -293,7 +293,7 @@ ___
 
 ▸ **startTone**(): `void`
 
-*Defined in [_lib/WebSys.ts:151](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L151)*
+*Defined in [_lib/WebSys.ts:153](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L153)*
 
 **Returns:** `void`
 
@@ -304,7 +304,7 @@ ___
 
 ▸ **stopTone**(): `void`
 
-*Defined in [_lib/WebSys.ts:154](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L154)*
+*Defined in [_lib/WebSys.ts:156](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L156)*
 
 **Returns:** `void`
 
@@ -315,7 +315,7 @@ ___
 
 ▸ **waitForVsync**(): `Promise`<`Object`>
 
-*Defined in [_lib/WebSys.ts:90](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L90)*
+*Defined in [_lib/WebSys.ts:92](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L92)*
 
 **Returns:** `Promise`<`Object`>
 
@@ -328,7 +328,7 @@ ___
 
 *Implementation of [Sys](../interfaces/__lib_sys_.sys.md).[write](../interfaces/__lib_sys_.sys.md#write)*
 
-*Defined in [_lib/WebSys.ts:132](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L132)*
+*Defined in [_lib/WebSys.ts:134](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L134)*
 
 **Parameters:**
 

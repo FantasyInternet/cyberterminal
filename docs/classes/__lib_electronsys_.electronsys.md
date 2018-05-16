@@ -155,7 +155,7 @@ ___
 
 *Inherited from [WebSys](__lib_websys_.websys.md).[createMachine](__lib_websys_.websys.md#createmachine)*
 
-*Defined in [_lib/WebSys.ts:96](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L96)*
+*Defined in [_lib/WebSys.ts:98](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L98)*
 
 **Returns:** [WebMachineWorker](__lib_websys_.webmachineworker.md)
 
@@ -212,7 +212,7 @@ ___
 
 *Inherited from [WebSys](__lib_websys_.websys.md).[focusInput](__lib_websys_.websys.md#focusinput)*
 
-*Defined in [_lib/WebSys.ts:158](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L158)*
+*Defined in [_lib/WebSys.ts:160](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L160)*
 
 **Parameters:**
 
@@ -304,7 +304,7 @@ ___
 
 *Inherited from [WebSys](__lib_websys_.websys.md).[setTextInput](__lib_websys_.websys.md#settextinput)*
 
-*Defined in [_lib/WebSys.ts:176](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L176)*
+*Defined in [_lib/WebSys.ts:178](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L178)*
 
 **Parameters:**
 
@@ -325,7 +325,7 @@ ___
 
 *Inherited from [WebSys](__lib_websys_.websys.md).[startTone](__lib_websys_.websys.md#starttone)*
 
-*Defined in [_lib/WebSys.ts:151](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L151)*
+*Defined in [_lib/WebSys.ts:153](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L153)*
 
 **Returns:** `void`
 
@@ -338,7 +338,7 @@ ___
 
 *Inherited from [WebSys](__lib_websys_.websys.md).[stopTone](__lib_websys_.websys.md#stoptone)*
 
-*Defined in [_lib/WebSys.ts:154](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L154)*
+*Defined in [_lib/WebSys.ts:156](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L156)*
 
 **Returns:** `void`
 
@@ -351,7 +351,7 @@ ___
 
 *Inherited from [WebSys](__lib_websys_.websys.md).[waitForVsync](__lib_websys_.websys.md#waitforvsync)*
 
-*Defined in [_lib/WebSys.ts:90](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L90)*
+*Defined in [_lib/WebSys.ts:92](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L92)*
 
 **Returns:** `Promise`<`Object`>
 
