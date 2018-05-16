@@ -78,6 +78,25 @@ export default class TextInput {
       this.state.text = (<HTMLInputElement>this._input).value
       this.state.pos = (<HTMLInputElement>this._input).selectionStart || 0
       this.state.len = ((<HTMLInputElement>this._input).selectionEnd || 0) - this.state.pos
+      if (!this.state.text && e && e.type === "keydown") {
+        switch (e.code) {
+          case "Backspace":
+            this.state.text = "\b \b"
+            break
+          case "ArrowUp":
+            this.state.text = "\x1b[A"
+            break
+          case "ArrowDown":
+            this.state.text = "\x1b[B"
+            break
+          case "ArrowRight":
+            this.state.text = "\x1b[C"
+            break
+          case "ArrowLeft":
+            this.state.text = "\x1b[D"
+            break
+        }
+      }
       this._sendState()
     })
   }

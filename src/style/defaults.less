@@ -9,15 +9,12 @@ fantasy-terminal {
   
   max-height: 100vh;
 
-  table {
+  pre {
     font-family: monospace;
+    white-space: pre;
 
-    td {
-      white-space: pre;
-
-      &.current{
-        border-bottom: 1px solid white;
-      }
+    span.current{
+      text-decoration:underline;
     }
   }
 

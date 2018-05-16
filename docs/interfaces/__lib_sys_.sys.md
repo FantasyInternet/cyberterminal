@@ -32,6 +32,7 @@ Unified interface to system I/O
 * [focusInput](__lib_sys_.sys.md#focusinput)
 * [print](__lib_sys_.sys.md#print)
 * [read](__lib_sys_.sys.md#read)
+* [replaceTextInput](__lib_sys_.sys.md#replacetextinput)
 * [setDisplayMode](__lib_sys_.sys.md#setdisplaymode)
 * [setTextInput](__lib_sys_.sys.md#settextinput)
 * [startTone](__lib_sys_.sys.md#starttone)
@@ -222,6 +223,27 @@ Read a file.
 | options | `any` |  Options |
 
 **Returns:** `Promise`<`any`>
+
+___
+<a id="replacetextinput"></a>
+
+###  replaceTextInput
+
+▸ **replaceTextInput**(search: *`string`*, replace: *`string`*, fromIndex: *`number`*): `void`
+
+*Defined in [_lib/Sys.ts:103](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L103)*
+
+Replace first occurrence of a substring with another.
+
+**Parameters:**
+
+| Param | Type | Description |
+| ------ | ------ | ------ |
+| search | `string` |  string to search for |
+| replace | `string` |  replacement string |
+| fromIndex | `number` |  position to search from |
+
+**Returns:** `void`
 
 ___
 <a id="setdisplaymode"></a>

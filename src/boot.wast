@@ -59,6 +59,9 @@
   (import "api" "setInputText" (func $setInputText))
   ;; Set position and (optionally) selection of text input.
   (import "api" "setInputPosition" (func $setInputPosition (param $position i32) (param $selected i32)))
+  ;; Pop replacement and search substrings from buffer stack and
+  ;; replace first occurence in text input.
+  (import "api" "replaceInputText" (func $replaceInputText (param $fromIndex i32)))
 
   ;; Get X coordinate of mouse input.
   (import "api" "getMouseX" (func $getMouseX (result i32)))
@@ -137,9 +140,16 @@
 
   ;; Update function is called once every interval.
   (func $update (param $t f64)
-    (call $resizePart (get_global $inputText) (call $getInputText))
-    (call $print)
-    (call $setInputText)
+    (local $len i32)
+    (set_local $len (call $getInputText))
+    (if (i32.gt_u (get_local $len) (i32.const 0)) (then
+      (call $print)
+      (set_local $len (call $getInputText))
+      (call $pushFromMemory (i32.const 0) (i32.const 0))
+      (call $replaceInputText (i32.const 0))
+    )(else
+      (call $popToMemory (call $getPartOffset (get_global $inputText)))
+    ))
     
     ;; (if (i32.eq (i32.load8_u (i32.add (call $getPartOffset (get_global $inputText)) (i32.sub (call $getInputPosition) (i32.const 1)))) (i32.const 10)) (then
     ;;   (call $setInputText (call $pushFromMemory (call $getPartOffset (get_global $inputText)) (i32.sub (call $getInputPosition) (i32.const 1))))

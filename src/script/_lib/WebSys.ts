@@ -70,21 +70,101 @@ export default class WebSys implements Sys {
   print(str: string) {
     if (this._displayTextGrid) {
       for (let char of str) {
-        let selector = `tr:nth-child(${this._displayCursorRow + 1})\ntd:nth-child(${this._displayCursorCol + 1})`
-        let cell = <HTMLTableCellElement>this._displayTextGrid.querySelector(selector)
-        cell.classList.remove("current")
-        cell.textContent = char
-        this._displayCursorCol++
-        if (this._displayCursorCol >= this._displayWidth || char === "\n") {
-          this._displayCursorCol = 0
+        if (this._displayTextEscape) {
+          this._displayTextEscape += char
+          let match: any
+          if (match = this._displayTextEscape.match(/e\[([0-9]*)A/)) {
+            let count = Number.parseInt(match[1]) || 1
+            this._displayCursorRow = Math.max(this._displayCursorRow - count, 0)
+            this._displayTextEscape = ""
+          } else if (match = this._displayTextEscape.match(/e\[([0-9]*)B/)) {
+            let count = Number.parseInt(match[1]) || 1
+            this._displayCursorRow = Math.min(this._displayCursorRow + count, this._displayHeight - 1)
+            this._displayTextEscape = ""
+          } else if (match = this._displayTextEscape.match(/e\[([0-9]*)C/)) {
+            let count = Number.parseInt(match[1]) || 1
+            this._displayCursorCol = Math.min(this._displayCursorCol + count, this._displayWidth - 1)
+            this._displayTextEscape = ""
+          } else if (match = this._displayTextEscape.match(/e\[([0-9]*)D/)) {
+            let count = Number.parseInt(match[1]) || 1
+            this._displayCursorCol = Math.max(this._displayCursorCol - count, 0)
+            this._displayTextEscape = ""
+          } else if (match = this._displayTextEscape.match(/e\[([0-9]*);*([0-9]*)[Hf]/)) {
+            let row = Number.parseInt(match[1]) || 1
+            let col = Number.parseInt(match[2]) || 1
+            this._displayCursorRow = Math.min(Math.max(0, row - 1), this._displayHeight - 1)
+            this._displayCursorCol = Math.min(Math.max(0, col - 1), this._displayWidth - 1)
+            this._displayTextEscape = ""
+          } else if (match = this._displayTextEscape.match(/e\[([0-9]*)J/)) {
+            let n = Number.parseInt(match[1]) || 0
+            switch (n) {
+              case 0:
+                this._clearTextRect(this._displayCursorCol, this._displayCursorRow, this._displayWidth, 1)
+                this._clearTextRect(0, this._displayCursorRow + 1, this._displayWidth, this._displayHeight)
+                break
+              case 1:
+                this._clearTextRect(0, this._displayCursorRow, this._displayCursorCol, 1)
+                this._clearTextRect(0, 0, this._displayWidth, this._displayCursorRow)
+                break
+              default:
+                this._clearTextRect(0, 0, this._displayWidth, this._displayHeight)
+                this._displayCursorRow = this._displayCursorCol = 0
+            }
+            this._displayTextEscape = ""
+          } else if (match = this._displayTextEscape.match(/e\[([0-9]*)K/)) {
+            let n = Number.parseInt(match[1]) || 0
+            switch (n) {
+              case 0:
+                this._clearTextRect(this._displayCursorCol, this._displayCursorRow, this._displayWidth, 1)
+                break
+              case 1:
+                this._clearTextRect(0, this._displayCursorRow, this._displayCursorCol, 1)
+                break
+              default:
+                this._clearTextRect(0, this._displayCursorRow, this._displayWidth, 1)
+            }
+            this._displayTextEscape = ""
+          }
+        } else {
+          let selector = `div:nth-child(${this._displayCursorRow + 1})\nspan:nth-child(${this._displayCursorCol + 1})`
+          let cell = <HTMLElement>this._displayTextGrid.querySelector(selector)
+          cell.classList.remove("current")
+          if ((char.codePointAt(0) || 0) >= 32) {
+            cell.textContent = char
+          }
+          this._displayCursorCol++
+          if (char === "\b") {
+            this._displayCursorCol -= 2
+          }
+          if (char === "\t") {
+            this._displayCursorCol = Math.ceil(this._displayCursorCol / 8) * 8
+          }
+          if (char === "\n") {
+            this._displayCursorCol = 0
+            this._displayCursorRow++
+          }
+          if (char === "\x1b") {
+            this._displayCursorCol--
+            this._displayTextEscape = "e"
+          }
+        }
+        while (this._displayCursorCol < 0) {
+          this._displayCursorCol += this._displayWidth
+          this._displayCursorRow--
+        }
+        while (this._displayCursorCol >= this._displayWidth) {
+          this._displayCursorCol -= this._displayWidth
           this._displayCursorRow++
         }
-        if (this._displayCursorRow >= this._displayHeight) {
+        while (this._displayCursorRow < 0) {
+          this._displayCursorRow = 0
+        }
+        while (this._displayCursorRow >= this._displayHeight) {
           this._scrollText()
         }
       }
-      let selector = `tr:nth-child(${this._displayCursorRow + 1})\ntd:nth-child(${this._displayCursorCol + 1})`
-      let cell = <HTMLTableCellElement>this._displayTextGrid.querySelector(selector)
+      let selector = `div:nth-child(${this._displayCursorRow + 1})\nspan:nth-child(${this._displayCursorCol + 1})`
+      let cell = <HTMLElement>this._displayTextGrid.querySelector(selector)
       cell.classList.add("current")
     }
   }
@@ -183,6 +263,24 @@ export default class WebSys implements Sys {
     })
   }
 
+  replaceTextInput(search: string, replace: string = "", fromIndex: number = 0) {
+    let text = this.textInput.state.text
+    let pos = this.textInput.state.pos
+    let len = this.textInput.state.len
+    let i = text.indexOf(search, fromIndex)
+    if (i >= 0) {
+      text = text.substr(0, i) + replace + text.substr(i + search.length)
+      if (pos > i) {
+        pos += replace.length - search.length
+      }
+      this.textInput.setState({
+        text: text,
+        pos: pos,
+        len: len
+      })
+    }
+  }
+
 
   /** _privates */
   private _container: HTMLElement = <HTMLElement>document.querySelector("fantasy-terminal")
@@ -193,11 +291,12 @@ export default class WebSys implements Sys {
   private _visibleHeight: number = -1
   private _displayBitmap?: ImageData
   private _displayContainer?: HTMLElement
-  private _displayTextGrid?: HTMLTableElement
+  private _displayTextGrid?: HTMLPreElement
   private _displayCursorCol: number = -1
   private _displayCursorRow: number = -1
-  private _displayTextSize: number = 8
+  private _displayTextSize: number = 0
   private _displayTextSizeDelta: number = 0
+  private _displayTextEscape: string = ""
   private _displayCanvas?: HTMLCanvasElement
   private _displayContext?: CanvasRenderingContext2D
   private _displayScale: number = 8
@@ -226,18 +325,18 @@ export default class WebSys implements Sys {
   private _initTextGrid(width: number, height: number) {
     if (!this._displayContainer) throw "No display container!"
 
-    let html = '<table>'
+    let html = '<pre>'
     for (let row = 0; row < height; row++) {
-      html += '<tr>'
+      html += '<div>'
       for (let col = 0; col < width; col++) {
-        html += '<td>&nbsp;</td>'
+        html += '<span>&nbsp;</span>'
       }
-      html += '</tr>'
+      html += '</div>'
     }
-    html += '</table>'
+    html += '</pre>'
 
     this._displayContainer.innerHTML = html
-    this._displayTextGrid = <HTMLTableElement>this._displayContainer.querySelector("table")
+    this._displayTextGrid = <HTMLPreElement>this._displayContainer.querySelector("pre")
     this._displayCursorCol = this._displayCursorRow = 0
     this.mouseInput.element = this._displayTextGrid
     this._resize()
@@ -245,15 +344,26 @@ export default class WebSys implements Sys {
 
   private _scrollText() {
     if (this._displayTextGrid) {
-      let row = <HTMLTableRowElement>this._displayTextGrid.querySelector("tr")
-      let parent = (<HTMLTableElement>row.parentElement)
+      let row = <HTMLDivElement>this._displayTextGrid.querySelector("div")
+      let parent = (<HTMLElement>row.parentElement)
       parent.removeChild(row)
-      let cols = row.querySelectorAll("td")
+      let cols = row.querySelectorAll("span")
       for (let col of cols) {
         col.textContent = " "
       }
       parent.appendChild(row)
       this._displayCursorRow--
+    }
+  }
+
+  private _clearTextRect(col: number, row: number, w: number, h: number) {
+    if (!this._displayTextGrid) return
+    for (let down = 0; down < h; down++) {
+      for (let right = 0; right < w; right++) {
+        let selector = `div:nth-child(${row + down + 1})\nspan:nth-child(${col + right + 1})`
+        let cell = this._displayTextGrid.querySelector(selector)
+        if (cell) cell.textContent = " "
+      }
     }
   }
 

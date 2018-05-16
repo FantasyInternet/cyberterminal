@@ -37,7 +37,7 @@ export default interface Sys {
   /**
    * Print string to text display.
    */
-  print(str:string):void
+  print(str: string): void
 
   /**
    * Start tone oscillator
@@ -93,4 +93,12 @@ export default interface Sys {
    * @param len Selection length
    */
   setTextInput(text: string, pos: number, len: number): void
+
+  /**
+   * Replace first occurrence of a substring with another.
+   * @param search string to search for
+   * @param replace replacement string
+   * @param fromIndex position to search from
+   */
+  replaceTextInput(search: string, replace: string, fromIndex: number): void
 }

@@ -281,6 +281,21 @@ export default class Machine {
     this._textInputState.pos = position || 0
     this._textInputState.len = selection || 0
   }
+  replaceInputText(fromIndex: number = 0) {
+    let replace = this._popString()
+    let search = this._popString()
+    this._sysCall("replaceTextInput", search, replace, fromIndex)
+
+    let text = this._textInputState.text
+    let i = text.indexOf(search, fromIndex)
+    if (i >= 0) {
+      text = text.substr(0, i) + replace + text.substr(i + search.length)
+      this._textInputState.text = text
+      if (this._textInputState.pos > i) {
+        this._textInputState.pos += replace.length - search.length
+      }
+    }
+  }
   getMouseX() { return this._mouseInputState.x }
   getMouseY() { return this._mouseInputState.y }
   getMousePressed() { return this._mouseInputState.pressed }
