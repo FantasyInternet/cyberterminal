@@ -11,7 +11,7 @@ export default class TextInput {
   }
 
   constructor(public sys: Sys, private _element: HTMLElement) {
-    _element.innerHTML = '<textarea></textarea>'
+    _element.innerHTML = '<textarea cols="80"></textarea>'
     this._multiline = <HTMLTextAreaElement>_element.querySelector("textarea")
     this._multiline.addEventListener("keydown", this._keyDown.bind(this))
     this._multiline.addEventListener("keyup", this._keyDown.bind(this))

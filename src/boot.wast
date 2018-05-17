@@ -120,42 +120,52 @@
     (data (i32.const 200) "./images/pointer.png")
 
   ;; Global variables
-  (global $pointerReq (mut i32) (i32.const 0))
-  (global $pointer    (mut i32) (i32.const 0))
-  (global $fontReq    (mut i32) (i32.const 0))
-  (global $font       (mut i32) (i32.const 0))
+  (global $clearCode  (mut i32) (i32.const 1))
+  (global $homeCode   (mut i32) (i32.const 1))
+  (global $inputPos   (mut i32) (i32.const 1024))
   (global $inputText  (mut i32) (i32.const 1))
+  (global $font       (mut i32) (i32.const 1))
 
   ;; Setup function is called once on start.
   (func $setup
+    (set_global $clearCode (call $createPart (i32.const 16)))
+    (i64.store (i32.add (call $getPartOffset (get_global $clearCode)) (i32.const 0)) (i64.const 0x6e6e6f434a325b1b));;"Esc[2JConn"
+    (i64.store (i32.add (call $getPartOffset (get_global $clearCode)) (i32.const 8)) (i64.const 0x0a3a6f7420746365));;"ect to:\n"
+    (set_global $homeCode  (call $createPart (i32.const 4)))
+    (i32.store (call $getPartOffset (get_global $homeCode)) (i32.const 0x48325b1b)) ;;"Esc[2H"
     (call $setUpdateInterval (i32.const 32))
     (call $setDisplayMode (i32.const 0) (i32.const 80) (i32.const 20) (i32.const 80) (i32.const 20))
 
     (call $focusInput (i32.const 1))
     (set_global $inputText (call $createPart (i32.const 0)))
-    (call $setInputText (call $getBaseUrl))
+    (call $setInputText (call $setInputPosition (call $getBaseUrl) (i32.const 0)))
     (return)
   )
   (export "setup" (func $setup))
 
   ;; Update function is called once every interval.
   (func $update (param $t f64)
+    (local $pos i32)
     (local $len i32)
-    (set_local $len (call $getInputText))
-    (if (i32.gt_u (get_local $len) (i32.const 0)) (then
-      (call $print)
-      (set_local $len (call $getInputText))
-      (call $pushFromMemory (i32.const 0) (i32.const 0))
-      (call $replaceInputText (i32.const 0))
-    )(else
+    (set_local $pos (call $getInputPosition))
+    (if (i32.lt_u (get_local $pos) (get_global $inputPos)) (then
+      (call $print (call $pushFromMemory (call $getPartOffset (get_global $clearCode)) (call $getPartLength (get_global $clearCode))))
+    ))
+    (if (i32.ne (get_local $pos) (get_global $inputPos)) (then
+      (call $resizePart (get_global $inputText) (call $getInputText))
       (call $popToMemory (call $getPartOffset (get_global $inputText)))
+      (call $print (call $pushFromMemory (call $getPartOffset (get_global $homeCode)) (call $getPartLength (get_global $homeCode))))
+      (call $print (call $pushFromMemory (call $getPartOffset (get_global $inputText)) (call $getPartLength (get_global $inputText))))
+      (call $print (call $pushFromMemory (call $getPartOffset (get_global $homeCode)) (call $getPartLength (get_global $homeCode))))
+      (call $print (call $pushFromMemory (call $getPartOffset (get_global $inputText)) (call $getInputPosition)))
+      (set_global $inputPos (get_local $pos))
     ))
     
-    ;; (if (i32.eq (i32.load8_u (i32.add (call $getPartOffset (get_global $inputText)) (i32.sub (call $getInputPosition) (i32.const 1)))) (i32.const 10)) (then
-    ;;   (call $setInputText (call $pushFromMemory (call $getPartOffset (get_global $inputText)) (i32.sub (call $getInputPosition) (i32.const 1))))
-    ;;   (call $connectTo (call $getInputText))
-    ;;   (return)
-    ;; ))
+    (if (i32.eq (i32.load8_u (i32.add (call $getPartOffset (get_global $inputText)) (i32.sub (call $getInputPosition) (i32.const 1)))) (i32.const 10)) (then
+      (call $setInputText (call $pushFromMemory (call $getPartOffset (get_global $inputText)) (i32.sub (call $getInputPosition) (i32.const 1))))
+      (call $connectTo (call $getInputText))
+      (return)
+    ))
   )
   (export "update" (func $update))
 

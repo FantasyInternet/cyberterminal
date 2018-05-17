@@ -382,17 +382,16 @@ export default class WebSys implements Sys {
 
   private _resizeTextGrid() {
     if (!this._displayTextGrid) return
-    let terminalWidth = this._container.offsetWidth
-    let terminalHeight = this._container.offsetHeight
-    if (this._displayTextGrid.offsetWidth > terminalWidth || this._displayTextGrid.offsetHeight > terminalHeight) {
-      if (this._displayTextSizeDelta) this._displayTextSizeDelta = -1
-    } else if (this._displayTextSizeDelta < 0) {
-      this._displayTextSizeDelta = 0
-    }
-    this._displayTextSize += this._displayTextSizeDelta
-    this._displayTextGrid.style.fontSize = this._displayTextSize + "px"
-    if (this._displayTextSizeDelta) {
-      requestAnimationFrame(this._resizeTextGrid.bind(this))
+    while (this._displayTextSizeDelta) {
+      let terminalWidth = this._container.offsetWidth
+      let terminalHeight = this._container.offsetHeight
+      if (this._displayTextGrid.offsetWidth > terminalWidth || this._displayTextGrid.offsetHeight > terminalHeight) {
+        if (this._displayTextSizeDelta) this._displayTextSizeDelta = -1
+      } else if (this._displayTextSizeDelta < 0) {
+        this._displayTextSizeDelta = 0
+      }
+      this._displayTextSize += this._displayTextSizeDelta
+      this._displayTextGrid.style.fontSize = this._displayTextSize + "px"
     }
   }
 
