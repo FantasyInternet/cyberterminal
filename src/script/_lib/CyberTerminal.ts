@@ -35,14 +35,13 @@ export default class CyberTerminal {
         this._connecting = null
       }, 1024)
     } else if (typeof process !== "undefined") {
-      this.removeMachine()
-      alert("Could not connect to " + url)
       this._connecting = setTimeout(() => {
+        this.removeMachine()
         this._connecting = null
       }, 1024)
-    } else {
-      location.assign(url)
-    }
+      this.sys.openWeb(url)
+    } else
+      this.sys.openWeb(url)
   }
 
   addMachine() {

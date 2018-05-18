@@ -35,6 +35,7 @@ Sys implementation for web browsers. See [Sys](../interfaces/__lib_sys_.sys.md) 
 * [delete](__lib_websys_.websys.md#delete)
 * [drawBitmap](__lib_websys_.websys.md#drawbitmap)
 * [focusInput](__lib_websys_.websys.md#focusinput)
+* [openWeb](__lib_websys_.websys.md#openweb)
 * [print](__lib_websys_.websys.md#print)
 * [read](__lib_websys_.websys.md#read)
 * [replaceTextInput](__lib_websys_.websys.md#replacetextinput)
@@ -203,6 +204,25 @@ ___
  | 
 
 **Returns:** `string`[]
+
+___
+<a id="openweb"></a>
+
+###  openWeb
+
+▸ **openWeb**(url: *`string`*): `void`
+
+*Implementation of [Sys](../interfaces/__lib_sys_.sys.md).[openWeb](../interfaces/__lib_sys_.sys.md#openweb)*
+
+*Defined in [_lib/WebSys.ts:284](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L284)*
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| url | `string` | 
+
+**Returns:** `void`
 
 ___
 <a id="print"></a>

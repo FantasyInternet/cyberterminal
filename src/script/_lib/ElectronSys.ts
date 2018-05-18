@@ -1,7 +1,11 @@
 import WebSys from "./WebSys"
 //@ts-ignore
-let fs; if (typeof window !== "undefined") { fs = window.require("fs") }
-
+let fs: any, shell: any; if (typeof window !== "undefined") {
+  //@ts-ignore
+  fs = window.require("fs")
+  //@ts-ignore
+  shell = window.require('electron').shell
+}
 /**
  * Sys implementation for electron app.
  * See [Sys](../interfaces/__lib_sys_.sys.md) for documentation
@@ -86,6 +90,10 @@ export default class ElectronSys extends WebSys {
         else resolve(true)
       })
     })
+  }
+
+  openWeb(url: string) {
+    shell.openExternal(url)
   }
 
 }

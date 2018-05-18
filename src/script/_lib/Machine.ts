@@ -413,7 +413,6 @@ export default class Machine {
           this.setDisplayMode(this._displayMode, this._displayWidth, this._displayHeight, this._visibleWidth, this._visibleHeight)
           this._pushString(this._textInputState.text)
           this.setInputText()
-          this.setInputPosition(this._textInputState.pos, this._textInputState.len)
           this.focusInput(this._inputFocus)
         }
         this._nextFrame = this._nextUpdate = performance.now()

@@ -101,4 +101,10 @@ export default interface Sys {
    * @param fromIndex position to search from
    */
   replaceTextInput(search: string, replace: string, fromIndex: number): void
+
+  /**
+   * Open a link in default web browser.
+   * @param url URL to open
+   */
+  openWeb(url: string): void
 }

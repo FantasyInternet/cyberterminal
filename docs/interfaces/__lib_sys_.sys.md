@@ -30,6 +30,7 @@ Unified interface to system I/O
 * [delete](__lib_sys_.sys.md#delete)
 * [drawBitmap](__lib_sys_.sys.md#drawbitmap)
 * [focusInput](__lib_sys_.sys.md#focusinput)
+* [openWeb](__lib_sys_.sys.md#openweb)
 * [print](__lib_sys_.sys.md#print)
 * [read](__lib_sys_.sys.md#read)
 * [replaceTextInput](__lib_sys_.sys.md#replacetextinput)
@@ -184,6 +185,25 @@ Focus on given type of input.
  |  The type of input to prioritize |
 
 **Returns:** `string`[]
+
+___
+<a id="openweb"></a>
+
+###  openWeb
+
+▸ **openWeb**(url: *`string`*): `void`
+
+*Defined in [_lib/Sys.ts:109](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L109)*
+
+Open a link in default web browser.
+
+**Parameters:**
+
+| Param | Type | Description |
+| ------ | ------ | ------ |
+| url | `string` |  URL to open |
+
+**Returns:** `void`
 
 ___
 <a id="print"></a>

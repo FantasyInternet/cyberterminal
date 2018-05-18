@@ -281,6 +281,10 @@ export default class WebSys implements Sys {
     }
   }
 
+  openWeb(url: string) {
+    location.assign(url)
+  }
+
 
   /** _privates */
   private _container: HTMLElement = <HTMLElement>document.querySelector("fantasy-terminal")
