@@ -39,7 +39,7 @@ export default class TextInput {
     ; (<HTMLInputElement>this._input).value = state.text
       ; (<HTMLInputElement>this._input).selectionStart = state.pos
       ; (<HTMLInputElement>this._input).selectionEnd = state.pos + state.len
-    this._keyDown()
+    //this._keyDown()
   }
 
   addEventListener(fn: Function) {

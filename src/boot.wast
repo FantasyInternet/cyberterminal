@@ -137,8 +137,9 @@
     (call $setDisplayMode (i32.const 0) (i32.const 80) (i32.const 20) (i32.const 80) (i32.const 20))
 
     (call $focusInput (i32.const 1))
-    (set_global $inputText (call $createPart (i32.const 0)))
-    (call $setInputText (call $setInputPosition (call $getBaseUrl) (i32.const 0)))
+    (set_global $inputText (call $createPart (call $getBaseUrl)))
+    (call $setInputText)
+    (call $setInputPosition (call $getPartLength (get_global $inputText)) (i32.const 0))
     (return)
   )
   (export "setup" (func $setup))

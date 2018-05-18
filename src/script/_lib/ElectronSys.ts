@@ -18,7 +18,7 @@ export default class ElectronSys extends WebSys {
     return new Promise((resolve, reject) => {
       //@ts-ignore
       fs.readFile(filename, (err, res) => {
-        if (err) reject("read error!")
+        if (err) return reject("read error!")
         switch (options.type) {
           case "binary":
             resolve(res.buffer)

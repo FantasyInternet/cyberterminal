@@ -104,7 +104,7 @@ ___
 
 ▸ **removeMachine**(): `void`
 
-*Defined in [_lib/CyberTerminal.ts:58](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L58)*
+*Defined in [_lib/CyberTerminal.ts:59](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L59)*
 
 **Returns:** `void`
 

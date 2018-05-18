@@ -254,6 +254,7 @@ export default class Machine {
   }
 
   focusInput(input: number) {
+    this._inputFocus = input
     switch (input) {
       case 1:
         this._sysCall("focusInput", "text")
@@ -272,14 +273,17 @@ export default class Machine {
   getInputPosition() { return this._textInputState.pos }
   getInputSelected() { return this._textInputState.len }
   setInputText() {
-    let text = this._popString()
-    this._sysCall("setTextInput", text, this._textInputState.pos || 0, this._textInputState.len || 0)
-    this._textInputState.text = text
+    this._textInputState.text = this._popString()
+    this._textInputState.pos = Math.min(this._textInputState.text.length, this._textInputState.pos)
+    this._textInputState.len = Math.min(this._textInputState.text.length - this._textInputState.pos, this._textInputState.len)
+    this._sysCall("setTextInput", this._textInputState.text, this._textInputState.pos || 0, this._textInputState.len || 0)
   }
   setInputPosition(position: number = 0, selection: number = 0) {
-    this._sysCall("setTextInput", this._textInputState.text, position || 0, selection || 0)
     this._textInputState.pos = position || 0
     this._textInputState.len = selection || 0
+    this._textInputState.pos = Math.min(this._textInputState.text.length, this._textInputState.pos)
+    this._textInputState.len = Math.min(this._textInputState.text.length - this._textInputState.pos, this._textInputState.len)
+    this._sysCall("setTextInput", this._textInputState.text, this._textInputState.pos || 0, this._textInputState.len || 0)
   }
   replaceInputText(fromIndex: number = 0) {
     let replace = this._popString()
@@ -339,6 +343,7 @@ export default class Machine {
   //@ts-ignore
   private _bufferStack: ArrayBuffer[] = []
   private _asyncCalls: number = 0
+  private _inputFocus: number = -1
   private _textInputState: any = {
     text: "", pos: 0, len: 0
   }
@@ -396,9 +401,7 @@ export default class Machine {
 
       case "suspend":
         this._active = false
-        this._mouseInputState = {
-          x: 0, y: 0, pressed: false
-        }
+        this._mouseInputState.pressed = false
         this._gameInputState = {
           axis: { x: 0, y: 0 },
           buttons: { a: false, b: false, x: false, y: false }
@@ -406,11 +409,14 @@ export default class Machine {
         break
 
       case "resume":
-        if (this._displayBitmap) {
-          this.setDisplayMode(this._displayMode, this._displayBitmap.width, this._displayBitmap.height, this._visibleWidth, this._visibleHeight)
+        if (this._displayMode >= 0) {
+          this.setDisplayMode(this._displayMode, this._displayWidth, this._displayHeight, this._visibleWidth, this._visibleHeight)
+          this._pushString(this._textInputState.text)
+          this.setInputText()
+          this.setInputPosition(this._textInputState.pos, this._textInputState.len)
+          this.focusInput(this._inputFocus)
         }
-        this._nextFrame = performance.now()
-        this._nextUpdate = performance.now()
+        this._nextFrame = this._nextUpdate = performance.now()
         this._active = true
         this._tick()
         break

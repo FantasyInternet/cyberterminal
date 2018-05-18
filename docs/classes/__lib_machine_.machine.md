@@ -198,7 +198,7 @@ ___
 
 ▸ **getGameAxisX**(): `any`
 
-*Defined in [_lib/Machine.ts:302](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L302)*
+*Defined in [_lib/Machine.ts:306](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L306)*
 
 **Returns:** `any`
 
@@ -209,7 +209,7 @@ ___
 
 ▸ **getGameAxisY**(): `any`
 
-*Defined in [_lib/Machine.ts:303](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L303)*
+*Defined in [_lib/Machine.ts:307](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L307)*
 
 **Returns:** `any`
 
@@ -220,7 +220,7 @@ ___
 
 ▸ **getGameButtonA**(): `any`
 
-*Defined in [_lib/Machine.ts:304](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L304)*
+*Defined in [_lib/Machine.ts:308](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L308)*
 
 **Returns:** `any`
 
@@ -231,7 +231,7 @@ ___
 
 ▸ **getGameButtonB**(): `any`
 
-*Defined in [_lib/Machine.ts:305](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L305)*
+*Defined in [_lib/Machine.ts:309](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L309)*
 
 **Returns:** `any`
 
@@ -242,7 +242,7 @@ ___
 
 ▸ **getGameButtonX**(): `any`
 
-*Defined in [_lib/Machine.ts:306](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L306)*
+*Defined in [_lib/Machine.ts:310](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L310)*
 
 **Returns:** `any`
 
@@ -253,7 +253,7 @@ ___
 
 ▸ **getGameButtonY**(): `any`
 
-*Defined in [_lib/Machine.ts:307](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L307)*
+*Defined in [_lib/Machine.ts:311](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L311)*
 
 **Returns:** `any`
 
@@ -264,7 +264,7 @@ ___
 
 ▸ **getInputPosition**(): `any`
 
-*Defined in [_lib/Machine.ts:272](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L272)*
+*Defined in [_lib/Machine.ts:273](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L273)*
 
 **Returns:** `any`
 
@@ -275,7 +275,7 @@ ___
 
 ▸ **getInputSelected**(): `any`
 
-*Defined in [_lib/Machine.ts:273](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L273)*
+*Defined in [_lib/Machine.ts:274](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L274)*
 
 **Returns:** `any`
 
@@ -286,7 +286,7 @@ ___
 
 ▸ **getInputText**(): `any`
 
-*Defined in [_lib/Machine.ts:271](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L271)*
+*Defined in [_lib/Machine.ts:272](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L272)*
 
 **Returns:** `any`
 
@@ -297,7 +297,7 @@ ___
 
 ▸ **getMousePressed**(): `any`
 
-*Defined in [_lib/Machine.ts:301](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L301)*
+*Defined in [_lib/Machine.ts:305](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L305)*
 
 **Returns:** `any`
 
@@ -308,7 +308,7 @@ ___
 
 ▸ **getMouseX**(): `any`
 
-*Defined in [_lib/Machine.ts:299](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L299)*
+*Defined in [_lib/Machine.ts:303](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L303)*
 
 **Returns:** `any`
 
@@ -319,7 +319,7 @@ ___
 
 ▸ **getMouseY**(): `any`
 
-*Defined in [_lib/Machine.ts:300](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L300)*
+*Defined in [_lib/Machine.ts:304](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L304)*
 
 **Returns:** `any`
 
@@ -453,7 +453,7 @@ ___
 
 ▸ **replaceInputText**(fromIndex?: *`number`*): `void`
 
-*Defined in [_lib/Machine.ts:284](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L284)*
+*Defined in [_lib/Machine.ts:288](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L288)*
 
 **Parameters:**
 
@@ -502,7 +502,7 @@ ___
 
 ▸ **setInputPosition**(position?: *`number`*, selection?: *`number`*): `void`
 
-*Defined in [_lib/Machine.ts:279](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L279)*
+*Defined in [_lib/Machine.ts:281](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L281)*
 
 **Parameters:**
 
@@ -520,7 +520,7 @@ ___
 
 ▸ **setInputText**(): `void`
 
-*Defined in [_lib/Machine.ts:274](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L274)*
+*Defined in [_lib/Machine.ts:275](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L275)*
 
 **Returns:** `void`
 
@@ -559,7 +559,7 @@ ___
 
 ▸ **startTone**(): `void`
 
-*Defined in [_lib/Machine.ts:309](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L309)*
+*Defined in [_lib/Machine.ts:313](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L313)*
 
 **Returns:** `void`
 
@@ -570,7 +570,7 @@ ___
 
 ▸ **stopTone**(): `void`
 
-*Defined in [_lib/Machine.ts:310](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L310)*
+*Defined in [_lib/Machine.ts:314](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L314)*
 
 **Returns:** `void`
 
@@ -619,7 +619,7 @@ ___
 
 ▸ **wabt**(): `number`
 
-*Defined in [_lib/Machine.ts:312](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L312)*
+*Defined in [_lib/Machine.ts:316](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L316)*
 
 **Returns:** `number`
 

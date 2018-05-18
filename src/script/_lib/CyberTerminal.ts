@@ -51,6 +51,7 @@ export default class CyberTerminal {
     let machine = this.sys.createMachine()
     this.machineWorkers.push(machine)
     machine.onMessage(this._onMessage.bind(this))
+    this.sys.textInput.setState({ text: "", pos: 0, len: 0 })
     this.sys.chipSound.stopAll()
     return machine
   }
@@ -58,8 +59,12 @@ export default class CyberTerminal {
   removeMachine() {
     let machine = this.machineWorkers.pop()
     if (machine) machine.terminate()
-    if (this.machineWorkers.length)
-      this.machineWorkers[this.machineWorkers.length - 1].send({ cmd: "resume" })
+    setTimeout(() => {
+      if (this.machineWorkers.length) {
+        this.machineWorkers[this.machineWorkers.length - 1].send({ cmd: "resume" })
+      }
+    }, 128)
+    this.sys.textInput.setState({ text: "", pos: 0, len: 0 })
     this.sys.chipSound.stopAll()
   }
 
@@ -156,16 +161,14 @@ export default class CyberTerminal {
         }
       }
       this._disconnecting = false
-    }
-    if (state.level === 1) {
+    } else if (state.level === 1) {
       let msg = {
         cmd: "break",
         state: state
       }
       if (!this.machineWorkers.length) return
       this.machineWorkers[this.machineWorkers.length - 1].send(msg)
-    }
-    if (state.level === 2) {
+    } else if (state.level === 2) {
       this.sys.startTone(0, 256, 1, "square")
       setTimeout(() => {
         this.sys.stopTone(0)
