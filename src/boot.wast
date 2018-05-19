@@ -120,7 +120,7 @@
     (data (i32.const 200) "./images/pointer.png")
 
   ;; Global variables
-  (global $clearCode  (mut i32) (i32.const 1))
+  (global $intro  (mut i32) (i32.const 1))
   (global $homeCode   (mut i32) (i32.const 1))
   (global $inputPos   (mut i32) (i32.const 1024))
   (global $inputText  (mut i32) (i32.const 1))
@@ -128,18 +128,23 @@
 
   ;; Setup function is called once on start.
   (func $setup
-    (set_global $clearCode (call $createPart (i32.const 16)))
-    (i64.store (i32.add (call $getPartOffset (get_global $clearCode)) (i32.const 0)) (i64.const 0x6e6e6f434a325b1b));;"Esc[2JConn"
-    (i64.store (i32.add (call $getPartOffset (get_global $clearCode)) (i32.const 8)) (i64.const 0x0a3a6f7420746365));;"ect to:\n"
-    (set_global $homeCode  (call $createPart (i32.const 4)))
-    (i32.store (call $getPartOffset (get_global $homeCode)) (i32.const 0x48325b1b)) ;;"Esc[2H"
+    (set_global $homeCode  (call $createPart (i32.const 56)))
+    (i64.store   (i32.add (call $getPartOffset (get_global $homeCode)) (i32.const 0)) (i64.const 0x0909485b1b4b5b1b));;"Esc[KEsc[H\t\t"
+    (i64.store   (i32.add (call $getPartOffset (get_global $homeCode)) (i32.const 8)) (i64.const 0x3d2d2d2d20202009));;"\t   ---="
+    (i64.store   (i32.add (call $getPartOffset (get_global $homeCode)) (i32.const 16)) (i64.const 0x5472656279433d3d));;"==CyberT"
+    (i64.store   (i32.add (call $getPartOffset (get_global $homeCode)) (i32.const 24)) (i64.const 0x3d6c616e696d7265));;"erminal="
+    (i64.store   (i32.add (call $getPartOffset (get_global $homeCode)) (i32.const 32)) (i64.const 0x0a0a202d2d2d3d3d));;"==--- \n\n"
+    (i64.store   (i32.add (call $getPartOffset (get_global $homeCode)) (i32.const 40)) (i64.const 0x207463656e6e6f43));;"Connect "
+    (i64.store   (i32.add (call $getPartOffset (get_global $homeCode)) (i32.const 48)) (i64.const 0x203a4c5255206f74));;"to URL: "
     (call $setUpdateInterval (i32.const 32))
     (call $setDisplayMode (i32.const 0) (i32.const 80) (i32.const 20) (i32.const 80) (i32.const 20))
 
     (call $focusInput (i32.const 1))
-    (set_global $inputText (call $createPart (call $getBaseUrl)))
-    (call $setInputText)
-    (call $setInputPosition (call $getPartLength (get_global $inputText)) (i32.const 0))
+    (set_global $inputText (call $createPart (i32.const 64)))
+    ;; (set_global $inputText (call $createPart (call $getBaseUrl)))
+    ;; (call $setInputText)
+    ;; (call $setInputPosition (call $getPartLength (get_global $inputText)) (i32.const 0))
+    ;; (call $print (call $pushFromMemory (call $getPartOffset (get_global $intro)) (call $getPartLength (get_global $intro))))
     (return)
   )
   (export "setup" (func $setup))
@@ -149,16 +154,13 @@
     (local $pos i32)
     (local $len i32)
     (set_local $pos (call $getInputPosition))
-    (if (i32.lt_u (get_local $pos) (get_global $inputPos)) (then
-      (call $print (call $pushFromMemory (call $getPartOffset (get_global $clearCode)) (call $getPartLength (get_global $clearCode))))
-    ))
     (if (i32.ne (get_local $pos) (get_global $inputPos)) (then
       (call $resizePart (get_global $inputText) (call $getInputText))
       (call $popToMemory (call $getPartOffset (get_global $inputText)))
       (call $print (call $pushFromMemory (call $getPartOffset (get_global $homeCode)) (call $getPartLength (get_global $homeCode))))
       (call $print (call $pushFromMemory (call $getPartOffset (get_global $inputText)) (call $getPartLength (get_global $inputText))))
       (call $print (call $pushFromMemory (call $getPartOffset (get_global $homeCode)) (call $getPartLength (get_global $homeCode))))
-      (call $print (call $pushFromMemory (call $getPartOffset (get_global $inputText)) (call $getInputPosition)))
+      (call $print (call $pushFromMemory (call $getPartOffset (get_global $inputText)) (get_local $pos)))
       (set_global $inputPos (get_local $pos))
     ))
     
@@ -447,7 +449,7 @@
     (local $id i32)
     (local $nextOffset i32)
     (set_local $offset (i32.const 0))
-    (set_local $len (i32.add (get_local $len) (i32.const 4)))
+    (set_local $len (i32.add (get_local $len) (i32.const 8)))
     (set_local $partCount (call $getPartCount))
     (block (loop
       (set_local $id (call $getNextPart (get_local $offset)))
@@ -467,7 +469,7 @@
       ))
       (br 0)
     ))
-    (set_local $len (i32.sub (get_local $len) (i32.const 4)))
+    (set_local $len (i32.sub (get_local $len) (i32.const 8)))
     (i32.store (get_local $offset) (get_local $len))
     (get_local $offset)
   )
@@ -521,7 +523,8 @@
     (local $id i32)
     (call $resizePart (i32.const 0) (i32.add (call $getPartLength (i32.const 0)) (i32.const 4)))
     (set_local $id (call $getPartCount))
-    (i32.store (i32.add (get_global $partIndexOffset) (i32.mul (get_local $id) (i32.const 4))) (call $alloc (get_local $len)))
+    (i32.store (i32.add (get_global $partIndexOffset) (i32.mul (get_local $id) (i32.const 4))) (call $alloc (i32.add (get_local $len) (i32.const 8))))
+    (call $resizePart (get_local $id) (get_local $len))
     (get_local $id)
   )
 )

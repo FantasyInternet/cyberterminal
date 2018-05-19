@@ -68,106 +68,108 @@ export default class WebSys implements Sys {
   }
 
   print(str: string) {
-    if (this._displayTextGrid) {
-      for (let char of str) {
-        if (this._displayTextEscape) {
-          this._displayTextEscape += char
-          let match: any
-          if (match = this._displayTextEscape.match(/e\[([0-9]*)A/)) {
-            let count = Number.parseInt(match[1]) || 1
-            this._displayCursorRow = Math.max(this._displayCursorRow - count, 0)
-            this._displayTextEscape = ""
-          } else if (match = this._displayTextEscape.match(/e\[([0-9]*)B/)) {
-            let count = Number.parseInt(match[1]) || 1
-            this._displayCursorRow = Math.min(this._displayCursorRow + count, this._displayHeight - 1)
-            this._displayTextEscape = ""
-          } else if (match = this._displayTextEscape.match(/e\[([0-9]*)C/)) {
-            let count = Number.parseInt(match[1]) || 1
-            this._displayCursorCol = Math.min(this._displayCursorCol + count, this._displayWidth - 1)
-            this._displayTextEscape = ""
-          } else if (match = this._displayTextEscape.match(/e\[([0-9]*)D/)) {
-            let count = Number.parseInt(match[1]) || 1
-            this._displayCursorCol = Math.max(this._displayCursorCol - count, 0)
-            this._displayTextEscape = ""
-          } else if (match = this._displayTextEscape.match(/e\[([0-9]*);*([0-9]*)[Hf]/)) {
-            let row = Number.parseInt(match[1]) || 1
-            let col = Number.parseInt(match[2]) || 1
-            this._displayCursorRow = Math.min(Math.max(0, row - 1), this._displayHeight - 1)
-            this._displayCursorCol = Math.min(Math.max(0, col - 1), this._displayWidth - 1)
-            this._displayTextEscape = ""
-          } else if (match = this._displayTextEscape.match(/e\[([0-9]*)J/)) {
-            let n = Number.parseInt(match[1]) || 0
-            switch (n) {
-              case 0:
-                this._clearTextRect(this._displayCursorCol, this._displayCursorRow, this._displayWidth, 1)
-                this._clearTextRect(0, this._displayCursorRow + 1, this._displayWidth, this._displayHeight)
-                break
-              case 1:
-                this._clearTextRect(0, this._displayCursorRow, this._displayCursorCol, 1)
-                this._clearTextRect(0, 0, this._displayWidth, this._displayCursorRow)
-                break
-              default:
-                this._clearTextRect(0, 0, this._displayWidth, this._displayHeight)
-                this._displayCursorRow = this._displayCursorCol = 0
-            }
-            this._displayTextEscape = ""
-          } else if (match = this._displayTextEscape.match(/e\[([0-9]*)K/)) {
-            let n = Number.parseInt(match[1]) || 0
-            switch (n) {
-              case 0:
-                this._clearTextRect(this._displayCursorCol, this._displayCursorRow, this._displayWidth, 1)
-                break
-              case 1:
-                this._clearTextRect(0, this._displayCursorRow, this._displayCursorCol, 1)
-                break
-              default:
-                this._clearTextRect(0, this._displayCursorRow, this._displayWidth, 1)
-            }
-            this._displayTextEscape = ""
+    if (!this._displayTextGrid) return
+    for (let char of str) {
+      if (this._displayTextEscape) {
+        this._displayTextEscape += char
+        if (char === "\x1b") this._displayTextEscape = "e"
+        if (this._displayTextEscape.length > 16) this._displayTextEscape = ""
+        let match: any
+        if (match = this._displayTextEscape.match(/e\[([0-9]*)A/)) {
+          let count = Number.parseInt(match[1]) || 1
+          this._displayCursorRow = Math.max(this._displayCursorRow - count, 0)
+          this._displayTextEscape = ""
+        } else if (match = this._displayTextEscape.match(/e\[([0-9]*)B/)) {
+          let count = Number.parseInt(match[1]) || 1
+          this._displayCursorRow = Math.min(this._displayCursorRow + count, this._displayHeight - 1)
+          this._displayTextEscape = ""
+        } else if (match = this._displayTextEscape.match(/e\[([0-9]*)C/)) {
+          let count = Number.parseInt(match[1]) || 1
+          this._displayCursorCol = Math.min(this._displayCursorCol + count, this._displayWidth - 1)
+          this._displayTextEscape = ""
+        } else if (match = this._displayTextEscape.match(/e\[([0-9]*)D/)) {
+          let count = Number.parseInt(match[1]) || 1
+          this._displayCursorCol = Math.max(this._displayCursorCol - count, 0)
+          this._displayTextEscape = ""
+        } else if (match = this._displayTextEscape.match(/e\[([0-9]*);*([0-9]*)[Hf]/)) {
+          let row = Number.parseInt(match[1]) || 1
+          let col = Number.parseInt(match[2]) || 1
+          this._displayCursorRow = Math.min(Math.max(0, row - 1), this._displayHeight - 1)
+          this._displayCursorCol = Math.min(Math.max(0, col - 1), this._displayWidth - 1)
+          this._displayTextEscape = ""
+        } else if (match = this._displayTextEscape.match(/e\[([0-9]*)J/)) {
+          let n = Number.parseInt(match[1]) || 0
+          switch (n) {
+            case 0:
+              this._clearTextRect(this._displayCursorCol, this._displayCursorRow, this._displayWidth, 1)
+              this._clearTextRect(0, this._displayCursorRow + 1, this._displayWidth, this._displayHeight)
+              break
+            case 1:
+              this._clearTextRect(0, this._displayCursorRow, this._displayCursorCol, 1)
+              this._clearTextRect(0, 0, this._displayWidth, this._displayCursorRow)
+              break
+            default:
+              this._clearTextRect(0, 0, this._displayWidth, this._displayHeight)
+              this._displayCursorRow = this._displayCursorCol = 0
           }
-        } else {
-          let selector = `div:nth-child(${this._displayCursorRow + 1})\nspan:nth-child(${this._displayCursorCol + 1})`
-          let cell = <HTMLElement>this._displayTextGrid.querySelector(selector)
-          cell.classList.remove("current")
-          if ((char.codePointAt(0) || 0) >= 32) {
-            cell.textContent = char
+          this._displayTextEscape = ""
+        } else if (match = this._displayTextEscape.match(/e\[([0-9]*)K/)) {
+          let n = Number.parseInt(match[1]) || 0
+          switch (n) {
+            case 0:
+              this._clearTextRect(this._displayCursorCol, this._displayCursorRow, this._displayWidth, 1)
+              break
+            case 1:
+              this._clearTextRect(0, this._displayCursorRow, this._displayCursorCol, 1)
+              break
+            default:
+              this._clearTextRect(0, this._displayCursorRow, this._displayWidth, 1)
           }
-          this._displayCursorCol++
-          if (char === "\b") {
-            this._displayCursorCol -= 2
-          }
-          if (char === "\t") {
-            this._displayCursorCol = Math.ceil(this._displayCursorCol / 8) * 8
-          }
-          if (char === "\n") {
-            this._displayCursorCol = 0
-            this._displayCursorRow++
-          }
-          if (char === "\x1b") {
-            this._displayCursorCol--
-            this._displayTextEscape = "e"
-          }
+          this._displayTextEscape = ""
         }
-        while (this._displayCursorCol < 0) {
-          this._displayCursorCol += this._displayWidth
-          this._displayCursorRow--
+      } else {
+        let selector = `div:nth-child(${this._displayCursorRow + 1})\nspan:nth-child(${this._displayCursorCol + 1})`
+        let cell = <HTMLElement>this._displayTextGrid.querySelector(selector)
+        cell.classList.remove("current")
+        if ((char.codePointAt(0) || 0) >= 32) {
+          cell.textContent = char
         }
-        while (this._displayCursorCol >= this._displayWidth) {
-          this._displayCursorCol -= this._displayWidth
+        this._displayCursorCol++
+        if (char === "\b") {
+          this._displayCursorCol -= 2
+        }
+        if (char === "\t") {
+          this._displayCursorCol = Math.ceil(this._displayCursorCol / 8) * 8
+        }
+        if (char === "\n") {
+          this._displayCursorCol = 0
           this._displayCursorRow++
         }
-        while (this._displayCursorRow < 0) {
-          this._displayCursorRow = 0
-        }
-        while (this._displayCursorRow >= this._displayHeight) {
-          this._scrollText()
+        if (char === "\x1b") {
+          this._displayCursorCol--
+          this._displayTextEscape = "e"
         }
       }
-      let selector = `div:nth-child(${this._displayCursorRow + 1})\nspan:nth-child(${this._displayCursorCol + 1})`
-      let cell = <HTMLElement>this._displayTextGrid.querySelector(selector)
-      cell.classList.add("current")
+      while (this._displayCursorCol < 0) {
+        this._displayCursorCol += this._displayWidth
+        this._displayCursorRow--
+      }
+      while (this._displayCursorCol >= this._displayWidth) {
+        this._displayCursorCol -= this._displayWidth
+        this._displayCursorRow++
+      }
+      while (this._displayCursorRow < 0) {
+        this._displayCursorRow = 0
+      }
+      while (this._displayCursorRow >= this._displayHeight) {
+        this._scrollText()
+      }
     }
+    let selector = `div:nth-child(${this._displayCursorRow + 1})\nspan:nth-child(${this._displayCursorCol + 1})`
+    let cell = <HTMLElement>this._displayTextGrid.querySelector(selector)
+    cell.classList.add("current")
   }
+
 
   async waitForVsync() {
     return new Promise((resolve, reject) => {

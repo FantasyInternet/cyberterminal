@@ -149,14 +149,12 @@ export default class CyberTerminal {
   private _onBreak(state: any) {
     if (state.level === 0 && this._disconnecting) {
       this.sys.stopTone(0)
-      if (confirm("Disconnect?")) {
-        this.removeMachine()
-        if (!this.machineWorkers.length) {
-          if (history.length > 1) {
-            history.back()
-          } else {
-            location.reload(true)
-          }
+      this.removeMachine()
+      if (!this.machineWorkers.length) {
+        if (history.length > 1) {
+          history.back()
+        } else {
+          location.reload(true)
         }
       }
       this._disconnecting = false
@@ -168,6 +166,8 @@ export default class CyberTerminal {
       if (!this.machineWorkers.length) return
       this.machineWorkers[this.machineWorkers.length - 1].send(msg)
     } else if (state.level === 2) {
+      if (!this.machineWorkers.length) return
+      this.machineWorkers[this.machineWorkers.length - 1].terminate()
       this.sys.startTone(0, 256, 1, "square")
       setTimeout(() => {
         this.sys.stopTone(0)
