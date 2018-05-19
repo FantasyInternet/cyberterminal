@@ -179,6 +179,7 @@
 
   ;; Break function is called whenever Esc is pressed.
   (func $break
+    (call $shutdown)
   )
   (export "break" (func $break))
 

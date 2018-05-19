@@ -61,6 +61,12 @@ export default class CyberTerminal {
     setTimeout(() => {
       if (this.machineWorkers.length) {
         this.machineWorkers[this.machineWorkers.length - 1].send({ cmd: "resume" })
+      } else {
+        if (history.length > 1) {
+          history.back()
+        } else {
+          location.reload(true)
+        }
       }
     }, 128)
     this.sys.textInput.setState({ text: "", pos: 0, len: 0 })
@@ -150,13 +156,6 @@ export default class CyberTerminal {
     if (state.level === 0 && this._disconnecting) {
       this.sys.stopTone(0)
       this.removeMachine()
-      if (!this.machineWorkers.length) {
-        if (history.length > 1) {
-          history.back()
-        } else {
-          location.reload(true)
-        }
-      }
       this._disconnecting = false
     } else if (state.level === 1) {
       let msg = {
