@@ -23,13 +23,11 @@ export default class Machine {
     this._displayHeight = height
     this._visibleWidth = visibleWidth
     this._visibleHeight = visibleHeight
-    delete this._displayBitmap
     switch (this._displayModes[this._displayMode]) {
       case "text":
         break
 
       case "pixel":
-        this._displayBitmap = new ImageData(width, height)
         break
 
       default:
@@ -38,7 +36,6 @@ export default class Machine {
         this._visibleHeight = -1
         throw "DisplayMode not supported!"
     }
-    this._commitDisplay()
     return
   }
 
@@ -49,8 +46,23 @@ export default class Machine {
   displayMemory(offset: number, length: number, destination: number = 0) {
     let process = this._processes[this._activePID]
     if (!process) throw "No active process!"
-    if (!this._displayBitmap) throw "No bitmap to commit!"
-    this._displayBitmap.data.set(new Uint8Array(process.instance.exports.memory.buffer.slice(offset, offset + length)), destination)
+    let buffer: ArrayBuffer
+    if (this._transferBuffer && this._transferBuffer.byteLength === (this._displayWidth * this._displayHeight * 4)) {
+      buffer = this._transferBuffer
+      delete this._transferBuffer
+    } else {
+      console.warn("Creating new _transferBuffer")
+      buffer = new ArrayBuffer(this._displayWidth * this._displayHeight * 4)
+    }
+    let data = new Uint8ClampedArray(buffer)
+    data.set(new Uint8Array(process.instance.exports.memory.buffer.slice(offset, offset + length)), destination)
+      ; (<Function>postMessage)({
+        cmd: "imagedata",
+        width: this._displayWidth,
+        height: this._displayHeight,
+        buffer: buffer
+      }, [buffer])
+    this._lastCommit = performance.now()
   }
   pushFromMemory(offset: number, length: number) {
     let process = this._processes[this._activePID]
@@ -282,8 +294,7 @@ export default class Machine {
   private _displayHeight: number = -1
   private _visibleWidth: number = -1
   private _visibleHeight: number = -1
-  private _displayBitmap?: ImageData
-  private _transferBuffer?: ArrayBuffer
+  private _transferBuffer: ArrayBuffer = new ArrayBuffer(8)
   private _lastCommit: number = performance.now()
   private _pendingCommits: Function[] = []
   private _pendingRequests: any[] = []
@@ -315,7 +326,6 @@ export default class Machine {
     if (t >= this._nextUpdate && process.instance.exports.update) {
       if (this._updateInterval <= 0) this._updateInterval = 1
       while (t >= this._nextUpdate) {
-
         process.instance.exports.update(this._nextUpdate)
         updated = true
         this._nextUpdate += this._updateInterval
@@ -323,7 +333,6 @@ export default class Machine {
     }
     if (this._transferBuffer && updated && process.instance.exports.draw) {
       process.instance.exports.draw(t)
-      this._commitDisplay()
     }
     /*while (performance.now() < this._nextFrame) {
       if (performance.now() >= this._nextUpdate) {
@@ -439,35 +448,6 @@ export default class Machine {
     })
   }
 
-  private _commitDisplay() {
-    switch (this._displayModes[this._displayMode]) {
-      case "pixel":
-        this._commitBitmap(true)
-        break
-    }
-  }
-
-  private _commitBitmap(force = false) {
-    if (!force && performance.now() - this._lastCommit < 1000) return
-    if (!this._displayBitmap) throw "No bitmap to commit!"
-    let buffer: ArrayBuffer
-    if (this._transferBuffer && this._transferBuffer.byteLength === this._displayBitmap.data.buffer.byteLength) {
-      buffer = this._transferBuffer
-      delete this._transferBuffer
-    } else {
-      console.warn("Creating new _transferBuffer")
-      buffer = new ArrayBuffer(this._displayBitmap.data.buffer.byteLength)
-    }
-    let data = new Uint8ClampedArray(buffer)
-    data.set(this._displayBitmap.data, 0)
-      ; (<Function>postMessage)({
-        cmd: "imagedata",
-        width: this._displayBitmap.width,
-        height: this._displayBitmap.height,
-        buffer: buffer
-      }, [buffer])
-    this._lastCommit = performance.now()
-  }
 
   private _generateRomApi() {
     let api: any = {}
