@@ -2,7 +2,6 @@
   (import "api" "pushFromMemory" (func $pushFromMemory (param i32) (param i32)))
   (import "api" "popToMemory" (func $popToMemory (param i32) ))
   (import "api" "log" (func $log))
-  (import "api" "wait" (func $wait (param i32) (param i32)))
   (import "api" "setDisplayMode" (func $setDisplayMode (param i32) (param i32) (param i32) ))
   (import "api" "displayMemory" (func $displayMemory (param i32) (param i32) ))
   (import "api" "focusInput" (func $focusInput (param i32) ))
@@ -257,7 +256,6 @@
         (set_global $ballVY (i32.div_s (get_global $ballVY) (i32.const 2)))
         (call $startTone (i32.const 0) (i32.const 110))
         (set_global $beep (i32.const 30))
-        (call $wait (i32.const 4000) (i32.const 0))
       ))
     ))
     (if (i32.and (i32.le_s (get_global $ballY) (i32.const 0)) (i32.lt_s (get_global $ballVY) (i32.const 0))) (then
@@ -327,10 +325,6 @@
   )
   (export "draw" (func $draw))
 
-  (func $resetRight
-    (set_global $right (i32.const 0))
-  )
-  (elem (i32.const 0) $resetRight)
 
 
   ;; graphics

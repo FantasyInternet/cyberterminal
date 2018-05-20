@@ -14,16 +14,6 @@
   ;; Copy memory range to display buffer ($destOffset optional) and commit display buffer.
   (import "api" "displayMemory" (func $displayMemory (param $offset i32) (param $length i32) (param $destOffset i32)))
 
-  ;; Call given index in function table on timeout. Returns a request ID.
-  ;; Callback in function table can expect same request ID as parameter.
-  (import "api" "wait" (func $wait (param $milliseconds i32) (param $tableIndex i32) (result i32)))
-  ;; Commit display buffer and call given index in function table on vsync. Returns a request ID.
-  ;; Callback can expect a timestamp and same request ID as parameter.
-  (import "api" "waitForVsync" (func $waitForVsync (param $tableIndex i32) (result i32)))
-  ;; Commit display buffer and call given index in function table when done. Returns a request ID.
-  ;; Callback can expect a timestamp and same request ID as parameter.
-  (import "api" "commitDisplay" (func $commitDisplay (param $tableIndex i32) (result i32)))
-
   ;; Pop URL from buffer stack and connect to it.
   (import "api" "connectTo" (func $connectTo ))
   ;; Shut down this connection

@@ -38,7 +38,7 @@ export default class Machine {
         this._visibleHeight = -1
         throw "DisplayMode not supported!"
     }
-    this.commitDisplay(() => { })
+    this._commitDisplay()
     return
   }
 
@@ -66,55 +66,6 @@ export default class Machine {
     let ar = new Uint8Array(process.instance.exports.memory.buffer)
     //@ts-ignore
     ar.set(new Uint8Array(this._bufferStack.pop()), offset)
-  }
-
-
-  wait(milliseconds: number, callback: number | Function) {
-    if (typeof callback === "number") {
-      let process = this._processes[this._activePID]
-      if (!process) throw "No active process!"
-      callback = process.instance.exports.table.get(callback)
-    }
-    let id = this._asyncCalls++
-    setTimeout(() => {
-      //@ts-ignore
-      callback(id)
-    }, milliseconds)
-    return id
-  }
-
-  waitForVsync(callback: number | Function) {
-    if (typeof callback === "number") {
-      let process = this._processes[this._activePID]
-      if (!process) throw "No active process!"
-      callback = process.instance.exports.table.get(callback)
-    }
-    let id = this._asyncCalls++
-    this.commitDisplay(-1)
-    this._sysRequest("waitForVsync").then((t: number) => {
-      //@ts-ignore
-      callback(t, id)
-    })
-    return id
-  }
-
-  commitDisplay(callback: number | Function) {
-    if (typeof callback === "number") {
-      let process = this._processes[this._activePID]
-      if (!process) throw "No active process!"
-      callback = process.instance.exports.table.get(callback)
-    }
-    let id = this._asyncCalls++
-    switch (this._displayModes[this._displayMode]) {
-      case "pixel":
-        this._commitBitmap(true)
-        break
-    }
-    this._pendingCommits.push((t: number) => {
-      //@ts-ignore
-      callback(t, id)
-    })
-    return id
   }
 
   connectTo() {
@@ -372,7 +323,7 @@ export default class Machine {
     }
     if (this._transferBuffer && updated && process.instance.exports.draw) {
       process.instance.exports.draw(t)
-      this.commitDisplay(() => { })
+      this._commitDisplay()
     }
     /*while (performance.now() < this._nextFrame) {
       if (performance.now() >= this._nextUpdate) {
@@ -486,6 +437,14 @@ export default class Machine {
         reject: reject
       }
     })
+  }
+
+  private _commitDisplay() {
+    switch (this._displayModes[this._displayMode]) {
+      case "pixel":
+        this._commitBitmap(true)
+        break
+    }
   }
 
   private _commitBitmap(force = false) {
