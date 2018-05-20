@@ -29,7 +29,7 @@ export default class ChipSound {
     }
     clearTimeout(chan.autoStop)
     chan.oscillator.frequency.setValueAtTime(frequency, 0)
-    chan.gain.gain.setValueAtTime(volume, 0)
+    chan.gain.gain.setValueAtTime(volume*.5, 0)
     chan.oscillator.type = type
     if (!this._channels[channel]) {
       this._channels[channel] = chan
