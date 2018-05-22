@@ -176,7 +176,9 @@ export default class CyberTerminal {
   }
 
   private async _findBoot(url: string) {
-    url = (await fetch(url)).url
+    if (url.substr(0, 5) !== "file:") {
+      url = (await fetch(url)).url
+    }
     let parts = url.split("/")
     let candidate = parts.shift() + "/" + parts.shift() + "/"
     let wasm: ArrayBuffer | null = null
