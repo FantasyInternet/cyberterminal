@@ -535,9 +535,18 @@ ___
 
 ###  startTone
 
-▸ **startTone**(): `void`
+▸ **startTone**(channel: *`number`*, frequency: *`number`*, volume?: *`number`*, type?: *`number`*): `void`
 
 *Defined in [_lib/Machine.ts:276](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L276)*
+
+**Parameters:**
+
+| Param | Type | Default value |
+| ------ | ------ | ------ |
+| channel | `number` | - | 
+| frequency | `number` | - | 
+| `Default value` volume | `number` | 1 | 
+| `Default value` type | `number` | 0 | 
 
 **Returns:** `void`
 
@@ -546,9 +555,15 @@ ___
 
 ###  stopTone
 
-▸ **stopTone**(): `void`
+▸ **stopTone**(channel: *`number`*): `void`
 
 *Defined in [_lib/Machine.ts:277](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L277)*
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| channel | `number` | 
 
 **Returns:** `void`
 

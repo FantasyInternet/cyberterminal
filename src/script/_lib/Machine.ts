@@ -273,8 +273,8 @@ export default class Machine {
   getGameButtonX() { return this._gameInputState.buttons.x }
   getGameButtonY() { return this._gameInputState.buttons.y }
 
-  startTone() { this._sysCall("startTone", ...arguments) }
-  stopTone() { this._sysCall("stopTone", ...arguments) }
+  startTone(channel: number, frequency: number, volume: number = 1, type: number = 0) { this._sysCall("startTone", channel, frequency, volume, this._toneTypes[type]) }
+  stopTone(channel: number) { this._sysCall("stopTone", channel) }
 
   wabt() {
     let wast = this._popString()
@@ -288,6 +288,7 @@ export default class Machine {
   private _frameInterval: number = 1000 / 60
   private _nextUpdate: number = performance.now()
   private _updateInterval: number = 1000 / 60
+  private _toneTypes: string[] = ["square", "sawtooth", "triangle", "sine"]
   private _displayModes: string[] = ["text", "pixel"]
   private _displayMode: number = -1
   private _displayWidth: number = -1
