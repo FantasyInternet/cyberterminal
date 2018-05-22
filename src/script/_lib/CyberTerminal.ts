@@ -40,8 +40,11 @@ export default class CyberTerminal {
         this._connecting = null
       }, 1024)
       this.sys.openWeb(url)
-    } else
+    } else if (location.toString() !== url) {
       this.sys.openWeb(url)
+    } else {
+      console.error("could not load boot.wasm!")
+    }
   }
 
   addMachine() {
@@ -177,7 +180,11 @@ export default class CyberTerminal {
 
   private async _findBoot(url: string) {
     if (url.substr(0, 5) !== "file:") {
-      url = (await fetch(url)).url
+      try {
+        url = (await fetch(url)).url
+      } catch (error) {
+        return {}
+      }
     }
     let parts = url.split("/")
     let candidate = parts.shift() + "/" + parts.shift() + "/"

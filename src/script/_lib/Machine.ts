@@ -322,6 +322,7 @@ export default class Machine {
     if (!this._active) return
     let t = performance.now()
     let process = this._processes[0]
+    if (!process) return this._active = false
     setTimeout(this._tick.bind(this), this._nextUpdate - t)
     let updated = !(process.instance.exports.update)
     if (t >= this._nextUpdate && process.instance.exports.update) {

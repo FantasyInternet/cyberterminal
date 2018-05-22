@@ -76,7 +76,7 @@ ___
 
 ▸ **addMachine**(): [MachineWorker](../interfaces/__lib_machineworker_.machineworker.md)
 
-*Defined in [_lib/CyberTerminal.ts:47](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L47)*
+*Defined in [_lib/CyberTerminal.ts:50](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L50)*
 
 **Returns:** [MachineWorker](../interfaces/__lib_machineworker_.machineworker.md)
 
@@ -104,7 +104,7 @@ ___
 
 ▸ **removeMachine**(): `void`
 
-*Defined in [_lib/CyberTerminal.ts:58](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L58)*
+*Defined in [_lib/CyberTerminal.ts:61](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L61)*
 
 **Returns:** `void`
 
