@@ -393,7 +393,7 @@ export default class WebSys implements Sys {
       let terminalWidth = this._container.offsetWidth
       let terminalHeight = this._container.offsetHeight
       if (this._displayTextGrid.offsetWidth > terminalWidth || this._displayTextGrid.offsetHeight > terminalHeight) {
-        if (this._displayTextSize <= 8) {
+        if (this._displayTextSize <= 0) {
           this._displayTextSizeDelta = 0
         } else {
           this._displayTextSizeDelta = -1
