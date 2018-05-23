@@ -31,12 +31,21 @@ export default class WebSys implements Sys {
     this.breaker = new Breaker(this)
   }
 
+  setTitle(title: string) {
+  }
+
   setDisplayMode(mode: "text" | "pixel", width: number, height: number, visibleWidth = width, visibleHeight = height) {
+    if (this._displayMode === mode &&
+      this._displayWidth === width &&
+      this._displayHeight === height &&
+      this._visibleWidth === visibleWidth &&
+      this._visibleHeight === visibleHeight) return
     this._displayMode = mode
     this._displayWidth = width
     this._displayHeight = height
     this._visibleWidth = visibleWidth
     this._visibleHeight = visibleHeight
+    delete this._displayTextGrid
     delete this._displayBitmap
     delete this._displayCanvas
     delete this._displayContext

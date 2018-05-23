@@ -12,6 +12,10 @@ let fs: any, shell: any; if (typeof window !== "undefined") {
  */
 export default class ElectronSys extends WebSys {
 
+  setTitle(title: string) {
+    document.title = title + " - " + this._title
+  }
+
   read(filename: string, options: any = {}) {
     let url = new URL(filename)
     if (url.protocol !== "file:") {
@@ -95,5 +99,8 @@ export default class ElectronSys extends WebSys {
   openWeb(url: string) {
     shell.openExternal(url)
   }
+
+  /** _privates */
+  private _title: string = document.title
 
 }

@@ -26,24 +26,31 @@ export default class CyberTerminal {
 
   async connectTo(url: string) {
     if (this._connecting) return
+    this.sys.setDisplayMode("text", url.length, 4)
+    this.sys.print("Connecting to\n" + url)
     this._connecting = true
     let machine = this.addMachine()
     let msg = await this._findBoot(url)
     if (msg.wasm) {
+      this.sys.print(".")
+      this.sys.setTitle("" + msg.url)
       machine.send(msg)
       this._connecting = setTimeout(() => {
         this._connecting = null
       }, 1024)
     } else if (typeof process !== "undefined") {
+      this.sys.print(".")
       this._connecting = setTimeout(() => {
         this.removeMachine()
         this._connecting = null
       }, 1024)
       this.sys.openWeb(url)
     } else if (location.toString() !== url) {
+      this.sys.print(".")
       this.sys.openWeb(url)
     } else {
-      console.error("could not load boot.wasm!")
+      this.sys.print("!\n")
+      this.sys.print("could not load boot.wasm!")
     }
   }
 
@@ -61,6 +68,8 @@ export default class CyberTerminal {
   removeMachine() {
     let machine = this.machineWorkers.pop()
     if (machine) machine.terminate()
+    this.sys.setDisplayMode("text", 16, 4)
+    this.sys.print("Disconnecting...")
     setTimeout(() => {
       if (this.machineWorkers.length) {
         this.machineWorkers[this.machineWorkers.length - 1].send({ cmd: "resume" })
@@ -179,6 +188,7 @@ export default class CyberTerminal {
   }
 
   private async _findBoot(url: string) {
+    this.sys.print(".")
     if (url.substr(0, 5) !== "file:") {
       try {
         url = (await fetch(url)).url
@@ -190,6 +200,7 @@ export default class CyberTerminal {
     let candidate = parts.shift() + "/" + parts.shift() + "/"
     let wasm: ArrayBuffer | null = null
     while (parts.length && !wasm) {
+      this.sys.print(".")
       candidate += parts.shift() + "/"
       try {
         wasm = await this.sys.read(candidate + "boot.wasm", { type: "binary" })
@@ -197,6 +208,7 @@ export default class CyberTerminal {
         wasm = null
       }
     }
+    this.sys.print(".")
     return {
       cmd: "boot",
       wasm: wasm,

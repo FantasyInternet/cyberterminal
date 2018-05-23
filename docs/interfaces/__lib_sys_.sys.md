@@ -36,6 +36,7 @@ Unified interface to system I/O
 * [replaceTextInput](__lib_sys_.sys.md#replacetextinput)
 * [setDisplayMode](__lib_sys_.sys.md#setdisplaymode)
 * [setTextInput](__lib_sys_.sys.md#settextinput)
+* [setTitle](__lib_sys_.sys.md#settitle)
 * [startTone](__lib_sys_.sys.md#starttone)
 * [stopTone](__lib_sys_.sys.md#stoptone)
 * [write](__lib_sys_.sys.md#write)
@@ -119,7 +120,7 @@ ___
 
 ▸ **createMachine**(): [MachineWorker](__lib_machineworker_.machineworker.md)
 
-*Defined in [_lib/Sys.ts:61](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L61)*
+*Defined in [_lib/Sys.ts:67](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L67)*
 
 Create a machine.
 
@@ -133,7 +134,7 @@ ___
 
 ▸ **delete**(filename: *`string`*): `Promise`<`boolean`>
 
-*Defined in [_lib/Sys.ts:81](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L81)*
+*Defined in [_lib/Sys.ts:87](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L87)*
 
 Delete a file.
 
@@ -152,7 +153,7 @@ ___
 
 ▸ **drawBitmap**(buffer: *`ArrayBuffer`*): `void`
 
-*Defined in [_lib/Sys.ts:35](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L35)*
+*Defined in [_lib/Sys.ts:41](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L41)*
 
 Draw given bitmap to pixel display.
 
@@ -171,7 +172,7 @@ ___
 
 ▸ **focusInput**(input: *"text" |"mouse" |"game"*): `string`[]
 
-*Defined in [_lib/Sys.ts:87](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L87)*
+*Defined in [_lib/Sys.ts:93](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L93)*
 
 Focus on given type of input.
 
@@ -193,7 +194,7 @@ ___
 
 ▸ **openWeb**(url: *`string`*): `void`
 
-*Defined in [_lib/Sys.ts:109](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L109)*
+*Defined in [_lib/Sys.ts:115](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L115)*
 
 Open a link in default web browser.
 
@@ -212,7 +213,7 @@ ___
 
 ▸ **print**(str: *`string`*): `void`
 
-*Defined in [_lib/Sys.ts:40](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L40)*
+*Defined in [_lib/Sys.ts:46](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L46)*
 
 Print string to text display.
 
@@ -231,7 +232,7 @@ ___
 
 ▸ **read**(filename: *`string`*, options: *`any`*): `Promise`<`any`>
 
-*Defined in [_lib/Sys.ts:68](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L68)*
+*Defined in [_lib/Sys.ts:74](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L74)*
 
 Read a file.
 
@@ -251,7 +252,7 @@ ___
 
 ▸ **replaceTextInput**(search: *`string`*, replace: *`string`*, fromIndex: *`number`*): `void`
 
-*Defined in [_lib/Sys.ts:103](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L103)*
+*Defined in [_lib/Sys.ts:109](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L109)*
 
 Replace first occurrence of a substring with another.
 
@@ -272,7 +273,7 @@ ___
 
 ▸ **setDisplayMode**(mode: *"text" |"pixel"*, width: *`number`*, height: *`number`*): `void`
 
-*Defined in [_lib/Sys.ts:30](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L30)*
+*Defined in [_lib/Sys.ts:36](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L36)*
 
 Switch display mode.
 
@@ -295,7 +296,7 @@ ___
 
 ▸ **setTextInput**(text: *`string`*, pos: *`number`*, len: *`number`*): `void`
 
-*Defined in [_lib/Sys.ts:95](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L95)*
+*Defined in [_lib/Sys.ts:101](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L101)*
 
 Set the state of the text input.
 
@@ -310,13 +311,32 @@ Set the state of the text input.
 **Returns:** `void`
 
 ___
+<a id="settitle"></a>
+
+###  setTitle
+
+▸ **setTitle**(title: *`string`*): `void`
+
+*Defined in [_lib/Sys.ts:28](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L28)*
+
+Set the title of the window.
+
+**Parameters:**
+
+| Param | Type | Description |
+| ------ | ------ | ------ |
+| title | `string` |  New title |
+
+**Returns:** `void`
+
+___
 <a id="starttone"></a>
 
 ###  startTone
 
 ▸ **startTone**(channel: *`number`*, frequency: *`number`*, volume: *`number`*, type: *"sine" |"square" |"sawtooth" |"triangle"*): `void`
 
-*Defined in [_lib/Sys.ts:49](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L49)*
+*Defined in [_lib/Sys.ts:55](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L55)*
 
 Start tone oscillator
 
@@ -342,7 +362,7 @@ ___
 
 ▸ **stopTone**(channel: *`number`*): `void`
 
-*Defined in [_lib/Sys.ts:55](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L55)*
+*Defined in [_lib/Sys.ts:61](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L61)*
 
 Stop tone oscillator
 
@@ -361,7 +381,7 @@ ___
 
 ▸ **write**(filename: *`string`*, data: *`string` |`ArrayBuffer`*): `Promise`<`boolean`>
 
-*Defined in [_lib/Sys.ts:75](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L75)*
+*Defined in [_lib/Sys.ts:81](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L81)*
 
 Write to a file.
 

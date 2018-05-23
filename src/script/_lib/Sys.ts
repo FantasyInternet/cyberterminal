@@ -22,6 +22,12 @@ export default interface Sys {
   breaker: Breaker
 
   /**
+   * Set the title of the window.
+   * @param title New title
+   */
+  setTitle(title: string): void
+
+  /**
    * Switch display mode.
    * @param mode Name of mode to switch to
    * @param width The width of the display in characters or pixels
