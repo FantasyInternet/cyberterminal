@@ -300,7 +300,7 @@ export default class WebSys implements Sys {
   private _displayTextGrid?: HTMLPreElement
   private _displayCursorCol: number = -1
   private _displayCursorRow: number = -1
-  private _displayTextSize: number = 0
+  private _displayTextSize: number = 10
   private _displayTextSizeDelta: number = 0
   private _displayTextEscape: string = ""
   private _displayCanvas?: HTMLCanvasElement
@@ -377,6 +377,7 @@ export default class WebSys implements Sys {
     switch (this._displayMode) {
       case "text":
         this._displayTextSizeDelta = 1
+        this._displayTextSize += 8
         this._resizeTextGrid()
         break
 
@@ -392,7 +393,11 @@ export default class WebSys implements Sys {
       let terminalWidth = this._container.offsetWidth
       let terminalHeight = this._container.offsetHeight
       if (this._displayTextGrid.offsetWidth > terminalWidth || this._displayTextGrid.offsetHeight > terminalHeight) {
-        if (this._displayTextSizeDelta) this._displayTextSizeDelta = -1
+        if (this._displayTextSize <= 8) {
+          this._displayTextSizeDelta = 0
+        } else {
+          this._displayTextSizeDelta = -1
+        }
       } else if (this._displayTextSizeDelta < 0) {
         this._displayTextSizeDelta = 0
       }
