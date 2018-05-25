@@ -180,11 +180,21 @@ export default class Machine {
     WebAssembly.instantiate(wasm, { env, Math }).then((process) => {
       this._activePID = pid
       this._processes[pid] = process
-      if (process.instance.exports.init)
-        process.instance.exports.init()
+      if (process.instance.exports.init) {
+        try {
+          process.instance.exports.init()
+        } catch (error) {
+          this._die(error)
+        }
+      }
       this._nextFrame = this._nextStep = performance.now()
       if (this._activePID === 0) this._tick()
       this._activePID = 0
+    }).catch((err: any) => {
+      this._processes[pid] = false
+      if (!pid) {
+        this._die(err)
+      }
     })
     return pid
   }
@@ -203,7 +213,7 @@ export default class Machine {
     this._activePID = oldpid
   }
   killProcess(pid: number) {
-    this._processes[pid] = null
+    this._processes[pid] = false
     this._activePID = 0
   }
   transferMemory(srcPid: number, srcOffset: number, length: number, destPid: number, destOffset: number) {
@@ -324,19 +334,23 @@ export default class Machine {
     let process = this._processes[0]
     if (!process) return this._active = false
     setTimeout(this._tick.bind(this), this._nextStep - t)
-    let stepped = !(process.instance.exports.step)
-    if (process.instance.exports.step) {
-      if (this._stepInterval <= 0) this._stepInterval = 1
-      while (t >= this._nextStep) {
-        process.instance.exports.step(this._nextStep)
-        stepped = true
-        this._nextStep += this._stepInterval
+    try {
+      let stepped = !(process.instance.exports.step)
+      if (process.instance.exports.step) {
+        if (this._stepInterval <= 0) this._stepInterval = 1
+        while (t >= this._nextStep) {
+          process.instance.exports.step(this._nextStep)
+          stepped = true
+          this._nextStep += this._stepInterval
+        }
       }
+      if (this._transferBuffer && stepped && process.instance.exports.display) {
+        process.instance.exports.display(t)
+      }
+      this._nextFrame += this._frameInterval
+    } catch (error) {
+      this._die(error)
     }
-    if (this._transferBuffer && stepped && process.instance.exports.display) {
-      process.instance.exports.display(t)
-    }
-    this._nextFrame += this._frameInterval
   }
 
   private _initCom() {
@@ -377,8 +391,10 @@ export default class Machine {
         break
 
       case "break":
-        if (this._processes.length && this._processes[0].instance.exports.break) {
+        if (this._processes[0] && this._processes[0].instance.exports.break) {
           this._processes[0].instance.exports.break()
+        } else {
+          this.shutdown()
         }
         break
 
@@ -506,5 +522,12 @@ export default class Machine {
     //@ts-ignore
     let dec = new TextDecoder("utf-8")
     return dec.decode(this._bufferStack.pop())
+  }
+
+  private _die(err: string) {
+    this._processes[0] = false
+    this.setDisplayMode(0, 80, 20)
+    this._pushString("\n\nError!\n" + err)
+    this.print()
   }
 }
