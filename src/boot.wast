@@ -1,99 +1,99 @@
 (module
   ;; Push memory range to buffer stack.
-  (import "api" "pushFromMemory" (func $pushFromMemory (param $offset i32) (param $length i32)))
+  (import "env" "pushFromMemory" (func $pushFromMemory (param $offset i32) (param $length i32)))
   ;; Pop one buffer off the buffer stack and store in memory.
-  (import "api" "popToMemory" (func $popToMemory (param $offset i32)))
+  (import "env" "popToMemory" (func $popToMemory (param $offset i32)))
 
   ;; Pop string from buffer stack and log it to console.
-  (import "api" "log" (func $log ))
+  (import "env" "log" (func $log ))
   ;; Pop string from buffer stack and print it to text display.
-  (import "api" "print" (func $print ))
+  (import "env" "print" (func $print ))
 
   ;; Set the display mode(0=text,1=pixel), resolution and (optionally) display size (for overscan).
-  (import "api" "setDisplayMode" (func $setDisplayMode (param $mode i32) (param $width i32) (param $height i32) (param $visibleWidth i32) (param $visibleHeight i32) ))
+  (import "env" "setDisplayMode" (func $setDisplayMode (param $mode i32) (param $width i32) (param $height i32) (param $visibleWidth i32) (param $visibleHeight i32) ))
   ;; Copy memory range to display buffer ($destOffset optional) and commit display buffer.
-  (import "api" "displayMemory" (func $displayMemory (param $offset i32) (param $length i32) (param $destOffset i32)))
+  (import "env" "displayMemory" (func $displayMemory (param $offset i32) (param $length i32) (param $destOffset i32)))
 
   ;; Pop URL from buffer stack and connect to it.
-  (import "api" "connectTo" (func $connectTo ))
+  (import "env" "connectTo" (func $connectTo ))
   ;; Shut down this connection
-  (import "api" "shutdown" (func $shutdown ))
+  (import "env" "shutdown" (func $shutdown ))
   ;; Push base URL to buffer stack and return its length in bytes.  
-  (import "api" "getBaseUrl" (func $getBaseUrl (result i32)))
+  (import "env" "getBaseUrl" (func $getBaseUrl (result i32)))
   ;; Pop URL from buffer stack and set it as base URL.
-  (import "api" "setBaseUrl" (func $setBaseUrl ))
+  (import "env" "setBaseUrl" (func $setBaseUrl ))
 
   ;; Pop path from buffer stack, read it and push the contents to buffer stack. Returns a request ID.
   ;; Callback can expect length in bytes and same request ID as parameter.
-  (import "api" "read" (func $read (param $tableIndex i32) (result i32)))
+  (import "env" "read" (func $read (param $tableIndex i32) (result i32)))
   ;; Pop path from buffer stack, read it and push the pixel data to buffer stack. Returns a request ID.
   ;; Callback can expect width and height in pixels and same request ID as parameter.
-  (import "api" "readImage" (func $readImage (param $tableIndex i32) (result i32)))
+  (import "env" "readImage" (func $readImage (param $tableIndex i32) (result i32)))
   ;; Pop data and path from buffer stack and write it to file. Returns a request ID.
   ;; Callback can expect success boolean and same request ID as parameter.
-  (import "api" "write" (func $write (param $tableIndex i32) (result i32)))
+  (import "env" "write" (func $write (param $tableIndex i32) (result i32)))
   ;; Pop path from buffer stack and delete the file. Returns a request ID.
   ;; Callback can expect success boolean and same request ID as parameter.
-  (import "api" "delete" (func $delete (param $tableIndex i32) (result i32)))
+  (import "env" "delete" (func $delete (param $tableIndex i32) (result i32)))
 
   ;; Prioritize  given type of input. 1=text, 2=mouse, 3=game.
-  (import "api" "focusInput" (func $focusInput (param $input i32)))
+  (import "env" "focusInput" (func $focusInput (param $input i32)))
 
   ;; Push text input text to buffer stack and return its length in bytes.
-  (import "api" "getInputText" (func $getInputText (result i32)))
+  (import "env" "getInputText" (func $getInputText (result i32)))
   ;; Get character position of carret in text input.
-  (import "api" "getInputPosition" (func $getInputPosition (result i32)))
+  (import "env" "getInputPosition" (func $getInputPosition (result i32)))
   ;; Get number of characters selected in text input.
-  (import "api" "getInputSelected" (func $getInputSelected (result i32)))
+  (import "env" "getInputSelected" (func $getInputSelected (result i32)))
   ;; Pop text from buffer stack and set text of text input.
-  (import "api" "setInputText" (func $setInputText))
+  (import "env" "setInputText" (func $setInputText))
   ;; Set position and (optionally) selection of text input.
-  (import "api" "setInputPosition" (func $setInputPosition (param $position i32) (param $selected i32)))
+  (import "env" "setInputPosition" (func $setInputPosition (param $position i32) (param $selected i32)))
   ;; Pop replacement and search substrings from buffer stack and
   ;; replace first occurence in text input.
-  (import "api" "replaceInputText" (func $replaceInputText (param $fromIndex i32)))
+  (import "env" "replaceInputText" (func $replaceInputText (param $fromIndex i32)))
 
   ;; Get X coordinate of mouse input.
-  (import "api" "getMouseX" (func $getMouseX (result i32)))
+  (import "env" "getMouseX" (func $getMouseX (result i32)))
   ;; Get Y coordinate of mouse input.
-  (import "api" "getMouseY" (func $getMouseY (result i32)))
+  (import "env" "getMouseY" (func $getMouseY (result i32)))
   ;; Check if mouse button is pressed.
-  (import "api" "getMousePressed" (func $getMousePressed (result i32)))
+  (import "env" "getMousePressed" (func $getMousePressed (result i32)))
 
   ;; Get X coodinate of game input. (-1 to 1)
-  (import "api" "getGameAxisX" (func $getGameAxisX (result f32)))
+  (import "env" "getGameAxisX" (func $getGameAxisX (result f32)))
   ;; Get Y coodinate of game input. (-1 to 1)
-  (import "api" "getGameAxisY" (func $getGameAxisY (result f32)))
+  (import "env" "getGameAxisY" (func $getGameAxisY (result f32)))
   ;; Check if game button A is pressed.
-  (import "api" "getGameButtonA" (func $getGameButtonA (result i32)))
+  (import "env" "getGameButtonA" (func $getGameButtonA (result i32)))
   ;; Check if game button B is pressed.
-  (import "api" "getGameButtonB" (func $getGameButtonB (result i32)))
+  (import "env" "getGameButtonB" (func $getGameButtonB (result i32)))
   ;; Check if game button X is pressed.
-  (import "api" "getGameButtonX" (func $getGameButtonX (result i32)))
+  (import "env" "getGameButtonX" (func $getGameButtonX (result i32)))
   ;; Check if game button Y is pressed.
-  (import "api" "getGameButtonY" (func $getGameButtonY (result i32)))
+  (import "env" "getGameButtonY" (func $getGameButtonY (result i32)))
 
   ;; Start generating a tone.
-  (import "api" "startTone" (func $startTone (param $channel i32) (param $frequency i32) (param $volume f32)))
+  (import "env" "startTone" (func $startTone (param $channel i32) (param $frequency i32) (param $volume f32)))
   ;; Stop generating a tone.
-  (import "api" "stopTone" (func $stopTone (param $channel i32)))
+  (import "env" "stopTone" (func $stopTone (param $channel i32)))
 
   ;; Set update interval.
-  (import "api" "setUpdateInterval" (func $setUpdateInterval (param $milliseconds i32)))
+  (import "env" "setUpdateInterval" (func $setUpdateInterval (param $milliseconds i32)))
   ;; Pop wasm binary code from buffer stack and load it. Returns new process ID.
   ;; All exports from boot.wasm starting with "api." are forwarded to the process.
-  (import "api" "loadProcess" (func $loadProcess (result i32)))
+  (import "env" "loadProcess" (func $loadProcess (result i32)))
   ;; Update a process, keeping it alive.
-  (import "api" "updateProcess" (func $updateProcess (param $pid i32)))
+  (import "env" "updateProcess" (func $updateProcess (param $pid i32)))
   ;; Call back a process. Any parameters beyond the first two will be forwarded to the callback function.
-  (import "api" "callbackProcess" (func $callbackProcess (param $pid i32) (param $tableIndex i32) (param $param i32)))
+  (import "env" "callbackProcess" (func $callbackProcess (param $pid i32) (param $tableIndex i32) (param $param i32)))
   ;; Kill a process.
-  (import "api" "killProcess" (func $killProcess (param $pid i32)))
+  (import "env" "killProcess" (func $killProcess (param $pid i32)))
   ;; Transfer a chunk of memory from one process to another
-  (import "api" "transferMemory" (func $transferMemory (param $srcPid i32) (param $srcOffset i32) (param $length i32) (param $destPid i32) (param $destOffset i32)))
+  (import "env" "transferMemory" (func $transferMemory (param $srcPid i32) (param $srcOffset i32) (param $length i32) (param $destPid i32) (param $destOffset i32)))
 
   ;; transpile wa(s)t into wasm on the buffer stack and return byte length.
-  (import "api" "wabt" (func $wabt (result i32)))
+  (import "env" "wabt" (func $wabt (result i32)))
 
   ;; All JavaScript Math functions are available.
   (import "Math" "random" (func $random (result f32)))

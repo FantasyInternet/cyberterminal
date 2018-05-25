@@ -173,11 +173,11 @@ export default class Machine {
   }
   loadProcess() {
     let wasm = this._popArrayBuffer()
-    let api = this._processes.length ? this._generateProcessApi() : this._generateRomApi()
+    let env = this._processes.length ? this._generateProcessApi() : this._generateRomApi()
     let pid = this._processes.length
     this._processes.push(null)
     //@ts-ignore
-    WebAssembly.instantiate(wasm, { api, Math }).then((process) => {
+    WebAssembly.instantiate(wasm, { env, Math }).then((process) => {
       this._activePID = pid
       this._processes[pid] = process
       if (process.instance.exports.setup)
