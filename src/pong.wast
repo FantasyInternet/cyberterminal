@@ -191,7 +191,7 @@
   (global $pointer    (mut i32) (i32.const 0))
   (global $fontReq (mut i32) (i32.const 0))
   (global $font    (mut i32) (i32.const 0))
-  (func $storeImages (param $w i32) (param $h i32) (param $req i32)
+  (func $storeImages (param $success i32) (param $w i32) (param $h i32) (param $req i32)
     (if (i32.eq (get_local $req) (get_global $sleepyheadReq)) (then
       (set_global $sleepyhead (call $createImg (get_local $w) (get_local $h)))
       (call $popToMemory (i32.add (call $getPartOffset (get_global $sleepyhead)) (i32.const 8)))

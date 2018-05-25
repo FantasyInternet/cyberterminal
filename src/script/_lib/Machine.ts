@@ -105,43 +105,39 @@ export default class Machine {
     }
   }
   read(callback: number | Function) {
-    if (typeof callback === "number") {
-      let process = this._processes[this._activePID]
-      if (!process) throw "No active process!"
-      callback = process.instance.exports.table.get(callback)
-    }
+    callback = this._getCallback(callback)
     let id = this._asyncCalls++
     let filename = (new URL(this._popString(), this._baseUrl)).toString()
     if (filename.substr(0, this._originUrl.length) !== this._originUrl) throw "cross origin not allowed!"
     this._sysRequest("read", filename, { type: "binary" }).then((data: ArrayBuffer) => {
       this._pushArrayBuffer(data)
       //@ts-ignore
-      callback(data.byteLength, id)
+      callback(true, data.byteLength, id)
+    }).catch((err) => {
+      console.error(err)
+      //@ts-ignore
+      callback(false, 0, id)
     })
     return id
   }
   readImage(callback: number | Function) {
-    if (typeof callback === "number") {
-      let process = this._processes[this._activePID]
-      if (!process) throw "No active process!"
-      callback = process.instance.exports.table.get(callback)
-    }
+    callback = this._getCallback(callback)
     let id = this._asyncCalls++
     let filename = (new URL(this._popString(), this._baseUrl)).toString()
     if (filename.substr(0, this._originUrl.length) !== this._originUrl) throw "cross origin not allowed!"
     this._sysRequest("read", filename, { type: "image" }).then((data: ImageData) => {
       this._pushArrayBuffer(data.data.buffer)
       //@ts-ignore
-      callback(data.width, data.height, id)
+      callback(true, data.width, data.height, id)
+    }).catch((err) => {
+      console.error(err)
+      //@ts-ignore
+      callback(false, 0, 0, id)
     })
     return id
   }
   write(callback: number | Function) {
-    if (typeof callback === "number") {
-      let process = this._processes[this._activePID]
-      if (!process) throw "No active process!"
-      callback = process.instance.exports.table.get(callback)
-    }
+    callback = this._getCallback(callback)
     let id = this._asyncCalls++
     let data = this._popArrayBuffer()
     let filename = (new URL(this._popString(), this._baseUrl)).toString()
@@ -149,21 +145,25 @@ export default class Machine {
     this._sysRequest("write", filename, data).then((success: boolean) => {
       //@ts-ignore
       callback(success, id)
+    }).catch((err) => {
+      console.error(err)
+      //@ts-ignore
+      callback(false, id)
     })
     return id
   }
   delete(callback: number | Function) {
-    if (typeof callback === "number") {
-      let process = this._processes[this._activePID]
-      if (!process) throw "No active process!"
-      callback = process.instance.exports.table.get(callback)
-    }
+    callback = this._getCallback(callback)
     let id = this._asyncCalls++
     let filename = (new URL(this._popString(), this._baseUrl)).toString()
     if (filename.substr(0, this._originUrl.length) !== this._originUrl) throw "cross origin not allowed!"
     this._sysRequest("delete", filename).then((success: boolean) => {
       //@ts-ignore
       callback(success, id)
+    }).catch((err) => {
+      console.error(err)
+      //@ts-ignore
+      callback(false, id)
     })
     return id
   }
@@ -529,5 +529,14 @@ export default class Machine {
     this.setDisplayMode(0, 80, 20)
     this._pushString("\n\nError!\n" + err)
     this.print()
+  }
+
+  private _getCallback(callback: number | Function) {
+    if (typeof callback === "number") {
+      let process = this._processes[this._activePID]
+      if (!process) throw "No active process!"
+      callback = process.instance.exports.table.get(callback)
+    }
+    return callback
   }
 }

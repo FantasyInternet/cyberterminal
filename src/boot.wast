@@ -24,16 +24,16 @@
   (import "env" "setBaseUrl" (func $setBaseUrl ))
 
   ;; Pop path from buffer stack, read it and push the contents to buffer stack. Returns a request ID.
-  ;; Callback can expect length in bytes and same request ID as parameter.
+  ;; Callback can expect success boolean, length in bytes and same request ID as parameters.
   (import "env" "read" (func $read (param $tableIndex i32) (result i32)))
   ;; Pop path from buffer stack, read it and push the pixel data to buffer stack. Returns a request ID.
-  ;; Callback can expect width and height in pixels and same request ID as parameter.
+  ;; Callback can expect success boolean, width and height in pixels and same request ID as parameters.
   (import "env" "readImage" (func $readImage (param $tableIndex i32) (result i32)))
   ;; Pop data and path from buffer stack and write it to file. Returns a request ID.
-  ;; Callback can expect success boolean and same request ID as parameter.
+  ;; Callback can expect success boolean and same request ID as parameters.
   (import "env" "write" (func $write (param $tableIndex i32) (result i32)))
   ;; Pop path from buffer stack and delete the file. Returns a request ID.
-  ;; Callback can expect success boolean and same request ID as parameter.
+  ;; Callback can expect success boolean and same request ID as parameters.
   (import "env" "delete" (func $delete (param $tableIndex i32) (result i32)))
 
   ;; Prioritize  given type of input. 1=text, 2=mouse, 3=game.
