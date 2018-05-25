@@ -78,13 +78,13 @@
   ;; Stop generating a tone.
   (import "env" "stopTone" (func $stopTone (param $channel i32)))
 
-  ;; Set update interval.
-  (import "env" "setUpdateInterval" (func $setUpdateInterval (param $milliseconds i32)))
+  ;; Set step interval.
+  (import "env" "setStepInterval" (func $setStepInterval (param $milliseconds i32)))
   ;; Pop wasm binary code from buffer stack and load it. Returns new process ID.
   ;; All exports from boot.wasm starting with "api." are forwarded to the process.
   (import "env" "loadProcess" (func $loadProcess (result i32)))
-  ;; Update a process, keeping it alive.
-  (import "env" "updateProcess" (func $updateProcess (param $pid i32)))
+  ;; Step a process, keeping it alive.
+  (import "env" "stepProcess" (func $stepProcess (param $pid i32)))
   ;; Call back a process. Any parameters beyond the first two will be forwarded to the callback function.
   (import "env" "callbackProcess" (func $callbackProcess (param $pid i32) (param $tableIndex i32) (param $param i32)))
   ;; Kill a process.
@@ -116,8 +116,8 @@
   (global $inputText  (mut i32) (i32.const 1))
   (global $font       (mut i32) (i32.const 1))
 
-  ;; Setup function is called once on start.
-  (func $setup
+  ;; Init function is called once on start.
+  (func $init
     (set_global $homeCode  (call $createPart (i32.const 56)))
     (i64.store   (i32.add (call $getPartOffset (get_global $homeCode)) (i32.const 0)) (i64.const 0x0909485b1b4b5b1b));;"Esc[KEsc[H\t\t"
     (i64.store   (i32.add (call $getPartOffset (get_global $homeCode)) (i32.const 8)) (i64.const 0x3d2d2d2d20202009));;"\t   ---="
@@ -126,7 +126,7 @@
     (i64.store   (i32.add (call $getPartOffset (get_global $homeCode)) (i32.const 32)) (i64.const 0x0a0a202d2d2d3d3d));;"==--- \n\n"
     (i64.store   (i32.add (call $getPartOffset (get_global $homeCode)) (i32.const 40)) (i64.const 0x207463656e6e6f43));;"Connect "
     (i64.store   (i32.add (call $getPartOffset (get_global $homeCode)) (i32.const 48)) (i64.const 0x203a4c5255206f74));;"to URL: "
-    (call $setUpdateInterval (i32.const 32))
+    (call $setStepInterval (i32.const 32))
     (call $setDisplayMode (i32.const 0) (i32.const 80) (i32.const 20) (i32.const 80) (i32.const 20))
 
     (call $focusInput (i32.const 1))
@@ -137,10 +137,10 @@
     ;; (call $print (call $pushFromMemory (call $getPartOffset (get_global $intro)) (call $getPartLength (get_global $intro))))
     (return)
   )
-  (export "setup" (func $setup))
+  (export "init" (func $init))
 
-  ;; Update function is called once every interval.
-  (func $update (param $t f64)
+  ;; Step function is called once every interval.
+  (func $step (param $t f64)
     (local $pos i32)
     (local $len i32)
     (set_local $pos (call $getInputPosition))
@@ -160,12 +160,12 @@
       (return)
     ))
   )
-  (export "update" (func $update))
+  (export "step" (func $step))
 
-  ;; Draw function is called whenever the display needs to be redrawn.
-  (func $draw (param $t f64)
+  ;; Display function is called whenever the display needs to be redrawn.
+  (func $display (param $t f64)
   )
-  (export "draw" (func $draw))
+  (export "display" (func $display))
 
   ;; Break function is called whenever Esc is pressed.
   (func $break

@@ -162,7 +162,7 @@
     (get_local $id)
   )
 
-  (func $setup
+  (func $init
     (call $log (call $pushFromMemory (i32.const 10) (i32.const 22)))
     (set_global $sleepyhead    (call $createImg (i32.const 0) (i32.const 0)))
     (set_global $sleepyheadReq (call $readImage (call $pushFromMemory (i32.const  40) (i32.const 23)) (i32.const 1)))
@@ -182,7 +182,7 @@
     (set_global $rightColor (call $rgb (i32.const 255) (i32.const 0) (i32.const 0)))
     (set_global $inputText (call $createPart (i32.const 1)))
   )
-  (export "setup" (func $setup))
+  (export "init" (func $init))
 
   (global $codeartistic (mut i32) (i32.const 0))
   (global $sleepyheadReq (mut i32) (i32.const 0))
@@ -221,7 +221,7 @@
   (global $ballColor (mut i32) (i32.const 0))
   (global $beep (mut i32) (i32.const 1))
   (global $inputText (mut i32) (i32.const 1))
-  (func $update (param $t f64)
+  (func $step (param $t f64)
     (set_global $beep (i32.sub (get_global $beep) (i32.const 1)))
     (if (i32.eq (get_global $beep) (i32.const 0)) (then
       (call $stopTone (i32.const 0) )
@@ -288,8 +288,8 @@
       ))
     ))
   )
-  (export "update" (func $update))
-  (func $draw (param $t f64)
+  (export "step" (func $step))
+  (func $display (param $t f64)
     (call $rect (get_global $display) (i32.const 0) (i32.const 0) (call $getImgWidth (get_global $display)) (call $getImgHeight (get_global $display)) (get_global $bgColor))
     (call $copyImg (get_global $sleepyhead) (i32.const 0) (i32.const 0) (get_global $display) (i32.const 80) (i32.const 16) (call $getImgWidth (get_global $sleepyhead)) (call $getImgHeight (get_global $sleepyhead)))
     (if (call $getMousePressed) (then
@@ -323,7 +323,7 @@
     (call $copyImg (get_global $pointer) (i32.const 0) (i32.const 0) (get_global $display) (call $getMouseX) (call $getMouseY) (call $getImgWidth (get_global $pointer)) (call $getImgHeight (get_global $pointer)))
     (call $displayMemory (i32.add (call $getPartOffset (get_global $display)) (i32.const 8)) (i32.sub (call $getPartLength (get_global $display)) (i32.const 8)))
   )
-  (export "draw" (func $draw))
+  (export "display" (func $display))
 
 
 

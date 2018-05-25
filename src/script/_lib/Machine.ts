@@ -168,8 +168,8 @@ export default class Machine {
     return id
   }
 
-  setUpdateInterval(milliseconds: number) {
-    this._updateInterval = milliseconds
+  setStepInterval(milliseconds: number) {
+    this._stepInterval = milliseconds
   }
   loadProcess() {
     let wasm = this._popArrayBuffer()
@@ -180,19 +180,19 @@ export default class Machine {
     WebAssembly.instantiate(wasm, { env, Math }).then((process) => {
       this._activePID = pid
       this._processes[pid] = process
-      if (process.instance.exports.setup)
-        process.instance.exports.setup()
-      this._nextFrame = this._nextUpdate = performance.now()
+      if (process.instance.exports.init)
+        process.instance.exports.init()
+      this._nextFrame = this._nextStep = performance.now()
       if (this._activePID === 0) this._tick()
       this._activePID = 0
     })
     return pid
   }
-  updateProcess(pid: number) {
+  stepProcess(pid: number) {
     let oldpid = this._activePID
     this._activePID = pid
     let process = this._processes[this._activePID]
-    if (process) process.instance.export.update(performance.now())
+    if (process) process.instance.export.step(performance.now())
     this._activePID = oldpid
   }
   callbackProcess(pid: number, tableIndex: number, ...a: any[]) {
@@ -286,8 +286,8 @@ export default class Machine {
   private _active: boolean = false
   private _nextFrame: number = performance.now()
   private _frameInterval: number = 1000 / 60
-  private _nextUpdate: number = performance.now()
-  private _updateInterval: number = 1000 / 60
+  private _nextStep: number = performance.now()
+  private _stepInterval: number = 1000 / 60
   private _toneTypes: string[] = ["square", "sawtooth", "triangle", "sine"]
   private _displayModes: string[] = ["text", "pixel"]
   private _displayMode: number = -1
@@ -323,25 +323,19 @@ export default class Machine {
     let t = performance.now()
     let process = this._processes[0]
     if (!process) return this._active = false
-    setTimeout(this._tick.bind(this), this._nextUpdate - t)
-    let updated = !(process.instance.exports.update)
-    if (t >= this._nextUpdate && process.instance.exports.update) {
-      if (this._updateInterval <= 0) this._updateInterval = 1
-      while (t >= this._nextUpdate) {
-        process.instance.exports.update(this._nextUpdate)
-        updated = true
-        this._nextUpdate += this._updateInterval
+    setTimeout(this._tick.bind(this), this._nextStep - t)
+    let stepped = !(process.instance.exports.step)
+    if (process.instance.exports.step) {
+      if (this._stepInterval <= 0) this._stepInterval = 1
+      while (t >= this._nextStep) {
+        process.instance.exports.step(this._nextStep)
+        stepped = true
+        this._nextStep += this._stepInterval
       }
     }
-    if (this._transferBuffer && updated && process.instance.exports.draw) {
-      process.instance.exports.draw(t)
+    if (this._transferBuffer && stepped && process.instance.exports.display) {
+      process.instance.exports.display(t)
     }
-    /*while (performance.now() < this._nextFrame) {
-      if (performance.now() >= this._nextUpdate) {
-        process.instance.exports.update(this._nextUpdate)
-        this._nextUpdate += this._updateInterval
-      }
-    }*/
     this._nextFrame += this._frameInterval
   }
 
@@ -377,7 +371,7 @@ export default class Machine {
           this.setInputText()
           this.focusInput(this._inputFocus)
         }
-        this._nextFrame = this._nextUpdate = performance.now()
+        this._nextFrame = this._nextStep = performance.now()
         this._active = true
         this._tick()
         break

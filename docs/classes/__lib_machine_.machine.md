@@ -47,12 +47,12 @@ Central processing unit for browsers See [Sys](../interfaces/__classes_sys_.sys.
 * [setDisplayMode](__lib_machine_.machine.md#setdisplaymode)
 * [setInputPosition](__lib_machine_.machine.md#setinputposition)
 * [setInputText](__lib_machine_.machine.md#setinputtext)
-* [setUpdateInterval](__lib_machine_.machine.md#setupdateinterval)
+* [setStepInterval](__lib_machine_.machine.md#setstepinterval)
 * [shutdown](__lib_machine_.machine.md#shutdown)
 * [startTone](__lib_machine_.machine.md#starttone)
+* [stepProcess](__lib_machine_.machine.md#stepprocess)
 * [stopTone](__lib_machine_.machine.md#stoptone)
 * [transferMemory](__lib_machine_.machine.md#transfermemory)
-* [updateProcess](__lib_machine_.machine.md#updateprocess)
 * [wabt](__lib_machine_.machine.md#wabt)
 * [write](__lib_machine_.machine.md#write)
 
@@ -503,11 +503,11 @@ ___
 **Returns:** `void`
 
 ___
-<a id="setupdateinterval"></a>
+<a id="setstepinterval"></a>
 
-###  setUpdateInterval
+###  setStepInterval
 
-▸ **setUpdateInterval**(milliseconds: *`number`*): `void`
+▸ **setStepInterval**(milliseconds: *`number`*): `void`
 
 *Defined in [_lib/Machine.ts:171](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L171)*
 
@@ -551,6 +551,23 @@ ___
 **Returns:** `void`
 
 ___
+<a id="stepprocess"></a>
+
+###  stepProcess
+
+▸ **stepProcess**(pid: *`number`*): `void`
+
+*Defined in [_lib/Machine.ts:191](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L191)*
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| pid | `number` | 
+
+**Returns:** `void`
+
+___
 <a id="stoptone"></a>
 
 ###  stopTone
@@ -585,23 +602,6 @@ ___
 | length | `number` | 
 | destPid | `number` | 
 | destOffset | `number` | 
-
-**Returns:** `void`
-
-___
-<a id="updateprocess"></a>
-
-###  updateProcess
-
-▸ **updateProcess**(pid: *`number`*): `void`
-
-*Defined in [_lib/Machine.ts:191](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L191)*
-
-**Parameters:**
-
-| Param | Type |
-| ------ | ------ |
-| pid | `number` | 
 
 **Returns:** `void`
 
