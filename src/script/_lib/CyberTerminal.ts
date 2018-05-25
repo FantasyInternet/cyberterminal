@@ -26,14 +26,15 @@ export default class CyberTerminal {
 
   async connectTo(url: string) {
     if (this._connecting) return
-    this.sys.setDisplayMode("text", url.length, 4)
-    this.sys.print("Connecting to\n" + url)
+    this.sys.setDisplayMode("text", 80, 20)
+    this.sys.print("\nConnecting to\n" + url)
     this._connecting = true
     let machine = this.addMachine()
     let msg = await this._findBoot(url)
     if (msg.wasm) {
       this.sys.print(".")
       this.sys.setTitle("" + msg.url)
+      this.sys.setDisplayMode("none", 0, 0)
       machine.send(msg)
       this._connecting = setTimeout(() => {
         this._connecting = null
@@ -68,10 +69,11 @@ export default class CyberTerminal {
   removeMachine() {
     let machine = this.machineWorkers.pop()
     if (machine) machine.terminate()
-    this.sys.setDisplayMode("text", 16, 4)
-    this.sys.print("Disconnecting...")
+    this.sys.setDisplayMode("none", 0, 0)
+    this.sys.print("\nDisconnecting...")
     setTimeout(() => {
       if (this.machineWorkers.length) {
+        this.sys.setDisplayMode("text", -1, -1)
         this.machineWorkers[this.machineWorkers.length - 1].send({ cmd: "resume" })
       } else {
         if (history.length > 1) {

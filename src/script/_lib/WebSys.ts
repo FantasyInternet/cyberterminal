@@ -34,7 +34,7 @@ export default class WebSys implements Sys {
   setTitle(title: string) {
   }
 
-  setDisplayMode(mode: "text" | "pixel", width: number, height: number, visibleWidth = width, visibleHeight = height) {
+  setDisplayMode(mode:"none"| "text" | "pixel", width: number, height: number, visibleWidth = width, visibleHeight = height) {
     if (this._displayMode === mode &&
       this._displayWidth === width &&
       this._displayHeight === height &&
@@ -50,6 +50,9 @@ export default class WebSys implements Sys {
     delete this._displayCanvas
     delete this._displayContext
     switch (this._displayMode) {
+      case "none":
+      break
+      
       case "text":
         this._initTextGrid(width, height)
         break

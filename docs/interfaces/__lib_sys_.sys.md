@@ -271,7 +271,7 @@ ___
 
 ###  setDisplayMode
 
-▸ **setDisplayMode**(mode: *"text" |"pixel"*, width: *`number`*, height: *`number`*): `void`
+▸ **setDisplayMode**(mode: *"none" |"text" |"pixel"*, width: *`number`*, height: *`number`*): `void`
 
 *Defined in [_lib/Sys.ts:36](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L36)*
 
@@ -281,7 +281,8 @@ Switch display mode.
 
 | Param | Type | Description |
 | ------ | ------ | ------ |
-| mode | "text" |
+| mode | "none" |
+"text" |
 "pixel"
  |  Name of mode to switch to |
 | width | `number` |  The width of the display in characters or pixels |
