@@ -110,7 +110,7 @@
     (data (i32.const 200) "./images/pointer.png")
 
   ;; Global variables
-  (global $intro  (mut i32) (i32.const 1))
+  (global $intro      (mut i32) (i32.const 1))
   (global $homeCode   (mut i32) (i32.const 1))
   (global $inputPos   (mut i32) (i32.const 1024))
   (global $inputText  (mut i32) (i32.const 1))
@@ -130,10 +130,12 @@
     (call $setDisplayMode (i32.const 0) (i32.const 80) (i32.const 20) (i32.const 80) (i32.const 20))
 
     (call $focusInput (i32.const 1))
-    (set_global $inputText (call $createPart (i32.const 64)))
+    (set_global $inputText (call $createPart (i32.const 7)))
+    (i64.store   (i32.add (call $getPartOffset (get_global $inputText)) (i32.const 0)) (i64.const 0x2f2f2f3a70747468));;"http:///"
+    (call $setInputText (call $pushFromMemory (call $getPartOffset (get_global $inputText)) (call $getPartLength (get_global $inputText))))
+    (call $setInputPosition (call $getPartLength (get_global $inputText)) (i32.const 0))
     ;; (set_global $inputText (call $createPart (call $getBaseUrl)))
     ;; (call $setInputText)
-    ;; (call $setInputPosition (call $getPartLength (get_global $inputText)) (i32.const 0))
     ;; (call $print (call $pushFromMemory (call $getPartOffset (get_global $intro)) (call $getPartLength (get_global $intro))))
     (return)
   )

@@ -1,4 +1,4 @@
-import wabt from "./wabt"
+var wabt = require("./wabt")
 
 /**
  * Central processing unit for browsers
@@ -288,6 +288,7 @@ export default class Machine {
 
   wabt() {
     let wast = this._popString()
+    //@ts-ignore
     let module = wabt.parseWat("idunno.wast", wast)
     return this._pushArrayBuffer(module.toBinary({}).buffer)
   }
