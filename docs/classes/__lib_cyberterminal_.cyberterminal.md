@@ -35,7 +35,7 @@ Terminal app
 
 ⊕ **new CyberTerminal**(sys: *[Sys](../interfaces/__lib_sys_.sys.md)*): [CyberTerminal](__lib_cyberterminal_.cyberterminal.md)
 
-*Defined in [_lib/CyberTerminal.ts:7](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L7)*
+*Defined in [_lib/CyberTerminal.ts:8](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L8)*
 
 **Parameters:**
 
@@ -55,7 +55,7 @@ ___
 
 **● machineWorkers**: *[MachineWorker](../interfaces/__lib_machineworker_.machineworker.md)[]* =  []
 
-*Defined in [_lib/CyberTerminal.ts:7](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L7)*
+*Defined in [_lib/CyberTerminal.ts:8](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L8)*
 
 ___
 <a id="sys"></a>
@@ -64,7 +64,7 @@ ___
 
 **● sys**: *[Sys](../interfaces/__lib_sys_.sys.md)*
 
-*Defined in [_lib/CyberTerminal.ts:9](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L9)*
+*Defined in [_lib/CyberTerminal.ts:10](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L10)*
 
 ___
 
@@ -76,7 +76,7 @@ ___
 
 ▸ **addMachine**(): [MachineWorker](../interfaces/__lib_machineworker_.machineworker.md)
 
-*Defined in [_lib/CyberTerminal.ts:58](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L58)*
+*Defined in [_lib/CyberTerminal.ts:63](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L63)*
 
 **Returns:** [MachineWorker](../interfaces/__lib_machineworker_.machineworker.md)
 
@@ -87,7 +87,7 @@ ___
 
 ▸ **connectTo**(url: *`string`*): `Promise`<`void`>
 
-*Defined in [_lib/CyberTerminal.ts:27](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L27)*
+*Defined in [_lib/CyberTerminal.ts:32](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L32)*
 
 **Parameters:**
 
@@ -104,7 +104,7 @@ ___
 
 ▸ **removeMachine**(): `void`
 
-*Defined in [_lib/CyberTerminal.ts:69](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L69)*
+*Defined in [_lib/CyberTerminal.ts:74](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L74)*
 
 **Returns:** `void`
 

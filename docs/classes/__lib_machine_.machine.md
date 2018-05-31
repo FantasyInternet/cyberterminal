@@ -28,6 +28,7 @@ Central processing unit for browsers See [Sys](../interfaces/__classes_sys_.sys.
 * [getGameButtonB](__lib_machine_.machine.md#getgamebuttonb)
 * [getGameButtonX](__lib_machine_.machine.md#getgamebuttonx)
 * [getGameButtonY](__lib_machine_.machine.md#getgamebuttony)
+* [getInputKey](__lib_machine_.machine.md#getinputkey)
 * [getInputPosition](__lib_machine_.machine.md#getinputposition)
 * [getInputSelected](__lib_machine_.machine.md#getinputselected)
 * [getInputText](__lib_machine_.machine.md#getinputtext)
@@ -176,7 +177,7 @@ ___
 
 ▸ **getGameAxisX**(): `any`
 
-*Defined in [_lib/Machine.ts:279](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L279)*
+*Defined in [_lib/Machine.ts:280](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L280)*
 
 **Returns:** `any`
 
@@ -187,7 +188,7 @@ ___
 
 ▸ **getGameAxisY**(): `any`
 
-*Defined in [_lib/Machine.ts:280](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L280)*
+*Defined in [_lib/Machine.ts:281](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L281)*
 
 **Returns:** `any`
 
@@ -198,7 +199,7 @@ ___
 
 ▸ **getGameButtonA**(): `any`
 
-*Defined in [_lib/Machine.ts:281](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L281)*
+*Defined in [_lib/Machine.ts:282](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L282)*
 
 **Returns:** `any`
 
@@ -209,7 +210,7 @@ ___
 
 ▸ **getGameButtonB**(): `any`
 
-*Defined in [_lib/Machine.ts:282](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L282)*
+*Defined in [_lib/Machine.ts:283](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L283)*
 
 **Returns:** `any`
 
@@ -220,7 +221,7 @@ ___
 
 ▸ **getGameButtonX**(): `any`
 
-*Defined in [_lib/Machine.ts:283](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L283)*
+*Defined in [_lib/Machine.ts:284](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L284)*
 
 **Returns:** `any`
 
@@ -231,7 +232,18 @@ ___
 
 ▸ **getGameButtonY**(): `any`
 
-*Defined in [_lib/Machine.ts:284](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L284)*
+*Defined in [_lib/Machine.ts:285](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L285)*
+
+**Returns:** `any`
+
+___
+<a id="getinputkey"></a>
+
+###  getInputKey
+
+▸ **getInputKey**(): `any`
+
+*Defined in [_lib/Machine.ts:248](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L248)*
 
 **Returns:** `any`
 
@@ -275,7 +287,7 @@ ___
 
 ▸ **getMousePressed**(): `any`
 
-*Defined in [_lib/Machine.ts:278](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L278)*
+*Defined in [_lib/Machine.ts:279](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L279)*
 
 **Returns:** `any`
 
@@ -286,7 +298,7 @@ ___
 
 ▸ **getMouseX**(): `any`
 
-*Defined in [_lib/Machine.ts:276](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L276)*
+*Defined in [_lib/Machine.ts:277](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L277)*
 
 **Returns:** `any`
 
@@ -297,7 +309,7 @@ ___
 
 ▸ **getMouseY**(): `any`
 
-*Defined in [_lib/Machine.ts:277](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L277)*
+*Defined in [_lib/Machine.ts:278](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L278)*
 
 **Returns:** `any`
 
@@ -431,7 +443,7 @@ ___
 
 ▸ **replaceInputText**(fromIndex?: *`number`*): `void`
 
-*Defined in [_lib/Machine.ts:261](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L261)*
+*Defined in [_lib/Machine.ts:262](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L262)*
 
 **Parameters:**
 
@@ -480,7 +492,7 @@ ___
 
 ▸ **setInputPosition**(position?: *`number`*, selection?: *`number`*): `void`
 
-*Defined in [_lib/Machine.ts:254](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L254)*
+*Defined in [_lib/Machine.ts:255](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L255)*
 
 **Parameters:**
 
@@ -498,7 +510,7 @@ ___
 
 ▸ **setInputText**(): `void`
 
-*Defined in [_lib/Machine.ts:248](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L248)*
+*Defined in [_lib/Machine.ts:249](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L249)*
 
 **Returns:** `void`
 
@@ -537,7 +549,7 @@ ___
 
 ▸ **startTone**(channel: *`number`*, frequency: *`number`*, volume?: *`number`*, type?: *`number`*): `void`
 
-*Defined in [_lib/Machine.ts:286](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L286)*
+*Defined in [_lib/Machine.ts:287](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L287)*
 
 **Parameters:**
 
@@ -574,7 +586,7 @@ ___
 
 ▸ **stopTone**(channel: *`number`*): `void`
 
-*Defined in [_lib/Machine.ts:287](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L287)*
+*Defined in [_lib/Machine.ts:288](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L288)*
 
 **Parameters:**
 
@@ -612,7 +624,7 @@ ___
 
 ▸ **wabt**(): `number`
 
-*Defined in [_lib/Machine.ts:289](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L289)*
+*Defined in [_lib/Machine.ts:290](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L290)*
 
 **Returns:** `number`
 

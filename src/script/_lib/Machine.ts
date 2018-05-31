@@ -245,6 +245,7 @@ export default class Machine {
   getInputText() { return this._pushString(this._textInputState.text) }
   getInputPosition() { return this._textInputState.pos }
   getInputSelected() { return this._textInputState.len }
+  getInputKey() { return this._textInputState.key }
   setInputText() {
     this._textInputState.text = this._popString()
     this._textInputState.pos = Math.min(this._textInputState.text.length, this._textInputState.pos)
@@ -319,8 +320,9 @@ export default class Machine {
   private _asyncCalls: number = 0
   private _inputFocus: number = -1
   private _textInputState: any = {
-    text: "", pos: 0, len: 0
+    text: "", pos: 0, len: 0, key: 0
   }
+  private _keyBuffer: number[] = [0]
   private _mouseInputState: any = {
     x: 0, y: 0, pressed: false
   }
@@ -334,16 +336,19 @@ export default class Machine {
     let t = performance.now()
     let process = this._processes[0]
     if (!process) return this._active = false
-    setTimeout(this._tick.bind(this), this._nextStep - t)
+    setTimeout(this._tick.bind(this), this._nextStep + this._stepInterval - t)
     try {
       let stepped = !(process.instance.exports.step)
       if (process.instance.exports.step) {
         if (this._stepInterval <= 0) this._stepInterval = 1
         while (t >= this._nextStep) {
+          if (this._keyBuffer.length) this._textInputState.key = this._keyBuffer.shift()
           process.instance.exports.step(this._nextStep)
           stepped = true
           this._nextStep += this._stepInterval
         }
+      } else {
+        if (this._keyBuffer.length) this._textInputState.key = this._keyBuffer.shift()
       }
       if (this._transferBuffer && stepped && process.instance.exports.display) {
         process.instance.exports.display(t)
@@ -418,6 +423,7 @@ export default class Machine {
 
       case "textInput":
         this._textInputState = e.data.state
+        this._keyBuffer.push(e.data.state.key)
         break
       case "mouseInput":
         this._mouseInputState = e.data.state

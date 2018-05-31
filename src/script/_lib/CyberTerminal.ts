@@ -1,4 +1,5 @@
 import Sys from "./Sys"
+let pkg = require("../../../package.json")
 
 /**
  * Terminal app
@@ -11,7 +12,11 @@ export default class CyberTerminal {
     this.sys.mouseInput.addEventListener(this._onMouseInput.bind(this))
     this.sys.gameInput.addEventListener(this._onGameInput.bind(this))
     this.sys.breaker.addEventListener(this._onBreak.bind(this))
-    this.connectTo(location.toString())
+    this.sys.setDisplayMode("text", 80, 20)
+    this.sys.print("CyberTerminal v" + pkg.version)
+    setTimeout(() => {
+      this.connectTo(location.toString())
+    }, 1024)
     document.addEventListener("visibilitychange", () => {
       if (this.machineWorkers.length) {
         if (document.visibilityState === "visible") {
