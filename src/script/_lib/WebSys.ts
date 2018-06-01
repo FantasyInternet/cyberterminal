@@ -7,6 +7,7 @@ import TextInput from "./TextInput"
 import Breaker from "./Breaker"
 
 let scriptSrc: string
+let dirCache: any = {}
 
 /**
  * Sys implementation for web browsers.
@@ -196,27 +197,46 @@ export default class WebSys implements Sys {
   async read(filename: string, options: any = {}) {
     //@ts-ignore
     let res = await fetch(filename)
-    if (!res.ok) throw "read error!"
+    if (res.ok) {
+      this._dirCache(filename, true)
+    } else {
+      this._dirCache(filename, false)
+      throw "read error!"
+    }
+    let buf = await res.arrayBuffer()
+    //@ts-ignore
+    let dec = new TextDecoder("utf-8")
+    let txt = dec.decode(buf)
+
+    try {
+      let parser = new DOMParser()
+      let url = new URL(filename)
+      let doc = parser.parseFromString(txt, "text/html")
+      let links = doc.querySelectorAll("[href],[src]")
+      for (let link of links) {
+        this._dirCache("" + new URL(link.getAttribute("href") || link.getAttribute("src") || ".", url))
+      }
+    } catch (error) { }
     switch (options.type) {
       case "binary":
-        return res.arrayBuffer()
+        return buf
 
       case "text":
-        return res.text()
+        return txt
 
       case "image":
         return new Promise((resolve) => {
-          let blob = res.blob().then((blob) => {
-            let img = new Image()
-            img.src = URL.createObjectURL(blob)
-            img.addEventListener("load", () => {
-              let canvas = document.createElement("canvas")
-              let g = <CanvasRenderingContext2D>canvas.getContext("2d")
-              canvas.width = img.width
-              canvas.height = img.height
-              g.drawImage(img, 0, 0)
-              resolve(g.getImageData(0, 0, img.width, img.height))
-            })
+          let blob = new Blob([buf])
+          let img = new Image()
+          img.src = URL.createObjectURL(blob)
+          img.addEventListener("load", () => {
+            let canvas = document.createElement("canvas")
+            let g = <CanvasRenderingContext2D>canvas.getContext("2d")
+            canvas.width = img.width
+            canvas.height = img.height
+            g.drawImage(img, 0, 0)
+            resolve(g.getImageData(0, 0, img.width, img.height))
+            URL.revokeObjectURL(img.src)
           })
         })
 
@@ -226,22 +246,43 @@ export default class WebSys implements Sys {
   }
 
   async write(filename: string, data: string | ArrayBuffer) {
-    //@ts-ignore
     let res = await fetch(filename, {
       method: "PUT",
       body: new Blob([data])
     })
     if (!res.ok) throw "write error!"
+    this._dirCache(filename, true)
     return res.ok
   }
 
   async delete(filename: string) {
-    //@ts-ignore
     let res = await fetch(filename, {
       method: "DELETE"
     })
     if (!res.ok) throw "delete error!"
+    this._dirCache(filename, false)
     return res.ok
+  }
+
+  async list(path: string) {
+    if (path.substr(-1) === "/") path = path.substr(0, path.length - 1)
+    await this.read(path + "/", { type: "text" })
+    let dir = this._dirCache(path)
+    let list = ""
+    for (let name in dir) {
+      if (name && name !== "." && name !== "..") {
+        if (dir[name]) {
+          if (typeof dir[name] === "object") {
+            list += name + "/\n"
+          } else {
+            list += name + "\n"
+          }
+        } else if (dir[name] == null) {
+          list += name + "\n"
+        }
+      }
+    }
+    return list
   }
 
   startTone() {
@@ -450,6 +491,21 @@ export default class WebSys implements Sys {
       requestAnimationFrame(this._resizeCanvas.bind(this))
     else
       this.mouseInput.scale = this._displayScale
+  }
+
+  private _dirCache(path: string, exists?: boolean, cache = dirCache): any {
+    while (path.substr(0, 1) === "/") path = path.substr(1)
+    let parts = path.split("/")
+    let name = parts.shift() || "."
+    if (parts.length) {
+      if (typeof cache !== "object") cache = {}
+      if (typeof cache[name] !== "object") cache[name] = {}
+      return this._dirCache(parts.join("/"), exists, cache[name])
+    } else {
+      if (cache[name] == null) cache[name] = null
+      if (typeof exists === "boolean") cache[name] = exists
+      return cache[name]
+    }
   }
 }
 

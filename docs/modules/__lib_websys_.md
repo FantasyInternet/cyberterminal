@@ -11,12 +11,22 @@
 
 ### Variables
 
+* [dirCache](__lib_websys_.md#dircache)
 * [scriptSrc](__lib_websys_.md#scriptsrc)
 
 ---
 
 ## Variables
 
+<a id="dircache"></a>
+
+### `<Let>` dirCache
+
+**● dirCache**: *`any`*
+
+*Defined in [_lib/WebSys.ts:10](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L10)*
+
+___
 <a id="scriptsrc"></a>
 
 ### `<Let>` scriptSrc

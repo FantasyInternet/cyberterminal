@@ -74,7 +74,7 @@ export default class Machine {
   popToMemory(offset: number) {
     let process = this._processes[this._activePID]
     if (!process) throw "No active process!"
-    if (!this._bufferStack.length) throw "Buffer stack is empty!"
+    if (!this._bufferStackLengths.length) throw "Buffer stack is empty!"
     let ar = new Uint8Array(process.instance.exports.memory.buffer)
     //@ts-ignore
     ar.set(new Uint8Array(this._popArrayBuffer()), offset)
@@ -164,6 +164,21 @@ export default class Machine {
       console.error(err)
       //@ts-ignore
       callback(false, id)
+    })
+    return id
+  }
+  list(callback: number | Function) {
+    callback = this._getCallback(callback)
+    let id = this._asyncCalls++
+    let filename = (new URL(this._popString(), this._baseUrl)).toString()
+    if (filename.substr(0, this._originUrl.length) !== this._originUrl) throw "cross origin not allowed!"
+    this._sysRequest("list", filename).then((list: string) => {
+      //@ts-ignore
+      callback(true, this._pushString(list), id)
+    }).catch((err) => {
+      console.error(err)
+      //@ts-ignore
+      callback(false, 0, id)
     })
     return id
   }
@@ -403,6 +418,7 @@ export default class Machine {
       case "resume":
         if (this._displayMode >= 0) {
           this.setDisplayMode(this._displayMode, this._displayWidth, this._displayHeight, this._visibleWidth, this._visibleHeight)
+          this.setInputType(this._textInputState.type)
           this._pushString(this._textInputState.text)
           this.setInputText()
           this.focusInput(this._inputFocus)
@@ -544,7 +560,7 @@ export default class Machine {
   private _popArrayBuffer() {
     let len = this._bufferStackLengths.pop() || 0
     let offset = this._bufferStackLengths.reduce((a = 0, b = 0) => a + b, 0)
-    return this._bufferStack.slice(offset, len)
+    return this._bufferStack.slice(offset, offset + len)
   }
 
   private _pushString(str: string) {

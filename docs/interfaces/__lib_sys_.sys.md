@@ -30,6 +30,7 @@ Unified interface to system I/O
 * [delete](__lib_sys_.sys.md#delete)
 * [drawBitmap](__lib_sys_.sys.md#drawbitmap)
 * [focusInput](__lib_sys_.sys.md#focusinput)
+* [list](__lib_sys_.sys.md#list)
 * [openWeb](__lib_sys_.sys.md#openweb)
 * [print](__lib_sys_.sys.md#print)
 * [read](__lib_sys_.sys.md#read)
@@ -172,7 +173,7 @@ ___
 
 ▸ **focusInput**(input: *"text" |"mouse" |"game"*): `string`[]
 
-*Defined in [_lib/Sys.ts:93](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L93)*
+*Defined in [_lib/Sys.ts:99](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L99)*
 
 Focus on given type of input.
 
@@ -188,13 +189,32 @@ Focus on given type of input.
 **Returns:** `string`[]
 
 ___
+<a id="list"></a>
+
+###  list
+
+▸ **list**(path: *`string`*): `Promise`<`any`>
+
+*Defined in [_lib/Sys.ts:93](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L93)*
+
+List contents of a directory.
+
+**Parameters:**
+
+| Param | Type | Description |
+| ------ | ------ | ------ |
+| path | `string` |  Name of directory to list |
+
+**Returns:** `Promise`<`any`>
+
+___
 <a id="openweb"></a>
 
 ###  openWeb
 
 ▸ **openWeb**(url: *`string`*): `void`
 
-*Defined in [_lib/Sys.ts:116](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L116)*
+*Defined in [_lib/Sys.ts:122](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L122)*
 
 Open a link in default web browser.
 
@@ -252,7 +272,7 @@ ___
 
 ▸ **replaceTextInput**(search: *`string`*, replace: *`string`*, fromIndex: *`number`*): `void`
 
-*Defined in [_lib/Sys.ts:110](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L110)*
+*Defined in [_lib/Sys.ts:116](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L116)*
 
 Replace first occurrence of a substring with another.
 
@@ -297,7 +317,7 @@ ___
 
 ▸ **setTextInput**(text: *`string`*, pos: *`number`*, len: *`number`*, type?: *"multiline" |"text" |"password" |"number" |"url" |"email" |"tel"*): `void`
 
-*Defined in [_lib/Sys.ts:102](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L102)*
+*Defined in [_lib/Sys.ts:108](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L108)*
 
 Set the state of the text input.
 

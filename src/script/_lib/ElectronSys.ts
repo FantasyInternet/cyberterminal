@@ -16,7 +16,7 @@ export default class ElectronSys extends WebSys {
     document.title = title + " - " + this._title
   }
 
-  read(filename: string, options: any = {}) {
+  read(filename: string, options: any = {}): Promise<any> {
     let url = new URL(filename)
     if (url.protocol !== "file:") {
       return super.read(filename, options)
@@ -92,6 +92,32 @@ export default class ElectronSys extends WebSys {
       fs.unlink(filename, (err) => {
         if (err) reject("delete error!")
         else resolve(true)
+      })
+    })
+  }
+  list(path: string) {
+    if (path.substr(-1) === "/") path = path.substr(0, path.length - 1)
+    let url = new URL(path)
+    if (url.protocol !== "file:") {
+      return super.delete(path)
+    }
+    path = decodeURI(url.pathname)
+    if (process.platform === "win32") path = path.substr(1)
+    return new Promise<any>((resolve, reject) => {
+      //@ts-ignore
+      fs.readdir(path, (err, files) => {
+        if (err) reject("list error!")
+        else {
+          let list = ""
+          for (let file of files) {
+            if (fs.statSync(path + "/" + file).isDirectory()) {
+              list += file + "/\n"
+            } else {
+              list += file + "\n"
+            }
+          }
+          resolve(list)
+        }
       })
     })
   }

@@ -87,6 +87,12 @@ export default interface Sys {
   delete(filename: string): Promise<boolean>
 
   /**
+   * List contents of a directory.
+   * @param path Name of directory to list
+   */
+  list(path: string): Promise<any>
+
+  /**
    * Focus on given type of input.
    * @param input The type of input to prioritize
    */

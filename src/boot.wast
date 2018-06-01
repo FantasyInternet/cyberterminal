@@ -35,6 +35,9 @@
   ;; Pop path from buffer stack and delete the file. Returns a request ID.
   ;; Callback can expect success boolean and same request ID as parameters.
   (import "env" "delete" (func $delete (param $tableIndex i32) (result i32)))
+  ;; Pop path from buffer stack and retrieve directory contents. Returns a request ID.
+  ;; Callback can expect success boolean, length in bytes and same request ID as parameters.
+  (import "env" "list" (func $list (param $tableIndex i32) (result i32)))
 
   ;; Prioritize  given type of input. 1=text, 2=mouse, 3=game.
   (import "env" "focusInput" (func $focusInput (param $input i32)))
