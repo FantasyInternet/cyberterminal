@@ -69,7 +69,7 @@ export default class Machine {
     if (!process) throw "No active process!"
     let ar = new Uint8Array(length)
     ar.set(new Uint8Array(process.instance.exports.memory.buffer.slice(offset, offset + length)))
-    this._bufferStack.push(ar.buffer)
+    return this._pushArrayBuffer(ar.buffer)
   }
   popToMemory(offset: number) {
     let process = this._processes[this._activePID]
@@ -77,7 +77,7 @@ export default class Machine {
     if (!this._bufferStack.length) throw "Buffer stack is empty!"
     let ar = new Uint8Array(process.instance.exports.memory.buffer)
     //@ts-ignore
-    ar.set(new Uint8Array(this._bufferStack.pop()), offset)
+    ar.set(new Uint8Array(this._popArrayBuffer()), offset)
   }
 
   connectTo() {
@@ -223,7 +223,7 @@ export default class Machine {
     if (!srcProcess) throw "No active process!"
     let ar = new Uint8Array(destProcess.instance.exports.memory.buffer)
     ar.set(new Uint8Array(srcProcess.instance.exports.memory.buffer.slice(srcOffset, srcOffset + length)), destOffset)
-    this._bufferStack.push(ar.buffer)
+    // this._bufferStack.push(ar.buffer)
   }
 
   focusInput(input: number) {
@@ -246,11 +246,21 @@ export default class Machine {
   getInputPosition() { return this._textInputState.pos }
   getInputSelected() { return this._textInputState.len }
   getInputKey() { return this._textInputState.key }
+  setInputType(type: number) {
+    this._textInputState.type = type
+    this._textInputState.text = ""
+    this._textInputState.pos = 0
+    this._textInputState.len = 0
+    this._sysCall("setTextInput", this._textInputState.text,
+      this._textInputState.pos || 0, this._textInputState.len || 0,
+      this._inputTypes[this._textInputState.type])
+  }
   setInputText() {
     this._textInputState.text = this._popString()
     this._textInputState.pos = Math.min(this._textInputState.text.length, this._textInputState.pos)
     this._textInputState.len = Math.min(this._textInputState.text.length - this._textInputState.pos, this._textInputState.len)
-    this._sysCall("setTextInput", this._textInputState.text, this._textInputState.pos || 0, this._textInputState.len || 0)
+    this._sysCall("setTextInput", this._textInputState.text,
+      this._textInputState.pos || 0, this._textInputState.len || 0)
   }
   setInputPosition(position: number = 0, selection: number = 0) {
     this._textInputState.pos = position || 0
@@ -316,13 +326,15 @@ export default class Machine {
   private _processes: any[] = []
   private _activePID: number = -1
   //@ts-ignore
-  private _bufferStack: ArrayBuffer[] = []
+  private _bufferStack: Uint8Array = new Uint8Array(1024)
+  private _bufferStackLengths: number[] = []
   private _asyncCalls: number = 0
   private _inputFocus: number = -1
   private _textInputState: any = {
-    text: "", pos: 0, len: 0, key: 0
+    type: 0, text: "", pos: 0, len: 0, key: 0
   }
   private _keyBuffer: number[] = [0]
+  private _inputTypes: string[] = ["multiline", "text", "password", "number", "url", "email", "tel"]
   private _mouseInputState: any = {
     x: 0, y: 0, pressed: false
   }
@@ -336,19 +348,23 @@ export default class Machine {
     let t = performance.now()
     let process = this._processes[0]
     if (!process) return this._active = false
-    setTimeout(this._tick.bind(this), this._nextStep + this._stepInterval - t)
+    if (t > this._nextStep) {
+      setTimeout(this._tick.bind(this), this._nextStep + this._stepInterval - t)
+    } else {
+      setTimeout(this._tick.bind(this), this._nextStep - t)
+    }
     try {
       let stepped = !(process.instance.exports.step)
       if (process.instance.exports.step) {
         if (this._stepInterval <= 0) this._stepInterval = 1
         while (t >= this._nextStep) {
-          if (this._keyBuffer.length) this._textInputState.key = this._keyBuffer.shift()
+          this._textInputState.key = this._keyBuffer.shift() || 0
           process.instance.exports.step(this._nextStep)
           stepped = true
           this._nextStep += this._stepInterval
         }
       } else {
-        if (this._keyBuffer.length) this._textInputState.key = this._keyBuffer.shift()
+        this._textInputState.key = this._keyBuffer.shift() || 0
       }
       if (this._transferBuffer && stepped && process.instance.exports.display) {
         process.instance.exports.display(t)
@@ -510,25 +526,37 @@ export default class Machine {
   private _copyFunction(_fn: Function) {
     return (...a: any[]) => _fn(...a)
   }
+
+  private _growBufferStack(addition: number) {
+    let old = this._bufferStack
+    this._bufferStack = new Uint8Array(this._bufferStack.byteLength + addition)
+    this._bufferStack.set(old)
+  }
   private _pushArrayBuffer(arbuf: ArrayBuffer) {
-    this._bufferStack.push(arbuf)
+    let offset = this._bufferStackLengths.reduce((a = 0, b = 0) => a + b, 0)
+    if (this._bufferStack.byteLength - offset < arbuf.byteLength) {
+      this._growBufferStack(arbuf.byteLength)
+    }
+    this._bufferStack.set(new Uint8Array(arbuf), offset)
+    this._bufferStackLengths.push(arbuf.byteLength)
     return arbuf.byteLength
   }
   private _popArrayBuffer() {
-    return this._bufferStack.pop()
+    let len = this._bufferStackLengths.pop() || 0
+    let offset = this._bufferStackLengths.reduce((a = 0, b = 0) => a + b, 0)
+    return this._bufferStack.slice(offset, len)
   }
 
   private _pushString(str: string) {
     //@ts-ignore
     let enc = new TextEncoder()
     let buf = enc.encode(str).buffer
-    this._bufferStack.push(buf)
-    return buf.byteLength
+    return this._pushArrayBuffer(buf)
   }
   private _popString() {
     //@ts-ignore
     let dec = new TextDecoder("utf-8")
-    return dec.decode(this._bufferStack.pop())
+    return dec.decode(this._popArrayBuffer())
   }
 
   private _die(err: string) {

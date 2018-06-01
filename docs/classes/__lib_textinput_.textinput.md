@@ -40,7 +40,7 @@ Class for taking care of text input
 
 ⊕ **new TextInput**(sys: *[Sys](../interfaces/__lib_sys_.sys.md)*, _element: *`HTMLElement`*): [TextInput](__lib_textinput_.textinput.md)
 
-*Defined in [_lib/TextInput.ts:12](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/TextInput.ts#L12)*
+*Defined in [_lib/TextInput.ts:13](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/TextInput.ts#L13)*
 
 **Parameters:**
 
@@ -61,7 +61,7 @@ ___
 
 **● sys**: *[Sys](../interfaces/__lib_sys_.sys.md)*
 
-*Defined in [_lib/TextInput.ts:14](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/TextInput.ts#L14)*
+*Defined in [_lib/TextInput.ts:15](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/TextInput.ts#L15)*
 
 ___
 
@@ -73,7 +73,7 @@ ___
 
 ▸ **addEventListener**(fn: *`Function`*): `void`
 
-*Defined in [_lib/TextInput.ts:46](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/TextInput.ts#L46)*
+*Defined in [_lib/TextInput.ts:64](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/TextInput.ts#L64)*
 
 **Parameters:**
 
@@ -90,7 +90,7 @@ ___
 
 ▸ **blur**(): `void`
 
-*Defined in [_lib/TextInput.ts:35](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/TextInput.ts#L35)*
+*Defined in [_lib/TextInput.ts:44](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/TextInput.ts#L44)*
 
 **Returns:** `void`
 
@@ -101,7 +101,7 @@ ___
 
 ▸ **focus**(): `void`
 
-*Defined in [_lib/TextInput.ts:32](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/TextInput.ts#L32)*
+*Defined in [_lib/TextInput.ts:41](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/TextInput.ts#L41)*
 
 **Returns:** `void`
 
@@ -112,7 +112,7 @@ ___
 
 ▸ **removeEventListener**(fn: *`Function`*): `void`
 
-*Defined in [_lib/TextInput.ts:53](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/TextInput.ts#L53)*
+*Defined in [_lib/TextInput.ts:71](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/TextInput.ts#L71)*
 
 **Parameters:**
 
@@ -129,7 +129,7 @@ ___
 
 ▸ **setState**(state: *`any`*): `void`
 
-*Defined in [_lib/TextInput.ts:39](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/TextInput.ts#L39)*
+*Defined in [_lib/TextInput.ts:48](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/TextInput.ts#L48)*
 
 **Parameters:**
 
@@ -157,7 +157,7 @@ ___
 
 **● key**: *`number`* = 0
 
-*Defined in [_lib/TextInput.ts:11](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/TextInput.ts#L11)*
+*Defined in [_lib/TextInput.ts:12](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/TextInput.ts#L12)*
 
 ___
 <a id="state.len"></a>
@@ -166,7 +166,7 @@ ___
 
 **● len**: *`number`* = 0
 
-*Defined in [_lib/TextInput.ts:10](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/TextInput.ts#L10)*
+*Defined in [_lib/TextInput.ts:11](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/TextInput.ts#L11)*
 
 ___
 <a id="state.pos"></a>
@@ -175,7 +175,7 @@ ___
 
 **● pos**: *`number`* = 0
 
-*Defined in [_lib/TextInput.ts:9](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/TextInput.ts#L9)*
+*Defined in [_lib/TextInput.ts:10](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/TextInput.ts#L10)*
 
 ___
 <a id="state.text"></a>
@@ -183,6 +183,15 @@ ___
 ####  text
 
 **● text**: *`string`* = ""
+
+*Defined in [_lib/TextInput.ts:9](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/TextInput.ts#L9)*
+
+___
+<a id="state.type"></a>
+
+####  type
+
+**● type**: *`string`* = "multiline"
 
 *Defined in [_lib/TextInput.ts:8](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/TextInput.ts#L8)*
 

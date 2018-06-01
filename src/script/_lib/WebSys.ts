@@ -34,7 +34,7 @@ export default class WebSys implements Sys {
   setTitle(title: string) {
   }
 
-  setDisplayMode(mode:"none"| "text" | "pixel", width: number, height: number, visibleWidth = width, visibleHeight = height) {
+  setDisplayMode(mode: "none" | "text" | "pixel", width: number, height: number, visibleWidth = width, visibleHeight = height) {
     if (this._displayMode === mode &&
       this._displayWidth === width &&
       this._displayHeight === height &&
@@ -51,8 +51,8 @@ export default class WebSys implements Sys {
     delete this._displayContext
     switch (this._displayMode) {
       case "none":
-      break
-      
+        break
+
       case "text":
         this._initTextGrid(width, height)
         break
@@ -269,8 +269,9 @@ export default class WebSys implements Sys {
     return this.inputPriority
   }
 
-  setTextInput(text: string, pos: number, len: number) {
+  setTextInput(text: string, pos: number, len: number, type?: string) {
     this.textInput.setState({
+      type: type,
       text: text,
       pos: pos,
       len: len

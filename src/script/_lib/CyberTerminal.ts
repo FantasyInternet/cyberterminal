@@ -15,7 +15,10 @@ export default class CyberTerminal {
     this.sys.setDisplayMode("text", 80, 20)
     this.sys.print("CyberTerminal v" + pkg.version)
     setTimeout(() => {
-      this.connectTo(location.toString())
+      this.sys.startTone(0, 512)
+      setTimeout(() => {
+        this.connectTo(location.toString())
+      }, 256)
     }, 1024)
     document.addEventListener("visibilitychange", () => {
       if (this.machineWorkers.length) {
@@ -66,7 +69,7 @@ export default class CyberTerminal {
     let machine = this.sys.createMachine()
     this.machineWorkers.push(machine)
     machine.onMessage(this._onMessage.bind(this))
-    this.sys.textInput.setState({ text: "", pos: 0, len: 0 })
+    this.sys.textInput.setState({ type: "multiline", text: "", pos: 0, len: 0 })
     this.sys.chipSound.stopAll()
     return machine
   }
@@ -88,7 +91,7 @@ export default class CyberTerminal {
         }
       }
     }, 128)
-    this.sys.textInput.setState({ text: "", pos: 0, len: 0 })
+    this.sys.textInput.setState({ type: "multiline", text: "", pos: 0, len: 0 })
     this.sys.chipSound.stopAll()
   }
 
@@ -186,7 +189,7 @@ export default class CyberTerminal {
     } else if (state.level === 2) {
       if (!this.machineWorkers.length) return
       this.machineWorkers[this.machineWorkers.length - 1].terminate()
-      this.sys.startTone(0, 256, 1, "square")
+      this.sys.startTone(0, 256)
       setTimeout(() => {
         this.sys.stopTone(0)
       }, 128)

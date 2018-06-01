@@ -215,7 +215,7 @@ ___
 
 *Implementation of [Sys](../interfaces/__lib_sys_.sys.md).[openWeb](../interfaces/__lib_sys_.sys.md#openweb)*
 
-*Defined in [_lib/WebSys.ts:298](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L298)*
+*Defined in [_lib/WebSys.ts:299](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L299)*
 
 **Parameters:**
 
@@ -273,7 +273,7 @@ ___
 
 *Implementation of [Sys](../interfaces/__lib_sys_.sys.md).[replaceTextInput](../interfaces/__lib_sys_.sys.md#replacetextinput)*
 
-*Defined in [_lib/WebSys.ts:280](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L280)*
+*Defined in [_lib/WebSys.ts:281](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L281)*
 
 **Parameters:**
 
@@ -314,9 +314,7 @@ ___
 
 ###  setTextInput
 
-▸ **setTextInput**(text: *`string`*, pos: *`number`*, len: *`number`*): `void`
-
-*Implementation of [Sys](../interfaces/__lib_sys_.sys.md).[setTextInput](../interfaces/__lib_sys_.sys.md#settextinput)*
+▸ **setTextInput**(text: *`string`*, pos: *`number`*, len: *`number`*, type?: *`undefined` |`string`*): `void`
 
 *Defined in [_lib/WebSys.ts:272](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L272)*
 
@@ -327,6 +325,9 @@ ___
 | text | `string` | 
 | pos | `number` | 
 | len | `number` | 
+| `Optional` type | `undefined` |
+`string`
+ | 
 
 **Returns:** `void`
 

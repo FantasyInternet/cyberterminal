@@ -52,7 +52,7 @@ export default interface Sys {
    * @param volume Volume of tone (0-1)
    * @param type Wave type
    */
-  startTone(channel: number, frequency: number, volume: number, type: "sine" | "square" | "sawtooth" | "triangle"): void
+  startTone(channel: number, frequency: number, volume?: number, type?: "sine" | "square" | "sawtooth" | "triangle"): void
 
   /**
    * Stop tone oscillator
@@ -97,8 +97,9 @@ export default interface Sys {
    * @param text Text to put into editor
    * @param pos Cursor position
    * @param len Selection length
+   * @param type Type of text input
    */
-  setTextInput(text: string, pos: number, len: number): void
+  setTextInput(text: string, pos: number, len: number, type?: "multiline" | "text" | "password" | "number" | "url" | "email" | "tel"): void
 
   /**
    * Replace first occurrence of a substring with another.

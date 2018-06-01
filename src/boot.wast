@@ -47,6 +47,8 @@
   (import "env" "getInputSelected" (func $getInputSelected (result i32)))
   ;; Get key code of key that was just pressed this step.
   (import "env" "getInputKey" (func $getInputKey (result i32)))
+  ;; Set the type of text input. 0=multiline, 1=singleline, 2=password, 3=number, 4=url, 5=email, 6=phone
+  (import "env" "setInputType" (func $setInputType (param i32)))
   ;; Pop text from buffer stack and set text of text input.
   (import "env" "setInputText" (func $setInputText))
   ;; Set position and (optionally) selection of text input.
@@ -119,7 +121,7 @@
   ;; Linear memory.
   (memory $memory 1)
     (export "memory" (memory $memory))
-    (data (i32.const 0xf100) "\1b[K\1b[H  ----------==========########## CyberTerminal ##########==========----------\n\nConnect to URL: ")
+    (data (i32.const 0xf100) "\1b[K\1b[H_______________________________/ CyberTerminal \\_______________________________\n\nConnect to URL: ")
 
   ;; Global variables
   (global $intro      (mut i32) (i32.const 1))
@@ -133,15 +135,15 @@
     (call $setStepInterval (i32.const 32))
     (call $setDisplayMode (i32.const 0) (i32.const 80) (i32.const 20) (i32.const 80) (i32.const 20))
 
+    (call $setInputType (i32.const 4))
     (call $focusInput (i32.const 1))
     (set_global $inputText (call $createPart (i32.const 7)))
     (i64.store   (i32.add (call $getPartOffset (get_global $inputText)) (i32.const 0)) (i64.const 0x2f2f2f3a70747468));;"http:///"
     (call $setInputText (call $pushFromMemory (call $getPartOffset (get_global $inputText)) (call $getPartLength (get_global $inputText))))
     (call $setInputPosition (call $getPartLength (get_global $inputText)) (i32.const 0))
-    ;; (set_global $inputText (call $createPart (call $getBaseUrl)))
-    ;; (call $setInputText)
-    ;; (call $print (call $pushFromMemory (call $getPartOffset (get_global $intro)) (call $getPartLength (get_global $intro))))
-    (return)
+
+    (call $printStr (get_global $homeCode))
+    (call $printStr (get_global $inputText))
   )
   (export "init" (func $init))
 
@@ -152,7 +154,7 @@
     (local $len i32)
     (set_local $gc (call $getPartLength (i32.const 0)))
     (set_local $pos (call $getInputPosition))
-    (if (i32.ne (get_local $pos) (get_global $inputPos)) (then
+    (if (call $getInputKey) (then
       (call $resizePart (get_global $inputText) (call $getInputText))
       (call $popToMemory (call $getPartOffset (get_global $inputText)))
       (call $printStr (get_global $homeCode))
@@ -163,9 +165,7 @@
     ))
     
     (if (i32.eq (call $getInputKey) (i32.const 13)) (then
-      (call $setInputText (call $pushFromMemory (call $getPartOffset (get_global $inputText)) (i32.sub (call $getInputPosition) (i32.const 1))))
-      (call $connectTo (call $getInputText))
-      (return)
+      (call $connectTo (drop (call $getInputText)))
     ))
     (call $resizePart (i32.const 0) (get_local $gc))
   )

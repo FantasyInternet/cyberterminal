@@ -5,6 +5,7 @@ import Sys from "./Sys"
  */
 export default class TextInput {
   state = {
+    type: "multiline",
     text: "",
     pos: 0,
     len: 0,
@@ -12,7 +13,7 @@ export default class TextInput {
   }
 
   constructor(public sys: Sys, private _element: HTMLElement) {
-    _element.innerHTML = '<textarea cols="80"></textarea>'
+    _element.innerHTML = '<textarea cols="80"></textarea><input/>'
     this._multiline = <HTMLTextAreaElement>_element.querySelector("textarea")
     this._multiline.addEventListener("keydown", this._keyDown.bind(this))
     this._multiline.addEventListener("keyup", this._keyDown.bind(this))
@@ -23,6 +24,14 @@ export default class TextInput {
           value = this.value
         this.value = value.substr(0, start) + "\t" + value.substr(end)
         this.selectionStart = this.selectionEnd = start + 1
+        e.preventDefault()
+      }
+    })
+    this._singleline = <HTMLInputElement>_element.querySelector("input")
+    this._singleline.addEventListener("keydown", this._keyDown.bind(this))
+    this._singleline.addEventListener("keyup", this._keyDown.bind(this))
+    this._singleline.addEventListener("keydown", function (e) {
+      if (e.code === "Tab") {
         e.preventDefault()
       }
     })
@@ -37,6 +46,15 @@ export default class TextInput {
   }
 
   setState(state: any) {
+    if (state.type) {
+      if (state.type === "multiline") {
+        this._input = this._multiline
+      } else {
+        this._input = this._singleline
+        this._input.setAttribute("type", state.type)
+      }
+      this.state.type = state.type
+    }
     ; (<HTMLInputElement>this._input).value = state.text
       ; (<HTMLInputElement>this._input).selectionStart = state.pos
       ; (<HTMLInputElement>this._input).selectionEnd = state.pos + state.len
@@ -62,6 +80,7 @@ export default class TextInput {
   private _lastState?: string
   private _input: HTMLElement
   private _multiline: HTMLTextAreaElement
+  private _singleline: HTMLInputElement
 
   private _sendState() {
     let newState = JSON.stringify(this.state)
@@ -76,9 +95,10 @@ export default class TextInput {
   private _keyDown(e?: KeyboardEvent) {
     if (e && e.altKey && e.code === "KeyG") this.sys.focusInput("game")
     requestAnimationFrame(() => {
-      this.state.text = (<HTMLInputElement>this._input).value
-      this.state.pos = (<HTMLInputElement>this._input).selectionStart || 0
-      this.state.len = ((<HTMLInputElement>this._input).selectionEnd || 0) - this.state.pos
+      let input = <HTMLInputElement>this._input
+      this.state.text = input.value
+      this.state.pos = input.selectionStart == null ? input.value.length : input.selectionStart
+      this.state.len = (input.selectionEnd || this.state.pos) - this.state.pos
       this.state.key = 0
       if (e && e.type === "keydown") this.state.key = e.keyCode
       if (!this.state.text && e && e.type === "keydown") {

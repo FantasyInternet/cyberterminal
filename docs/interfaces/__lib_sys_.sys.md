@@ -194,7 +194,7 @@ ___
 
 ▸ **openWeb**(url: *`string`*): `void`
 
-*Defined in [_lib/Sys.ts:115](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L115)*
+*Defined in [_lib/Sys.ts:116](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L116)*
 
 Open a link in default web browser.
 
@@ -252,7 +252,7 @@ ___
 
 ▸ **replaceTextInput**(search: *`string`*, replace: *`string`*, fromIndex: *`number`*): `void`
 
-*Defined in [_lib/Sys.ts:109](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L109)*
+*Defined in [_lib/Sys.ts:110](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L110)*
 
 Replace first occurrence of a substring with another.
 
@@ -295,9 +295,9 @@ ___
 
 ###  setTextInput
 
-▸ **setTextInput**(text: *`string`*, pos: *`number`*, len: *`number`*): `void`
+▸ **setTextInput**(text: *`string`*, pos: *`number`*, len: *`number`*, type?: *"multiline" |"text" |"password" |"number" |"url" |"email" |"tel"*): `void`
 
-*Defined in [_lib/Sys.ts:101](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L101)*
+*Defined in [_lib/Sys.ts:102](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L102)*
 
 Set the state of the text input.
 
@@ -308,6 +308,14 @@ Set the state of the text input.
 | text | `string` |  Text to put into editor |
 | pos | `number` |  Cursor position |
 | len | `number` |  Selection length |
+| `Optional` type | "multiline" |
+"text" |
+"password" |
+"number" |
+"url" |
+"email" |
+"tel"
+ |  Type of text input |
 
 **Returns:** `void`
 
@@ -335,7 +343,7 @@ ___
 
 ###  startTone
 
-▸ **startTone**(channel: *`number`*, frequency: *`number`*, volume: *`number`*, type: *"sine" |"square" |"sawtooth" |"triangle"*): `void`
+▸ **startTone**(channel: *`number`*, frequency: *`number`*, volume?: *`undefined` |`number`*, type?: *"sine" |"square" |"sawtooth" |"triangle"*): `void`
 
 *Defined in [_lib/Sys.ts:55](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L55)*
 
@@ -347,8 +355,10 @@ Start tone oscillator
 | ------ | ------ | ------ |
 | channel | `number` |  Audio channel to use |
 | frequency | `number` |  Frequency of tone |
-| volume | `number` |  Volume of tone (0-1) |
-| type | "sine" |
+| `Optional` volume | `undefined` |
+`number`
+ |  Volume of tone (0-1) |
+| `Optional` type | "sine" |
 "square" |
 "sawtooth" |
 "triangle"

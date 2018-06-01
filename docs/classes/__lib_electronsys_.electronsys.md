@@ -303,7 +303,7 @@ ___
 
 *Inherited from [WebSys](__lib_websys_.websys.md).[replaceTextInput](__lib_websys_.websys.md#replacetextinput)*
 
-*Defined in [_lib/WebSys.ts:280](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L280)*
+*Defined in [_lib/WebSys.ts:281](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L281)*
 
 **Parameters:**
 
@@ -346,9 +346,7 @@ ___
 
 ###  setTextInput
 
-▸ **setTextInput**(text: *`string`*, pos: *`number`*, len: *`number`*): `void`
-
-*Implementation of [Sys](../interfaces/__lib_sys_.sys.md).[setTextInput](../interfaces/__lib_sys_.sys.md#settextinput)*
+▸ **setTextInput**(text: *`string`*, pos: *`number`*, len: *`number`*, type?: *`undefined` |`string`*): `void`
 
 *Inherited from [WebSys](__lib_websys_.websys.md).[setTextInput](__lib_websys_.websys.md#settextinput)*
 
@@ -361,6 +359,9 @@ ___
 | text | `string` | 
 | pos | `number` | 
 | len | `number` | 
+| `Optional` type | `undefined` |
+`string`
+ | 
 
 **Returns:** `void`
 
