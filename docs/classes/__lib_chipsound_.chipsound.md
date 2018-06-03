@@ -42,7 +42,7 @@ ___
 
 ###  startTone
 
-▸ **startTone**(channel: *`number`*, frequency: *`number`*, volume?: *`number`*, type?: *"sine" |"square" |"sawtooth" |"triangle"*): `void`
+▸ **startTone**(channel: *`number`*, frequency: *`number`*, volume?: *`number`*, type?: * "sine" &#124; "square" &#124; "sawtooth" &#124; "triangle"*): `void`
 
 *Defined in [_lib/ChipSound.ts:19](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/ChipSound.ts#L19)*
 
@@ -50,14 +50,10 @@ ___
 
 | Param | Type | Default value |
 | ------ | ------ | ------ |
-| channel | `number` | - | 
-| frequency | `number` | - | 
-| `Default value` volume | `number` | 1 | 
-| `Default value` type | "sine" |
-"square" |
-"sawtooth" |
-"triangle"
- | &quot;square&quot; | 
+| channel | `number` | - |
+| frequency | `number` | - |
+| `Default value` volume | `number` | 1 |
+| `Default value` type |  "sine" &#124; "square" &#124; "sawtooth" &#124; "triangle"| &quot;square&quot; |
 
 **Returns:** `void`
 
@@ -85,7 +81,7 @@ ___
 
 | Param | Type |
 | ------ | ------ |
-| channel | `number` | 
+| channel | `number` |
 
 **Returns:** `void`
 

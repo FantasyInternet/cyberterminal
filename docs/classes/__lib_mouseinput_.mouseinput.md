@@ -50,7 +50,7 @@ Class for taking care of mouse input
 
 | Param | Type |
 | ------ | ------ |
-| sys | [Sys](../interfaces/__lib_sys_.sys.md) | 
+| sys | [Sys](../interfaces/__lib_sys_.sys.md) |
 
 **Returns:** [MouseInput](__lib_mouseinput_.mouseinput.md)
 
@@ -91,7 +91,7 @@ setelement(val: *`HTMLElement`*): `void`
 
 | Param | Type |
 | ------ | ------ |
-| val | `HTMLElement` | 
+| val | `HTMLElement` |
 
 **Returns:** `void`
 
@@ -111,7 +111,7 @@ ___
 
 | Param | Type |
 | ------ | ------ |
-| fn | `Function` | 
+| fn | `Function` |
 
 **Returns:** `void`
 
@@ -150,7 +150,7 @@ ___
 
 | Param | Type |
 | ------ | ------ |
-| fn | `Function` | 
+| fn | `Function` |
 
 **Returns:** `void`
 

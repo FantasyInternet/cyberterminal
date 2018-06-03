@@ -70,7 +70,7 @@ ___
 
 | Param | Type |
 | ------ | ------ |
-| listener | `Function` | 
+| listener | `Function` |
 
 **Returns:** `void`
 
@@ -79,7 +79,7 @@ ___
 
 ###  send
 
-▸ **send**(msg: *`any`*, transferables?: *`any`[] |`undefined`*): `void`
+▸ **send**(msg: *`any`*, transferables?: * `any`[] &#124; `undefined`*): `void`
 
 *Defined in [_lib/WebSys.ts:520](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L520)*
 
@@ -87,10 +87,8 @@ ___
 
 | Param | Type |
 | ------ | ------ |
-| msg | `any` | 
-| `Optional` transferables | `any`[] |
-`undefined`
- | 
+| msg | `any` |
+| `Optional` transferables |  `any`[] &#124; `undefined`|
 
 **Returns:** `void`
 

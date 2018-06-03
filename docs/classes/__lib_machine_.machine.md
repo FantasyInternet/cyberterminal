@@ -89,9 +89,9 @@ ___
 
 | Param | Type |
 | ------ | ------ |
-| pid | `number` | 
-| tableIndex | `number` | 
-| `Rest` a | `any`[] | 
+| pid | `number` |
+| tableIndex | `number` |
+| `Rest` a | `any`[] |
 
 **Returns:** `void`
 
@@ -111,7 +111,7 @@ ___
 
 ###  delete
 
-▸ **delete**(callback: *`number` |`Function`*): `number`
+▸ **delete**(callback: * `number` &#124; `Function`*): `number`
 
 *Defined in [_lib/Machine.ts:155](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L155)*
 
@@ -119,9 +119,7 @@ ___
 
 | Param | Type |
 | ------ | ------ |
-| callback | `number` |
-`Function`
- | 
+| callback |  `number` &#124; `Function`|
 
 **Returns:** `number`
 
@@ -138,9 +136,9 @@ ___
 
 | Param | Type | Default value |
 | ------ | ------ | ------ |
-| offset | `number` | - | 
-| length | `number` | - | 
-| `Default value` destination | `number` | 0 | 
+| offset | `number` | - |
+| length | `number` | - |
+| `Default value` destination | `number` | 0 |
 
 **Returns:** `void`
 
@@ -157,7 +155,7 @@ ___
 
 | Param | Type |
 | ------ | ------ |
-| input | `number` | 
+| input | `number` |
 
 **Returns:** `void`
 
@@ -328,7 +326,7 @@ ___
 
 | Param | Type |
 | ------ | ------ |
-| pid | `number` | 
+| pid | `number` |
 
 **Returns:** `void`
 
@@ -337,7 +335,7 @@ ___
 
 ###  list
 
-▸ **list**(callback: *`number` |`Function`*): `number`
+▸ **list**(callback: * `number` &#124; `Function`*): `number`
 
 *Defined in [_lib/Machine.ts:170](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L170)*
 
@@ -345,9 +343,7 @@ ___
 
 | Param | Type |
 | ------ | ------ |
-| callback | `number` |
-`Function`
- | 
+| callback |  `number` &#124; `Function`|
 
 **Returns:** `number`
 
@@ -386,7 +382,7 @@ ___
 
 | Param | Type |
 | ------ | ------ |
-| offset | `number` | 
+| offset | `number` |
 
 **Returns:** `void`
 
@@ -414,8 +410,8 @@ ___
 
 | Param | Type |
 | ------ | ------ |
-| offset | `number` | 
-| length | `number` | 
+| offset | `number` |
+| length | `number` |
 
 **Returns:** `number`
 
@@ -424,7 +420,7 @@ ___
 
 ###  read
 
-▸ **read**(callback: *`number` |`Function`*): `number`
+▸ **read**(callback: * `number` &#124; `Function`*): `number`
 
 *Defined in [_lib/Machine.ts:107](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L107)*
 
@@ -432,9 +428,7 @@ ___
 
 | Param | Type |
 | ------ | ------ |
-| callback | `number` |
-`Function`
- | 
+| callback |  `number` &#124; `Function`|
 
 **Returns:** `number`
 
@@ -443,7 +437,7 @@ ___
 
 ###  readImage
 
-▸ **readImage**(callback: *`number` |`Function`*): `number`
+▸ **readImage**(callback: * `number` &#124; `Function`*): `number`
 
 *Defined in [_lib/Machine.ts:123](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L123)*
 
@@ -451,9 +445,7 @@ ___
 
 | Param | Type |
 | ------ | ------ |
-| callback | `number` |
-`Function`
- | 
+| callback |  `number` &#124; `Function`|
 
 **Returns:** `number`
 
@@ -470,7 +462,7 @@ ___
 
 | Param | Type | Default value |
 | ------ | ------ | ------ |
-| `Default value` fromIndex | `number` | 0 | 
+| `Default value` fromIndex | `number` | 0 |
 
 **Returns:** `void`
 
@@ -498,11 +490,11 @@ ___
 
 | Param | Type | Default value |
 | ------ | ------ | ------ |
-| mode | `number` | - | 
-| width | `number` | - | 
-| height | `number` | - | 
-| `Default value` visibleWidth | `number` |  width | 
-| `Default value` visibleHeight | `number` |  height | 
+| mode | `number` | - |
+| width | `number` | - |
+| height | `number` | - |
+| `Default value` visibleWidth | `number` |  width |
+| `Default value` visibleHeight | `number` |  height |
 
 **Returns:** `void`
 
@@ -519,8 +511,8 @@ ___
 
 | Param | Type | Default value |
 | ------ | ------ | ------ |
-| `Default value` position | `number` | 0 | 
-| `Default value` selection | `number` | 0 | 
+| `Default value` position | `number` | 0 |
+| `Default value` selection | `number` | 0 |
 
 **Returns:** `void`
 
@@ -548,7 +540,7 @@ ___
 
 | Param | Type |
 | ------ | ------ |
-| type | `number` | 
+| type | `number` |
 
 **Returns:** `void`
 
@@ -565,7 +557,7 @@ ___
 
 | Param | Type |
 | ------ | ------ |
-| milliseconds | `number` | 
+| milliseconds | `number` |
 
 **Returns:** `void`
 
@@ -593,10 +585,10 @@ ___
 
 | Param | Type | Default value |
 | ------ | ------ | ------ |
-| channel | `number` | - | 
-| frequency | `number` | - | 
-| `Default value` volume | `number` | 1 | 
-| `Default value` type | `number` | 0 | 
+| channel | `number` | - |
+| frequency | `number` | - |
+| `Default value` volume | `number` | 1 |
+| `Default value` type | `number` | 0 |
 
 **Returns:** `void`
 
@@ -613,7 +605,7 @@ ___
 
 | Param | Type |
 | ------ | ------ |
-| pid | `number` | 
+| pid | `number` |
 
 **Returns:** `void`
 
@@ -630,7 +622,7 @@ ___
 
 | Param | Type |
 | ------ | ------ |
-| channel | `number` | 
+| channel | `number` |
 
 **Returns:** `void`
 
@@ -647,11 +639,11 @@ ___
 
 | Param | Type |
 | ------ | ------ |
-| srcPid | `number` | 
-| srcOffset | `number` | 
-| length | `number` | 
-| destPid | `number` | 
-| destOffset | `number` | 
+| srcPid | `number` |
+| srcOffset | `number` |
+| length | `number` |
+| destPid | `number` |
+| destOffset | `number` |
 
 **Returns:** `void`
 
@@ -671,7 +663,7 @@ ___
 
 ###  write
 
-▸ **write**(callback: *`number` |`Function`*): `number`
+▸ **write**(callback: * `number` &#124; `Function`*): `number`
 
 *Defined in [_lib/Machine.ts:139](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L139)*
 
@@ -679,9 +671,7 @@ ___
 
 | Param | Type |
 | ------ | ------ |
-| callback | `number` |
-`Function`
- | 
+| callback |  `number` &#124; `Function`|
 
 **Returns:** `number`
 

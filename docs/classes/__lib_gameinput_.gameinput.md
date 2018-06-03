@@ -46,7 +46,7 @@ Class for taking care of game input
 
 | Param | Type |
 | ------ | ------ |
-| sys | [Sys](../interfaces/__lib_sys_.sys.md) | 
+| sys | [Sys](../interfaces/__lib_sys_.sys.md) |
 
 **Returns:** [GameInput](__lib_gameinput_.gameinput.md)
 
@@ -89,7 +89,7 @@ ___
 
 | Param | Type |
 | ------ | ------ |
-| fn | `Function` | 
+| fn | `Function` |
 
 **Returns:** `void`
 
@@ -128,7 +128,7 @@ ___
 
 | Param | Type |
 | ------ | ------ |
-| fn | `Function` | 
+| fn | `Function` |
 
 **Returns:** `void`
 

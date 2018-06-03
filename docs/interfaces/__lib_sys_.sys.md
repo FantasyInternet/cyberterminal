@@ -162,7 +162,7 @@ Draw given bitmap to pixel display.
 
 | Param | Type |
 | ------ | ------ |
-| buffer | `ArrayBuffer` | 
+| buffer | `ArrayBuffer` |
 
 **Returns:** `void`
 
@@ -171,7 +171,7 @@ ___
 
 ###  focusInput
 
-▸ **focusInput**(input: *"text" |"mouse" |"game"*): `string`[]
+▸ **focusInput**(input: * "text" &#124; "mouse" &#124; "game"*): `string`[]
 
 *Defined in [_lib/Sys.ts:99](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L99)*
 
@@ -181,10 +181,7 @@ Focus on given type of input.
 
 | Param | Type | Description |
 | ------ | ------ | ------ |
-| input | "text" |
-"mouse" |
-"game"
- |  The type of input to prioritize |
+| input |  "text" &#124; "mouse" &#124; "game"|  The type of input to prioritize |
 
 **Returns:** `string`[]
 
@@ -241,7 +238,7 @@ Print string to text display.
 
 | Param | Type |
 | ------ | ------ |
-| str | `string` | 
+| str | `string` |
 
 **Returns:** `void`
 
@@ -291,7 +288,7 @@ ___
 
 ###  setDisplayMode
 
-▸ **setDisplayMode**(mode: *"none" |"text" |"pixel"*, width: *`number`*, height: *`number`*): `void`
+▸ **setDisplayMode**(mode: * "none" &#124; "text" &#124; "pixel"*, width: *`number`*, height: *`number`*): `void`
 
 *Defined in [_lib/Sys.ts:36](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L36)*
 
@@ -301,10 +298,7 @@ Switch display mode.
 
 | Param | Type | Description |
 | ------ | ------ | ------ |
-| mode | "none" |
-"text" |
-"pixel"
- |  Name of mode to switch to |
+| mode |  "none" &#124; "text" &#124; "pixel"|  Name of mode to switch to |
 | width | `number` |  The width of the display in characters or pixels |
 | height | `number` |  The height of the display in characters or pixels |
 
@@ -315,7 +309,7 @@ ___
 
 ###  setTextInput
 
-▸ **setTextInput**(text: *`string`*, pos: *`number`*, len: *`number`*, type?: *"multiline" |"text" |"password" |"number" |"url" |"email" |"tel"*): `void`
+▸ **setTextInput**(text: *`string`*, pos: *`number`*, len: *`number`*, type?: * "multiline" &#124; "text" &#124; "password" &#124; "number" &#124; "url" &#124; "email" &#124; "tel"*): `void`
 
 *Defined in [_lib/Sys.ts:108](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L108)*
 
@@ -328,14 +322,7 @@ Set the state of the text input.
 | text | `string` |  Text to put into editor |
 | pos | `number` |  Cursor position |
 | len | `number` |  Selection length |
-| `Optional` type | "multiline" |
-"text" |
-"password" |
-"number" |
-"url" |
-"email" |
-"tel"
- |  Type of text input |
+| `Optional` type |  "multiline" &#124; "text" &#124; "password" &#124; "number" &#124; "url" &#124; "email" &#124; "tel"|  Type of text input |
 
 **Returns:** `void`
 
@@ -363,7 +350,7 @@ ___
 
 ###  startTone
 
-▸ **startTone**(channel: *`number`*, frequency: *`number`*, volume?: *`undefined` |`number`*, type?: *"sine" |"square" |"sawtooth" |"triangle"*): `void`
+▸ **startTone**(channel: *`number`*, frequency: *`number`*, volume?: * `undefined` &#124; `number`*, type?: * "sine" &#124; "square" &#124; "sawtooth" &#124; "triangle"*): `void`
 
 *Defined in [_lib/Sys.ts:55](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L55)*
 
@@ -375,14 +362,8 @@ Start tone oscillator
 | ------ | ------ | ------ |
 | channel | `number` |  Audio channel to use |
 | frequency | `number` |  Frequency of tone |
-| `Optional` volume | `undefined` |
-`number`
- |  Volume of tone (0-1) |
-| `Optional` type | "sine" |
-"square" |
-"sawtooth" |
-"triangle"
- |  Wave type |
+| `Optional` volume |  `undefined` &#124; `number`|  Volume of tone (0-1) |
+| `Optional` type |  "sine" &#124; "square" &#124; "sawtooth" &#124; "triangle"|  Wave type |
 
 **Returns:** `void`
 
@@ -410,7 +391,7 @@ ___
 
 ###  write
 
-▸ **write**(filename: *`string`*, data: *`string` |`ArrayBuffer`*): `Promise`<`boolean`>
+▸ **write**(filename: *`string`*, data: * `string` &#124; `ArrayBuffer`*): `Promise`<`boolean`>
 
 *Defined in [_lib/Sys.ts:81](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L81)*
 
@@ -421,9 +402,7 @@ Write to a file.
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | filename | `string` |  Name of file to write to |
-| data | `string` |
-`ArrayBuffer`
- |  Data to write |
+| data |  `string` &#124; `ArrayBuffer`|  Data to write |
 
 **Returns:** `Promise`<`boolean`>
 

@@ -41,7 +41,7 @@ Terminal app
 
 | Param | Type |
 | ------ | ------ |
-| sys | [Sys](../interfaces/__lib_sys_.sys.md) | 
+| sys | [Sys](../interfaces/__lib_sys_.sys.md) |
 
 **Returns:** [CyberTerminal](__lib_cyberterminal_.cyberterminal.md)
 
@@ -93,7 +93,7 @@ ___
 
 | Param | Type |
 | ------ | ------ |
-| url | `string` | 
+| url | `string` |
 
 **Returns:** `Promise`<`void`>
 

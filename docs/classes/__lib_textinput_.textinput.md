@@ -46,8 +46,8 @@ Class for taking care of text input
 
 | Param | Type |
 | ------ | ------ |
-| sys | [Sys](../interfaces/__lib_sys_.sys.md) | 
-| _element | `HTMLElement` | 
+| sys | [Sys](../interfaces/__lib_sys_.sys.md) |
+| _element | `HTMLElement` |
 
 **Returns:** [TextInput](__lib_textinput_.textinput.md)
 
@@ -79,7 +79,7 @@ ___
 
 | Param | Type |
 | ------ | ------ |
-| fn | `Function` | 
+| fn | `Function` |
 
 **Returns:** `void`
 
@@ -118,7 +118,7 @@ ___
 
 | Param | Type |
 | ------ | ------ |
-| fn | `Function` | 
+| fn | `Function` |
 
 **Returns:** `void`
 
@@ -135,7 +135,7 @@ ___
 
 | Param | Type |
 | ------ | ------ |
-| state | `any` | 
+| state | `any` |
 
 **Returns:** `void`
 

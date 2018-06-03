@@ -162,7 +162,7 @@ ___
 
 | Param | Type |
 | ------ | ------ |
-| filename | `string` | 
+| filename | `string` |
 
 **Returns:** `Promise`<`boolean`>
 
@@ -181,7 +181,7 @@ ___
 
 | Param | Type |
 | ------ | ------ |
-| buffer | `ArrayBuffer` | 
+| buffer | `ArrayBuffer` |
 
 **Returns:** `void`
 
@@ -190,7 +190,7 @@ ___
 
 ###  focusInput
 
-▸ **focusInput**(input: *"text" |"mouse" |"game"*): `string`[]
+▸ **focusInput**(input: * "text" &#124; "mouse" &#124; "game"*): `string`[]
 
 *Implementation of [Sys](../interfaces/__lib_sys_.sys.md).[focusInput](../interfaces/__lib_sys_.sys.md#focusinput)*
 
@@ -200,10 +200,7 @@ ___
 
 | Param | Type |
 | ------ | ------ |
-| input | "text" |
-"mouse" |
-"game"
- | 
+| input |  "text" &#124; "mouse" &#124; "game"|
 
 **Returns:** `string`[]
 
@@ -222,7 +219,7 @@ ___
 
 | Param | Type |
 | ------ | ------ |
-| path | `string` | 
+| path | `string` |
 
 **Returns:** `Promise`<`string`>
 
@@ -241,7 +238,7 @@ ___
 
 | Param | Type |
 | ------ | ------ |
-| url | `string` | 
+| url | `string` |
 
 **Returns:** `void`
 
@@ -260,7 +257,7 @@ ___
 
 | Param | Type |
 | ------ | ------ |
-| str | `string` | 
+| str | `string` |
 
 **Returns:** `void`
 
@@ -279,8 +276,8 @@ ___
 
 | Param | Type | Default value |
 | ------ | ------ | ------ |
-| filename | `string` | - | 
-| `Default value` options | `any` |  {} | 
+| filename | `string` | - |
+| `Default value` options | `any` |  {} |
 
 **Returns:** `Promise`<`any`>
 
@@ -299,9 +296,9 @@ ___
 
 | Param | Type | Default value |
 | ------ | ------ | ------ |
-| search | `string` | - | 
-| `Default value` replace | `string` | &quot;&quot; | 
-| `Default value` fromIndex | `number` | 0 | 
+| search | `string` | - |
+| `Default value` replace | `string` | &quot;&quot; |
+| `Default value` fromIndex | `number` | 0 |
 
 **Returns:** `void`
 
@@ -310,7 +307,7 @@ ___
 
 ###  setDisplayMode
 
-▸ **setDisplayMode**(mode: *"none" |"text" |"pixel"*, width: *`number`*, height: *`number`*, visibleWidth?: *`number`*, visibleHeight?: *`number`*): `void`
+▸ **setDisplayMode**(mode: * "none" &#124; "text" &#124; "pixel"*, width: *`number`*, height: *`number`*, visibleWidth?: *`number`*, visibleHeight?: *`number`*): `void`
 
 *Defined in [_lib/WebSys.ts:38](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L38)*
 
@@ -318,14 +315,11 @@ ___
 
 | Param | Type | Default value |
 | ------ | ------ | ------ |
-| mode | "none" |
-"text" |
-"pixel"
- | - | 
-| width | `number` | - | 
-| height | `number` | - | 
-| `Default value` visibleWidth | `number` |  width | 
-| `Default value` visibleHeight | `number` |  height | 
+| mode |  "none" &#124; "text" &#124; "pixel"| - |
+| width | `number` | - |
+| height | `number` | - |
+| `Default value` visibleWidth | `number` |  width |
+| `Default value` visibleHeight | `number` |  height |
 
 **Returns:** `void`
 
@@ -334,7 +328,7 @@ ___
 
 ###  setTextInput
 
-▸ **setTextInput**(text: *`string`*, pos: *`number`*, len: *`number`*, type?: *`undefined` |`string`*): `void`
+▸ **setTextInput**(text: *`string`*, pos: *`number`*, len: *`number`*, type?: * `undefined` &#124; `string`*): `void`
 
 *Defined in [_lib/WebSys.ts:313](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L313)*
 
@@ -342,12 +336,10 @@ ___
 
 | Param | Type |
 | ------ | ------ |
-| text | `string` | 
-| pos | `number` | 
-| len | `number` | 
-| `Optional` type | `undefined` |
-`string`
- | 
+| text | `string` |
+| pos | `number` |
+| len | `number` |
+| `Optional` type |  `undefined` &#124; `string`|
 
 **Returns:** `void`
 
@@ -366,7 +358,7 @@ ___
 
 | Param | Type |
 | ------ | ------ |
-| title | `string` | 
+| title | `string` |
 
 **Returns:** `void`
 
@@ -408,7 +400,7 @@ ___
 
 ###  write
 
-▸ **write**(filename: *`string`*, data: *`string` |`ArrayBuffer`*): `Promise`<`boolean`>
+▸ **write**(filename: *`string`*, data: * `string` &#124; `ArrayBuffer`*): `Promise`<`boolean`>
 
 *Implementation of [Sys](../interfaces/__lib_sys_.sys.md).[write](../interfaces/__lib_sys_.sys.md#write)*
 
@@ -418,10 +410,8 @@ ___
 
 | Param | Type |
 | ------ | ------ |
-| filename | `string` | 
-| data | `string` |
-`ArrayBuffer`
- | 
+| filename | `string` |
+| data |  `string` &#124; `ArrayBuffer`|
 
 **Returns:** `Promise`<`boolean`>
 
