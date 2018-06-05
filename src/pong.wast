@@ -2,6 +2,7 @@
   (import "env" "pushFromMemory" (func $pushFromMemory (param i32) (param i32)))
   (import "env" "popToMemory" (func $popToMemory (param i32) ))
   (import "env" "log" (func $log))
+  (import "env" "setStepInterval" (func $setStepInterval (param $milliseconds f64)))
   (import "env" "setDisplayMode" (func $setDisplayMode (param i32) (param i32) (param i32) ))
   (import "env" "displayMemory" (func $displayMemory (param i32) (param i32) ))
   (import "env" "focusInput" (func $focusInput (param i32) ))
@@ -175,6 +176,7 @@
     (set_global $display (call $createImg (i32.const 320) (i32.const 200)))
     (call $setDisplayMode (i32.const 1) (call $getImgWidth (get_global $display)) (call $getImgHeight (get_global $display)))
     (call $focusInput (i32.const 3))
+    (call $setStepInterval (f64.div (f64.const 1000) (f64.const 60)))
 
     (set_global $bgColor (call $rgb (i32.const 0) (i32.const 0) (i32.const 0)))
     (set_global $ballColor (call $rgb (i32.const 255) (i32.const 255) (i32.const 255)))

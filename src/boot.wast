@@ -85,8 +85,8 @@
   ;; Stop generating a tone.
   (import "env" "stopTone" (func $stopTone (param $channel i32)))
 
-  ;; Set step interval.
-  (import "env" "setStepInterval" (func $setStepInterval (param $milliseconds i32)))
+  ;; Set step interval. Set to -1 to only step on input.
+  (import "env" "setStepInterval" (func $setStepInterval (param $milliseconds f64)))
   ;; Pop wasm binary code from buffer stack and load it. Returns new process ID.
   ;; All exports from boot.wasm starting with "api." are forwarded to the process.
   (import "env" "loadProcess" (func $loadProcess (result i32)))
@@ -125,17 +125,19 @@
   (memory $memory 1)
     (export "memory" (memory $memory))
     (data (i32.const 0xf100) "\1b[K\1b[H_______________________________/ CyberTerminal \\_______________________________\n\nConnect to URL: ")
+    (data (i32.const 0xf200) "\n")
 
   ;; Global variables
-  (global $intro      (mut i32) (i32.const 1))
-  (global $homeCode   (mut i32) (i32.const 1))
+  (global $homeCode   (mut i32) (i32.const 0))
+  (global $nl         (mut i32) (i32.const 0))
   (global $inputPos   (mut i32) (i32.const 1024))
-  (global $inputText  (mut i32) (i32.const 1))
+  (global $inputText  (mut i32) (i32.const 0))
 
   ;; Init function is called once on start.
   (func $init
     (set_global $homeCode  (call $createString (i32.const 0xf100)))
-    (call $setStepInterval (i32.const 32))
+    (set_global $nl (call $createString (i32.const 0xf200)))
+    (call $setStepInterval (f64.const -1))
     (call $setDisplayMode (i32.const 0) (i32.const 80) (i32.const 20) (i32.const 80) (i32.const 20))
 
     (call $setInputType (i32.const 4))
@@ -156,16 +158,18 @@
     (local $pos i32)
     (local $len i32)
     (set_local $gc (call $getPartLength (i32.const 0)))
-    (set_local $pos (call $getInputPosition))
-    (if (call $getInputKey) (then
+    ;; (if (call $getInputKey) (then
+      (set_local $pos (call $getInputPosition))
       (call $resizePart (get_global $inputText) (call $getInputText))
       (call $popToMemory (call $getPartOffset (get_global $inputText)))
+      ;; (call $printStr (get_global $nl))
+      ;; (call $printStr (call $uintToStr (i32.trunc_u/f64 (get_local $t))))
       (call $printStr (get_global $homeCode))
       (call $printStr (get_global $inputText))
       (call $printStr (get_global $homeCode))
       (call $printStr (call $substr (get_global $inputText) (i32.const 0) (get_local $pos)))
       (set_global $inputPos (get_local $pos))
-    ))
+    ;; ))
     
     (if (i32.eq (call $getInputKey) (i32.const 13)) (then
       (call $connectTo (drop (call $getInputText)))

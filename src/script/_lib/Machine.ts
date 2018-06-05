@@ -202,7 +202,7 @@ export default class Machine {
           this._die(error)
         }
       }
-      this._nextFrame = this._nextStep = performance.now()
+      this._nextStep = performance.now()
       if (this._activePID === 0) this._tick()
       this._activePID = 0
     }).catch((err: any) => {
@@ -321,10 +321,8 @@ export default class Machine {
 
   /* _privates */
   private _active: boolean = false
-  private _nextFrame: number = performance.now()
-  private _frameInterval: number = 1000 / 60
   private _nextStep: number = performance.now()
-  private _stepInterval: number = 1000 / 60
+  private _stepInterval: number = -1
   private _toneTypes: string[] = ["square", "sawtooth", "triangle", "sine"]
   private _displayModes: string[] = ["text", "pixel"]
   private _displayMode: number = -1
@@ -363,20 +361,28 @@ export default class Machine {
     let t = performance.now()
     let process = this._processes[0]
     if (!process) return this._active = false
-    if (t > this._nextStep) {
-      setTimeout(this._tick.bind(this), this._nextStep + this._stepInterval - t)
+    if (this._stepInterval < 0) {
+      this._nextStep = t
     } else {
-      setTimeout(this._tick.bind(this), this._nextStep - t)
+      if (t > this._nextStep) {
+        setTimeout(this._tick.bind(this), this._nextStep + this._stepInterval - t)
+      } else {
+        setTimeout(this._tick.bind(this), this._nextStep - t)
+      }
     }
     try {
       let stepped = !(process.instance.exports.step)
       if (process.instance.exports.step) {
-        if (this._stepInterval <= 0) this._stepInterval = 1
         while (t >= this._nextStep) {
           this._textInputState.key = this._keyBuffer.shift() || 0
           process.instance.exports.step(this._nextStep)
           stepped = true
           this._nextStep += this._stepInterval
+          if (this._stepInterval === 0) {
+            t = performance.now()
+            if (t - this._nextStep > 16) this._nextStep = t + 1
+          }
+          if (this._stepInterval < 0) this._nextStep = t + 1
         }
       } else {
         this._textInputState.key = this._keyBuffer.shift() || 0
@@ -384,7 +390,6 @@ export default class Machine {
       if (this._transferBuffer && stepped && process.instance.exports.display) {
         process.instance.exports.display(t)
       }
-      this._nextFrame += this._frameInterval
     } catch (error) {
       this._die(error)
     }
@@ -422,8 +427,9 @@ export default class Machine {
           this._pushString(this._textInputState.text)
           this.setInputText()
           this.focusInput(this._inputFocus)
+          this._keyBuffer.push(16)
         }
-        this._nextFrame = this._nextStep = performance.now()
+        this._nextStep = performance.now()
         this._active = true
         this._tick()
         break
@@ -451,20 +457,21 @@ export default class Machine {
           }
           this._pendingRequests[e.data.reqId] = undefined
         }
+        if (this._stepInterval < 0) this._tick()
         break
 
       case "textInput":
         this._textInputState = e.data.state
         this._keyBuffer.push(e.data.state.key)
+        if (this._stepInterval < 0) this._tick()
         break
       case "mouseInput":
         this._mouseInputState = e.data.state
+        if (this._stepInterval < 0) this._tick()
         break
       case "gameInput":
         this._gameInputState = e.data.state
-        break
-
-      default:
+        if (this._stepInterval < 0) this._tick()
         break
     }
   }

@@ -99,7 +99,7 @@ export default class ElectronSys extends WebSys {
     if (path.substr(-1) === "/") path = path.substr(0, path.length - 1)
     let url = new URL(path)
     if (url.protocol !== "file:") {
-      return super.delete(path)
+      return super.list(path)
     }
     path = decodeURI(url.pathname)
     if (process.platform === "win32") path = path.substr(1)
