@@ -323,6 +323,10 @@ export default class Machine {
   private _active: boolean = false
   private _nextStep: number = performance.now()
   private _stepInterval: number = -1
+  private _stepCount: number = 0
+  private _stepSecond: number = 0
+  private _frameCount: number = 0
+  private _frameSecond: number = 0
   private _toneTypes: string[] = ["square", "sawtooth", "triangle", "sine"]
   private _displayModes: string[] = ["text", "pixel"]
   private _displayMode: number = -1
@@ -372,23 +376,39 @@ export default class Machine {
     }
     try {
       let stepped = !(process.instance.exports.step)
+      let tard = Infinity
       if (process.instance.exports.step) {
         while (t >= this._nextStep) {
           this._textInputState.key = this._keyBuffer.shift() || 0
           process.instance.exports.step(this._nextStep)
+          this._stepCount++
           stepped = true
           this._nextStep += this._stepInterval
-          if (this._stepInterval === 0) {
+
+          if (performance.now() - t > 6) {
             t = performance.now()
-            if (t - this._nextStep > 16) this._nextStep = t + 1
+            if (t - this._nextStep > tard) this._nextStep = t + 1
+            tard = t - this._nextStep
           }
           if (this._stepInterval < 0) this._nextStep = t + 1
         }
+        if (this._stepSecond !== Math.floor(performance.now() / 1000)) {
+          if (this._baseUrl.includes("?debug")) console.log("Steps Per Second", this._stepCount)
+          this._stepCount = 0
+          this._stepSecond = Math.floor(performance.now() / 1000)
+        }
       } else {
         this._textInputState.key = this._keyBuffer.shift() || 0
+        this._nextStep += this._stepInterval
       }
       if (this._transferBuffer && stepped && process.instance.exports.display) {
         process.instance.exports.display(t)
+        this._frameCount++
+        if (this._frameSecond !== Math.floor(performance.now() / 1000)) {
+          if (this._baseUrl.includes("?debug")) console.log("Frames Per Second", this._frameCount)
+          this._frameCount = 0
+          this._frameSecond = Math.floor(performance.now() / 1000)
+        }
       }
     } catch (error) {
       this._die(error)

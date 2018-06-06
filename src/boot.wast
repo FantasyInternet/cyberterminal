@@ -158,7 +158,7 @@
     (local $pos i32)
     (local $len i32)
     (set_local $gc (call $getPartLength (i32.const 0)))
-    ;; (if (call $getInputKey) (then
+    (if (call $getInputKey) (then
       (set_local $pos (call $getInputPosition))
       (call $resizePart (get_global $inputText) (call $getInputText))
       (call $popToMemory (call $getPartOffset (get_global $inputText)))
@@ -169,7 +169,7 @@
       (call $printStr (get_global $homeCode))
       (call $printStr (call $substr (get_global $inputText) (i32.const 0) (get_local $pos)))
       (set_global $inputPos (get_local $pos))
-    ;; ))
+    ))
     
     (if (i32.eq (call $getInputKey) (i32.const 13)) (then
       (call $connectTo (drop (call $getInputText)))
@@ -189,9 +189,9 @@
   )
   (export "break" (func $break))
 
-  
 
-  
+
+
 ;;--------;;--------;;--------;;--------;;--------;;--------;;--------;;
 
 
