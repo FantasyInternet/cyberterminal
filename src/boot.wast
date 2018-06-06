@@ -136,7 +136,7 @@
   ;; Init function is called once on start.
   (func $init
     (set_global $homeCode  (call $createString (i32.const 0xf100)))
-    (set_global $nl (call $createString (i32.const 0xf200)))
+    ;; (set_global $nl (call $createString (i32.const 0xf200)))
     (call $setStepInterval (f64.const -1))
     (call $setDisplayMode (i32.const 0) (i32.const 80) (i32.const 20) (i32.const 80) (i32.const 20))
 
