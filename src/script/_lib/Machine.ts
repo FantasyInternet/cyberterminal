@@ -443,16 +443,19 @@ export default class Machine {
           axis: { x: 0, y: 0 },
           buttons: { a: false, b: false, x: false, y: false }
         }
-        this._keyBuffer = [0]
+        this._keyBuffer = []
         break
 
       case "resume":
         this._active = true
         if (this._displayMode >= 0) {
           this.setDisplayMode(this._displayMode, this._displayWidth, this._displayHeight, this._visibleWidth, this._visibleHeight)
-          this.setInputType(this._textInputState.type)
-          this._pushString(this._textInputState.text)
+          let txt = this._textInputState
+          this._textInputState = {}
+          this.setInputType(txt.type)
+          this._pushString(txt.text)
           this.setInputText()
+          this.setInputPosition(txt.pos, txt.len)
           this.focusInput(this._inputFocus)
           this._keyBuffer.push(16)
         }
