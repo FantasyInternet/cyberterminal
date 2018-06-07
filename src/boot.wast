@@ -124,7 +124,7 @@
   ;; Linear memory.
   (memory $memory 1)
     (export "memory" (memory $memory))
-    (data (i32.const 0xf100) "\1b[K\1b[H_______________________________/ CyberTerminal \\_______________________________\n\nConnect to URL: ")
+    (data (i32.const 0xf100) "\1b[K\1b[H\t\t\t\t_______________\n_______________________________/ CyberTerminal \\_______________________________\n\nConnect to URL: ")
     (data (i32.const 0xf200) "\n")
 
   ;; Global variables
@@ -658,6 +658,12 @@
       ))
     ))
   )
+
+
+
+
+
+
 
   ;; Memory management
 

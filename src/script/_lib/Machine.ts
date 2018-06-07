@@ -385,7 +385,7 @@ export default class Machine {
           stepped = true
           this._nextStep += this._stepInterval
 
-          if (performance.now() - t > 6) {
+          if (performance.now() - t > 16) {
             t = performance.now()
             if (t - this._nextStep > tard) this._nextStep = t + 1
             tard = t - this._nextStep
@@ -438,9 +438,11 @@ export default class Machine {
           axis: { x: 0, y: 0 },
           buttons: { a: false, b: false, x: false, y: false }
         }
+        this._keyBuffer = [0]
         break
 
       case "resume":
+        this._active = true
         if (this._displayMode >= 0) {
           this.setDisplayMode(this._displayMode, this._displayWidth, this._displayHeight, this._visibleWidth, this._visibleHeight)
           this.setInputType(this._textInputState.type)
@@ -450,7 +452,6 @@ export default class Machine {
           this._keyBuffer.push(16)
         }
         this._nextStep = performance.now()
-        this._active = true
         this._tick()
         break
 
@@ -481,15 +482,18 @@ export default class Machine {
         break
 
       case "textInput":
+        if (!this._active) break
         this._textInputState = e.data.state
         this._keyBuffer.push(e.data.state.key)
         if (this._stepInterval < 0) this._tick()
         break
       case "mouseInput":
+        if (!this._active) break
         this._mouseInputState = e.data.state
         if (this._stepInterval < 0) this._tick()
         break
       case "gameInput":
+        if (!this._active) break
         this._gameInputState = e.data.state
         if (this._stepInterval < 0) this._tick()
         break
