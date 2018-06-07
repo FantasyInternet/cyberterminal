@@ -201,6 +201,7 @@ export default class Machine {
       if (process.instance.exports.init) {
         try {
           process.instance.exports.init()
+          this._active = true
         } catch (error) {
           this._die(error)
         }
@@ -367,7 +368,9 @@ export default class Machine {
     if (!this._active) return
     let t = performance.now()
     let process = this._processes[0]
-    if (!process) return this._active = false
+    if (!process) {
+      return this._active = false
+    }
     if (this._stepInterval < 0) {
       this._nextStep = t
     } else {
@@ -426,7 +429,6 @@ export default class Machine {
     //console.log("main:", e)
     switch (e.data.cmd) {
       case "boot":
-        this._active = true
         this._pushString(e.data.url)
         this.setBaseUrl()
         this._originUrl = e.data.origin

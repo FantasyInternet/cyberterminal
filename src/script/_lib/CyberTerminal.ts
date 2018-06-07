@@ -69,7 +69,7 @@ export default class CyberTerminal {
     let machine = this.sys.createMachine()
     this.machineWorkers.push(machine)
     machine.onMessage(this._onMessage.bind(this))
-    this.sys.textInput.setState({ type: "multiline", text: "", pos: 0, len: 0 })
+    this.sys.textInput.setState({ type: "multiline", text: "", pos: 0, len: 0, key: 0 })
     this.sys.chipSound.stopAll()
     return machine
   }
