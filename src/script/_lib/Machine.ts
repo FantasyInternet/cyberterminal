@@ -15,6 +15,9 @@ export default class Machine {
   log() {
     console.log("📟", this._popString())
   }
+  logNumber() {
+    console.log("💡", ...arguments)
+  }
 
   setDisplayMode(mode: number, width: number, height: number, visibleWidth = width, visibleHeight = height) {
     this._sysCall("setDisplayMode", this._displayModes[mode], width, height, visibleWidth, visibleHeight)
@@ -607,6 +610,7 @@ export default class Machine {
   }
 
   private _die(err: string) {
+    console.trace(err)
     this._processes[0] = false
     this.setDisplayMode(0, 80, 20)
     this._pushString("\n\nError!\n" + err)

@@ -4,8 +4,12 @@
   ;; Pop one buffer off the buffer stack and store in memory.
   (import "env" "popToMemory" (func $popToMemory (param $offset i32)))
 
-  ;; Pop string from buffer stack and log it to console.
+  ;; Pop string from buffer stack and log it to the console.
   (import "env" "log" (func $log ))
+  ;; Log numbers to the console. Use any number of parameters.
+  (import "env" "logNumber" (func $logNumber1 (param $a i32) ))
+  (import "env" "logNumber" (func $logNumber2 (param $a i32) (param $b i32) ))
+  (import "env" "logNumber" (func $logNumber3 (param $a i32) (param $b i32) (param $c i32) ))
   ;; Pop string from buffer stack and print it to text display.
   (import "env" "print" (func $print ))
 
@@ -154,10 +158,9 @@
 
   ;; Step function is called once every interval.
   (func $step (param $t f64)
-    (local $gc i32)
     (local $pos i32)
     (local $len i32)
-    (set_local $gc (call $getPartLength (i32.const 0)))
+    (call $enterPart (call $createPart (i32.const 0)))
     (if (call $getInputKey) (then
       (set_local $pos (call $getInputPosition))
       (call $resizePart (get_global $inputText) (call $getInputText))
@@ -174,7 +177,7 @@
     (if (i32.eq (call $getInputKey) (i32.const 13)) (then
       (call $connectTo (drop (call $getInputText)))
     ))
-    (call $resizePart (i32.const 0) (get_local $gc))
+    (call $deleteParent)
   )
   (export "step" (func $step))
 
@@ -667,46 +670,86 @@
 
   ;; Memory management
 
-  (global $partIndexOffset (mut i32) (i32.const 0))
+  (data (i32.const 0) "\00\00\00\00\00\00\00\00\10\00\00\00\00\00\00\00")
+  (global $nextPartId (mut i32) (i32.const 1))
+  (global $parentPart (mut i32) (i32.const 0))
 
-  (func $getPartCount (result i32)
-    (i32.div_u (i32.load (get_global $partIndexOffset)) (i32.const 4))
+  (func $getPartIndex (param $id i32) (result i32)
+    (local $indexOffset i32)
+    (local $indexLength i32)
+    (local $p i32)
+    (set_local $indexOffset (i32.const 0x00))
+    (set_local $indexLength (i32.const 0x10))
+    (set_local $p (get_local $indexOffset))
+    (block(loop
+      (br_if 1 (i32.ge_u (get_local $p) (i32.add (get_local $indexOffset) (get_local $indexLength))))
+      (if (i32.eq (i32.load (get_local $p)) (get_local $id)) (then
+        (return (get_local $p))
+      ))
+      (if (i32.eq (i32.load (get_local $p)) (i32.const 0)) (then
+        (set_local $indexOffset (i32.load (i32.add (get_local $p) (i32.const 0x8))))
+        (set_local $indexLength (i32.load (i32.add (get_local $p) (i32.const 0xc))))
+        (set_local $p (get_local $indexOffset))
+      )(else
+        (set_local $p (i32.add (get_local $p) (i32.const 0x10)))
+      ))
+      (br 0)
+    ))
+    (i32.const -1)
+  )
+  (func $getPartParent (param $id i32) (result i32)
+    (local $i i32)
+    (set_local $i (call $getPartIndex (get_local $id)))
+    (if (i32.ne (get_local $i) (i32.const -1)) (then
+      (set_local $i (i32.load (i32.add (get_local $i) (i32.const 0x4))))
+    ))
+    (get_local $i)
   )
   (func $getPartOffset (param $id i32) (result i32)
-    (local $offset i32)
-    (set_local $offset (get_global $partIndexOffset))
-    (if (i32.gt_u (get_local $id) (i32.const 0)) (then
-      (set_local $offset (i32.load (i32.add (get_global $partIndexOffset) (i32.mul (get_local $id) (i32.const 4)))))
+    (local $i i32)
+    (set_local $i (call $getPartIndex (get_local $id)))
+    (if (i32.ne (get_local $i) (i32.const -1)) (then
+      (set_local $i (i32.load (i32.add (get_local $i) (i32.const 0x8))))
     ))
-    (i32.add (get_local $offset) (i32.const 4))
+    (get_local $i)
   )
   (func $getPartLength (param $id i32) (result i32)
-    (i32.load (i32.sub (call $getPartOffset (get_local $id)) (i32.const 4)))
+    (local $i i32)
+    (set_local $i (call $getPartIndex (get_local $id)))
+    (if (i32.ne (get_local $i) (i32.const -1)) (then
+      (set_local $i (i32.load (i32.add (get_local $i) (i32.const 0xc))))
+    ))
+    (get_local $i)
   )
 
   (func $getNextPart (param $fromOffset i32) (result i32)
-    (local $pos i32)
-    (local $partsLeft i32)
-    (local $bestOffset i32)
-    (local $bestId i32)
-    (local $offset i32)
+    (local $indexOffset i32)
+    (local $indexLength i32)
     (local $id i32)
-    (set_local $pos (get_global $partIndexOffset))
-    (set_local $partsLeft (call $getPartCount))
-    (set_local $bestOffset (i32.mul (current_memory) (i32.const 65536)))
-    (set_local $bestId (i32.add (get_local $partsLeft) (i32.const 1)))
-    (set_local $offset (get_global $partIndexOffset))
-    (set_local $id (i32.const 0))
-    (block (loop
-      (if (i32.and (i32.lt_u (get_local $offset) (get_local $bestOffset)) (i32.ge_u (get_local $offset) (get_local $fromOffset))) (then
+    (local $offset i32)
+    (local $bestId i32)
+    (local $bestIdOffset i32)
+    (local $p i32)
+    (set_local $indexOffset (i32.const 0x00))
+    (set_local $indexLength (i32.const 0x10))
+    (set_local $bestId (i32.const -1))
+    (set_local $bestIdOffset (i32.const -1))
+    (set_local $p (get_local $indexOffset))
+    (block(loop
+      (br_if 1 (i32.ge_u (get_local $p) (i32.add (get_local $indexOffset) (get_local $indexLength))))
+      (set_local $id (i32.load (get_local $p)))
+      (set_local $offset (i32.load (i32.add (get_local $p) (i32.const 0x8))))
+      (if (i32.and (i32.ge_u (get_local $offset) (get_local $fromOffset)) (i32.lt_u (get_local $offset) (get_local $bestIdOffset))) (then
         (set_local $bestId (get_local $id))
-        (set_local $bestOffset (get_local $offset))
+        (set_local $bestIdOffset (get_local $offset))
       ))
-      (br_if 1 (i32.le_u (get_local $partsLeft) (i32.const 0)))
-      (set_local $pos (i32.add (get_local $pos) (i32.const 4)))
-      (set_local $id  (i32.add (get_local $id)  (i32.const 1)))
-      (set_local $offset (i32.load (get_local $pos)))
-      (set_local $partsLeft (i32.sub (get_local $partsLeft) (i32.const 1)))
+      (if (i32.eq (i32.load (get_local $p)) (i32.const 0)) (then
+        (set_local $indexOffset (i32.load (i32.add (get_local $p) (i32.const 0x8))))
+        (set_local $indexLength (i32.load (i32.add (get_local $p) (i32.const 0xc))))
+        (set_local $p (get_local $indexOffset))
+      )(else
+        (set_local $p (i32.add (get_local $p) (i32.const 0x10)))
+      ))
       (br 0)
     ))
     (get_local $bestId)
@@ -714,58 +757,40 @@
 
   (func $alloc (param $len i32) (result i32)
     (local $offset i32)
-    (local $partCount i32)
-    (local $id i32)
-    (local $nextOffset i32)
-    (set_local $offset (i32.const 0))
-    (set_local $len (i32.add (get_local $len) (i32.const 8)))
-    (set_local $partCount (call $getPartCount))
-    (block (loop
-      (set_local $id (call $getNextPart (get_local $offset)))
-      (if (i32.gt_u (get_local $id) (get_local $partCount)) (then
-        (set_local $nextOffset (i32.mul (current_memory) (i32.const 65536)))
-      )(else
-        (set_local $nextOffset (call $getPartOffset (get_local $id)))
-      ))
-      (br_if 1 (i32.lt_u (i32.add (get_local $offset) (get_local $len)) (get_local $nextOffset)))
-      (if (i32.gt_u (get_local $id) (get_local $partCount)) (then
-        (if (i32.lt_s (grow_memory (i32.const 1)) (i32.const 0)) (then
-          (unreachable)
-        ))
-        (set_local $offset (i32.const 0))
-      )(else
-        (set_local $offset (i32.add (get_local $nextOffset) (call $getPartLength (get_local $id))))
-      ))
-      (br 0)
-    ))
-    (set_local $len (i32.sub (get_local $len) (i32.const 8)))
-    (i32.store (get_local $offset) (get_local $len))
-    (get_local $offset)
-  )
-  (func $resizePart (param $id i32) (param $len i32)
-    (local $offset i32)
     (local $nextId i32)
     (local $nextOffset i32)
-    (local $newOffset i32)
-    (set_local $offset (call $getPartOffset (get_local $id)))
-    (set_local $len (i32.add (get_local $len) (i32.const 4)))
-    (set_local $nextId (call $getNextPart (get_local $offset)))
-    (set_local $nextOffset (call $getPartOffset (get_local $nextId)))
-    (if (i32.lt_u (i32.add (get_local $offset) (get_local $len)) (get_local $nextOffset)) (then
-      (set_local $offset (i32.sub (get_local $offset) (i32.const 4)))
-      (set_local $len    (i32.sub (get_local $len)    (i32.const 4)))
-      (i32.store (get_local $offset) (get_local $len))
-    )(else
-      (set_local $offset (i32.sub (get_local $offset) (i32.const 4)))
-      (set_local $newOffset (call $alloc (get_local $len)))
-      (call $copyMem (get_local $offset) (get_local $newOffset) (get_local $len))
-      (set_local $len    (i32.sub (get_local $len)    (i32.const 4)))
-      (i32.store (get_local $newOffset) (get_local $len))
-      (if (i32.eq (get_local $id) (i32.const 0)) (then
-        (set_global $partIndexOffset (get_local $newOffset))
+    (set_local $offset (i32.const 0x10))
+    (block(loop
+      (set_local $nextId (call $getNextPart (get_local $offset)))
+      (if (i32.eq (get_local $nextId) (i32.const -1))(then
+        (set_local $nextOffset (i32.mul (current_memory) (i32.const 65536)))
       )(else
-        (i32.store (i32.add (get_global $partIndexOffset) (i32.mul (get_local $id) (i32.const 4))) (get_local $newOffset))
+        (set_local $nextOffset (call $getPartOffset (get_local $nextId)))
       ))
+      (br_if 1 (i32.gt_u (i32.sub (get_local $nextOffset) (get_local $offset)) (get_local $len)))
+      (br_if 1 (i32.eq (get_local $nextId) (i32.const -1)))
+      (set_local $offset (i32.add (get_local $nextOffset) (i32.add (call $getPartLength (get_local $nextId)) (i32.const 1))))
+      (br 0)
+    ))
+    (if (i32.le_u (i32.sub (get_local $nextOffset) (get_local $offset)) (get_local $len)) (then
+      (if (i32.lt_s (grow_memory (i32.add (i32.div_u (get_local $len) (i32.const 65536)) (i32.const 1))) (i32.const 0)) (then
+        (unreachable)
+      ))
+      (set_local $offset (call $alloc (get_local $len)))
+    ))
+    (get_local $offset)
+  )
+  (func $resizePart (param $id i32) (param $newlen i32)
+    (local $offset i32)
+    (local $len i32)
+    (set_local $offset (call $getPartOffset (get_local $id)))
+    (set_local $len (call $getPartLength (get_local $id)))
+    (if (i32.le_u (get_local $newlen) (get_local $len)) (then
+      (i32.store (i32.add (call $getPartIndex (get_local $id)) (i32.const 0xc)) (get_local $newlen))
+    )(else
+      (i32.store (i32.add (call $getPartIndex (get_local $id)) (i32.const 0x8)) (call $alloc (get_local $newlen)))
+      (i32.store (i32.add (call $getPartIndex (get_local $id)) (i32.const 0xc)) (get_local $newlen))
+      (call $copyMem (get_local $offset) (call $getPartOffset (get_local $id)) (get_local $len))
     ))
   )
   (func $copyMem (param $fromOffset i32) (param $toOffset i32) (param $len i32)
@@ -781,20 +806,66 @@
       (set_local $len (i32.add (get_local $len) (i32.const 1)))
     ))
     (block (loop
+      (br_if 1 (i32.eqz (get_local $len)))
       (i32.store8 (get_local $toOffset) (i32.load8_u (get_local $fromOffset)))
       (set_local $fromOffset (i32.add (get_local $fromOffset) (get_local $delta)))
       (set_local $toOffset   (i32.add (get_local $toOffset  ) (get_local $delta)))
-      (set_local $len (i32.sub (get_local $len) (i32.const 1)))
-      (br_if 1 (i32.le_u (get_local $len) (i32.const 0)))
+      (set_local $len        (i32.sub (get_local $len)        (i32.const 1)))
       (br 0)
     ))
   )
   (func $createPart (param $len i32) (result i32)
-    (local $id i32)
-    (call $resizePart (i32.const 0) (i32.add (call $getPartLength (i32.const 0)) (i32.const 4)))
-    (set_local $id (call $getPartCount))
-    (i32.store (i32.add (get_global $partIndexOffset) (i32.mul (get_local $id) (i32.const 4))) (call $alloc (i32.add (get_local $len) (i32.const 8))))
-    (call $resizePart (get_local $id) (get_local $len))
-    (get_local $id)
+    (local $offset i32)
+    (call $resizePart (i32.const 0) (i32.add (call $getPartLength (i32.const 0)) (i32.const 0x10)))
+    (set_local $offset (i32.sub (i32.add (call $getPartOffset (i32.const 0)) (call $getPartLength (i32.const 0))) (i32.const 0x10)))
+    (i32.store (i32.add (get_local $offset) (i32.const 0x0)) (get_global $nextPartId))
+    (i32.store (i32.add (get_local $offset) (i32.const 0x4)) (get_global $parentPart))
+    (i32.store (i32.add (get_local $offset) (i32.const 0x8)) (call $alloc (get_local $len)))
+    (i32.store (i32.add (get_local $offset) (i32.const 0xc)) (get_local $len))
+    (get_global $nextPartId)
+    (set_global $nextPartId (i32.add (get_global $nextPartId) (i32.const 1)))
+  )
+
+  (func $deletePart (param $id i32)
+    (local $indexOffset i32)
+    (local $indexLength i32)
+    (local $p i32)
+    (set_local $indexOffset (call $getPartOffset (i32.const 0)))
+    (set_local $indexLength (call $getPartLength (i32.const 0)))
+    (set_local $p (get_local $indexOffset))
+    (block(loop
+      (br_if 1 (i32.ge_u (get_local $p) (i32.add (get_local $indexOffset) (get_local $indexLength))))
+      (if (i32.eq (i32.load (get_local $p)) (get_local $id)) (then
+        (call $copyMem (i32.sub (i32.add (get_local $indexOffset) (get_local $indexLength)) (i32.const 0x10)) (get_local $p) (i32.const 0x10))
+        (set_local $indexLength (i32.sub (get_local $indexLength) (i32.const 0x10)))
+        (call $resizePart (i32.const 0) (get_local $indexLength))
+        (set_local $p (i32.sub (get_local $p) (i32.const 0x10)))
+      ))
+      (if (i32.eq (i32.load (i32.add (get_local $p) (i32.const 0x4))) (get_local $id)) (then
+        (call $deletePart (i32.load (get_local $p)))
+        (set_local $indexOffset (call $getPartOffset (i32.const 0)))
+        (set_local $indexLength (call $getPartLength (i32.const 0)))
+        (set_local $p (i32.sub (get_local $indexOffset) (i32.const 0x10)))
+      ))
+      (set_local $p (i32.add (get_local $p) (i32.const 0x10)))
+      (br 0)
+    ))
+    (if (i32.eq (get_global $parentPart) (get_local $id))(then
+      (call $exitPart)
+    ))
+  )
+  (func $movePartUp (param $id i32)
+    (local $p i32)
+    (set_local $p (call $getPartIndex (get_local $id)))
+    (i32.store (i32.add (get_local $p) (i32.const 0x4)) (call $getPartParent (call $getPartParent (get_local $id))))
+  )
+  (func $enterPart (param $id i32)
+    (set_global $parentPart (get_local $id))
+  )
+  (func $exitPart
+    (set_global $parentPart (call $getPartParent (get_global $parentPart)))
+  )
+  (func $deleteParent
+    (call $deletePart (get_global $parentPart))
   )
 )
