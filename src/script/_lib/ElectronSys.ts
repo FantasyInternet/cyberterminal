@@ -1,16 +1,24 @@
 import WebSys from "./WebSys"
 //@ts-ignore
-let fs: any, shell: any; if (typeof window !== "undefined") {
+let fs: any, shell: any, win: any; if (typeof window !== "undefined") {
   //@ts-ignore
   fs = window.require("fs")
   //@ts-ignore
   shell = window.require('electron').shell
+  //@ts-ignore
+  win = window.require("electron").remote.getCurrentWindow()
 }
+
 /**
  * Sys implementation for electron app.
  * See [Sys](../interfaces/__lib_sys_.sys.md) for documentation
  */
 export default class ElectronSys extends WebSys {
+
+  constructor() {
+    super()
+    this._initHotkeys()
+  }
 
   setTitle(title: string) {
     document.title = title + " - " + this._title
@@ -128,5 +136,20 @@ export default class ElectronSys extends WebSys {
 
   /** _privates */
   private _title: string = document.title
+
+  private _initHotkeys() {
+    document.addEventListener("keydown", (e) => {
+      switch (e.code) {
+        case "F11":
+          win.setFullScreen(!win.isFullScreen())
+          e.preventDefault()
+          break
+        case "F12":
+          win.webContents.openDevTools()
+          e.preventDefault()
+          break
+      }
+    })
+  }
 
 }

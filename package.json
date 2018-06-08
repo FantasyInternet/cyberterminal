@@ -24,7 +24,7 @@
       "category": "your.app.category.type"
     },
     "directories": {
-      "app": "./build/",
+      "app": "./build/electron-version/",
       "output": "./build-desktop/"
     }
   },
