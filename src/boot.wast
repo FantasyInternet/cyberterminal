@@ -3,13 +3,18 @@
   (import "env" "pushFromMemory" (func $pushFromMemory (param $offset i32) (param $length i32)))
   ;; Pop one buffer off the buffer stack and store in memory.
   (import "env" "popToMemory" (func $popToMemory (param $offset i32)))
+  ;; Pop API function name off the buffer stack and return index or 0 if not found.
+  (import "env" "getApiFunctionIndex" (func $getApiFunctionIndex (result i32)))
+  ;; Call API function by index. Use any number of parameters and return values.
+  (import "env" "callApiFunction" (func $callApiFunction (param $index i32) (param $a i32) (result i32)))
+  (import "env" "callApiFunction" (func $api_i32i32_i32 (param $index i32) (param $a i32) (param $b i32) (result i32)))
 
   ;; Pop string from buffer stack and log it to the console.
   (import "env" "log" (func $log ))
   ;; Log numbers to the console. Use any number of parameters.
-  (import "env" "logNumber" (func $logNumber1 (param $a i32) ))
-  (import "env" "logNumber" (func $logNumber2 (param $a i32) (param $b i32) ))
-  (import "env" "logNumber" (func $logNumber3 (param $a i32) (param $b i32) (param $c i32) ))
+  (import "env" "logNumber" (func $log1Number  (param $a i32) ))
+  (import "env" "logNumber" (func $log2Numbers (param $a i32) (param $b i32) ))
+  (import "env" "logNumber" (func $log3Numbers (param $a i32) (param $b i32) (param $c i32) ))
   ;; Pop string from buffer stack and print it to text display.
   (import "env" "print" (func $print ))
 
@@ -32,7 +37,7 @@
   (import "env" "read" (func $read (param $tableIndex i32) (result i32)))
   ;; Pop path from buffer stack, read it and push the pixel data to buffer stack. Returns a request ID.
   ;; Callback can expect success boolean, width and height in pixels and same request ID as parameters.
-  (import "env" "readImage" (func $readImage (param $tableIndex i32) (result i32)))
+  ;; (import "env" "readImage" (func $readImage (param $tableIndex i32) (result i32)))
   ;; Pop data and path from buffer stack and write it to file. Returns a request ID.
   ;; Callback can expect success boolean and same request ID as parameters.
   (import "env" "write" (func $write (param $tableIndex i32) (result i32)))
@@ -104,7 +109,7 @@
   (import "env" "transferMemory" (func $transferMemory (param $srcPid i32) (param $srcOffset i32) (param $length i32) (param $destPid i32) (param $destOffset i32)))
 
   ;; transpile wa(s)t into wasm on the buffer stack and return byte length.
-  (import "env" "wabt" (func $wabt (result i32)))
+  ;; (import "env" "wabt" (func $wabt (result i32)))
 
   ;; All JavaScript Math functions are available.
   (import "Math" "random" (func $random (result f32)))
@@ -123,18 +128,21 @@
 
   ;; Table for callback functions.
   (table $table 8 anyfunc)
+    (elem (i32.const 1) $storeImages)
     (export "table" (table $table))
 
   ;; Linear memory.
   (memory $memory 1)
     (export "memory" (memory $memory))
-    (data (i32.const 1010) "Hello world from WASM!")
-    (data (i32.const 1040) "./images/sleepyhead.png")
-    (data (i32.const 1080) "./images/pointer.png")
-    (data (i32.const 1120) "./images/font.png")
-    (data (i32.const 1160) "http://codeartistic.ninja")
+    (data (i32.const 1010) "Hello world from WASM!");;22
+    (data (i32.const 1040) "./images/sleepyhead.png");;23
+    (data (i32.const 1080) "./images/pointer.png");;20
+    (data (i32.const 1120) "./images/font.png");;17
+    (data (i32.const 1160) "http://codeartistic.ninja");;25
+    (data (i32.const 1190) "readImage");;9
 
   ;; Global variables
+  (global $readImage (mut i32) (i32.const 0))
   (global $codeartistic (mut i32) (i32.const 0))
   (global $sleepyheadReq (mut i32) (i32.const 0))
   (global $sleepyhead    (mut i32) (i32.const 0))
@@ -161,11 +169,14 @@
   (func $init
     (call $log (call $pushFromMemory (i32.const 1010) (i32.const 22)))
     (set_global $sleepyhead    (call $createImg (i32.const 0) (i32.const 0)))
-    (set_global $sleepyheadReq (call $readImage (call $pushFromMemory (i32.const  1040) (i32.const 23)) (i32.const 1)))
     (set_global $pointer       (call $createImg (i32.const 0) (i32.const 0)))
-    (set_global $pointerReq    (call $readImage (call $pushFromMemory (i32.const  1080) (i32.const 20)) (i32.const 1)))
     (set_global $font          (call $createImg (i32.const 0) (i32.const 0)))
-    (set_global $fontReq       (call $readImage (call $pushFromMemory (i32.const 1120) (i32.const 17)) (i32.const 1)))
+    (set_global $readImage     (call $getApiFunctionIndex (call $pushFromMemory (i32.const 1190) (i32.const 9))))
+    (if (get_global $readImage)(then
+      (set_global $sleepyheadReq (call $callApiFunction (get_global $readImage) (call $pushFromMemory (i32.const 1040) (i32.const 23)) (i32.const 1)))
+      (set_global $pointerReq    (call $callApiFunction (get_global $readImage) (call $pushFromMemory (i32.const 1080) (i32.const 20)) (i32.const 1)))
+      (set_global $fontReq       (call $callApiFunction (get_global $readImage) (call $pushFromMemory (i32.const 1120) (i32.const 17)) (i32.const 1)))
+    ))
     (set_global $codeartistic  (call $createPart (i32.const 25)))
     (call $copyMem (i32.const 1160) (call $getPartOffset (get_global $codeartistic)) (call $getPartLength (get_global $codeartistic)))
     (set_global $display (call $createImg (i32.const 320) (i32.const 200)))
@@ -195,7 +206,6 @@
       (call $popToMemory (i32.add (call $getPartOffset (get_global $font)) (i32.const 8)))
     ))
   )
-  (elem (i32.const 1) $storeImages)
 
 
   ;; Step function is called once every interval.

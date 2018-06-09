@@ -82,6 +82,14 @@ export default class Machine {
     //@ts-ignore
     ar.set(new Uint8Array(this._popArrayBuffer()), offset)
   }
+  getApiFunctionIndex() {
+    let name = this._popString()
+    return Math.max(0, this._romApiNames.indexOf(name))
+  }
+  callApiFunction(index: number, ...params: number[]) {
+    //@ts-ignore
+    return this[this._romApiNames[index]].apply(this, params)
+  }
 
   connectTo() {
     let url = (new URL(this._popString(), this._baseUrl)).toString()
@@ -344,6 +352,7 @@ export default class Machine {
   private _pendingRequests: any[] = []
   private _baseUrl: string = ""
   private _originUrl: string = ""
+  private _romApiNames: string[] = []
   private _processes: any[] = []
   private _activePID: number = -1
   //@ts-ignore
@@ -541,10 +550,12 @@ export default class Machine {
 
   private _generateRomApi() {
     let api: any = {}
+    this._romApiNames = [""]
     for (let name of Object.getOwnPropertyNames(Machine.prototype)) {
       let val = (<any>this)[name]
       if (name.substr(0, 1) !== "_" && name !== "constructor" && typeof val === "function") {
         api[name] = this._copyFunction(val.bind(this))
+        this._romApiNames.push(name)
       }
     }
     return api
