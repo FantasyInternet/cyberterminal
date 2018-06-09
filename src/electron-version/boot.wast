@@ -128,180 +128,61 @@
   ;; Linear memory.
   (memory $memory 1)
     (export "memory" (memory $memory))
-    (data (i32.const 1010) "Hello world from WASM!")
-    (data (i32.const 1040) "./images/sleepyhead.png")
-    (data (i32.const 1080) "./images/pointer.png")
-    (data (i32.const 1120) "./images/font.png")
-    (data (i32.const 1160) "http://codeartistic.ninja")
+    (data (i32.const 0xf100) "\1b[K\1b[H\t\t\t\t_______________\n_______________________________/ CyberTerminal \\_______________________________\n\nConnect to URL: ")
+    (data (i32.const 0xf200) "\n")
 
   ;; Global variables
-  (global $codeartistic (mut i32) (i32.const 0))
-  (global $sleepyheadReq (mut i32) (i32.const 0))
-  (global $sleepyhead    (mut i32) (i32.const 0))
-  (global $pointerReq (mut i32) (i32.const 0))
-  (global $pointer    (mut i32) (i32.const 0))
-  (global $fontReq (mut i32) (i32.const 0))
-
-  (global $left (mut i32) (i32.const 100))
-  (global $leftV (mut i32) (i32.const 0))
-  (global $leftColor (mut i32) (i32.const 100))
-  (global $right (mut i32) (i32.const 100))
-  (global $rightV (mut i32) (i32.const 0))
-  (global $rightColor (mut i32) (i32.const 100))
-  (global $ballX (mut i32) (i32.const 160))
-  (global $ballY (mut i32) (i32.const 100))
-  (global $ballVX (mut i32) (i32.const 1))
-  (global $ballVY (mut i32) (i32.const 0))
-  (global $bgColor (mut i32) (i32.const 0))
-  (global $ballColor (mut i32) (i32.const 0))
-  (global $beep (mut i32) (i32.const 1))
-  (global $inputText (mut i32) (i32.const 1))
+  (global $homeCode   (mut i32) (i32.const 0))
+  (global $nl         (mut i32) (i32.const 0))
+  (global $inputPos   (mut i32) (i32.const 1024))
+  (global $inputText  (mut i32) (i32.const 0))
 
   ;; Init function is called once on start.
   (func $init
-    (call $log (call $pushFromMemory (i32.const 1010) (i32.const 22)))
-    (set_global $sleepyhead    (call $createImg (i32.const 0) (i32.const 0)))
-    (set_global $sleepyheadReq (call $readImage (call $pushFromMemory (i32.const  1040) (i32.const 23)) (i32.const 1)))
-    (set_global $pointer       (call $createImg (i32.const 0) (i32.const 0)))
-    (set_global $pointerReq    (call $readImage (call $pushFromMemory (i32.const  1080) (i32.const 20)) (i32.const 1)))
-    (set_global $font          (call $createImg (i32.const 0) (i32.const 0)))
-    (set_global $fontReq       (call $readImage (call $pushFromMemory (i32.const 1120) (i32.const 17)) (i32.const 1)))
-    (set_global $codeartistic  (call $createPart (i32.const 25)))
-    (call $copyMem (i32.const 1160) (call $getPartOffset (get_global $codeartistic)) (call $getPartLength (get_global $codeartistic)))
-    (set_global $display (call $createImg (i32.const 320) (i32.const 200)))
-    (call $setDisplayMode (i32.const 1) (call $getImgWidth (get_global $display)) (call $getImgHeight (get_global $display)) (call $getImgWidth (get_global $display)) (call $getImgHeight (get_global $display)))
-    (call $focusInput (i32.const 3))
-    (call $setStepInterval (f64.div (f64.const 1000) (f64.const 60)))
+    (set_global $homeCode  (call $createString (i32.const 0xf100)))
+    ;; (set_global $nl (call $createString (i32.const 0xf200)))
+    (call $setStepInterval (f64.const -1))
+    (call $setDisplayMode (i32.const 0) (i32.const 80) (i32.const 20) (i32.const 80) (i32.const 20))
 
-    (set_global $bgColor (call $rgb (i32.const 0) (i32.const 0) (i32.const 0)))
-    (set_global $ballColor (call $rgb (i32.const 255) (i32.const 255) (i32.const 255)))
-    (set_global $leftColor (call $rgb (i32.const 0) (i32.const 0) (i32.const 255)))
-    (set_global $rightColor (call $rgb (i32.const 255) (i32.const 0) (i32.const 0)))
-    (set_global $inputText (call $createPart (i32.const 1)))
+    (call $setInputType (i32.const 4))
+    (call $focusInput (i32.const 1))
+    (set_global $inputText (call $createPart (i32.const 7)))
+    (i64.store   (i32.add (call $getPartOffset (get_global $inputText)) (i32.const 0)) (i64.const 0x2f2f2f3a70747468));;"http:///"
+    (call $setInputText (call $pushFromMemory (call $getPartOffset (get_global $inputText)) (call $getPartLength (get_global $inputText))))
+    (call $setInputPosition (call $getPartLength (get_global $inputText)) (i32.const 0))
+
+    (call $printStr (get_global $homeCode))
+    (call $printStr (get_global $inputText))
   )
   (export "init" (func $init))
 
-  (func $storeImages (param $success i32) (param $w i32) (param $h i32) (param $req i32)
-    (if (i32.eq (get_local $req) (get_global $sleepyheadReq)) (then
-      (set_global $sleepyhead (call $createImg (get_local $w) (get_local $h)))
-      (call $popToMemory (i32.add (call $getPartOffset (get_global $sleepyhead)) (i32.const 8)))
-    ))
-    (if (i32.eq (get_local $req) (get_global $pointerReq)) (then
-      (set_global $pointer (call $createImg (get_local $w) (get_local $h)))
-      (call $popToMemory (i32.add (call $getPartOffset (get_global $pointer)) (i32.const 8)))
-    ))
-    (if (i32.eq (get_local $req) (get_global $fontReq)) (then
-      (set_global $font (call $createImg (get_local $w) (get_local $h)))
-      (call $popToMemory (i32.add (call $getPartOffset (get_global $font)) (i32.const 8)))
-    ))
-  )
-  (elem (i32.const 1) $storeImages)
-
-
   ;; Step function is called once every interval.
   (func $step (param $t f64)
-    (set_global $beep (i32.sub (get_global $beep) (i32.const 1)))
-    (if (i32.eq (get_global $beep) (i32.const 0)) (then
-      (call $stopTone (i32.const 0) )
+    (local $pos i32)
+    (local $len i32)
+    (call $enterPart (call $createPart (i32.const 0)))
+    (if (call $getInputKey) (then
+      (set_local $pos (call $getInputPosition))
+      (call $resizePart (get_global $inputText) (call $getInputText))
+      (call $popToMemory (call $getPartOffset (get_global $inputText)))
+      ;; (call $printStr (get_global $nl))
+      ;; (call $printStr (call $uintToStr (i32.trunc_u/f64 (get_local $t))))
+      (call $printStr (get_global $homeCode))
+      (call $printStr (get_global $inputText))
+      (call $printStr (get_global $homeCode))
+      (call $printStr (call $substr (get_global $inputText) (i32.const 0) (get_local $pos)))
+      (set_global $inputPos (get_local $pos))
     ))
-    (set_global $ballX (i32.add (get_global $ballX) (get_global $ballVX)))
-    (set_global $ballY (i32.add (get_global $ballY) (get_global $ballVY)))
-    (set_global $left  (i32.add (get_global $left)  (get_global $leftV)))
-    (set_global $right (i32.add (get_global $right) (get_global $rightV)))
-    (if (i32.le_s (get_global $ballX) (i32.const 8)) (then
-      (if (i32.and (i32.ge_s (get_global $ballY) (i32.sub (get_global $left) (i32.const 20))) (i32.le_s (get_global $ballY) (i32.add (get_global $left) (i32.const 20)))) (then
-        (set_global $ballVX (i32.mul (get_global $ballVX) (i32.const -1)))
-        (set_global $ballVY (i32.add (get_global $ballVY) (get_global $leftV)))
-        (call $startTone (i32.const 0) (i32.const 440) (f32.const 1) (i32.const 0))
-        (set_global $beep (i32.const 4))
-      )(else
-        (set_global $ballX (i32.const 310))
-        (set_global $ballY (get_global $right))
-        (set_global $ballVY (i32.div_s (get_global $ballVY) (i32.const 2)))
-        (call $startTone (i32.const 0) (i32.const 110) (f32.const 1) (i32.const 0))
-        (set_global $beep (i32.const 30))
-      ))
+    
+    (if (i32.eq (call $getInputKey) (i32.const 13)) (then
+      (call $connectTo (drop (call $getInputText)))
     ))
-    (if (i32.ge_s (get_global $ballX) (i32.const 312)) (then
-      (if (i32.and (i32.ge_s (get_global $ballY) (i32.sub (get_global $right) (i32.const 20))) (i32.le_s (get_global $ballY) (i32.add (get_global $right) (i32.const 20)))) (then
-        (set_global $ballVX (i32.mul (get_global $ballVX) (i32.const -1)))
-        (set_global $ballVY (i32.add (get_global $ballVY) (get_global $rightV)))
-        (call $startTone (i32.const 0) (i32.const 440) (f32.const 1) (i32.const 0))
-        (set_global $beep (i32.const 4))
-      )(else
-        (set_global $ballX (i32.const 10))
-        (set_global $ballY (get_global $left))
-        (set_global $ballVY (i32.div_s (get_global $ballVY) (i32.const 2)))
-        (call $startTone (i32.const 0) (i32.const 110) (f32.const 1) (i32.const 0))
-        (set_global $beep (i32.const 30))
-      ))
-    ))
-    (if (i32.and (i32.le_s (get_global $ballY) (i32.const 0)) (i32.lt_s (get_global $ballVY) (i32.const 0))) (then
-      (set_global $ballVY (i32.mul (get_global $ballVY) (i32.const -1)))
-      (call $startTone (i32.const 0) (i32.const 220) (f32.const 1) (i32.const 0))
-      (set_global $beep (i32.const 4))
-    ))
-    (if (i32.and (i32.ge_s (get_global $ballY) (call $getImgHeight (get_global $display))) (i32.gt_s (get_global $ballVY) (i32.const 0))) (then
-      (set_global $ballVY (i32.mul (get_global $ballVY) (i32.const -1)))
-      (call $startTone (i32.const 0) (i32.const 220) (f32.const 1) (i32.const 0))
-      (set_global $beep (i32.const 4))
-    ))
-    ;; (if (i32.lt_s (get_global $ballVX) (i32.const 0)) (then
-    ;;   (set_global $rightV (i32.const 0))
-    ;;   (if (i32.lt_s (get_global $ballY) (get_global $left)) (then
-    ;;     (set_global $leftV (i32.const -1))
-    ;;   )(else
-    ;;     (set_global $leftV (i32.const 1))
-    ;;   ))
-    ;; )(else
-    (set_global $leftV (i32.trunc_s/f32 (call $getGameAxisY)))
-    (if (call $getGameButtonY) (set_global $left (get_global $right)))
-    (if (call $getGameButtonB) (call $connectTo (call $pushFromMemory (call $getPartOffset (get_global $codeartistic)) (call $getPartLength (get_global $codeartistic)))))
-    (set_global $rightV (i32.const 0))
-    (if (i32.ge_s (get_global $ballX) (i32.const 160)) (then
-      (if (i32.lt_s (get_global $ballY) (get_global $right)) (then
-        (set_global $rightV (i32.const -1))
-      )(else
-        (set_global $rightV (i32.const 1))
-      ))
-    ))
+    (call $deleteParent)
   )
   (export "step" (func $step))
 
   ;; Display function is called whenever the display needs to be redrawn.
   (func $display (param $t f64)
-    (call $rect (get_global $display) (i32.const 0) (i32.const 0) (call $getImgWidth (get_global $display)) (call $getImgHeight (get_global $display)) (get_global $bgColor))
-    (call $copyImg (get_global $sleepyhead) (i32.const 0) (i32.const 0) (get_global $display) (i32.const 80) (i32.const 16) (call $getImgWidth (get_global $sleepyhead)) (call $getImgHeight (get_global $sleepyhead)))
-    (if (call $getMousePressed) (then
-      (set_global $ballX (call $getMouseX))
-      (set_global $ballY (call $getMouseY))
-    ))
-    (call $rect (get_global $display) (i32.sub (get_global $ballX) (i32.const 4)) (i32.sub (get_global $ballY) (i32.const 4)) (i32.const 8) (i32.const 8) (get_global $ballColor))
-    (call $rect (get_global $display) (i32.const 0)   (i32.sub (get_global $left)  (i32.const 16)) (i32.const 8) (i32.const 32) (get_global $leftColor))
-    (call $rect (get_global $display) (i32.const 312) (i32.sub (get_global $right) (i32.const 16)) (i32.const 8) (i32.const 32) (get_global $rightColor))
-    (set_global $txtX (i32.const 160))
-    (set_global $txtY (i32.const 32))
-    (call $printChar (get_global $display) (i32.const 72))  ;; H
-    (call $printChar (get_global $display) (i32.const 101)) ;; e
-    (call $printChar (get_global $display) (i32.const 108)) ;; l
-    (call $printChar (get_global $display) (i32.const 108)) ;; l
-    (call $printChar (get_global $display) (i32.const 111)) ;; o
-    (call $printChar (get_global $display) (i32.const 32))  ;; (space)
-    (call $printChar (get_global $display) (i32.const 119)) ;; w
-    (call $printChar (get_global $display) (i32.const 111)) ;; o
-    (call $printChar (get_global $display) (i32.const 114)) ;; r
-    (call $printChar (get_global $display) (i32.const 108)) ;; l
-    (call $printChar (get_global $display) (i32.const 100)) ;; d
-    (call $printChar (get_global $display) (i32.const 33))  ;; !
-
-    (set_global $txtX (i32.const 0))
-    (set_global $txtY (i32.const 128))
-    (call $resizePart (get_global $inputText) (call $getInputText))
-    (call $popToMemory (call $getPartOffset (get_global $inputText)))
-    (call $printInput (get_global $display) (get_global $inputText) (call $getInputPosition) (call $getInputSelected) (get_global $leftColor))
-
-    (call $copyImg (get_global $pointer) (i32.const 0) (i32.const 0) (get_global $display) (call $getMouseX) (call $getMouseY) (call $getImgWidth (get_global $pointer)) (call $getImgHeight (get_global $pointer)))
-    (call $displayMemory (i32.add (call $getPartOffset (get_global $display)) (i32.const 8)) (i32.sub (call $getPartLength (get_global $display)) (i32.const 8)) (i32.const 0))
   )
   (export "display" (func $display))
 
