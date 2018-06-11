@@ -4,7 +4,8 @@
   "description": "A fantasy internet client.",
   "author": {
     "name": "codeartisticninja",
-    "url": "http://codeartistic.ninja/"
+    "url": "http://codeartistic.ninja/",
+    "email": "the@codeartistic.ninja"
   },
   "private": true,
   "build": {
@@ -18,12 +19,19 @@
         "nsis",
         "portable"
       ],
-      "icon": "images/icon.png"
+      "icon": "icons/1024x1024.png"
     },
     "mac": {
       "category": "your.app.category.type"
     },
+    "linux": {
+      "target": [
+        "deb"
+      ],
+      "icon": "icons/"
+    },
     "directories": {
+      "buildResources": "./build/electron-version/",
       "app": "./build/electron-version/",
       "output": "./build-desktop/"
     }
