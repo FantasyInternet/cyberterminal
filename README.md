@@ -1,8 +1,10 @@
 CyberTerminal
 =============
-A fantasy internet terminal.
+![icon](./src/images/icon.gif)
+
+A fantasy terminal for the [fantasy internet](https://fantasyinternet.github.io/).
+
+[💾Get the latest version](https://github.com/FantasyInternet/cyberterminal/releases)
+
 
 Made by [codeartistic.ninja](http://the.codeartistic.ninja/)
-
-Follow development of this app [live on Twitch!](https://www.twitch.tv/codeartisticninja)
-
