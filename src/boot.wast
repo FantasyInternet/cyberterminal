@@ -50,6 +50,8 @@
   ;; Callback can expect success boolean, length in bytes and same request ID as parameters.
   (import "env" "list" (func $list (param $tableIndex i32) (result i32)))
 
+  (import "env" "head" (func $head (param $tableIndex i32) (result i32)))
+
   ;; Prioritize  given type of input. 1=text, 2=mouse, 3=game.
   (import "env" "focusInput" (func $focusInput (param $input i32)))
 
@@ -131,6 +133,7 @@
   ;; Table for callback functions.
   (table $table 8 anyfunc)
     (elem (i32.const 1) $storeImages)
+    (elem (i32.const 2) $getStuff)
     (export "table" (table $table))
 
   ;; Linear memory.
@@ -183,8 +186,13 @@
     (call $printStr (call $createString (i32.const 0xf300)))
     (call $printStr (call $createString (i32.const 0xf400)))
     (call $printStr (call $createString (i32.const 0xf500)))
+    (drop (call $head (call $pushFromMemory (i32.const 1040) (i32.const 1)) (i32.const 2)))
   )
   (export "init" (func $init))
+
+  (func $getStuff (param $success i32) (param $len i32) (param $req i32)
+    (call $log)
+  )
 
   (func $storeImages (param $success i32) (param $w i32) (param $h i32) (param $req i32)
     (if (i32.eq (get_local $req) (get_global $sleepyheadReq)) (then

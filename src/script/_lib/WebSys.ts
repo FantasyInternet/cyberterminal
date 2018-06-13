@@ -305,6 +305,17 @@ export default class WebSys implements Sys {
     return res.ok
   }
 
+  async head(filename: string) {
+    let res = await fetch(filename, {
+      method: "HEAD"
+    })
+    if (!res.ok) throw "head error!"
+    this._dirCache(filename, false)
+    let txt = ""
+    res.headers.forEach((val: string, key: string) => { txt += key + ": " + val + "\n" })
+    return txt
+  }
+
   async list(path: string) {
     if (path.substr(-1) === "/") path = path.substr(0, path.length - 1)
     try {

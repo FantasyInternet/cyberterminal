@@ -35,6 +35,7 @@ Sys implementation for web browsers. See [Sys](../interfaces/__lib_sys_.sys.md) 
 * [delete](_script__lib_websys_.websys.md#delete)
 * [drawBitmap](_script__lib_websys_.websys.md#drawbitmap)
 * [focusInput](_script__lib_websys_.websys.md#focusinput)
+* [head](_script__lib_websys_.websys.md#head)
 * [list](_script__lib_websys_.websys.md#list)
 * [openWeb](_script__lib_websys_.websys.md#openweb)
 * [print](_script__lib_websys_.websys.md#print)
@@ -194,7 +195,7 @@ ___
 
 *Implementation of [Sys](../interfaces/_script__lib_sys_.sys.md).[focusInput](../interfaces/_script__lib_sys_.sys.md#focusinput)*
 
-*Defined in [script/_lib/WebSys.ts:338](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L338)*
+*Defined in [script/_lib/WebSys.ts:349](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L349)*
 
 **Parameters:**
 
@@ -205,6 +206,23 @@ ___
 **Returns:** `string`[]
 
 ___
+<a id="head"></a>
+
+###  head
+
+▸ **head**(filename: *`string`*): `Promise`<`string`>
+
+*Defined in [script/_lib/WebSys.ts:308](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L308)*
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| filename | `string` |
+
+**Returns:** `Promise`<`string`>
+
+___
 <a id="list"></a>
 
 ###  list
@@ -213,7 +231,7 @@ ___
 
 *Implementation of [Sys](../interfaces/_script__lib_sys_.sys.md).[list](../interfaces/_script__lib_sys_.sys.md#list)*
 
-*Defined in [script/_lib/WebSys.ts:308](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L308)*
+*Defined in [script/_lib/WebSys.ts:319](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L319)*
 
 **Parameters:**
 
@@ -232,7 +250,7 @@ ___
 
 *Implementation of [Sys](../interfaces/_script__lib_sys_.sys.md).[openWeb](../interfaces/_script__lib_sys_.sys.md#openweb)*
 
-*Defined in [script/_lib/WebSys.ts:383](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L383)*
+*Defined in [script/_lib/WebSys.ts:394](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L394)*
 
 **Parameters:**
 
@@ -290,7 +308,7 @@ ___
 
 *Implementation of [Sys](../interfaces/_script__lib_sys_.sys.md).[replaceTextInput](../interfaces/_script__lib_sys_.sys.md#replacetextinput)*
 
-*Defined in [script/_lib/WebSys.ts:365](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L365)*
+*Defined in [script/_lib/WebSys.ts:376](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L376)*
 
 **Parameters:**
 
@@ -330,7 +348,7 @@ ___
 
 ▸ **setTextInput**(text: *`string`*, pos: *`number`*, len: *`number`*, type?: * `undefined` &#124; `string`*): `void`
 
-*Defined in [script/_lib/WebSys.ts:356](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L356)*
+*Defined in [script/_lib/WebSys.ts:367](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L367)*
 
 **Parameters:**
 
@@ -369,7 +387,7 @@ ___
 
 ▸ **startTone**(): `void`
 
-*Defined in [script/_lib/WebSys.ts:331](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L331)*
+*Defined in [script/_lib/WebSys.ts:342](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L342)*
 
 **Returns:** `void`
 
@@ -380,7 +398,7 @@ ___
 
 ▸ **stopTone**(): `void`
 
-*Defined in [script/_lib/WebSys.ts:334](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L334)*
+*Defined in [script/_lib/WebSys.ts:345](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L345)*
 
 **Returns:** `void`
 

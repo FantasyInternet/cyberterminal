@@ -197,6 +197,21 @@ export default class Machine {
     })
     return id
   }
+  head(callback: number | Function) {
+    callback = this._getCallback(callback)
+    let id = this._asyncCalls++
+    let filename = (new URL(this._popString(), this._baseUrl)).toString()
+    if (filename.substr(0, this._originUrl.length) !== this._originUrl) throw "cross origin not allowed!"
+    this._sysRequest("head", filename).then((headers: string) => {
+      //@ts-ignore
+      callback(true, this._pushString(headers), id)
+    }).catch((err) => {
+      console.error(err)
+      //@ts-ignore
+      callback(false, 0, id)
+    })
+    return id
+  }
 
   setStepInterval(milliseconds: number) {
     this._stepInterval = milliseconds
