@@ -19,7 +19,7 @@
   (import "env" "print" (func $print ))
 
   ;; Set the display mode(0=text,1=pixel), resolution and (optionally) display size (for overscan).
-  (import "env" "setDisplayMode" (func $setDisplayMode (param $mode i32) (param $width i32) (param $height i32) (param $visibleWidth i32) (param $visibleHeight i32) ))
+  (import "env" "setDisplayMode" (func $setDisplayMode (param $mode i32) (param $width i32) (param $height i32)))
   ;; Copy memory range to display buffer ($destOffset optional) and commit display buffer.
   (import "env" "displayMemory" (func $displayMemory (param $offset i32) (param $length i32) (param $destOffset i32)))
 
@@ -134,6 +134,11 @@
   ;; Linear memory.
   (memory $memory 1)
     (export "memory" (memory $memory))
+    (data (i32.const 0xf100) "Hello again!\n\1b[1mBold!\1b[m\n\1b[3mItalic!\1b[m\n\1b[4mUnderline!\1b[m\n\1b[9mCrossed out!\1b[m\n")
+    (data (i32.const 0xf200) "Colors!\n\1b[30mblack?\1b[m\n\1b[31mred\1b[m\n\1b[32mgreen\1b[m\n\1b[33myellow\1b[m\n\1b[34mblue")
+    (data (i32.const 0xf300) "\1b[m\n\1b[35mmagenta\1b[m\n\1b[36mcyan\1b[m\n\1b[37mwhite")
+    (data (i32.const 0xf400) "Colors!\n\1b[40mblack?\n\1b[41mred\n\1b[42mgreen\n\1b[43myellow\1b[m\n\1b[44mblue")
+    (data (i32.const 0xf500) "\1b[m\n\1b[45mmagenta\1b[m\n\1b[46mcyan\1b[m\n\1b[47mwhite")
     (data (i32.const 1010) "Hello world from WASM!");;22
     (data (i32.const 1040) "./images/sleepyhead.png");;23
     (data (i32.const 1080) "./images/pointer.png");;20
@@ -167,28 +172,12 @@
 
   ;; Init function is called once on start.
   (func $init
-    (call $log (call $pushFromMemory (i32.const 1010) (i32.const 22)))
-    (set_global $sleepyhead    (call $createImg (i32.const 0) (i32.const 0)))
-    (set_global $pointer       (call $createImg (i32.const 0) (i32.const 0)))
-    (set_global $font          (call $createImg (i32.const 0) (i32.const 0)))
-    (set_global $readImage     (call $getApiFunctionIndex (call $pushFromMemory (i32.const 1190) (i32.const 9))))
-    (if (get_global $readImage)(then
-      (set_global $sleepyheadReq (call $callApiFunction (get_global $readImage) (call $pushFromMemory (i32.const 1040) (i32.const 23)) (i32.const 1)))
-      (set_global $pointerReq    (call $callApiFunction (get_global $readImage) (call $pushFromMemory (i32.const 1080) (i32.const 20)) (i32.const 1)))
-      (set_global $fontReq       (call $callApiFunction (get_global $readImage) (call $pushFromMemory (i32.const 1120) (i32.const 17)) (i32.const 1)))
-    ))
-    (set_global $codeartistic  (call $createPart (i32.const 25)))
-    (call $copyMem (i32.const 1160) (call $getPartOffset (get_global $codeartistic)) (call $getPartLength (get_global $codeartistic)))
-    (set_global $display (call $createImg (i32.const 320) (i32.const 200)))
-    (call $setDisplayMode (i32.const 1) (call $getImgWidth (get_global $display)) (call $getImgHeight (get_global $display)) (call $getImgWidth (get_global $display)) (call $getImgHeight (get_global $display)))
-    (call $focusInput (i32.const 3))
-    (call $setStepInterval (f64.div (f64.const 1000) (f64.const 60)))
-
-    (set_global $bgColor (call $rgb (i32.const 0) (i32.const 0) (i32.const 0)))
-    (set_global $ballColor (call $rgb (i32.const 255) (i32.const 255) (i32.const 255)))
-    (set_global $leftColor (call $rgb (i32.const 0) (i32.const 0) (i32.const 255)))
-    (set_global $rightColor (call $rgb (i32.const 255) (i32.const 0) (i32.const 0)))
-    (set_global $inputText (call $createPart (i32.const 1)))
+    (call $setDisplayMode (i32.const 0) (i32.const 40) (i32.const 10))
+    (call $printStr (call $createString (i32.const 0xf100)))
+    (call $printStr (call $createString (i32.const 0xf200)))
+    (call $printStr (call $createString (i32.const 0xf300)))
+    (call $printStr (call $createString (i32.const 0xf400)))
+    (call $printStr (call $createString (i32.const 0xf500)))
   )
   (export "init" (func $init))
 
@@ -276,7 +265,7 @@
       ))
     ))
   )
-  (export "step" (func $step))
+  ;; (export "step" (func $step))
 
   ;; Display function is called whenever the display needs to be redrawn.
   (func $display (param $t f64)
@@ -313,7 +302,7 @@
     (call $copyImg (get_global $pointer) (i32.const 0) (i32.const 0) (get_global $display) (call $getMouseX) (call $getMouseY) (call $getImgWidth (get_global $pointer)) (call $getImgHeight (get_global $pointer)))
     (call $displayMemory (i32.add (call $getPartOffset (get_global $display)) (i32.const 8)) (i32.sub (call $getPartLength (get_global $display)) (i32.const 8)) (i32.const 0))
   )
-  (export "display" (func $display))
+  ;; (export "display" (func $display))
 
   ;; Break function is called whenever Esc is pressed.
   (func $break

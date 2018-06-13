@@ -139,11 +139,52 @@ export default class WebSys implements Sys {
               this._clearTextRect(0, this._displayCursorRow, this._displayWidth, 1)
           }
           this._displayTextEscape = ""
+        } else if (match = this._displayTextEscape.match(/e\[([0-9]*)m/)) {
+          let n = Number.parseInt(match[1]) || 0
+          switch (n) {
+            case 0:
+              this._displayTextStyle = ""
+              break
+            case 1:
+              this._displayTextStyle += "font-weight:bold;"
+              break
+            case 3:
+              this._displayTextStyle += "font-style:italic;"
+              break
+            case 4:
+              this._displayTextStyle += "text-decoration:underline;"
+              break
+            case 9:
+              this._displayTextStyle += "text-decoration:line-through;"
+              break
+          }
+          if (n >= 30 && n < 40) {
+            this._displayTextStyle += "color:" + this._displayTextColors[n - 30] + ";"
+          }
+          if (n >= 40 && n < 50) {
+            this._displayTextStyle += "background-color:" + this._displayTextColors[n - 40] + ";"
+          }
+          this._displayTextEscape = ""
+        } else if (match = this._displayTextEscape.match(/e\[s/)) {
+          this._displayCursorHistory.push({ col: this._displayCursorCol, row: this._displayCursorRow })
+          this._displayTextEscape = ""
+        } else if (match = this._displayTextEscape.match(/e\[u/)) {
+          let pos = this._displayCursorHistory.pop()
+          if (pos) {
+            this._displayCursorCol = pos.col
+            this._displayCursorRow = pos.row
+          }
+          this._displayTextEscape = ""
         }
       } else {
         let selector = `div:nth-child(${this._displayCursorRow + 1})\nspan:nth-child(${this._displayCursorCol + 1})`
         let cell = <HTMLElement>this._displayTextGrid.querySelector(selector)
         cell.classList.remove("current")
+        if (this._displayTextStyle) {
+          cell.setAttribute("style", this._displayTextStyle)
+        } else {
+          cell.removeAttribute("style")
+        }
         if ((char.codePointAt(0) || 0) >= 32) {
           cell.textContent = char
         }
@@ -359,6 +400,9 @@ export default class WebSys implements Sys {
   private _displayTextSize: number = 10
   private _displayTextSizeDelta: number = 0
   private _displayTextEscape: string = ""
+  private _displayTextStyle: string = ""
+  private _displayTextColors: string[] = ["#000", "#f00", "#0f0", "#ff0", "#00f", "#f0f", "#0ff", "#fff"]
+  private _displayCursorHistory: any[] = []
   private _displayCanvas?: HTMLCanvasElement
   private _displayContext?: CanvasRenderingContext2D
   private _displayScale: number = 8
@@ -411,6 +455,12 @@ export default class WebSys implements Sys {
       parent.removeChild(row)
       let cols = row.querySelectorAll("span")
       for (let col of cols) {
+        col.classList.remove("current")
+        if (this._displayTextStyle) {
+          col.setAttribute("style", this._displayTextStyle)
+        } else {
+          col.removeAttribute("style")
+        }
         col.textContent = " "
       }
       parent.appendChild(row)
@@ -423,7 +473,13 @@ export default class WebSys implements Sys {
     for (let down = 0; down < h; down++) {
       for (let right = 0; right < w; right++) {
         let selector = `div:nth-child(${row + down + 1})\nspan:nth-child(${col + right + 1})`
-        let cell = this._displayTextGrid.querySelector(selector)
+        let cell = <HTMLElement>this._displayTextGrid.querySelector(selector)
+        cell.classList.remove("current")
+        if (this._displayTextStyle) {
+          cell.setAttribute("style", this._displayTextStyle)
+        } else {
+          cell.removeAttribute("style")
+        }
         if (cell) cell.textContent = " "
       }
     }
