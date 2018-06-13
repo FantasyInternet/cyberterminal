@@ -216,7 +216,7 @@ ___
 
 *Inherited from [WebSys](_script__lib_websys_.websys.md).[focusInput](_script__lib_websys_.websys.md#focusinput)*
 
-*Defined in [script/_lib/WebSys.ts:295](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L295)*
+*Defined in [script/_lib/WebSys.ts:297](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L297)*
 
 **Parameters:**
 
@@ -322,7 +322,7 @@ ___
 
 *Inherited from [WebSys](_script__lib_websys_.websys.md).[replaceTextInput](_script__lib_websys_.websys.md#replacetextinput)*
 
-*Defined in [script/_lib/WebSys.ts:322](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L322)*
+*Defined in [script/_lib/WebSys.ts:324](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L324)*
 
 **Parameters:**
 
@@ -366,7 +366,7 @@ ___
 
 *Inherited from [WebSys](_script__lib_websys_.websys.md).[setTextInput](_script__lib_websys_.websys.md#settextinput)*
 
-*Defined in [script/_lib/WebSys.ts:313](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L313)*
+*Defined in [script/_lib/WebSys.ts:315](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L315)*
 
 **Parameters:**
 
@@ -409,7 +409,7 @@ ___
 
 *Inherited from [WebSys](_script__lib_websys_.websys.md).[startTone](_script__lib_websys_.websys.md#starttone)*
 
-*Defined in [script/_lib/WebSys.ts:288](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L288)*
+*Defined in [script/_lib/WebSys.ts:290](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L290)*
 
 **Returns:** `void`
 
@@ -422,7 +422,7 @@ ___
 
 *Inherited from [WebSys](_script__lib_websys_.websys.md).[stopTone](_script__lib_websys_.websys.md#stoptone)*
 
-*Defined in [script/_lib/WebSys.ts:291](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L291)*
+*Defined in [script/_lib/WebSys.ts:293](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L293)*
 
 **Returns:** `void`
 

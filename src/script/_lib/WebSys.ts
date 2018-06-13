@@ -266,7 +266,9 @@ export default class WebSys implements Sys {
 
   async list(path: string) {
     if (path.substr(-1) === "/") path = path.substr(0, path.length - 1)
-    await this.read(path + "/", { type: "text" })
+    try {
+      await this.read(path + "/", { type: "text" })
+    } catch (error) { }
     let dir = this._dirCache(path)
     let list = ""
     for (let name in dir) {

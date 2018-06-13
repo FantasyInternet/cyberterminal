@@ -194,7 +194,7 @@ ___
 
 *Implementation of [Sys](../interfaces/_script__lib_sys_.sys.md).[focusInput](../interfaces/_script__lib_sys_.sys.md#focusinput)*
 
-*Defined in [script/_lib/WebSys.ts:295](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L295)*
+*Defined in [script/_lib/WebSys.ts:297](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L297)*
 
 **Parameters:**
 
@@ -232,7 +232,7 @@ ___
 
 *Implementation of [Sys](../interfaces/_script__lib_sys_.sys.md).[openWeb](../interfaces/_script__lib_sys_.sys.md#openweb)*
 
-*Defined in [script/_lib/WebSys.ts:340](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L340)*
+*Defined in [script/_lib/WebSys.ts:342](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L342)*
 
 **Parameters:**
 
@@ -290,7 +290,7 @@ ___
 
 *Implementation of [Sys](../interfaces/_script__lib_sys_.sys.md).[replaceTextInput](../interfaces/_script__lib_sys_.sys.md#replacetextinput)*
 
-*Defined in [script/_lib/WebSys.ts:322](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L322)*
+*Defined in [script/_lib/WebSys.ts:324](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L324)*
 
 **Parameters:**
 
@@ -330,7 +330,7 @@ ___
 
 ▸ **setTextInput**(text: *`string`*, pos: *`number`*, len: *`number`*, type?: * `undefined` &#124; `string`*): `void`
 
-*Defined in [script/_lib/WebSys.ts:313](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L313)*
+*Defined in [script/_lib/WebSys.ts:315](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L315)*
 
 **Parameters:**
 
@@ -369,7 +369,7 @@ ___
 
 ▸ **startTone**(): `void`
 
-*Defined in [script/_lib/WebSys.ts:288](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L288)*
+*Defined in [script/_lib/WebSys.ts:290](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L290)*
 
 **Returns:** `void`
 
@@ -380,7 +380,7 @@ ___
 
 ▸ **stopTone**(): `void`
 
-*Defined in [script/_lib/WebSys.ts:291](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L291)*
+*Defined in [script/_lib/WebSys.ts:293](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L293)*
 
 **Returns:** `void`
 
