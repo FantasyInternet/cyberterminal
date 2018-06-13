@@ -82,6 +82,10 @@ export default class Machine {
     //@ts-ignore
     ar.set(new Uint8Array(this._popArrayBuffer()), offset)
   }
+  getBufferSize(indexFromEnd: number = 0) {
+    indexFromEnd++
+    return this._bufferStackLengths[this._bufferStackLengths.length - indexFromEnd] || 0
+  }
   getApiFunctionIndex() {
     let name = this._popString()
     return Math.max(0, this._romApiNames.indexOf(name))

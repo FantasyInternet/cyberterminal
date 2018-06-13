@@ -3,6 +3,8 @@
   (import "env" "pushFromMemory" (func $pushFromMemory (param $offset i32) (param $length i32)))
   ;; Pop one buffer off the buffer stack and store in memory.
   (import "env" "popToMemory" (func $popToMemory (param $offset i32)))
+  (import "env" "getBufferSize" (func $getBufferSize (result i32)))
+
   ;; Pop API function name off the buffer stack and return index or 0 if not found.
   (import "env" "getApiFunctionIndex" (func $getApiFunctionIndex (result i32)))
   ;; Call API function by index. Use any number of parameters and return values.
@@ -173,6 +175,9 @@
   ;; Init function is called once on start.
   (func $init
     (call $setDisplayMode (i32.const 0) (i32.const 40) (i32.const 10))
+    (call $pushFromMemory (i32.const 1010) (i32.const 22))
+    (call $log1Number (call $getBufferSize))
+    (call $log)
     (call $printStr (call $createString (i32.const 0xf100)))
     (call $printStr (call $createString (i32.const 0xf200)))
     (call $printStr (call $createString (i32.const 0xf300)))
