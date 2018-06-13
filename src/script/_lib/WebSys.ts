@@ -296,6 +296,34 @@ export default class WebSys implements Sys {
     return res.ok
   }
 
+  async post(filename: string, data: string | ArrayBuffer) {
+    let type = ""
+    if (data instanceof ArrayBuffer) {
+      //@ts-ignore
+      let dec = new TextDecoder("utf-8")
+      data = dec.decode(data)
+    }
+    try {
+      //@ts-ignore
+      JSON.parse(data)
+      type = "application/json"
+    } catch (error) {
+      type = "application/x-www-form-urlencoded"
+    }
+
+    //@ts-ignore
+    let res = await fetch(filename, {
+      method: "POST",
+      headers: {
+        "Content-type": type
+      },
+      body: new Blob([data])
+    })
+    if (!res.ok) throw "post error!"
+    this._dirCache(filename, true)
+    return res.arrayBuffer()
+  }
+
   async delete(filename: string) {
     let res = await fetch(filename, {
       method: "DELETE"

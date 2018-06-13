@@ -51,6 +51,7 @@
   (import "env" "list" (func $list (param $tableIndex i32) (result i32)))
 
   (import "env" "head" (func $head (param $tableIndex i32) (result i32)))
+  (import "env" "post" (func $post (param $tableIndex i32) (result i32)))
 
   ;; Prioritize  given type of input. 1=text, 2=mouse, 3=game.
   (import "env" "focusInput" (func $focusInput (param $input i32)))
@@ -144,6 +145,7 @@
     (data (i32.const 0xf300) "\1b[m\n\1b[35mmagenta\1b[m\n\1b[36mcyan\1b[m\n\1b[37mwhite")
     (data (i32.const 0xf400) "Colors!\n\1b[40mblack?\n\1b[41mred\n\1b[42mgreen\n\1b[43myellow\1b[m\n\1b[44mblue")
     (data (i32.const 0xf500) "\1b[m\n\1b[45mmagenta\1b[m\n\1b[46mcyan\1b[m\n\1b[47mwhite")
+    (data (i32.const 0xf600) "foo=bar&life=42");;15
     (data (i32.const 1010) "Hello world from WASM!");;22
     (data (i32.const 1040) "./images/sleepyhead.png");;23
     (data (i32.const 1080) "./images/pointer.png");;20
@@ -187,6 +189,11 @@
     (call $printStr (call $createString (i32.const 0xf400)))
     (call $printStr (call $createString (i32.const 0xf500)))
     (drop (call $head (call $pushFromMemory (i32.const 1040) (i32.const 1)) (i32.const 2)))
+    (drop (call $post
+      (call $pushFromMemory (i32.const 1040) (i32.const 1))
+      (call $pushFromMemory (i32.const 0xf600) (i32.const 15))
+      (i32.const 2)
+    ))
   )
   (export "init" (func $init))
 
