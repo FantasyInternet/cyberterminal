@@ -513,13 +513,15 @@ export default class WebSys implements Sys {
       for (let right = 0; right < w; right++) {
         let selector = `div:nth-child(${row + down + 1})\nspan:nth-child(${col + right + 1})`
         let cell = <HTMLElement>this._displayTextGrid.querySelector(selector)
-        cell.classList.remove("current")
-        if (this._displayTextStyle) {
-          cell.setAttribute("style", this._displayTextStyle)
-        } else {
-          cell.removeAttribute("style")
+        if (cell) {
+          cell.classList.remove("current")
+          if (this._displayTextStyle) {
+            cell.setAttribute("style", this._displayTextStyle)
+          } else {
+            cell.removeAttribute("style")
+          }
+          cell.textContent = " "
         }
-        if (cell) cell.textContent = " "
       }
     }
   }
