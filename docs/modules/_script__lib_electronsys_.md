@@ -11,6 +11,8 @@
 ### Variables
 
 * [fs](_script__lib_electronsys_.md#fs)
+* [path](_script__lib_electronsys_.md#path)
+* [process](_script__lib_electronsys_.md#process)
 * [shell](_script__lib_electronsys_.md#shell)
 * [win](_script__lib_electronsys_.md#win)
 
@@ -23,6 +25,24 @@
 ### `<Let>` fs
 
 **● fs**: *`any`*
+
+*Defined in [script/_lib/ElectronSys.ts:3](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/ElectronSys.ts#L3)*
+
+___
+<a id="path"></a>
+
+### `<Let>` path
+
+**● path**: *`any`*
+
+*Defined in [script/_lib/ElectronSys.ts:3](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/ElectronSys.ts#L3)*
+
+___
+<a id="process"></a>
+
+### `<Let>` process
+
+**● process**: *`any`*
 
 *Defined in [script/_lib/ElectronSys.ts:3](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/ElectronSys.ts#L3)*
 

@@ -17,7 +17,7 @@ export default class CyberTerminal {
     setTimeout(() => {
       this.sys.startTone(0, 512)
       setTimeout(() => {
-        this.connectTo(location.toString())
+        this.connectTo(this.sys.startupUrl)
       }, 256)
     }, 1024)
     document.addEventListener("visibilitychange", () => {

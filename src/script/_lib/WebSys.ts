@@ -20,16 +20,22 @@ export default class WebSys implements Sys {
   gameInput: GameInput
   inputPriority: string[] = ["text", "mouse", "game"]
   breaker: Breaker
+  startupUrl: string
 
   constructor() {
     let scripts = document.querySelectorAll("script")
     scriptSrc = (<HTMLScriptElement>scripts[scripts.length - 1]).src
+    if (!this._container) {
+      document.write('<fantasy-terminal></fantasy-terminal>')
+      this._container = <HTMLElement>document.querySelector("fantasy-terminal")
+    }
     this._initContainer()
     this.chipSound = new ChipSound()
     this.textInput = new TextInput(this, <HTMLInputElement>this._container.querySelector(".input .text"))
     this.mouseInput = new MouseInput(this)
     this.gameInput = new GameInput(this)
     this.breaker = new Breaker(this)
+    this.startupUrl = location.toString()
   }
 
   setTitle(title: string) {
@@ -139,30 +145,33 @@ export default class WebSys implements Sys {
               this._clearTextRect(0, this._displayCursorRow, this._displayWidth, 1)
           }
           this._displayTextEscape = ""
-        } else if (match = this._displayTextEscape.match(/e\[([0-9]*)m/)) {
-          let n = Number.parseInt(match[1]) || 0
-          switch (n) {
-            case 0:
-              this._displayTextStyle = ""
-              break
-            case 1:
-              this._displayTextStyle += "font-weight:bold;"
-              break
-            case 3:
-              this._displayTextStyle += "font-style:italic;"
-              break
-            case 4:
-              this._displayTextStyle += "text-decoration:underline;"
-              break
-            case 9:
-              this._displayTextStyle += "text-decoration:line-through;"
-              break
-          }
-          if (n >= 30 && n < 40) {
-            this._displayTextStyle += "color:" + this._displayTextColors[n - 30] + ";"
-          }
-          if (n >= 40 && n < 50) {
-            this._displayTextStyle += "background-color:" + this._displayTextColors[n - 40] + ";"
+        } else if (match = this._displayTextEscape.match(/e\[([0-9;]*)m/)) {
+          let nums = match[1].split(";")
+          for (let num of nums) {
+            let n = Number.parseInt(num) || 0
+            switch (n) {
+              case 0:
+                this._displayTextStyle = ""
+                break
+              case 1:
+                this._displayTextStyle += "font-weight:bold;"
+                break
+              case 3:
+                this._displayTextStyle += "font-style:italic;"
+                break
+              case 4:
+                this._displayTextStyle += "text-decoration:underline;"
+                break
+              case 9:
+                this._displayTextStyle += "text-decoration:line-through;"
+                break
+            }
+            if (n >= 30 && n < 40) {
+              this._displayTextStyle += "color:" + this._displayTextColors[n - 30] + ";"
+            }
+            if (n >= 40 && n < 50) {
+              this._displayTextStyle += "background-color:" + this._displayTextColors[n - 40] + ";"
+            }
           }
           this._displayTextEscape = ""
         } else if (match = this._displayTextEscape.match(/e\[s/)) {
@@ -483,6 +492,7 @@ export default class WebSys implements Sys {
     this._displayContainer.innerHTML = html
     this._displayTextGrid = <HTMLPreElement>this._displayContainer.querySelector("pre")
     this._displayCursorCol = this._displayCursorRow = 0
+    this._displayTextStyle = ""
     this.mouseInput.element = this._displayTextGrid
     this._resize()
   }

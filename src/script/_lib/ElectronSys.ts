@@ -1,12 +1,16 @@
 import WebSys from "./WebSys"
 //@ts-ignore
-let fs: any, shell: any, win: any; if (typeof window !== "undefined") {
+let fs: any, path: any, shell: any, win: any, process: any; if (typeof window !== "undefined") {
   //@ts-ignore
   fs = window.require("fs")
+  //@ts-ignore
+  path = window.require("path")
   //@ts-ignore
   shell = window.require('electron').shell
   //@ts-ignore
   win = window.require("electron").remote.getCurrentWindow()
+  //@ts-ignore
+  process = window.require("electron").remote.process
 }
 
 /**
@@ -18,6 +22,17 @@ export default class ElectronSys extends WebSys {
   constructor() {
     super()
     this._initHotkeys()
+    let url = new URL(".", location.toString())
+    this.startupUrl = url.toString()
+    if (process.argv.length > 1) {
+      this.startupUrl = process.argv.pop()
+      try {
+        let file = path.resolve(process.cwd(), this.startupUrl).replace(/\\/g, '/')
+        if (file.substr(-1) !== "/" && fs.statSync(file).isDirectory()) file += "/"
+        if (file[0] !== "/") file = "/" + file
+        this.startupUrl = encodeURI('file://' + file)
+      } catch (error) { }
+    }
   }
 
   setTitle(title: string) {

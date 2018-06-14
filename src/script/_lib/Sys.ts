@@ -20,6 +20,8 @@ export default interface Sys {
   inputPriority: string[]
   /** Stop button to break or disconnect current connection. */
   breaker: Breaker
+  /** Start URL */
+  startupUrl: string
 
   /**
    * Set the title of the window.
