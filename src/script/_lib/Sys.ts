@@ -17,7 +17,7 @@ export default interface Sys {
   /** Game input state. */
   gameInput: GameInput
   /** Inputs in prioritized order, highest to lowest. */
-  inputPriority: string[]
+  inputPriority: ("text" | "mouse" | "game")[]
   /** Stop button to break or disconnect current connection. */
   breaker: Breaker
   /** Start URL */

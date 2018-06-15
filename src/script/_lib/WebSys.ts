@@ -18,7 +18,7 @@ export default class WebSys implements Sys {
   textInput: TextInput
   mouseInput: MouseInput
   gameInput: GameInput
-  inputPriority: string[] = ["text", "mouse", "game"]
+  inputPriority: ("text" | "mouse" | "game")[] = ["text", "mouse", "game"]
   breaker: Breaker
   startupUrl: string
 

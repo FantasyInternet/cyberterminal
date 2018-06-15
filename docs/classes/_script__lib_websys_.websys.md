@@ -27,7 +27,7 @@ Sys implementation for web browsers. See [Sys](../interfaces/__lib_sys_.sys.md) 
 * [gameInput](_script__lib_websys_.websys.md#gameinput)
 * [inputPriority](_script__lib_websys_.websys.md#inputpriority)
 * [mouseInput](_script__lib_websys_.websys.md#mouseinput)
-* [startUrl](_script__lib_websys_.websys.md#starturl)
+* [startupUrl](_script__lib_websys_.websys.md#startupurl)
 * [textInput](_script__lib_websys_.websys.md#textinput)
 
 ### Methods
@@ -106,7 +106,7 @@ ___
 
 ###  inputPriority
 
-**● inputPriority**: *`string`[]* =  ["text", "mouse", "game"]
+**● inputPriority**: *( "text" &#124; "mouse" &#124; "game")[]* =  ["text", "mouse", "game"]
 
 *Implementation of [Sys](../interfaces/_script__lib_sys_.sys.md).[inputPriority](../interfaces/_script__lib_sys_.sys.md#inputpriority)*
 
@@ -124,13 +124,13 @@ ___
 *Defined in [script/_lib/WebSys.ts:19](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L19)*
 
 ___
-<a id="starturl"></a>
+<a id="startupurl"></a>
 
-###  startUrl
+###  startupUrl
 
-**● startUrl**: *`string`*
+**● startupUrl**: *`string`*
 
-*Implementation of [Sys](../interfaces/_script__lib_sys_.sys.md).[startUrl](../interfaces/_script__lib_sys_.sys.md#starturl)*
+*Implementation of [Sys](../interfaces/_script__lib_sys_.sys.md).[startupUrl](../interfaces/_script__lib_sys_.sys.md#startupurl)*
 
 *Defined in [script/_lib/WebSys.ts:23](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L23)*
 
@@ -204,7 +204,7 @@ ___
 
 ###  focusInput
 
-▸ **focusInput**(input: * "text" &#124; "mouse" &#124; "game"*): `string`[]
+▸ **focusInput**(input: * "text" &#124; "mouse" &#124; "game"*): ( "text" &#124; "mouse" &#124; "game")[]
 
 *Implementation of [Sys](../interfaces/_script__lib_sys_.sys.md).[focusInput](../interfaces/_script__lib_sys_.sys.md#focusinput)*
 
@@ -216,7 +216,7 @@ ___
 | ------ | ------ |
 | input |  "text" &#124; "mouse" &#124; "game"|
 
-**Returns:** `string`[]
+**Returns:** ( "text" &#124; "mouse" &#124; "game")[]
 
 ___
 <a id="head"></a>

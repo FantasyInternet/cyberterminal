@@ -22,7 +22,7 @@ Unified interface to system I/O
 * [gameInput](_script__lib_sys_.sys.md#gameinput)
 * [inputPriority](_script__lib_sys_.sys.md#inputpriority)
 * [mouseInput](_script__lib_sys_.sys.md#mouseinput)
-* [startUrl](_script__lib_sys_.sys.md#starturl)
+* [startupUrl](_script__lib_sys_.sys.md#startupurl)
 * [textInput](_script__lib_sys_.sys.md#textinput)
 
 ### Methods
@@ -84,7 +84,7 @@ ___
 
 ###  inputPriority
 
-**● inputPriority**: *`string`[]*
+**● inputPriority**: *( "text" &#124; "mouse" &#124; "game")[]*
 
 *Defined in [script/_lib/Sys.ts:20](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L20)*
 
@@ -102,11 +102,11 @@ ___
 Mouse input state.
 
 ___
-<a id="starturl"></a>
+<a id="startupurl"></a>
 
-###  startUrl
+###  startupUrl
 
-**● startUrl**: *`string`*
+**● startupUrl**: *`string`*
 
 *Defined in [script/_lib/Sys.ts:24](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L24)*
 
