@@ -40,6 +40,14 @@ Alt+T
 
 Switch to text input
 
+Fantasy internet sites to check out
+-----------------------------------
+
+Nothing substantial yet, but the following URLs are available. Copy these links into the terminal.
+
+*   [https://fantasyinternet.github.io/try](https://fantasyinternet.github.io/try)
+*   [http://cybermicro.online/pong/](http://cybermicro.online/pong/)
+
 ## Index
 
 ### External modules

@@ -17,3 +17,10 @@ F11       | Full screen
 F12       | Developer console
 Alt+G     | Switch to game input
 Alt+T     | Switch to text input
+
+Fantasy internet sites to check out
+-----------------------------------
+Nothing substantial yet, but the following URLs are available. Copy these links into the terminal.
+
+ - https://fantasyinternet.github.io/try
+ - http://cybermicro.online/pong/
