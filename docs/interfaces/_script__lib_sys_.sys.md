@@ -27,6 +27,7 @@ Unified interface to system I/O
 
 ### Methods
 
+* [addEventListener](_script__lib_sys_.sys.md#addeventlistener)
 * [createMachine](_script__lib_sys_.sys.md#createmachine)
 * [delete](_script__lib_sys_.sys.md#delete)
 * [drawBitmap](_script__lib_sys_.sys.md#drawbitmap)
@@ -127,6 +128,24 @@ ___
 
 ## Methods
 
+<a id="addeventlistener"></a>
+
+###  addEventListener
+
+▸ **addEventListener**(event: *`string`*, listener: *`Function`*): `void`
+
+*Defined in [script/_lib/Sys.ts:126](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L126)*
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| event | `string` |
+| listener | `Function` |
+
+**Returns:** `void`
+
+___
 <a id="createmachine"></a>
 
 ###  createMachine

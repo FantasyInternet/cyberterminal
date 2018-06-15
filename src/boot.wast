@@ -120,7 +120,8 @@
   (import "Math" "random" (func $random (result f32)))
 
 
-
+  (import "env" "getNativeDisplayWidth" (func $getNativeDisplayWidth (result i32)))
+  (import "env" "getNativeDisplayHeight" (func $getNativeDisplayHeight (result i32)))
 
 
 ;;--------;;--------;;--------;;--------;;--------;;--------;;--------;;
@@ -179,21 +180,8 @@
 
   ;; Init function is called once on start.
   (func $init
-    (call $setDisplayMode (i32.const 0) (i32.const 40) (i32.const 10))
-    (call $pushFromMemory (i32.const 1010) (i32.const 22))
-    (call $log1Number (call $getBufferSize))
-    (call $log)
-    (call $printStr (call $createString (i32.const 0xf100)))
-    (call $printStr (call $createString (i32.const 0xf200)))
-    (call $printStr (call $createString (i32.const 0xf300)))
-    (call $printStr (call $createString (i32.const 0xf400)))
-    (call $printStr (call $createString (i32.const 0xf500)))
-    (drop (call $head (call $pushFromMemory (i32.const 1040) (i32.const 1)) (i32.const 2)))
-    (drop (call $post
-      (call $pushFromMemory (i32.const 1040) (i32.const 1))
-      (call $pushFromMemory (i32.const 0xf600) (i32.const 15))
-      (i32.const 2)
-    ))
+    (call $log2Numbers  (call $getNativeDisplayWidth) (call $getNativeDisplayHeight))
+    (call $setDisplayMode (i32.const 1) (call $getNativeDisplayWidth) (call $getNativeDisplayHeight))
   )
   (export "init" (func $init))
 
@@ -219,73 +207,11 @@
 
   ;; Step function is called once every interval.
   (func $step (param $t f64)
-    (set_global $beep (i32.sub (get_global $beep) (i32.const 1)))
-    (if (i32.eq (get_global $beep) (i32.const 0)) (then
-      (call $stopTone (i32.const 0) )
-    ))
+    (call $log2Numbers  (call $getNativeDisplayWidth) (call $getNativeDisplayHeight))
     (set_global $ballX (i32.add (get_global $ballX) (get_global $ballVX)))
     (set_global $ballY (i32.add (get_global $ballY) (get_global $ballVY)))
-    (set_global $left  (i32.add (get_global $left)  (get_global $leftV)))
-    (set_global $right (i32.add (get_global $right) (get_global $rightV)))
-    (if (i32.le_s (get_global $ballX) (i32.const 8)) (then
-      (if (i32.and (i32.ge_s (get_global $ballY) (i32.sub (get_global $left) (i32.const 20))) (i32.le_s (get_global $ballY) (i32.add (get_global $left) (i32.const 20)))) (then
-        (set_global $ballVX (i32.mul (get_global $ballVX) (i32.const -1)))
-        (set_global $ballVY (i32.add (get_global $ballVY) (get_global $leftV)))
-        (call $startTone (i32.const 0) (i32.const 440) (f32.const 1) (i32.const 0))
-        (set_global $beep (i32.const 4))
-      )(else
-        (set_global $ballX (i32.const 310))
-        (set_global $ballY (get_global $right))
-        (set_global $ballVY (i32.div_s (get_global $ballVY) (i32.const 2)))
-        (call $startTone (i32.const 0) (i32.const 110) (f32.const 1) (i32.const 0))
-        (set_global $beep (i32.const 30))
-      ))
-    ))
-    (if (i32.ge_s (get_global $ballX) (i32.const 312)) (then
-      (if (i32.and (i32.ge_s (get_global $ballY) (i32.sub (get_global $right) (i32.const 20))) (i32.le_s (get_global $ballY) (i32.add (get_global $right) (i32.const 20)))) (then
-        (set_global $ballVX (i32.mul (get_global $ballVX) (i32.const -1)))
-        (set_global $ballVY (i32.add (get_global $ballVY) (get_global $rightV)))
-        (call $startTone (i32.const 0) (i32.const 440) (f32.const 1) (i32.const 0))
-        (set_global $beep (i32.const 4))
-      )(else
-        (set_global $ballX (i32.const 10))
-        (set_global $ballY (get_global $left))
-        (set_global $ballVY (i32.div_s (get_global $ballVY) (i32.const 2)))
-        (call $startTone (i32.const 0) (i32.const 110) (f32.const 1) (i32.const 0))
-        (set_global $beep (i32.const 30))
-      ))
-    ))
-    (if (i32.and (i32.le_s (get_global $ballY) (i32.const 0)) (i32.lt_s (get_global $ballVY) (i32.const 0))) (then
-      (set_global $ballVY (i32.mul (get_global $ballVY) (i32.const -1)))
-      (call $startTone (i32.const 0) (i32.const 220) (f32.const 1) (i32.const 0))
-      (set_global $beep (i32.const 4))
-    ))
-    (if (i32.and (i32.ge_s (get_global $ballY) (call $getImgHeight (get_global $display))) (i32.gt_s (get_global $ballVY) (i32.const 0))) (then
-      (set_global $ballVY (i32.mul (get_global $ballVY) (i32.const -1)))
-      (call $startTone (i32.const 0) (i32.const 220) (f32.const 1) (i32.const 0))
-      (set_global $beep (i32.const 4))
-    ))
-    ;; (if (i32.lt_s (get_global $ballVX) (i32.const 0)) (then
-    ;;   (set_global $rightV (i32.const 0))
-    ;;   (if (i32.lt_s (get_global $ballY) (get_global $left)) (then
-    ;;     (set_global $leftV (i32.const -1))
-    ;;   )(else
-    ;;     (set_global $leftV (i32.const 1))
-    ;;   ))
-    ;; )(else
-    (set_global $leftV (i32.trunc_s/f32 (call $getGameAxisY)))
-    (if (call $getGameButtonY) (set_global $left (get_global $right)))
-    (if (call $getGameButtonB) (call $connectTo (call $pushFromMemory (call $getPartOffset (get_global $codeartistic)) (call $getPartLength (get_global $codeartistic)))))
-    (set_global $rightV (i32.const 0))
-    (if (i32.ge_s (get_global $ballX) (i32.const 160)) (then
-      (if (i32.lt_s (get_global $ballY) (get_global $right)) (then
-        (set_global $rightV (i32.const -1))
-      )(else
-        (set_global $rightV (i32.const 1))
-      ))
-    ))
   )
-  ;; (export "step" (func $step))
+  (export "step" (func $step))
 
   ;; Display function is called whenever the display needs to be redrawn.
   (func $display (param $t f64)

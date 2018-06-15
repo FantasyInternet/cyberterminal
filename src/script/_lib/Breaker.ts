@@ -1,7 +1,7 @@
 import Sys from "./Sys"
 
 /**
- * Class for taking care of game input
+ * Class for taking care of break input
  */
 export default class Breaker {
   state = {

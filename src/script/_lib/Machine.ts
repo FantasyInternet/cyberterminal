@@ -67,6 +67,12 @@ export default class Machine {
       }, [buffer])
     this._lastCommit = performance.now()
   }
+  getNativeDisplayWidth() {
+    return this._nativeDisplay.width
+  }
+  getNativeDisplayHeight() {
+    return this._nativeDisplay.height
+  }
   pushFromMemory(offset: number, length: number) {
     let process = this._processes[this._activePID]
     if (!process) throw "No active process!"
@@ -407,6 +413,9 @@ export default class Machine {
     axis: { x: 0, y: 0 },
     buttons: { a: false, b: false, x: false, y: false }
   }
+  private _nativeDisplay: any = {
+    width: 0, height: 0
+  }
 
   private _tick() {
     if (!this._active) return
@@ -519,6 +528,11 @@ export default class Machine {
         this._transferBuffer = e.data.buffer
         let cb
         while (cb = this._pendingCommits.pop()) cb(this._lastCommit)
+        break
+
+      case "resize":
+        this._nativeDisplay.width = e.data.state.width
+        this._nativeDisplay.height = e.data.state.height
         break
 
       case "response":

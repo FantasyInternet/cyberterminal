@@ -32,6 +32,7 @@ Sys implementation for web browsers. See [Sys](../interfaces/__lib_sys_.sys.md) 
 
 ### Methods
 
+* [addEventListener](_script__lib_websys_.websys.md#addeventlistener)
 * [createMachine](_script__lib_websys_.websys.md#createmachine)
 * [delete](_script__lib_websys_.websys.md#delete)
 * [drawBitmap](_script__lib_websys_.websys.md#drawbitmap)
@@ -149,6 +150,26 @@ ___
 
 ## Methods
 
+<a id="addeventlistener"></a>
+
+###  addEventListener
+
+▸ **addEventListener**(event: *`string`*, fn: *`Function`*): `void`
+
+*Implementation of [Sys](../interfaces/_script__lib_sys_.sys.md).[addEventListener](../interfaces/_script__lib_sys_.sys.md#addeventlistener)*
+
+*Defined in [script/_lib/WebSys.ts:435](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L435)*
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| event | `string` |
+| fn | `Function` |
+
+**Returns:** `void`
+
+___
 <a id="createmachine"></a>
 
 ###  createMachine

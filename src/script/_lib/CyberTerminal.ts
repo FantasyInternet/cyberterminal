@@ -12,6 +12,7 @@ export default class CyberTerminal {
     this.sys.mouseInput.addEventListener(this._onMouseInput.bind(this))
     this.sys.gameInput.addEventListener(this._onGameInput.bind(this))
     this.sys.breaker.addEventListener(this._onBreak.bind(this))
+    this.sys.addEventListener("resize", this._onResize.bind(this))
     this.sys.setDisplayMode("text", 80, 20)
     this.sys.print("CyberTerminal v" + pkg.version)
     setTimeout(() => {
@@ -43,6 +44,10 @@ export default class CyberTerminal {
       this.sys.print(".")
       this.sys.setTitle("" + msg.url)
       this.sys.setDisplayMode("none", 0, 0)
+      machine.send({
+        cmd: "resize",
+        state: this._resizeState
+      })
       machine.send(msg)
       this._connecting = setTimeout(() => {
         this._connecting = null
@@ -99,6 +104,7 @@ export default class CyberTerminal {
   /* _privates */
   private _connecting: any
   private _disconnecting: boolean = false
+  private _resizeState: any = {}
 
   private _onMessage(message: any, machineWorker: MachineWorker) {
     switch (message.cmd) {
@@ -195,6 +201,16 @@ export default class CyberTerminal {
       }, 128)
       this._disconnecting = true
     }
+  }
+
+  private _onResize(state: any) {
+    this._resizeState = state
+    let msg = {
+      cmd: "resize",
+      state: state
+    }
+    if (!this.machineWorkers.length) return
+    this.machineWorkers[this.machineWorkers.length - 1].send(msg)
   }
 
   private async _findBoot(url: string) {

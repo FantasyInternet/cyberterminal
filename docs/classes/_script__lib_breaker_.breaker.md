@@ -2,7 +2,7 @@
 
 # Class: Breaker
 
-Class for taking care of game input
+Class for taking care of break input
 
 ## Hierarchy
 

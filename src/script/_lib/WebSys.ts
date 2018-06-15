@@ -432,6 +432,16 @@ export default class WebSys implements Sys {
     location.assign(url)
   }
 
+  addEventListener(event: string, fn: Function) {
+    let listeners: Function[] = []
+    if (event === "resize") listeners = this._resizeListeners
+    let i = listeners.indexOf(fn)
+    if (i < 0) {
+      listeners.push(fn)
+      if (event === "resize") this._resize()
+    }
+  }
+
 
   /** _privates */
   private _container: HTMLElement = <HTMLElement>document.querySelector("fantasy-terminal")
@@ -454,6 +464,7 @@ export default class WebSys implements Sys {
   private _displayCanvas?: HTMLCanvasElement
   private _displayContext?: CanvasRenderingContext2D
   private _displayScale: number = 8
+  private _resizeListeners: Function[] = []
 
   private _initContainer() {
     let style = document.createElement("style")
@@ -548,6 +559,12 @@ export default class WebSys implements Sys {
         this._resizeCanvas(false)
         break
     }
+    this._resizeListeners.forEach((fn: Function) => {
+      fn({
+        width: this._container.offsetWidth * devicePixelRatio,
+        height: this._container.offsetHeight * devicePixelRatio
+      })
+    })
   }
 
   private _resizeTextGrid() {

@@ -122,4 +122,6 @@ export default interface Sys {
    * @param url URL to open
    */
   openWeb(url: string): void
+
+  addEventListener(event: string, listener: Function): void
 }
