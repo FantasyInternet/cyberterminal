@@ -64,7 +64,7 @@ Sys implementation for electron app. See [Sys](../interfaces/__lib_sys_.sys.md) 
 
 *Overrides [WebSys](_script__lib_websys_.websys.md).[constructor](_script__lib_websys_.websys.md#constructor)*
 
-*Defined in [script/_lib/ElectronSys.ts:20](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/ElectronSys.ts#L20)*
+*Defined in [script/_lib/ElectronSys.ts:22](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/ElectronSys.ts#L22)*
 
 **Returns:** [ElectronSys](_script__lib_electronsys_.electronsys.md)
 
@@ -213,7 +213,7 @@ ___
 
 *Overrides [WebSys](_script__lib_websys_.websys.md).[delete](_script__lib_websys_.websys.md#delete)*
 
-*Defined in [script/_lib/ElectronSys.ts:106](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/ElectronSys.ts#L106)*
+*Defined in [script/_lib/ElectronSys.ts:109](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/ElectronSys.ts#L109)*
 
 **Parameters:**
 
@@ -295,7 +295,7 @@ ___
 
 *Overrides [WebSys](_script__lib_websys_.websys.md).[list](_script__lib_websys_.websys.md#list)*
 
-*Defined in [script/_lib/ElectronSys.ts:121](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/ElectronSys.ts#L121)*
+*Defined in [script/_lib/ElectronSys.ts:124](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/ElectronSys.ts#L124)*
 
 **Parameters:**
 
@@ -316,7 +316,7 @@ ___
 
 *Overrides [WebSys](_script__lib_websys_.websys.md).[openWeb](_script__lib_websys_.websys.md#openweb)*
 
-*Defined in [script/_lib/ElectronSys.ts:148](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/ElectronSys.ts#L148)*
+*Defined in [script/_lib/ElectronSys.ts:151](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/ElectronSys.ts#L151)*
 
 **Parameters:**
 
@@ -378,7 +378,7 @@ ___
 
 *Overrides [WebSys](_script__lib_websys_.websys.md).[read](_script__lib_websys_.websys.md#read)*
 
-*Defined in [script/_lib/ElectronSys.ts:42](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/ElectronSys.ts#L42)*
+*Defined in [script/_lib/ElectronSys.ts:45](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/ElectronSys.ts#L45)*
 
 **Parameters:**
 
@@ -468,7 +468,7 @@ ___
 
 *Overrides [WebSys](_script__lib_websys_.websys.md).[setTitle](_script__lib_websys_.websys.md#settitle)*
 
-*Defined in [script/_lib/ElectronSys.ts:38](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/ElectronSys.ts#L38)*
+*Defined in [script/_lib/ElectronSys.ts:41](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/ElectronSys.ts#L41)*
 
 **Parameters:**
 
@@ -528,7 +528,7 @@ ___
 
 *Overrides [WebSys](_script__lib_websys_.websys.md).[write](_script__lib_websys_.websys.md#write)*
 
-*Defined in [script/_lib/ElectronSys.ts:82](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/ElectronSys.ts#L82)*
+*Defined in [script/_lib/ElectronSys.ts:85](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/ElectronSys.ts#L85)*
 
 **Parameters:**
 

@@ -10,6 +10,7 @@
 
 ### Variables
 
+* [app](_script__lib_electronsys_.md#app)
 * [fs](_script__lib_electronsys_.md#fs)
 * [path](_script__lib_electronsys_.md#path)
 * [process](_script__lib_electronsys_.md#process)
@@ -20,6 +21,15 @@
 
 ## Variables
 
+<a id="app"></a>
+
+### `<Let>` app
+
+**● app**: *`any`*
+
+*Defined in [script/_lib/ElectronSys.ts:3](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/ElectronSys.ts#L3)*
+
+___
 <a id="fs"></a>
 
 ### `<Let>` fs

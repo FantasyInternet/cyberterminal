@@ -128,6 +128,8 @@
 
   ;; Table for callback functions.
   (table $table 8 anyfunc)
+    (elem (i32.const 0) $noop)
+    (elem (i32.const 1) $updateBoot)
     (export "table" (table $table))
 
   ;; Linear memory.
@@ -135,6 +137,8 @@
     (export "memory" (memory $memory))
     (data (i32.const 0xf100) "\1b[K\1b[H\t\t\t\t_______________\n_______________________________/ CyberTerminal \\_______________________________\n\nConnect to URL: ")
     (data (i32.const 0xf200) "\n")
+    (data (i32.const 0xf300) "./updates/cyberterminal.wasm")
+    (data (i32.const 0xf400) "./boot.wasm")
 
   ;; Global variables
   (global $homeCode   (mut i32) (i32.const 0))
@@ -158,8 +162,17 @@
 
     (call $printStr (get_global $homeCode))
     (call $printStr (get_global $inputText))
+    (call $pushFromMemory (i32.const 0xf400) (i32.const 11))
+    (drop (call $read (call $pushFromMemory (i32.const 0xf300) (i32.const 28)) (i32.const 1)))
   )
   (export "init" (func $init))
+
+  (func $updateBoot (param $success i32) (param $len i32)
+    (if (get_local $success)(then
+      (drop (call $write (i32.const 0)))
+    ))
+  )
+  (func $noop)
 
   ;; Step function is called once every interval.
   (func $step (param $t f64)

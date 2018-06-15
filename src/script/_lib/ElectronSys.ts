@@ -1,6 +1,6 @@
 import WebSys from "./WebSys"
 //@ts-ignore
-let fs: any, path: any, shell: any, win: any, process: any; if (typeof window !== "undefined") {
+let fs: any, path: any, shell: any, win: any, process: any, app: any; if (typeof window !== "undefined") {
   //@ts-ignore
   fs = window.require("fs")
   //@ts-ignore
@@ -11,6 +11,8 @@ let fs: any, path: any, shell: any, win: any, process: any; if (typeof window !=
   win = window.require("electron").remote.getCurrentWindow()
   //@ts-ignore
   process = window.require("electron").remote.process
+  //@ts-ignore
+  app = window.require("electron").remote.app
 }
 
 /**
@@ -22,17 +24,18 @@ export default class ElectronSys extends WebSys {
   constructor() {
     super()
     this._initHotkeys()
-    let url = new URL(".", location.toString())
-    this.startupUrl = url.toString()
+    this.startupUrl = path.join(app.getPath("userData"), "os") + "/"
     if (process.argv.length > 1) {
       this.startupUrl = process.argv.pop()
-      try {
-        let file = path.resolve(process.cwd(), this.startupUrl).replace(/\\/g, '/')
-        if (file.substr(-1) !== "/" && fs.statSync(file).isDirectory()) file += "/"
-        if (file[0] !== "/") file = "/" + file
-        this.startupUrl = encodeURI('file://' + file)
-      } catch (error) { }
     }
+    try {
+      let file = path.resolve(process.cwd(), this.startupUrl).replace(/\\/g, '/')
+      if (file.substr(-1) !== "/" && fs.statSync(file).isDirectory()) file += "/"
+      if (file[0] !== "/") file = "/" + file
+      this.startupUrl = encodeURI('file://' + file)
+    } catch (error) { }
+
+    this._createUserFolder()
   }
 
   setTitle(title: string) {
@@ -165,6 +168,26 @@ export default class ElectronSys extends WebSys {
           break
       }
     })
+  }
+
+  private async _createUserFolder() {
+    let folder = app.getPath("userData")
+    if (folder.substr(-1) !== "/") folder += "/"
+    folder += "os/"
+    try {
+      fs.mkdirSync(folder)
+    } catch (error) { }
+    try {
+      fs.mkdirSync(folder + "updates")
+    } catch (error) { }
+    let res = await fetch("boot.wasm")
+    let bootwasm = await res.arrayBuffer()
+    fs.writeFileSync(folder + "updates/cyberterminal.wasm", new Buffer(bootwasm))
+    try {
+      fs.accessSync(folder + "boot.wasm")
+    } catch (error) {
+      fs.writeFileSync(folder + "boot.wasm", new Buffer(bootwasm))
+    }
   }
 
 }
