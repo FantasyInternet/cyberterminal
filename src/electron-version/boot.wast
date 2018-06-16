@@ -1,118 +1,36 @@
 (module
-  ;; Push memory range to buffer stack.
+  ;; Read the API spec on https://fantasyinternet.github.io/api
   (import "env" "pushFromMemory" (func $pushFromMemory (param $offset i32) (param $length i32)))
-  ;; Pop one buffer off the buffer stack and store in memory.
   (import "env" "popToMemory" (func $popToMemory (param $offset i32)))
-  ;; Pop API function name off the buffer stack and return index or 0 if not found.
-  (import "env" "getApiFunctionIndex" (func $getApiFunctionIndex (result i32)))
-  ;; Call API function by index. Use any number of parameters and return values.
-  (import "env" "callApiFunction" (func $callApiFunction (param $index i32) (param $a i32) (result i32)))
-  (import "env" "callApiFunction" (func $api_i32i32_i32 (param $index i32) (param $a i32) (param $b i32) (result i32)))
 
-  ;; Pop string from buffer stack and log it to the console.
   (import "env" "log" (func $log ))
-  ;; Log numbers to the console. Use any number of parameters.
   (import "env" "logNumber" (func $log1Number  (param $a i32) ))
   (import "env" "logNumber" (func $log2Numbers (param $a i32) (param $b i32) ))
   (import "env" "logNumber" (func $log3Numbers (param $a i32) (param $b i32) (param $c i32) ))
-  ;; Pop string from buffer stack and print it to text display.
   (import "env" "print" (func $print ))
 
-  ;; Set the display mode(0=text,1=pixel), resolution and (optionally) display size (for overscan).
-  (import "env" "setDisplayMode" (func $setDisplayMode (param $mode i32) (param $width i32) (param $height i32) (param $visibleWidth i32) (param $visibleHeight i32) ))
-  ;; Copy memory range to display buffer ($destOffset optional) and commit display buffer.
-  (import "env" "displayMemory" (func $displayMemory (param $offset i32) (param $length i32) (param $destOffset i32)))
+  (import "env" "setDisplayMode" (func $setDisplayMode (param $mode i32) (param $width i32) (param $height i32)  ))
 
-  ;; Pop URL from buffer stack and connect to it.
   (import "env" "connectTo" (func $connectTo ))
-  ;; Shut down this connection
-  (import "env" "shutdown" (func $shutdown ))
-  ;; Push base URL to buffer stack and return its length in bytes.  
-  (import "env" "getBaseUrl" (func $getBaseUrl (result i32)))
-  ;; Pop URL from buffer stack and set it as base URL.
-  (import "env" "setBaseUrl" (func $setBaseUrl ))
 
-  ;; Pop path from buffer stack, read it and push the contents to buffer stack. Returns a request ID.
-  ;; Callback can expect success boolean, length in bytes and same request ID as parameters.
   (import "env" "read" (func $read (param $tableIndex i32) (result i32)))
-  ;; Pop path from buffer stack, read it and push the pixel data to buffer stack. Returns a request ID.
-  ;; Callback can expect success boolean, width and height in pixels and same request ID as parameters.
-  ;; (import "env" "readImage" (func $readImage (param $tableIndex i32) (result i32)))
-  ;; Pop data and path from buffer stack and write it to file. Returns a request ID.
-  ;; Callback can expect success boolean and same request ID as parameters.
   (import "env" "write" (func $write (param $tableIndex i32) (result i32)))
-  ;; Pop path from buffer stack and delete the file. Returns a request ID.
-  ;; Callback can expect success boolean and same request ID as parameters.
   (import "env" "delete" (func $delete (param $tableIndex i32) (result i32)))
-  ;; Pop path from buffer stack and retrieve directory contents. Returns a request ID.
-  ;; Callback can expect success boolean, length in bytes and same request ID as parameters.
   (import "env" "list" (func $list (param $tableIndex i32) (result i32)))
 
-  ;; Prioritize  given type of input. 1=text, 2=mouse, 3=game.
   (import "env" "focusInput" (func $focusInput (param $input i32)))
 
-  ;; Push text input text to buffer stack and return its length in bytes.
   (import "env" "getInputText" (func $getInputText (result i32)))
-  ;; Get character position of carret in text input.
   (import "env" "getInputPosition" (func $getInputPosition (result i32)))
-  ;; Get number of characters selected in text input.
   (import "env" "getInputSelected" (func $getInputSelected (result i32)))
-  ;; Get key code of key that was just pressed this step.
   (import "env" "getInputKey" (func $getInputKey (result i32)))
-  ;; Set the type of text input. 0=multiline, 1=singleline, 2=password, 3=number, 4=url, 5=email, 6=phone
   (import "env" "setInputType" (func $setInputType (param i32)))
-  ;; Pop text from buffer stack and set text of text input.
   (import "env" "setInputText" (func $setInputText))
-  ;; Set position and (optionally) selection of text input.
   (import "env" "setInputPosition" (func $setInputPosition (param $position i32) (param $selected i32)))
-  ;; Pop replacement and search substrings from buffer stack and
-  ;; replace first occurence in text input.
   (import "env" "replaceInputText" (func $replaceInputText (param $fromIndex i32)))
 
-  ;; Get X coordinate of mouse input.
-  (import "env" "getMouseX" (func $getMouseX (result i32)))
-  ;; Get Y coordinate of mouse input.
-  (import "env" "getMouseY" (func $getMouseY (result i32)))
-  ;; Check if mouse button is pressed.
-  (import "env" "getMousePressed" (func $getMousePressed (result i32)))
-
-  ;; Get X coodinate of game input. (-1 to 1)
-  (import "env" "getGameAxisX" (func $getGameAxisX (result f32)))
-  ;; Get Y coodinate of game input. (-1 to 1)
-  (import "env" "getGameAxisY" (func $getGameAxisY (result f32)))
-  ;; Check if game button A is pressed.
-  (import "env" "getGameButtonA" (func $getGameButtonA (result i32)))
-  ;; Check if game button B is pressed.
-  (import "env" "getGameButtonB" (func $getGameButtonB (result i32)))
-  ;; Check if game button X is pressed.
-  (import "env" "getGameButtonX" (func $getGameButtonX (result i32)))
-  ;; Check if game button Y is pressed.
-  (import "env" "getGameButtonY" (func $getGameButtonY (result i32)))
-
-  ;; Start generating a tone.
-  (import "env" "startTone" (func $startTone (param $channel i32) (param $frequency i32) (param $volume f32) (param $type i32)))
-  ;; Stop generating a tone.
-  (import "env" "stopTone" (func $stopTone (param $channel i32)))
-
-  ;; Set step interval. Set to -1 to only step on input.
   (import "env" "setStepInterval" (func $setStepInterval (param $milliseconds f64)))
-  ;; Pop wasm binary code from buffer stack and load it. Returns new process ID.
-  ;; All exports from boot.wasm starting with "api." are forwarded to the process.
-  (import "env" "loadProcess" (func $loadProcess (result i32)))
-  ;; Step a process, keeping it alive.
-  (import "env" "stepProcess" (func $stepProcess (param $pid i32)))
-  ;; Call back a process. Any parameters beyond the first two will be forwarded to the callback function.
-  (import "env" "callbackProcess" (func $callbackProcess (param $pid i32) (param $tableIndex i32) (param $param i32)))
-  ;; Kill a process.
-  (import "env" "killProcess" (func $killProcess (param $pid i32)))
-  ;; Transfer a chunk of memory from one process to another
-  (import "env" "transferMemory" (func $transferMemory (param $srcPid i32) (param $srcOffset i32) (param $length i32) (param $destPid i32) (param $destOffset i32)))
 
-  ;; transpile wa(s)t into wasm on the buffer stack and return byte length.
-  ;; (import "env" "wabt" (func $wabt (result i32)))
-
-  ;; All JavaScript Math functions are available.
-  (import "Math" "random" (func $random (result f32)))
 
 
 
@@ -130,28 +48,38 @@
   (table $table 8 anyfunc)
     (elem (i32.const 0) $noop)
     (elem (i32.const 1) $updateBoot)
+    (elem (i32.const 2) $readHistory)
     (export "table" (table $table))
 
   ;; Linear memory.
   (memory $memory 1)
     (export "memory" (memory $memory))
-    (data (i32.const 0xf100) "\1b[K\1b[H\t\t\t\t_______________\n_______________________________/ CyberTerminal \\_______________________________\n\nConnect to URL: ")
+    (data (i32.const 0xf100) "\1b[K\1b[H\t\t\t\t_______________\n_______________________________/ CyberTerminal \\_______________________________\n\n")
     (data (i32.const 0xf200) "\n")
     (data (i32.const 0xf300) "./updates/cyberterminal.wasm")
     (data (i32.const 0xf400) "./boot.wasm")
+    (data (i32.const 0xf500) "./history.txt")
+    (data (i32.const 0xf600) "\1b[K\n\1b[AConnect to URL: ")
+    (data (i32.const 0xf700) ": ")
 
   ;; Global variables
   (global $homeCode   (mut i32) (i32.const 0))
   (global $nl         (mut i32) (i32.const 0))
   (global $inputPos   (mut i32) (i32.const 1024))
   (global $inputText  (mut i32) (i32.const 0))
+  (global $mode       (mut i32) (i32.const 0))
+  (global $urlprompt  (mut i32) (i32.const 0))
+  (global $history    (mut i32) (i32.const 0))
+  (global $colon      (mut i32) (i32.const 0))
 
   ;; Init function is called once on start.
   (func $init
     (set_global $homeCode  (call $createString (i32.const 0xf100)))
-    ;; (set_global $nl (call $createString (i32.const 0xf200)))
+    (set_global $urlprompt  (call $createString (i32.const 0xf600)))
+    (set_global $nl (call $createString (i32.const 0xf200)))
+    (set_global $colon (call $createString (i32.const 0xf700)))
     (call $setStepInterval (f64.const -1))
-    (call $setDisplayMode (i32.const 0) (i32.const 80) (i32.const 20) (i32.const 80) (i32.const 20))
+    (call $setDisplayMode (i32.const 0) (i32.const 80) (i32.const 20))
 
     (call $setInputType (i32.const 4))
     (call $focusInput (i32.const 1))
@@ -161,8 +89,9 @@
     (call $setInputPosition (call $getPartLength (get_global $inputText)) (i32.const 0))
 
     (call $printStr (get_global $homeCode))
-    (call $printStr (get_global $inputText))
+    ;; (call $printStr (get_global $inputText))
     (call $pushFromMemory (i32.const 0xf400) (i32.const 11))
+    (drop (call $read (call $pushFromMemory (i32.const 0xf500) (i32.const 13)) (i32.const 2)))
     (drop (call $read (call $pushFromMemory (i32.const 0xf300) (i32.const 28)) (i32.const 1)))
   )
   (export "init" (func $init))
@@ -173,27 +102,81 @@
     ))
   )
   (func $noop)
+  (func $readHistory (param $success i32) (param $len i32)
+    (local $lines i32)
+    (local $line i32)
+    (if (get_local $success)(then
+      (set_global $history (call $createPart (get_local $len)))
+      (call $popToMemory (call $getPartOffset (get_global $history)))
+      (set_local $lines (call $countLines (get_global $history)))
+      (if (i32.gt_u (get_local $lines) (i32.const 10))(then
+        (set_local $lines (i32.const 10))
+      ))
+      (block(loop
+        (br_if 1 (i32.ge_u (get_local $line) (get_local $lines)))
+        (call $printStr (call $uintToStr (get_local $line)))
+        (call $printStr (get_global $colon))
+        (call $printStr (call $getLine (get_global $history) (get_local $line)))
+        (set_local $line (i32.add (get_local $line) (i32.const 1)))
+        (br 0)
+      ))
+      ;; (call $printStr (get_global $history))
+      (call $printStr (get_global $nl))
+      (call $printStr (get_global $nl))
+      (set_global $mode (i32.const 1))
+    )(else
+      (set_global $history (call $createPart (i32.const 0)))
+      (set_global $mode (i32.const 2))
+    ))
+  )
 
   ;; Step function is called once every interval.
   (func $step (param $t f64)
     (local $pos i32)
     (local $len i32)
+    (local $newhist i32)
     (call $enterPart (call $createPart (i32.const 0)))
-    (if (call $getInputKey) (then
-      (set_local $pos (call $getInputPosition))
-      (call $resizePart (get_global $inputText) (call $getInputText))
-      (call $popToMemory (call $getPartOffset (get_global $inputText)))
-      ;; (call $printStr (get_global $nl))
-      ;; (call $printStr (call $uintToStr (i32.trunc_u/f64 (get_local $t))))
-      (call $printStr (get_global $homeCode))
-      (call $printStr (get_global $inputText))
-      (call $printStr (get_global $homeCode))
-      (call $printStr (call $substr (get_global $inputText) (i32.const 0) (get_local $pos)))
-      (set_global $inputPos (get_local $pos))
+    (if (i32.eq (get_global $mode) (i32.const 1))(then
+      (if (call $getInputKey) (then
+        (if (i32.and (i32.ge_u (call $getInputKey) (i32.const 48)) (i32.lt_u (call $getInputKey) (i32.const 58)))(then
+          (set_local $newhist (call $getLine (get_global $history) (i32.sub (call $getInputKey) (i32.const 48))))
+          (call $trim (get_local $newhist))
+          (call $pushFromMemory (call $getPartOffset (get_local $newhist)) (call $getPartLength (get_local $newhist)))
+          (call $setInputText)
+          (call $setInputPosition (call $getPartLength (get_local $newhist)) (i32.const 0))
+        )(else
+        ))
+        (set_global $mode (i32.const 2))
+        ;; (call $log1Number (call $getInputKey))
+      ))
     ))
-    
-    (if (i32.eq (call $getInputKey) (i32.const 13)) (then
-      (call $connectTo (drop (call $getInputText)))
+    (if (i32.eq (get_global $mode) (i32.const 2))(then
+      (if (call $getInputKey) (then
+        (set_local $pos (call $getInputPosition))
+        (call $resizePart (get_global $inputText) (call $getInputText))
+        (call $popToMemory (call $getPartOffset (get_global $inputText)))
+        ;; (call $printStr (get_global $nl))
+        ;; (call $printStr (call $uintToStr (i32.trunc_u/f64 (get_local $t))))
+        (call $printStr (get_global $urlprompt))
+        (call $printStr (get_global $inputText))
+        (call $printStr (get_global $urlprompt))
+        (call $printStr (call $substr (get_global $inputText) (i32.const 0) (get_local $pos)))
+        (set_global $inputPos (get_local $pos))
+      ))
+      
+      (if (i32.eq (call $getInputKey) (i32.const 13)) (then
+        (call $appendBytes (get_global $inputText) (i64.const 10))
+        (set_local $newhist (call $concat (get_global $inputText) (get_global $history)))
+        (call $resizePart (get_global $history) (call $getPartLength (get_local $newhist)))
+        (call $copyMem (call $getPartOffset (get_local $newhist)) (call $getPartOffset (get_global $history)) (call $getPartLength (get_global $history)))
+        (drop (call $write
+          (call $pushFromMemory (i32.const 0xf500) (i32.const 13))
+          (call $pushFromMemory (call $getPartOffset (get_global $history)) (call $getPartLength (get_global $history)))
+          (i32.const 0)
+        ))
+        (call $connectTo (drop (call $getInputText)))
+        ;; (set_global $mode (i32.const 1))
+      ))
     ))
     (call $deleteParent)
   )
@@ -204,11 +187,6 @@
   )
   (export "display" (func $display))
 
-  ;; Break function is called whenever Esc is pressed.
-  (func $break
-    (call $shutdown)
-  )
-  (export "break" (func $break))
 
 
 
@@ -307,9 +285,9 @@
       (set_local $col (i32.add (get_local $col) (i32.const 1)))
       (if (i32.eq (call $byteAt (get_local $str) (get_local $p)) (i32.const 10)) (then
         (if (i32.eq (get_local $line) (get_local $linenum)) (then
-          (set_local $p (i32.sub (get_local $p) (get_local $col)))
+          (set_local $p (i32.sub (get_local $p) (i32.sub (get_local $col) (i32.const 1))))
           (set_local $strc (call $substr (get_local $str) (get_local $p) (get_local $col)))
-          (set_local $p (i32.add (get_local $p) (get_local $col)))
+          (set_local $p (i32.add (get_local $p) (i32.sub (get_local $col) (i32.const 1))))
         ))
         (set_local $line (i32.add (get_local $line) (i32.const 1)))
         (set_local $col (i32.const 0))
@@ -381,6 +359,9 @@
       (set_local $int (i32.rem_u (get_local $int) (get_local $order)))
       (set_local $order (i32.div_u (get_local $order) (i32.const 10)))
       (br 0)
+    ))
+    (if (i32.eqz (call $getPartLength (get_local $str)))(then
+      (call $appendBytes (get_local $str) (i64.const 0x30) )
     ))
     (get_local $str)
   )
@@ -457,6 +438,17 @@
       (br 0)
     ))
     (call $resizePart (get_local $str) (get_local $l))
+  )
+
+  (func $pushString (param $str i32)
+    (call $pushFromMemory (call $getPartOffset (get_local $str)) (call $getPartLength (get_local $str)))
+  )
+
+  (func $popString (param $len i32) (result i32)
+    (local $str i32)
+    (set_local $str (call $createPart (get_local $len)))
+    (call $popToMemory (call $getPartOffset (get_local $str)))
+    (get_local $str)
   )
 
  
