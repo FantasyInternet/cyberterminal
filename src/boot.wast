@@ -16,6 +16,7 @@
   ;; Log numbers to the console. Use any number of parameters.
   (import "env" "logNumber" (func $log1Number  (param $a i32) ))
   (import "env" "logNumber" (func $log2Numbers (param $a i32) (param $b i32) ))
+  (import "env" "logNumber" (func $log2floats  (param $a f32) (param $b f32) ))
   (import "env" "logNumber" (func $log3Numbers (param $a i32) (param $b i32) (param $c i32) ))
   ;; Pop string from buffer stack and print it to text display.
   (import "env" "print" (func $print ))
@@ -169,19 +170,21 @@
   (global $right (mut i32) (i32.const 100))
   (global $rightV (mut i32) (i32.const 0))
   (global $rightColor (mut i32) (i32.const 100))
-  (global $ballX (mut i32) (i32.const 160))
-  (global $ballY (mut i32) (i32.const 100))
+  (global $ballX (mut f32) (f32.const 160))
+  (global $ballY (mut f32) (f32.const 100))
   (global $ballVX (mut i32) (i32.const 1))
   (global $ballVY (mut i32) (i32.const 0))
   (global $bgColor (mut i32) (i32.const 0))
-  (global $ballColor (mut i32) (i32.const 0))
+  (global $ballColor (mut i32) (i32.const 0xff0000ff))
   (global $beep (mut i32) (i32.const 1))
   (global $inputText (mut i32) (i32.const 1))
 
   ;; Init function is called once on start.
   (func $init
-    (call $log2Numbers  (call $getNativeDisplayWidth) (call $getNativeDisplayHeight))
-    (call $setDisplayMode (i32.const 1) (call $getNativeDisplayWidth) (call $getNativeDisplayHeight))
+    (call $setStepInterval (f64.div (f64.const 1000) (f64.const 60)))
+    (set_global $display (call $createImg (i32.const 320) (i32.const 200)))
+    (call $setDisplayMode (i32.const 1) (i32.const 320) (i32.const 200))
+    (call $focusInput (i32.const 3))
   )
   (export "init" (func $init))
 
@@ -207,48 +210,31 @@
 
   ;; Step function is called once every interval.
   (func $step (param $t f64)
-    (call $log2Numbers  (call $getNativeDisplayWidth) (call $getNativeDisplayHeight))
-    (set_global $ballX (i32.add (get_global $ballX) (get_global $ballVX)))
-    (set_global $ballY (i32.add (get_global $ballY) (get_global $ballVY)))
+    ;; (call $log2floats (call $getGameAxisX) (call $getGameAxisY) )
+    (set_global $ballX (f32.add (get_global $ballX) (call $getGameAxisX)))
+    (set_global $ballY (f32.add (get_global $ballY) (call $getGameAxisY)))
   )
   (export "step" (func $step))
 
   ;; Display function is called whenever the display needs to be redrawn.
   (func $display (param $t f64)
     (call $rect (get_global $display) (i32.const 0) (i32.const 0) (call $getImgWidth (get_global $display)) (call $getImgHeight (get_global $display)) (get_global $bgColor))
-    (call $copyImg (get_global $sleepyhead) (i32.const 0) (i32.const 0) (get_global $display) (i32.const 80) (i32.const 16) (call $getImgWidth (get_global $sleepyhead)) (call $getImgHeight (get_global $sleepyhead)))
-    (if (call $getMousePressed) (then
-      (set_global $ballX (call $getMouseX))
-      (set_global $ballY (call $getMouseY))
+    (call $rect (get_global $display) (i32.sub (i32.trunc_s/f32 (get_global $ballX)) (i32.const 4)) (i32.sub (i32.trunc_s/f32 (get_global $ballY)) (i32.const 4)) (i32.const 8) (i32.const 8) (get_global $ballColor))
+    (if (call $getGameButtonA)(then
+      (call $rect (get_global $display) (i32.sub (i32.trunc_s/f32 (get_global $ballX)) (i32.const 0)) (i32.sub (i32.trunc_s/f32 (get_global $ballY)) (i32.const 2)) (i32.const 8) (i32.const 4) (get_global $ballColor))
     ))
-    (call $rect (get_global $display) (i32.sub (get_global $ballX) (i32.const 4)) (i32.sub (get_global $ballY) (i32.const 4)) (i32.const 8) (i32.const 8) (get_global $ballColor))
-    (call $rect (get_global $display) (i32.const 0)   (i32.sub (get_global $left)  (i32.const 16)) (i32.const 8) (i32.const 32) (get_global $leftColor))
-    (call $rect (get_global $display) (i32.const 312) (i32.sub (get_global $right) (i32.const 16)) (i32.const 8) (i32.const 32) (get_global $rightColor))
-    (set_global $txtX (i32.const 160))
-    (set_global $txtY (i32.const 32))
-    (call $printChar (get_global $display) (i32.const 72))  ;; H
-    (call $printChar (get_global $display) (i32.const 101)) ;; e
-    (call $printChar (get_global $display) (i32.const 108)) ;; l
-    (call $printChar (get_global $display) (i32.const 108)) ;; l
-    (call $printChar (get_global $display) (i32.const 111)) ;; o
-    (call $printChar (get_global $display) (i32.const 32))  ;; (space)
-    (call $printChar (get_global $display) (i32.const 119)) ;; w
-    (call $printChar (get_global $display) (i32.const 111)) ;; o
-    (call $printChar (get_global $display) (i32.const 114)) ;; r
-    (call $printChar (get_global $display) (i32.const 108)) ;; l
-    (call $printChar (get_global $display) (i32.const 100)) ;; d
-    (call $printChar (get_global $display) (i32.const 33))  ;; !
-
-    (set_global $txtX (i32.const 0))
-    (set_global $txtY (i32.const 128))
-    (call $resizePart (get_global $inputText) (call $getInputText))
-    (call $popToMemory (call $getPartOffset (get_global $inputText)))
-    (call $printInput (get_global $display) (get_global $inputText) (call $getInputPosition) (call $getInputSelected) (get_global $leftColor))
-
-    (call $copyImg (get_global $pointer) (i32.const 0) (i32.const 0) (get_global $display) (call $getMouseX) (call $getMouseY) (call $getImgWidth (get_global $pointer)) (call $getImgHeight (get_global $pointer)))
+    (if (call $getGameButtonX)(then
+      (call $rect (get_global $display) (i32.sub (i32.trunc_s/f32 (get_global $ballX)) (i32.const 8)) (i32.sub (i32.trunc_s/f32 (get_global $ballY)) (i32.const 2)) (i32.const 8) (i32.const 4) (get_global $ballColor))
+    ))
+    (if (call $getGameButtonY)(then
+      (call $rect (get_global $display) (i32.sub (i32.trunc_s/f32 (get_global $ballX)) (i32.const 2)) (i32.sub (i32.trunc_s/f32 (get_global $ballY)) (i32.const 0)) (i32.const 4) (i32.const 8) (get_global $ballColor))
+    ))
+    (if (call $getGameButtonB)(then
+      (call $rect (get_global $display) (i32.sub (i32.trunc_s/f32 (get_global $ballX)) (i32.const 2)) (i32.sub (i32.trunc_s/f32 (get_global $ballY)) (i32.const 8)) (i32.const 4) (i32.const 8) (get_global $ballColor))
+    ))
     (call $displayMemory (i32.add (call $getPartOffset (get_global $display)) (i32.const 8)) (i32.sub (call $getPartLength (get_global $display)) (i32.const 8)) (i32.const 0))
   )
-  ;; (export "display" (func $display))
+  (export "display" (func $display))
 
   ;; Break function is called whenever Esc is pressed.
   (func $break

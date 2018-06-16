@@ -33,7 +33,7 @@ export default class WebSys implements Sys {
     this.chipSound = new ChipSound()
     this.textInput = new TextInput(this, <HTMLInputElement>this._container.querySelector(".input .text"))
     this.mouseInput = new MouseInput(this)
-    this.gameInput = new GameInput(this)
+    this.gameInput = new GameInput(this, <HTMLInputElement>this._container.querySelector(".input .game"))
     this.breaker = new Breaker(this)
     this.startupUrl = location.toString()
   }

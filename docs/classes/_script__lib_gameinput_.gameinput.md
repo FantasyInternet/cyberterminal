@@ -20,7 +20,6 @@ Class for taking care of game input
 
 ### Methods
 
-* [_getKeyMap](_script__lib_gameinput_.gameinput.md#_getkeymap)
 * [addEventListener](_script__lib_gameinput_.gameinput.md#addeventlistener)
 * [blur](_script__lib_gameinput_.gameinput.md#blur)
 * [focus](_script__lib_gameinput_.gameinput.md#focus)
@@ -38,7 +37,7 @@ Class for taking care of game input
 
 ###  constructor
 
-⊕ **new GameInput**(sys: *[Sys](../interfaces/_script__lib_sys_.sys.md)*): [GameInput](_script__lib_gameinput_.gameinput.md)
+⊕ **new GameInput**(sys: *[Sys](../interfaces/_script__lib_sys_.sys.md)*, _element: *`HTMLElement`*): [GameInput](_script__lib_gameinput_.gameinput.md)
 
 *Defined in [script/_lib/GameInput.ts:10](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/GameInput.ts#L10)*
 
@@ -47,6 +46,7 @@ Class for taking care of game input
 | Param | Type |
 | ------ | ------ |
 | sys | [Sys](../interfaces/_script__lib_sys_.sys.md) |
+| _element | `HTMLElement` |
 
 **Returns:** [GameInput](_script__lib_gameinput_.gameinput.md)
 
@@ -66,24 +66,13 @@ ___
 
 ## Methods
 
-<a id="_getkeymap"></a>
-
-###  _getKeyMap
-
-▸ **_getKeyMap**(): `object`
-
-*Defined in [script/_lib/GameInput.ts:147](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/GameInput.ts#L147)*
-
-**Returns:** `object`
-
-___
 <a id="addeventlistener"></a>
 
 ###  addEventListener
 
 ▸ **addEventListener**(fn: *`Function`*): `void`
 
-*Defined in [script/_lib/GameInput.ts:118](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/GameInput.ts#L118)*
+*Defined in [script/_lib/GameInput.ts:59](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/GameInput.ts#L59)*
 
 **Parameters:**
 
@@ -100,7 +89,7 @@ ___
 
 ▸ **blur**(): `void`
 
-*Defined in [script/_lib/GameInput.ts:108](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/GameInput.ts#L108)*
+*Defined in [script/_lib/GameInput.ts:48](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/GameInput.ts#L48)*
 
 **Returns:** `void`
 
@@ -111,7 +100,7 @@ ___
 
 ▸ **focus**(): `void`
 
-*Defined in [script/_lib/GameInput.ts:107](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/GameInput.ts#L107)*
+*Defined in [script/_lib/GameInput.ts:43](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/GameInput.ts#L43)*
 
 **Returns:** `void`
 
@@ -122,7 +111,7 @@ ___
 
 ▸ **removeEventListener**(fn: *`Function`*): `void`
 
-*Defined in [script/_lib/GameInput.ts:125](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/GameInput.ts#L125)*
+*Defined in [script/_lib/GameInput.ts:66](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/GameInput.ts#L66)*
 
 **Parameters:**
 
