@@ -213,6 +213,10 @@
     ;; (call $log2floats (call $getGameAxisX) (call $getGameAxisY) )
     (set_global $ballX (f32.add (get_global $ballX) (call $getGameAxisX)))
     (set_global $ballY (f32.add (get_global $ballY) (call $getGameAxisY)))
+    (if (call $getMousePressed)(then
+      (set_global $ballX (f32.convert_s/i32 (call $getMouseX)))
+      (set_global $ballY (f32.convert_s/i32 (call $getMouseY)))
+    ))
   )
   (export "step" (func $step))
 

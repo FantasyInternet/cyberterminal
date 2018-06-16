@@ -14,14 +14,12 @@ export default class GameInput {
       let html = ""
       html += '<div class="left">'
       html += '<div class="slider">'
-      html += '<div class="knob">'
-      html += '</div>'
+      html += '<div class="knob"></div>'
       html += '</div>'
       html += '</div>'
       html += '<div class="right">'
       html += '<div class="slider">'
-      html += '<div class="knob">'
-      html += '</div>'
+      html += '<div class="knob"></div>'
       html += '</div>'
       html += '</div>'
       this._element.innerHTML = html
@@ -44,6 +42,7 @@ export default class GameInput {
     if (this._device === "touch") {
       this._element.classList.add("active")
     }
+    localStorage.setItem("GameInput._device", this._device)
   }
   blur() {
     this.state.axis.x =
@@ -54,6 +53,7 @@ export default class GameInput {
       this.state.buttons.y = false
     this._element.classList.remove("active")
     this._sendState()
+    localStorage.setItem("GameInput._device", this._device)
   }
 
   addEventListener(fn: Function) {
@@ -73,9 +73,16 @@ export default class GameInput {
   /** _privates */
   private _listeners: Function[] = []
   private _lastState?: string
-  private _device: string = ""
+  private _device: string = "" + localStorage.getItem("GameInput._device")
 
   private _sendState() {
+    if (Math.abs(this.state.axis.x) < .2) this.state.axis.x = 0
+    if (Math.abs(this.state.axis.y) < .2) this.state.axis.y = 0
+    let mag = Math.sqrt(Math.pow(this.state.axis.x, 2) + Math.pow(this.state.axis.y, 2))
+    if (mag > 1) {
+      this.state.axis.x /= mag
+      this.state.axis.y /= mag
+    }
     let newState = JSON.stringify(this.state)
     if (this._lastState !== newState) {
       this._lastState = newState
@@ -164,12 +171,6 @@ export default class GameInput {
     if (this._keysDown["b"]) this.state.buttons.b = true
     if (this._keysDown["x"]) this.state.buttons.x = true
     if (this._keysDown["y"]) this.state.buttons.y = true
-
-    let mag = Math.sqrt(Math.pow(this.state.axis.x, 2) + Math.pow(this.state.axis.y, 2))
-    if (mag > 1) {
-      this.state.axis.x /= mag
-      this.state.axis.y /= mag
-    }
   }
 
   private _getKeyMap() {
@@ -197,11 +198,10 @@ export default class GameInput {
   private _leftTouchCenter: any = { x: 0, y: 0 }
   private _rightTouchCenter: any = { x: 0, y: 0 }
   private _touchRadius: number = 36
+  private _fireTO: any
 
   private _onTouchOn() {
-    if (this.sys.inputPriority[0] === "game") {
-      this._element.classList.add("active")
-    }
+    this._device = "touch"
   }
   private _onTouchOff(e: TouchEvent) {
     if (e.changedTouches[0].target === this._element) {
@@ -213,12 +213,14 @@ export default class GameInput {
         this.state.buttons.y = false
       setTimeout(() => {
         this._element.classList.remove("active")
+        this._element.classList.remove("idle")
       }, 32)
     }
   }
 
   private _onLeftTouchStart(e: TouchEvent) {
     this._device = "touch"
+    this._element.classList.remove("idle")
     this._leftTouchCenter.x = e.changedTouches[0].clientX
     this._leftTouchCenter.y = e.changedTouches[0].clientY
     let left = <HTMLElement>this._element.querySelector(".left")
@@ -236,11 +238,12 @@ export default class GameInput {
       this._leftTouchCenter.x = e.changedTouches[0].clientX - deltaX
       this._leftTouchCenter.y = e.changedTouches[0].clientY - deltaY
     }
-    this.state.axis.x = deltaX / this._touchRadius
-    this.state.axis.y = deltaY / this._touchRadius
+    this.state.axis.x = deltaX / (this._touchRadius - 1)
+    this.state.axis.y = deltaY / (this._touchRadius - 1)
     this._sendState()
   }
   private _onLeftTouchEnd(e: TouchEvent) {
+    this._element.classList.add("idle")
     this.state.axis.x = 0
     this.state.axis.y = 0
     this._sendState()
@@ -248,7 +251,10 @@ export default class GameInput {
 
   private _onRightTouchStart(e: TouchEvent) {
     this._device = "touch"
+    this._element.classList.remove("idle")
+    clearTimeout(this._fireTO)
     this.state.buttons.a = false
+    this._sendState()
     this._rightTouchCenter.x = e.changedTouches[0].clientX
     this._rightTouchCenter.y = e.changedTouches[0].clientY
     let right = <HTMLElement>this._element.querySelector(".right")
@@ -279,12 +285,13 @@ export default class GameInput {
     this._sendState()
   }
   private _onRightTouchEnd(e: TouchEvent) {
+    this._element.classList.add("idle")
     if ((this.state.buttons.a ||
       this.state.buttons.b ||
       this.state.buttons.x ||
       this.state.buttons.y) === false) {
       this.state.buttons.a = true
-      setTimeout(() => {
+      this._fireTO = setTimeout(() => {
         this.state.buttons.a = false
         this._sendState()
       }, 256)
@@ -302,11 +309,18 @@ export default class GameInput {
     leftKnob.style.left = this.state.axis.x + "em"
     leftKnob.style.top = this.state.axis.y + "em"
     let rightKnob = <HTMLElement>this._element.querySelector(".right .knob")
-    rightKnob.style.left = "0em"
-    rightKnob.style.top = "0em"
-    if (this.state.buttons.a) rightKnob.style.left = "1em"
-    if (this.state.buttons.x) rightKnob.style.left = "-1em"
-    if (this.state.buttons.y) rightKnob.style.top = "1em"
-    if (this.state.buttons.b) rightKnob.style.top = "-1em"
+    let x = 0
+    let y = 0
+    if (this.state.buttons.a) x++
+    if (this.state.buttons.x) x--
+    if (this.state.buttons.y) y++
+    if (this.state.buttons.b) y--
+    let mag = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2))
+    if (mag > 1) {
+      x /= mag
+      y /= mag
+    }
+    rightKnob.style.left = x + "em"
+    rightKnob.style.top = y + "em"
   }
 }

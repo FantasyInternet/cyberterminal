@@ -89,7 +89,7 @@ ___
 
 ▸ **blur**(): `void`
 
-*Defined in [script/_lib/GameInput.ts:48](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/GameInput.ts#L48)*
+*Defined in [script/_lib/GameInput.ts:47](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/GameInput.ts#L47)*
 
 **Returns:** `void`
 
@@ -100,7 +100,7 @@ ___
 
 ▸ **focus**(): `void`
 
-*Defined in [script/_lib/GameInput.ts:43](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/GameInput.ts#L43)*
+*Defined in [script/_lib/GameInput.ts:41](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/GameInput.ts#L41)*
 
 **Returns:** `void`
 

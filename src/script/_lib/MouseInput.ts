@@ -46,6 +46,7 @@ export default class MouseInput {
   private _listeners: Function[] = []
   private _lastState?: string
   private _element: HTMLElement = document.body
+  private _idleTO: any
 
   private _sendState() {
     let newState = JSON.stringify(this.state)
@@ -58,6 +59,7 @@ export default class MouseInput {
   }
 
   private _mouseMove(e: PointerEvent) {
+    clearTimeout(this._idleTO)
     this.state.x = e.offsetX / this.scale * devicePixelRatio
     this.state.y = e.offsetY / this.scale * devicePixelRatio
     this._sendState()
@@ -71,7 +73,7 @@ export default class MouseInput {
   private _mouseUp(e: PointerEvent) {
     this.state.pressed = false
     this._sendState()
-    setTimeout(() => {
+    this._idleTO = setTimeout(() => {
       this.sys.focusInput(this.sys.inputPriority[0])
     }, 1024)
   }
