@@ -90,9 +90,7 @@
 
     (call $printStr (get_global $homeCode))
     ;; (call $printStr (get_global $inputText))
-    (call $pushFromMemory (i32.const 0xf400) (i32.const 11))
     (drop (call $read (call $pushFromMemory (i32.const 0xf500) (i32.const 13)) (i32.const 2)))
-    (drop (call $read (call $pushFromMemory (i32.const 0xf300) (i32.const 28)) (i32.const 1)))
   )
   (export "init" (func $init))
 
@@ -128,6 +126,8 @@
       (set_global $history (call $createPart (i32.const 0)))
       (set_global $mode (i32.const 2))
     ))
+    (call $pushFromMemory (i32.const 0xf400) (i32.const 11))
+    (drop (call $read (call $pushFromMemory (i32.const 0xf300) (i32.const 28)) (i32.const 1)))
   )
 
   ;; Step function is called once every interval.

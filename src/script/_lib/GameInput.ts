@@ -26,6 +26,7 @@ export default class GameInput {
     }
     document.addEventListener("keydown", this._onKeyDown.bind(this))
     document.addEventListener("keyup", this._onKeyUp.bind(this))
+
     document.addEventListener("touchstart", this._onTouchOn.bind(this))
     this._element.addEventListener("touchstart", this._onTouchOff.bind(this))
     let left = <HTMLElement>this._element.querySelector(".left")
@@ -36,6 +37,8 @@ export default class GameInput {
     right.addEventListener("touchstart", this._onRightTouchStart.bind(this))
     right.addEventListener("touchmove", this._onRightTouchMove.bind(this))
     right.addEventListener("touchend", this._onRightTouchEnd.bind(this))
+
+    addEventListener("gamepadconnected", this._onGamepadConnected.bind(this))
   }
 
   focus() {
@@ -302,6 +305,34 @@ export default class GameInput {
         this.state.buttons.y = false
     }
     this._sendState()
+  }
+
+  /** gamepad */
+  private _gamepadIndex: number = 0
+  private _scanRaf: any
+
+  private _onGamepadConnected(e: GamepadEvent) {
+    console.log("gamepad connected")
+    this._gamepadIndex = e.gamepad.index
+    this._scanRaf = requestAnimationFrame(this._scanGamepad.bind(this))
+  }
+
+  private _scanGamepad() {
+    if (!navigator.getGamepads().length) return
+    cancelAnimationFrame(this._scanRaf)
+    let gamepad = <Gamepad>navigator.getGamepads()[this._gamepadIndex]
+    this.state.axis.x = gamepad.axes[0].valueOf()
+    this.state.axis.y = gamepad.axes[1].valueOf()
+    this.state.buttons.a = gamepad.buttons[0].pressed
+    this.state.buttons.b = gamepad.buttons[1].pressed
+    this.state.buttons.x = gamepad.buttons[2].pressed
+    this.state.buttons.y = gamepad.buttons[3].pressed
+    if (gamepad.buttons[12].pressed) this.state.axis.y = -1
+    if (gamepad.buttons[13].pressed) this.state.axis.y = 1
+    if (gamepad.buttons[14].pressed) this.state.axis.x = -1
+    if (gamepad.buttons[15].pressed) this.state.axis.x = 1
+    this._sendState()
+    this._scanRaf = requestAnimationFrame(this._scanGamepad.bind(this))
   }
 
   private _updateGui() {

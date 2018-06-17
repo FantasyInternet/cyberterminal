@@ -72,7 +72,7 @@ ___
 
 ▸ **addEventListener**(fn: *`Function`*): `void`
 
-*Defined in [script/_lib/GameInput.ts:59](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/GameInput.ts#L59)*
+*Defined in [script/_lib/GameInput.ts:62](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/GameInput.ts#L62)*
 
 **Parameters:**
 
@@ -89,7 +89,7 @@ ___
 
 ▸ **blur**(): `void`
 
-*Defined in [script/_lib/GameInput.ts:47](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/GameInput.ts#L47)*
+*Defined in [script/_lib/GameInput.ts:50](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/GameInput.ts#L50)*
 
 **Returns:** `void`
 
@@ -100,7 +100,7 @@ ___
 
 ▸ **focus**(): `void`
 
-*Defined in [script/_lib/GameInput.ts:41](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/GameInput.ts#L41)*
+*Defined in [script/_lib/GameInput.ts:44](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/GameInput.ts#L44)*
 
 **Returns:** `void`
 
@@ -111,7 +111,7 @@ ___
 
 ▸ **removeEventListener**(fn: *`Function`*): `void`
 
-*Defined in [script/_lib/GameInput.ts:66](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/GameInput.ts#L66)*
+*Defined in [script/_lib/GameInput.ts:69](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/GameInput.ts#L69)*
 
 **Parameters:**
 
