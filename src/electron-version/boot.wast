@@ -54,13 +54,14 @@
   ;; Linear memory.
   (memory $memory 1)
     (export "memory" (memory $memory))
-    (data (i32.const 0xf100) "\1b[K\1b[H\t\t\t\t_______________\n_______________________________/ CyberTerminal \\_______________________________\n\n")
+    (data (i32.const 0xf100) "\1b[K\1b[H\t\t\t\t\1b[1m_______________\n_______________________________/ \1b[31mCy\1b[33mber\1b[32mTe\1b[36mrm\1b[0;1min\1b[35mal\1b[0;1m \\_______________________________\n\n")
     (data (i32.const 0xf200) "\n")
     (data (i32.const 0xf300) "./updates/cyberterminal.wasm")
     (data (i32.const 0xf400) "./boot.wasm")
     (data (i32.const 0xf500) "./history.txt")
-    (data (i32.const 0xf600) "\1b[K\n\1b[AConnect to URL: ")
+    (data (i32.const 0xf600) "\1b[K\n\1b[A\1b[1;37mURL: \1b[0m")
     (data (i32.const 0xf700) ": ")
+    (data (i32.const 0xf800) "\1b[1;37mHistory:\1b[0m\n\n")
 
   ;; Global variables
   (global $homeCode   (mut i32) (i32.const 0))
@@ -110,6 +111,7 @@
       (if (i32.gt_u (get_local $lines) (i32.const 10))(then
         (set_local $lines (i32.const 10))
       ))
+      (call $printStr (call $createString (i32.const 0xf800)))
       (block(loop
         (br_if 1 (i32.ge_u (get_local $line) (get_local $lines)))
         (call $printStr (call $uintToStr (get_local $line)))
