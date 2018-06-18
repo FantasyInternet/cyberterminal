@@ -312,7 +312,6 @@ export default class GameInput {
   private _scanRaf: any
 
   private _onGamepadConnected(e: GamepadEvent) {
-    console.log("gamepad connected")
     this._gamepadIndex = e.gamepad.index
     this._scanRaf = requestAnimationFrame(this._scanGamepad.bind(this))
   }
@@ -331,6 +330,10 @@ export default class GameInput {
     if (gamepad.buttons[13].pressed) this.state.axis.y = 1
     if (gamepad.buttons[14].pressed) this.state.axis.x = -1
     if (gamepad.buttons[15].pressed) this.state.axis.x = 1
+    if (Math.round(gamepad.axes[2].valueOf()) > 0) this.state.buttons.a = true
+    if (Math.round(gamepad.axes[2].valueOf()) < 0) this.state.buttons.x = true
+    if (Math.round(gamepad.axes[3].valueOf()) > 0) this.state.buttons.y = true
+    if (Math.round(gamepad.axes[3].valueOf()) < 0) this.state.buttons.b = true
     this._sendState()
     this._scanRaf = requestAnimationFrame(this._scanGamepad.bind(this))
   }

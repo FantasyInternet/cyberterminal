@@ -53,8 +53,7 @@
 
   ;; Linear memory.
   (memory $memory 1)
-    (export "memory" (memory $memory))
-    (data (i32.const 0xf100) "\1b[K\1b[H\t\t\t\t\1b[1m_______________\n_______________________________/ \1b[31mCy\1b[33mber\1b[32mTe\1b[36mrm\1b[0;1min\1b[35mal\1b[0;1m \\_______________________________\n\n")
+    (data (i32.const 0xf100) "\1b[K\1b[H\t\t\t\t\1b[1m_______________\n_______________________________/ \1b[31mCy\1b[33mber\1b[32mTer\1b[36mmin\1b[35mal\1b[0;1m \\_______________________________\n\n")
     (data (i32.const 0xf200) "\n")
     (data (i32.const 0xf300) "./updates/cyberterminal.wasm")
     (data (i32.const 0xf400) "./boot.wasm")
@@ -62,6 +61,7 @@
     (data (i32.const 0xf600) "\1b[K\n\1b[A\1b[1;37mURL: \1b[0m")
     (data (i32.const 0xf700) ": ")
     (data (i32.const 0xf800) "\1b[1;37mHistory:\1b[0m\n\n")
+    (export "memory" (memory $memory))
 
   ;; Global variables
   (global $homeCode   (mut i32) (i32.const 0))
