@@ -19,7 +19,7 @@
         "nsis",
         "portable"
       ],
-      "icon": "icons/256x256.png"
+      "icon": "icons/512x512.png"
     },
     "mac": {
       "category": "your.app.category.type"
