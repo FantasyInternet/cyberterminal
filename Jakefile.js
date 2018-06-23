@@ -23,7 +23,7 @@ let os = require("os"),
 * Jakefile.js
 * For building web apps
 *
-* @date 19-jun-2018
+* @date 23-jun-2018
 */
 let srcDir = "./src/",
   outDir = "./build/",
@@ -303,7 +303,7 @@ namespace("wasm", function () {
     console.log("\nCompiling Wast...")
     fileTypeList([".wast", ".wat"]).forEach(function (inFile) {
       let outFile = outputFile(inFile, ".wasm"),
-        output = "" + waquire(inFile)
+        output = "" + waquire("./" + inFile)
       console.log(inFile, "->", outFile)
 
       let module = wabt.parseWat(inFile, output)
