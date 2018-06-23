@@ -1,6 +1,6 @@
 {
   "name": "cyberterminal",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "A fantasy internet client.",
   "author": {
     "name": "codeartisticninja",
@@ -65,7 +65,7 @@
     "typescript": "^2.9.1",
     "wabt": "^1.0.0",
     "walt-compiler": "^0.6.2",
-    "waquire": "^0.1.4"
+    "waquire": "^0.3.1"
   },
   "dependencies": {
     "statify": "^2.0.1"

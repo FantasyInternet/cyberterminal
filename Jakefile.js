@@ -15,6 +15,7 @@ let os = require("os"),
   jsmin = require("jsmin").jsmin,
   walt = require("walt-compiler").default,
   wabt = require("wabt"),
+  waquire = require("waquire"),
   FtpClient = require("ftp"),
   md5 = require("md5")
 
@@ -22,7 +23,7 @@ let os = require("os"),
 * Jakefile.js
 * For building web apps
 *
-* @date 11-may-2018
+* @date 19-jun-2018
 */
 let srcDir = "./src/",
   outDir = "./build/",
@@ -302,7 +303,7 @@ namespace("wasm", function () {
     console.log("\nCompiling Wast...")
     fileTypeList([".wast", ".wat"]).forEach(function (inFile) {
       let outFile = outputFile(inFile, ".wasm"),
-        output = "" + fs.readFileSync(inFile)
+        output = "" + waquire(inFile)
       console.log(inFile, "->", outFile)
 
       let module = wabt.parseWat(inFile, output)
