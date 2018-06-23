@@ -428,6 +428,11 @@ export default class WebSys implements Sys {
     }
   }
 
+  setNativeMouse(type: string) {
+    if (!this._displayContainer) return
+    this._displayContainer.style.cursor = type
+  }
+
   openWeb(url: string) {
     location.assign(url)
   }

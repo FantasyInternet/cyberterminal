@@ -38,6 +38,7 @@ Unified interface to system I/O
 * [read](_script__lib_sys_.sys.md#read)
 * [replaceTextInput](_script__lib_sys_.sys.md#replacetextinput)
 * [setDisplayMode](_script__lib_sys_.sys.md#setdisplaymode)
+* [setNativeMouse](_script__lib_sys_.sys.md#setnativemouse)
 * [setTextInput](_script__lib_sys_.sys.md#settextinput)
 * [setTitle](_script__lib_sys_.sys.md#settitle)
 * [startTone](_script__lib_sys_.sys.md#starttone)
@@ -134,7 +135,7 @@ ___
 
 ▸ **addEventListener**(event: *`string`*, listener: *`Function`*): `void`
 
-*Defined in [script/_lib/Sys.ts:126](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L126)*
+*Defined in [script/_lib/Sys.ts:132](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L132)*
 
 **Parameters:**
 
@@ -242,7 +243,7 @@ ___
 
 ▸ **openWeb**(url: *`string`*): `void`
 
-*Defined in [script/_lib/Sys.ts:124](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L124)*
+*Defined in [script/_lib/Sys.ts:130](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L130)*
 
 Open a link in default web browser.
 
@@ -332,6 +333,25 @@ Switch display mode.
 | mode |  "none" &#124; "text" &#124; "pixel"|  Name of mode to switch to |
 | width | `number` |  The width of the display in characters or pixels |
 | height | `number` |  The height of the display in characters or pixels |
+
+**Returns:** `void`
+
+___
+<a id="setnativemouse"></a>
+
+###  setNativeMouse
+
+▸ **setNativeMouse**(type: *`string`*): `void`
+
+*Defined in [script/_lib/Sys.ts:124](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L124)*
+
+Set the appearance of the native mouse cursor.
+
+**Parameters:**
+
+| Param | Type | Description |
+| ------ | ------ | ------ |
+| type | `string` |  Type of Cursor |
 
 **Returns:** `void`
 

@@ -82,6 +82,8 @@
   ;; Check if mouse button is pressed.
   (import "env" "getMousePressed" (func $getMousePressed (result i32)))
 
+  (import "env" "setNativeMouse" (func $setNativeMouse (param i32)))
+
   ;; Get X coodinate of game input. (-1 to 1)
   (import "env" "getGameAxisX" (func $getGameAxisX (result f32)))
   ;; Get Y coodinate of game input. (-1 to 1)
@@ -185,6 +187,8 @@
     (set_global $display (call $createImg (i32.const 320) (i32.const 200)))
     (call $setDisplayMode (i32.const 1) (i32.const 320) (i32.const 200))
     (call $focusInput (i32.const 3))
+    (call $setNativeMouse (i32.const 0))
+    (call $setNativeMouse (i32.const 1))
   )
   (export "init" (func $init))
 

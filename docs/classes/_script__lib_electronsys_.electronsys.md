@@ -45,6 +45,7 @@ Sys implementation for electron app. See [Sys](../interfaces/__lib_sys_.sys.md) 
 * [read](_script__lib_electronsys_.electronsys.md#read)
 * [replaceTextInput](_script__lib_electronsys_.electronsys.md#replacetextinput)
 * [setDisplayMode](_script__lib_electronsys_.electronsys.md#setdisplaymode)
+* [setNativeMouse](_script__lib_electronsys_.electronsys.md#setnativemouse)
 * [setTextInput](_script__lib_electronsys_.electronsys.md#settextinput)
 * [setTitle](_script__lib_electronsys_.electronsys.md#settitle)
 * [startTone](_script__lib_electronsys_.electronsys.md#starttone)
@@ -176,7 +177,7 @@ ___
 
 *Inherited from [WebSys](_script__lib_websys_.websys.md).[addEventListener](_script__lib_websys_.websys.md#addeventlistener)*
 
-*Defined in [script/_lib/WebSys.ts:435](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L435)*
+*Defined in [script/_lib/WebSys.ts:440](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L440)*
 
 **Parameters:**
 
@@ -432,6 +433,27 @@ ___
 | height | `number` | - |
 | `Default value` visibleWidth | `number` |  width |
 | `Default value` visibleHeight | `number` |  height |
+
+**Returns:** `void`
+
+___
+<a id="setnativemouse"></a>
+
+###  setNativeMouse
+
+▸ **setNativeMouse**(type: *`string`*): `void`
+
+*Implementation of [Sys](../interfaces/_script__lib_sys_.sys.md).[setNativeMouse](../interfaces/_script__lib_sys_.sys.md#setnativemouse)*
+
+*Inherited from [WebSys](_script__lib_websys_.websys.md).[setNativeMouse](_script__lib_websys_.websys.md#setnativemouse)*
+
+*Defined in [script/_lib/WebSys.ts:431](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L431)*
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| type | `string` |
 
 **Returns:** `void`
 

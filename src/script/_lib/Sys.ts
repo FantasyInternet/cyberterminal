@@ -118,6 +118,12 @@ export default interface Sys {
   replaceTextInput(search: string, replace: string, fromIndex: number): void
 
   /**
+   * Set the appearance of the native mouse cursor.
+   * @param type Type of Cursor
+   */
+  setNativeMouse(type: string): void
+
+  /**
    * Open a link in default web browser.
    * @param url URL to open
    */
