@@ -28,7 +28,7 @@ export default class GameInput {
     document.addEventListener("keyup", this._onKeyUp.bind(this))
 
     document.addEventListener("touchstart", this._onTouchOn.bind(this))
-    this._element.addEventListener("touchstart", this._onTouchOff.bind(this))
+    this._element.addEventListener("click", this._onTouchOff.bind(this))
     let left = <HTMLElement>this._element.querySelector(".left")
     left.addEventListener("touchstart", this._onLeftTouchStart.bind(this))
     left.addEventListener("touchmove", this._onLeftTouchMove.bind(this))
@@ -157,6 +157,7 @@ export default class GameInput {
       default:
         break
     }
+    localStorage.setItem("GameInput._device", this._device)
   }
 
   private _scanKeys() {
@@ -207,7 +208,7 @@ export default class GameInput {
     this._device = "touch"
   }
   private _onTouchOff(e: TouchEvent) {
-    if (e.changedTouches[0].target === this._element) {
+    if (e.target === this._element) {
       this.state.axis.x =
         this.state.axis.y = 0
       this.state.buttons.a =
@@ -313,13 +314,17 @@ export default class GameInput {
 
   private _onGamepadConnected(e: GamepadEvent) {
     this._gamepadIndex = e.gamepad.index
+    this._device = "gamepad"
     this._scanRaf = requestAnimationFrame(this._scanGamepad.bind(this))
+    localStorage.setItem("GameInput._device", this._device)
   }
 
   private _scanGamepad() {
-    if (!navigator.getGamepads().length) return
     cancelAnimationFrame(this._scanRaf)
+    if (!navigator.getGamepads().length) return
     let gamepad = <Gamepad>navigator.getGamepads()[this._gamepadIndex]
+    if (gamepad.buttons[0].pressed) this._device = "gamepad"
+    if (this._device !== "gamepad") return setTimeout(this._scanGamepad.bind(this), 256)
     this.state.axis.x = gamepad.axes[0].valueOf()
     this.state.axis.y = gamepad.axes[1].valueOf()
     this.state.buttons.a = gamepad.buttons[0].pressed
