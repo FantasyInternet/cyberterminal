@@ -16,7 +16,8 @@ Class for taking care of mouse input
 
 ### Properties
 
-* [scale](_script__lib_mouseinput_.mouseinput.md#scale)
+* [scaleX](_script__lib_mouseinput_.mouseinput.md#scalex)
+* [scaleY](_script__lib_mouseinput_.mouseinput.md#scaley)
 * [sys](_script__lib_mouseinput_.mouseinput.md#sys)
 
 ### Accessors
@@ -44,7 +45,7 @@ Class for taking care of mouse input
 
 ⊕ **new MouseInput**(sys: *[Sys](../interfaces/_script__lib_sys_.sys.md)*): [MouseInput](_script__lib_mouseinput_.mouseinput.md)
 
-*Defined in [script/_lib/MouseInput.ts:21](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/MouseInput.ts#L21)*
+*Defined in [script/_lib/MouseInput.ts:22](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/MouseInput.ts#L22)*
 
 **Parameters:**
 
@@ -58,13 +59,22 @@ ___
 
 ## Properties
 
-<a id="scale"></a>
+<a id="scalex"></a>
 
-###  scale
+###  scaleX
 
-**● scale**: *`number`* = 1
+**● scaleX**: *`number`* = 1
 
 *Defined in [script/_lib/MouseInput.ts:11](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/MouseInput.ts#L11)*
+
+___
+<a id="scaley"></a>
+
+###  scaleY
+
+**● scaleY**: *`number`* = 1
+
+*Defined in [script/_lib/MouseInput.ts:12](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/MouseInput.ts#L12)*
 
 ___
 <a id="sys"></a>
@@ -73,7 +83,7 @@ ___
 
 **● sys**: *[Sys](../interfaces/_script__lib_sys_.sys.md)*
 
-*Defined in [script/_lib/MouseInput.ts:23](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/MouseInput.ts#L23)*
+*Defined in [script/_lib/MouseInput.ts:24](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/MouseInput.ts#L24)*
 
 ___
 
@@ -85,7 +95,7 @@ ___
 
 setelement(val: *`HTMLElement`*): `void`
 
-*Defined in [script/_lib/MouseInput.ts:13](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/MouseInput.ts#L13)*
+*Defined in [script/_lib/MouseInput.ts:14](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/MouseInput.ts#L14)*
 
 **Parameters:**
 
@@ -105,7 +115,7 @@ ___
 
 ▸ **addEventListener**(fn: *`Function`*): `void`
 
-*Defined in [script/_lib/MouseInput.ts:31](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/MouseInput.ts#L31)*
+*Defined in [script/_lib/MouseInput.ts:32](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/MouseInput.ts#L32)*
 
 **Parameters:**
 
@@ -122,7 +132,7 @@ ___
 
 ▸ **blur**(): `void`
 
-*Defined in [script/_lib/MouseInput.ts:26](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/MouseInput.ts#L26)*
+*Defined in [script/_lib/MouseInput.ts:27](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/MouseInput.ts#L27)*
 
 **Returns:** `void`
 
@@ -133,7 +143,7 @@ ___
 
 ▸ **focus**(): `void`
 
-*Defined in [script/_lib/MouseInput.ts:25](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/MouseInput.ts#L25)*
+*Defined in [script/_lib/MouseInput.ts:26](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/MouseInput.ts#L26)*
 
 **Returns:** `void`
 
@@ -144,7 +154,7 @@ ___
 
 ▸ **removeEventListener**(fn: *`Function`*): `void`
 
-*Defined in [script/_lib/MouseInput.ts:38](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/MouseInput.ts#L38)*
+*Defined in [script/_lib/MouseInput.ts:39](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/MouseInput.ts#L39)*
 
 **Parameters:**
 
