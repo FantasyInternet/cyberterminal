@@ -1,2 +1,8 @@
 include ../_layout
+  script.
+    let app = window.require("electron").remote.app
+    let userstyles = app.getPath("userData")
+    if (userstyles.substr(-1) !== "/") userstyles += "/"
+    userstyles += "user.css"
+    document.write('<link rel="stylesheet" href="'+userstyles+'"/>')
   script(type="text/javascript", src="script/cyberterminal-electron.js")

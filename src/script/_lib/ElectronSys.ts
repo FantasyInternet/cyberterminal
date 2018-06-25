@@ -173,6 +173,11 @@ export default class ElectronSys extends WebSys {
   private async _createUserFolder() {
     let folder = app.getPath("userData")
     if (folder.substr(-1) !== "/") folder += "/"
+    try {
+      fs.readFileSync(folder + "user.css")
+    } catch (error) {
+      fs.writeFileSync(folder + "user.css", "/* Place your own custom styles here! :) */\nfantasy-terminal { background-color: black; }\n")
+    }
     folder += "os/"
     try {
       fs.mkdirSync(folder)
