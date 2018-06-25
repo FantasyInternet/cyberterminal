@@ -124,6 +124,7 @@ export default class Machine {
       this._baseUrl = url.toString()
       this._originUrl = this._baseUrl.substr(0, this._baseUrl.indexOf(url.pathname) + 1)
     }
+    this._sysCall("setAddress", this._baseUrl, false)
   }
   read(callback: number | Function) {
     callback = this._getCallback(callback)
@@ -354,6 +355,7 @@ export default class Machine {
   }
   getMouseX() { return this._mouseInputState.x }
   getMouseY() { return this._mouseInputState.y }
+  setNativeMouse(type: number) { this._sysCall("setNativeMouse", this._mouseTypes[type]) }
   getMousePressed() { return this._mouseInputState.pressed }
   getGameAxisX() { return this._gameInputState.axis.x }
   getGameAxisY() { return this._gameInputState.axis.y }
@@ -409,6 +411,7 @@ export default class Machine {
   private _mouseInputState: any = {
     x: 0, y: 0, pressed: false
   }
+  private _mouseTypes: string[] = ["none", "default"]
   private _gameInputState: any = {
     axis: { x: 0, y: 0 },
     buttons: { a: false, b: false, x: false, y: false }

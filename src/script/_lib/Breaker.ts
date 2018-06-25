@@ -12,7 +12,6 @@ export default class Breaker {
     document.addEventListener("keydown", (e: KeyboardEvent) => {
       if (e.code === "Escape" && this.state.level === 0) {
         this.state.level = 1
-        this._sendState()
         setTimeout(() => {
           if (this.state.level === 1) {
             this.state.level = 2
@@ -23,6 +22,7 @@ export default class Breaker {
     })
     document.addEventListener("keyup", (e: KeyboardEvent) => {
       if (e.code === "Escape") {
+        this._sendState()
         this.state.level = 0
         this._sendState()
       }

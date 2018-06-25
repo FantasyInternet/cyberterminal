@@ -24,10 +24,11 @@ export default interface Sys {
   startupUrl: string
 
   /**
-   * Set the title of the window.
-   * @param title New title
+   * Set the current URL.
+   * @param url URL
+   * @param push if it should be pushed to the navigation stack.
    */
-  setTitle(title: string): void
+  setAddress(url: string, push: boolean): void
 
   /**
    * Switch display mode.
@@ -116,6 +117,12 @@ export default interface Sys {
    * @param fromIndex position to search from
    */
   replaceTextInput(search: string, replace: string, fromIndex: number): void
+
+  /**
+   * Set the appearance of the native mouse cursor.
+   * @param type Type of Cursor
+   */
+  setNativeMouse(type: string): void
 
   /**
    * Open a link in default web browser.

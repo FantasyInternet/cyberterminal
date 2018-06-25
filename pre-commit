@@ -7,5 +7,6 @@
 #
 # To enable this hook, rename this file to "pre-commit".
 
-npm version patch --no-git-tag-version
+[ "$(git symbolic-ref --short -q HEAD)" = "dev"    ] && npm version patch --no-git-tag-version
+[ "$(git symbolic-ref --short -q HEAD)" = "master" ] && npm version minor --no-git-tag-version
 git add package*.json

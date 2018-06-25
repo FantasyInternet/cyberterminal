@@ -8,7 +8,8 @@ export default class MouseInput {
     x: 0, y: 0,
     pressed: false
   }
-  scale: number = 1
+  scaleX: number = 1
+  scaleY: number = 1
 
   set element(val: HTMLElement) {
     this._element.removeEventListener("pointermove", this._mouseMove.bind(this))
@@ -59,16 +60,17 @@ export default class MouseInput {
   }
 
   private _mouseMove(e: PointerEvent) {
-    clearTimeout(this._idleTO)
-    this.state.x = e.offsetX / this.scale * devicePixelRatio
-    this.state.y = e.offsetY / this.scale * devicePixelRatio
+    this.state.x = (e.pageX - this._element.getBoundingClientRect().left) / this.scaleX * devicePixelRatio
+    this.state.y = (e.pageY - this._element.getBoundingClientRect().top) / this.scaleY * devicePixelRatio
     this._sendState()
   }
   private _mouseDown(e: PointerEvent) {
-    this.state.x = e.offsetX / this.scale * devicePixelRatio
-    this.state.y = e.offsetY / this.scale * devicePixelRatio
+    clearTimeout(this._idleTO)
+    this.state.x = (e.pageX - this._element.offsetLeft) / this.scaleX * devicePixelRatio
+    this.state.y = (e.pageY - this._element.offsetTop) / this.scaleY * devicePixelRatio
     this.state.pressed = true
     this._sendState()
+    e.preventDefault()
   }
   private _mouseUp(e: PointerEvent) {
     this.state.pressed = false

@@ -38,7 +38,12 @@ export default class WebSys implements Sys {
     this.startupUrl = location.toString()
   }
 
-  setTitle(title: string) {
+  setAddress(url: string, push: boolean) {
+    if (push) {
+      history.pushState(url, url, url)
+    } else {
+      history.replaceState(url, url, url)
+    }
   }
 
   setDisplayMode(mode: "none" | "text" | "pixel", width: number, height: number, visibleWidth = width, visibleHeight = height) {
@@ -56,6 +61,7 @@ export default class WebSys implements Sys {
     delete this._displayBitmap
     delete this._displayCanvas
     delete this._displayContext
+    this._displayContainer && this._displayContainer.removeAttribute("style")
     switch (this._displayMode) {
       case "none":
         break
@@ -428,6 +434,11 @@ export default class WebSys implements Sys {
     }
   }
 
+  setNativeMouse(type: string) {
+    if (!this._displayContainer) return
+    this._displayContainer.style.cursor = type
+  }
+
   openWeb(url: string) {
     location.assign(url)
   }
@@ -584,6 +595,8 @@ export default class WebSys implements Sys {
       this._displayTextSize += this._displayTextSizeDelta
       this._displayTextGrid.style.fontSize = this._displayTextSize + "px"
     }
+    this.mouseInput.scaleX = this._displayTextGrid.offsetWidth / this._displayWidth * devicePixelRatio
+    this.mouseInput.scaleY = this._displayTextGrid.offsetHeight / this._displayHeight * devicePixelRatio
   }
 
   private _resizeCanvas(checkHeight = true) {
@@ -613,10 +626,11 @@ export default class WebSys implements Sys {
     this._displayCanvas.style.marginTop = this._displayCanvas.style.marginBottom =
       (this._visibleHeight - this._displayCanvas.height) / 2 * this._displayScale / devicePixelRatio + "px"
     this._displayCanvas.style.display = "inline-block"
-    if (!checkHeight)
+    if (!checkHeight) {
       requestAnimationFrame(this._resizeCanvas.bind(this))
-    else
-      this.mouseInput.scale = this._displayScale
+    } else {
+      this.mouseInput.scaleX = this.mouseInput.scaleY = this._displayScale
+    }
   }
 
   private _dirCache(path: string, exists?: boolean, cache = dirCache): any {
@@ -638,6 +652,7 @@ export default class WebSys implements Sys {
 
 class WebMachineWorker implements MachineWorker {
   worker: Worker
+  baseUrl: string = ""
 
   constructor() {
     this.worker = new Worker(scriptSrc)
