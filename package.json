@@ -1,6 +1,6 @@
 {
   "name": "cyberterminal",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "A fantasy internet client.",
   "author": {
     "name": "codeartisticninja",
@@ -16,8 +16,13 @@
     },
     "win": {
       "target": [
-        "nsis",
-        "portable"
+        {
+          "target": "nsis",
+          "arch": [
+            "x64",
+            "ia32"
+          ]
+        }
       ],
       "icon": "icons/512x512.png"
     },
