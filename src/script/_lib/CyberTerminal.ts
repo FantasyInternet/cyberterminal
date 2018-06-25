@@ -31,10 +31,24 @@ export default class CyberTerminal {
         }
       }
     })
+    addEventListener("popstate", (e: PopStateEvent) => {
+      if (e.state !== this.machineWorkers[this.machineWorkers.length - 1].baseUrl)
+        this.removeMachine()
+    })
   }
 
   async connectTo(url: string) {
-    if (this._connecting) return
+    if (this._connecting) {
+      clearTimeout(this._connecting)
+      this._connecting = setTimeout(() => {
+        this._connecting = null
+      }, 2048)
+      this.machineWorkers[this.machineWorkers.length - 1].send({
+        cmd: "resume"
+      })
+      return
+    }
+    console.log("Connecting to", url)
     this.sys.setDisplayMode("text", 80, 20)
     this.sys.print("\n\nConnecting to " + url)
     this._connecting = true
@@ -42,7 +56,7 @@ export default class CyberTerminal {
     let msg = await this._findBoot(url)
     if (msg.wasm) {
       this.sys.print(".")
-      this.sys.setTitle("" + msg.url)
+      this.sys.setAddress("" + msg.url, true)
       this.sys.setDisplayMode("none", 0, 0)
       machine.send({
         cmd: "resize",
@@ -51,13 +65,13 @@ export default class CyberTerminal {
       machine.send(msg)
       this._connecting = setTimeout(() => {
         this._connecting = null
-      }, 1024)
+      }, 2048)
     } else if (typeof process !== "undefined") {
       this.sys.print(".")
       this._connecting = setTimeout(() => {
         this.removeMachine()
         this._connecting = null
-      }, 1024)
+      }, 2048)
       this.sys.openWeb(url)
     } else if (location.toString() !== url) {
       this.sys.print(".")
@@ -84,6 +98,11 @@ export default class CyberTerminal {
     if (machine) machine.terminate()
     this.sys.setDisplayMode("text", 80, 20)
     this.sys.print("\n\nDisconnecting...")
+    if (history.length > 1) {
+      history.back()
+    } else {
+      this.sys.setAddress(this.machineWorkers[this.machineWorkers.length - 1].baseUrl, false)
+    }
     setTimeout(() => {
       if (this.machineWorkers.length) {
         this.sys.setDisplayMode("none", 0, 0)
@@ -98,6 +117,11 @@ export default class CyberTerminal {
     }, 128)
     this.sys.textInput.setState({ type: "multiline", text: "", pos: 0, len: 0 })
     this.sys.chipSound.stopAll()
+  }
+
+  setAddress(url: string, push: boolean) {
+    this.machineWorkers[this.machineWorkers.length - 1].baseUrl = url
+    this.sys.setAddress(url, push)
   }
 
 

@@ -124,6 +124,7 @@ export default class Machine {
       this._baseUrl = url.toString()
       this._originUrl = this._baseUrl.substr(0, this._baseUrl.indexOf(url.pathname) + 1)
     }
+    this._sysCall("setAddress", this._baseUrl, false)
   }
   read(callback: number | Function) {
     callback = this._getCallback(callback)

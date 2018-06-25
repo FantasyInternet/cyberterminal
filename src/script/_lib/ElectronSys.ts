@@ -38,8 +38,8 @@ export default class ElectronSys extends WebSys {
     this._createUserFolder()
   }
 
-  setTitle(title: string) {
-    document.title = title + " - " + this._title
+  setAddress(url: string, push: boolean) {
+    document.title = url + " - " + this._title
   }
 
   read(filename: string, options: any = {}): Promise<any> {

@@ -2,6 +2,9 @@
  * Interface to MachineWorker
  */
 interface MachineWorker {
+  /** Current base URL. */
+  baseUrl: string
+
   /**
    * Send a message to machine.
    * @param msg Message to send

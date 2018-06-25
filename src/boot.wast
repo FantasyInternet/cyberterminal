@@ -150,11 +150,11 @@
     (data (i32.const 0xf400) "Colors!\n\1b[40mblack?\n\1b[41mred\n\1b[42mgreen\n\1b[43myellow\1b[m\n\1b[44mblue")
     (data (i32.const 0xf500) "\1b[m\n\1b[45mmagenta\1b[m\n\1b[0;46mcyan\1b[m\n\1b[47mwhite\1b[u")
     (data (i32.const 0xf600) "foo=bar&life=42");;15
+    (data (i32.const 0xf700) "../../FantasyInternet.github.io/");;33
     (data (i32.const 1010) "Hello world from WASM!");;22
     (data (i32.const 1040) "./images/sleepyhead.png");;23
     (data (i32.const 1080) "./images/pointer.png");;20
     (data (i32.const 1120) "./images/font.png");;17
-    (data (i32.const 1160) "http://codeartistic.ninja");;25
     (data (i32.const 1190) "readImage");;9
 
   ;; Global variables
@@ -187,8 +187,7 @@
     (set_global $display (call $createImg (i32.const 320) (i32.const 200)))
     (call $setDisplayMode (i32.const 1) (i32.const 320) (i32.const 200))
     (call $focusInput (i32.const 3))
-    (call $setNativeMouse (i32.const 0))
-    (call $setNativeMouse (i32.const 1))
+    (set_global $codeartistic (call $createString (i32.const 0xf700)))
   )
   (export "init" (func $init))
 
@@ -220,6 +219,13 @@
     (if (call $getMousePressed)(then
       (set_global $ballX (f32.convert_s/i32 (call $getMouseX)))
       (set_global $ballY (f32.convert_s/i32 (call $getMouseY)))
+      (call $setNativeMouse (i32.const 0))
+    )(else
+      (call $setNativeMouse (i32.const 1))
+    ))
+    (if (call $getInputKey)(then
+      (call $log (call $pushFromMemory (call $getPartOffset (get_global $codeartistic)) (call $getPartLength (get_global $codeartistic))))
+      (call $connectTo (call $pushFromMemory (call $getPartOffset (get_global $codeartistic)) (call $getPartLength (get_global $codeartistic))))
     ))
   )
   (export "step" (func $step))

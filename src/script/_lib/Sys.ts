@@ -24,10 +24,11 @@ export default interface Sys {
   startupUrl: string
 
   /**
-   * Set the title of the window.
-   * @param title New title
+   * Set the current URL.
+   * @param url URL
+   * @param push if it should be pushed to the navigation stack.
    */
-  setTitle(title: string): void
+  setAddress(url: string, push: boolean): void
 
   /**
    * Switch display mode.

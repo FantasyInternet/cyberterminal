@@ -38,7 +38,12 @@ export default class WebSys implements Sys {
     this.startupUrl = location.toString()
   }
 
-  setTitle(title: string) {
+  setAddress(url: string, push: boolean) {
+    if (push) {
+      history.pushState(url, url, url)
+    } else {
+      history.replaceState(url, url, url)
+    }
   }
 
   setDisplayMode(mode: "none" | "text" | "pixel", width: number, height: number, visibleWidth = width, visibleHeight = height) {
@@ -56,6 +61,7 @@ export default class WebSys implements Sys {
     delete this._displayBitmap
     delete this._displayCanvas
     delete this._displayContext
+    this._displayContainer && this._displayContainer.removeAttribute("style")
     switch (this._displayMode) {
       case "none":
         break
@@ -643,6 +649,7 @@ export default class WebSys implements Sys {
 
 class WebMachineWorker implements MachineWorker {
   worker: Worker
+  baseUrl: string = ""
 
   constructor() {
     this.worker = new Worker(scriptSrc)

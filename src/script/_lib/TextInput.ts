@@ -94,6 +94,7 @@ export default class TextInput {
 
   private _keyDown(e?: KeyboardEvent) {
     if (e && e.altKey && e.code === "KeyG") this.sys.focusInput("game")
+    if (e && e.code === "Escape") return
     requestAnimationFrame(() => {
       let input = <HTMLInputElement>this._input
       this.state.text = input.value

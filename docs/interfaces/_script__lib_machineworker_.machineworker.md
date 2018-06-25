@@ -14,6 +14,10 @@ Interface to MachineWorker
 
 ## Index
 
+### Properties
+
+* [baseUrl](_script__lib_machineworker_.machineworker.md#baseurl)
+
 ### Methods
 
 * [onMessage](_script__lib_machineworker_.machineworker.md#onmessage)
@@ -21,6 +25,20 @@ Interface to MachineWorker
 * [terminate](_script__lib_machineworker_.machineworker.md#terminate)
 
 ---
+
+## Properties
+
+<a id="baseurl"></a>
+
+###  baseUrl
+
+**● baseUrl**: *`string`*
+
+*Defined in [script/_lib/MachineWorker.ts:6](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/MachineWorker.ts#L6)*
+
+Current base URL.
+
+___
 
 ## Methods
 
@@ -30,7 +48,7 @@ Interface to MachineWorker
 
 ▸ **onMessage**(listener: *`Function`*): `void`
 
-*Defined in [script/_lib/MachineWorker.ts:16](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/MachineWorker.ts#L16)*
+*Defined in [script/_lib/MachineWorker.ts:19](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/MachineWorker.ts#L19)*
 
 Register an event listener for received messages.
 
@@ -49,7 +67,7 @@ ___
 
 ▸ **send**(msg: *`any`*, transferables?: *`any`[]*): `void`
 
-*Defined in [script/_lib/MachineWorker.ts:10](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/MachineWorker.ts#L10)*
+*Defined in [script/_lib/MachineWorker.ts:13](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/MachineWorker.ts#L13)*
 
 Send a message to machine.
 
@@ -69,7 +87,7 @@ ___
 
 ▸ **terminate**(): `void`
 
-*Defined in [script/_lib/MachineWorker.ts:21](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/MachineWorker.ts#L21)*
+*Defined in [script/_lib/MachineWorker.ts:24](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/MachineWorker.ts#L24)*
 
 Terminate the machine!
 
