@@ -39,10 +39,12 @@ export default class WebSys implements Sys {
   }
 
   setAddress(url: string, push: boolean) {
-    if (push) {
-      history.pushState(url, url, url)
-    } else {
-      history.replaceState(url, url, url)
+    if (url !== location.toString()) {
+      if (push) {
+        history.pushState(url, url, url)
+      } else {
+        history.replaceState(url, url, url)
+      }
     }
   }
 

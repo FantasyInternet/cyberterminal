@@ -32,8 +32,11 @@ export default class CyberTerminal {
       }
     })
     addEventListener("popstate", (e: PopStateEvent) => {
-      if (e.state !== this.machineWorkers[this.machineWorkers.length - 1].baseUrl)
-        this.removeMachine()
+      if (this.machineWorkers.length) {
+        if (e.state !== this.machineWorkers[this.machineWorkers.length - 1].baseUrl) {
+          this.removeMachine()
+        }
+      }
     })
   }
 
@@ -96,23 +99,21 @@ export default class CyberTerminal {
   removeMachine() {
     let machine = this.machineWorkers.pop()
     if (machine) machine.terminate()
+    console.log("Disconnecting from", machine ? machine.baseUrl : machine)
     this.sys.setDisplayMode("text", 80, 20)
     this.sys.print("\n\nDisconnecting...")
-    if (history.length > 1) {
-      history.back()
-    } else {
+    history.back()
+    if (this.machineWorkers.length)
       this.sys.setAddress(this.machineWorkers[this.machineWorkers.length - 1].baseUrl, false)
-    }
     setTimeout(() => {
       if (this.machineWorkers.length) {
         this.sys.setDisplayMode("none", 0, 0)
         this.machineWorkers[this.machineWorkers.length - 1].send({ cmd: "resume" })
       } else {
-        if (history.length > 1) {
-          history.back()
-        } else {
-          location.reload(true)
-        }
+        history.back()
+        setTimeout(() => {
+          location.reload()
+        }, 1024)
       }
     }, 128)
     this.sys.textInput.setState({ type: "multiline", text: "", pos: 0, len: 0 })

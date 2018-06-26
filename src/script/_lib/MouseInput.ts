@@ -66,8 +66,8 @@ export default class MouseInput {
   }
   private _mouseDown(e: PointerEvent) {
     clearTimeout(this._idleTO)
-    this.state.x = (e.pageX - this._element.offsetLeft) / this.scaleX * devicePixelRatio
-    this.state.y = (e.pageY - this._element.offsetTop) / this.scaleY * devicePixelRatio
+    this.state.x = (e.pageX - this._element.getBoundingClientRect().left) / this.scaleX * devicePixelRatio
+    this.state.y = (e.pageY - this._element.getBoundingClientRect().top) / this.scaleY * devicePixelRatio
     this.state.pressed = true
     this._sendState()
     e.preventDefault()
