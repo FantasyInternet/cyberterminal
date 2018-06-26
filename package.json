@@ -30,8 +30,14 @@
       "category": "your.app.category.type"
     },
     "linux": {
-      "target": [
-        "deb"
+      "target":[
+        {
+          "target": "deb",
+          "arch": [
+            "x64",
+            "ia32"
+          ]
+        }
       ],
       "icon": "icons/"
     },
