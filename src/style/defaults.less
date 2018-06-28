@@ -6,7 +6,7 @@ fantasy-terminal {
   justify-content: center;
   overflow: hidden;
   position: relative;
-  touch-action: none !important;
+  touch-action: none;
   min-width: 1em;
   min-height: 1em;
   max-height: 100vh;
@@ -18,22 +18,22 @@ fantasy-terminal {
     }
   }
   canvas {
-    min-width: none !important;
-    max-width: none !important;
-    min-height: none !important;
-    max-height: none !important;
+    min-width: none;
+    max-width: none;
+    min-height: none;
+    max-height: none;
   }
   .input {
-    position: absolute !important;
-    top: 0 !important;
-    left: 0 !important;
+    position: absolute;
+    top: 0;
+    left: 0;
     .text {
-      position: absolute !important;
-      right: 100vw !important;
-      bottom: 100vh !important;
+      position: absolute;
+      right: 100vw;
+      bottom: 100vh;
       textarea,
       input {
-        position: static !important;
+        position: static;
       }
     }
     .game {
@@ -72,7 +72,7 @@ fantasy-terminal {
       }
       .left,
       .right {
-        touch-action: none !important;
+        touch-action: none;
         position: absolute;
         bottom: 0;
         width: 40%;

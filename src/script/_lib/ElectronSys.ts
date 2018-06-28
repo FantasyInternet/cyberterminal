@@ -1,4 +1,5 @@
 import WebSys from "./WebSys"
+import css from "./css"
 //@ts-ignore
 let fs: any, path: any, shell: any, win: any, process: any, app: any; if (typeof window !== "undefined") {
   //@ts-ignore
@@ -23,6 +24,8 @@ export default class ElectronSys extends WebSys {
 
   constructor() {
     super()
+    //@ts-ignore
+    document.querySelector("style").textContent = css
     this._initHotkeys()
     this.startupUrl = path.join(app.getPath("userData"), "os") + "/"
     if (process.argv.length > 1) {

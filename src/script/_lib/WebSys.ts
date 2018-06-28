@@ -64,6 +64,7 @@ export default class WebSys implements Sys {
     delete this._displayCanvas
     delete this._displayContext
     this._displayContainer && this._displayContainer.removeAttribute("style")
+    this._displayCursorHistory = []
     switch (this._displayMode) {
       case "none":
         break
@@ -481,7 +482,7 @@ export default class WebSys implements Sys {
 
   private _initContainer() {
     let style = document.createElement("style")
-    style.textContent = css
+    style.textContent = css.replace(/;/g, " !important;")
       ; (<HTMLElement>document.querySelector("head")).insertBefore(style, document.querySelector("head *"))
     this._container.innerHTML = '<div class="display"></div><div class="input"><div class="text"></div><div class="mouse"></div><div class="game"></div></div>'
     this._displayContainer = <HTMLElement>this._container.querySelector(".display")
@@ -538,11 +539,28 @@ export default class WebSys implements Sys {
       }
       parent.appendChild(row)
       this._displayCursorRow--
+      for (let pos of this._displayCursorHistory) {
+        pos.row--
+      }
     }
   }
 
   private _clearTextRect(col: number, row: number, w: number, h: number) {
     if (!this._displayTextGrid) return
+    if (col < 0) {
+      w += col
+      col = 0
+    }
+    if (row < 0) {
+      h += row
+      row = 0
+    }
+    if (col + w > this._displayWidth) {
+      w = this._displayWidth - col
+    }
+    if (row + h > this._displayHeight) {
+      h = this._displayHeight - row
+    }
     for (let down = 0; down < h; down++) {
       for (let right = 0; right < w; right++) {
         let selector = `div:nth-child(${row + down + 1})\nspan:nth-child(${col + right + 1})`

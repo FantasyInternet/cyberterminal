@@ -1,6 +1,6 @@
 {
   "name": "cyberterminal",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "A fantasy internet client.",
   "author": {
     "name": "codeartisticninja",
@@ -54,7 +54,7 @@
     "browserify": "^16.2.2",
     "cssmin": "^0.4.3",
     "electron-builder": "^20.15.1",
-    "fantasyinternet.wast": "0.0.2",
+    "fantasyinternet.wast": "0.0.4",
     "file-watch": "^0.1.0",
     "ftp": "^0.3.10",
     "htmlmin": "0.0.7",

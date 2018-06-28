@@ -27,7 +27,7 @@
 
 **● app**: *`any`*
 
-*Defined in [script/_lib/ElectronSys.ts:3](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/ElectronSys.ts#L3)*
+*Defined in [script/_lib/ElectronSys.ts:4](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/ElectronSys.ts#L4)*
 
 ___
 <a id="fs"></a>
@@ -36,7 +36,7 @@ ___
 
 **● fs**: *`any`*
 
-*Defined in [script/_lib/ElectronSys.ts:3](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/ElectronSys.ts#L3)*
+*Defined in [script/_lib/ElectronSys.ts:4](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/ElectronSys.ts#L4)*
 
 ___
 <a id="path"></a>
@@ -45,7 +45,7 @@ ___
 
 **● path**: *`any`*
 
-*Defined in [script/_lib/ElectronSys.ts:3](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/ElectronSys.ts#L3)*
+*Defined in [script/_lib/ElectronSys.ts:4](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/ElectronSys.ts#L4)*
 
 ___
 <a id="process"></a>
@@ -54,7 +54,7 @@ ___
 
 **● process**: *`any`*
 
-*Defined in [script/_lib/ElectronSys.ts:3](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/ElectronSys.ts#L3)*
+*Defined in [script/_lib/ElectronSys.ts:4](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/ElectronSys.ts#L4)*
 
 ___
 <a id="shell"></a>
@@ -63,7 +63,7 @@ ___
 
 **● shell**: *`any`*
 
-*Defined in [script/_lib/ElectronSys.ts:3](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/ElectronSys.ts#L3)*
+*Defined in [script/_lib/ElectronSys.ts:4](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/ElectronSys.ts#L4)*
 
 ___
 <a id="win"></a>
@@ -72,7 +72,7 @@ ___
 
 **● win**: *`any`*
 
-*Defined in [script/_lib/ElectronSys.ts:3](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/ElectronSys.ts#L3)*
+*Defined in [script/_lib/ElectronSys.ts:4](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/ElectronSys.ts#L4)*
 
 ___
 
