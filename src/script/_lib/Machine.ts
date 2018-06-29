@@ -1,4 +1,6 @@
-var wabt = require("./wabt")
+import { partials } from "handlebars"
+
+let wabt = require("./wabt")
 
 /**
  * Central processing unit for browsers
@@ -693,4 +695,25 @@ export default class Machine {
     }
     return callback
   }
+
+  private _getMemoryTable(pid: number = 0) {
+    let buf = this._processes[pid].instance.exports.memory.buffer
+    let mem = new Uint32Array(buf.slice(0, 16))
+    mem = new Uint32Array(buf.slice(mem[2], mem[2] + mem[3]))
+    let index = []
+    for (let i = 0; i < mem.length; i += 4) {
+      index.push({ id: mem[i + 0], parent: mem[i + 1], offset: mem[i + 2], len: mem[i + 3] })
+    }
+    return index
+  }
+  private _getMemoryPart(id: number, pid: number = 0) {
+    let buf = this._processes[pid].instance.exports.memory.buffer
+    let index = this._getMemoryTable(pid)
+    for (let partInfo of index) {
+      if (partInfo.id === id) {
+        return buf.slice(partInfo.offset, partInfo.offset + partInfo.len)
+      }
+    }
+  }
+
 }
