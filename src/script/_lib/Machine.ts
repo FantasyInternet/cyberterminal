@@ -112,6 +112,9 @@ export default class Machine {
     this._sysCall("removeMachine")
     this._active = false
   }
+  getOriginUrl() {
+    return this._pushString(this._originUrl)
+  }
   getBaseUrl() {
     return this._pushString(this._baseUrl)
   }
@@ -246,6 +249,7 @@ export default class Machine {
     let env = this._processes.length ? this._generateProcessApi() : this._generateRomApi()
     let pid = this._processes.length
     this._processes.push(null)
+    console.log("loading process", pid)
     //@ts-ignore
     WebAssembly.instantiate(wasm, { env, Math }).then((process) => {
       this._activePID = pid
@@ -255,6 +259,8 @@ export default class Machine {
           process.instance.exports.init()
           this._active = true
         } catch (error) {
+          console.trace(error)
+          this.killProcess(pid)
           this._die(error)
         }
       }
@@ -262,28 +268,51 @@ export default class Machine {
       if (this._activePID === 0) this._tick()
       this._activePID = 0
     }).catch((err: any) => {
+      console.trace(err)
       this._processes[pid] = false
       if (!pid) {
         this._die(err)
       }
+      if (this._activePID === 0) this._tick()
     })
     return pid
+  }
+  processStatus(pid: number) {
+    if (this._processes[pid] === false) return -1
+    if (this._processes[pid] === undefined) return 0
+    if (this._processes[pid] === null) return 1
+    if (this._processes[pid]) return 2
   }
   stepProcess(pid: number) {
     let oldpid = this._activePID
     this._activePID = pid
     let process = this._processes[this._activePID]
-    if (process) process.instance.export.step(performance.now())
+    if (process && process.instance.exports.step) {
+      try {
+        process.instance.exports.step(performance.now())
+      } catch (error) {
+        console.trace(error)
+        this.killProcess(pid)
+      }
+    }
     this._activePID = oldpid
   }
   callbackProcess(pid: number, tableIndex: number, ...a: any[]) {
     let oldpid = this._activePID
     this._activePID = pid
     let process = this._processes[this._activePID]
-    if (process) process.instance.export.table.get(tableIndex)(...a)
+    if (process) {
+      try {
+        process.instance.exports.table.get(tableIndex)(...a)
+      } catch (error) {
+        console.trace(error)
+        this.killProcess(pid)
+      }
+    }
     this._activePID = oldpid
   }
   killProcess(pid: number) {
+    this._processes[pid] && console.log("killing process", pid)
     this._processes[pid] = false
     this._activePID = 0
   }
@@ -294,7 +323,6 @@ export default class Machine {
     if (!srcProcess) throw "No active process!"
     let ar = new Uint8Array(destProcess.instance.exports.memory.buffer)
     ar.set(new Uint8Array(srcProcess.instance.exports.memory.buffer.slice(srcOffset, srcOffset + length)), destOffset)
-    // this._bufferStack.push(ar.buffer)
   }
 
   focusInput(input: number) {
@@ -620,8 +648,8 @@ export default class Machine {
     let exports = this._processes[0].instance.exports
     for (let name of Object.getOwnPropertyNames(exports)) {
       let val = (<any>exports)[name]
-      if (name.substr(0, 4) === "api." && typeof val === "function") {
-        api[name] = val
+      if (name.substr(0, 4) === "env." && typeof val === "function") {
+        api[name.substr(4)] = val
       }
     }
     return api
@@ -689,9 +717,25 @@ export default class Machine {
 
   private _getCallback(callback: number | Function) {
     if (typeof callback === "number") {
-      let process = this._processes[this._activePID]
+      let pid = this._activePID
+      let process = this._processes[pid]
       if (!process) throw "No active process!"
-      callback = process.instance.exports.table.get(callback)
+      let num = callback
+      // callback = process.instance.exports.table.get(num)
+      callback = (...args: any[]) => {
+        let oldpid = this._activePID
+        let out: any
+        try {
+          this._activePID = pid
+          process = this._processes[pid]
+          out = process.instance.exports.table.get(num).apply(this, args)
+        } catch (error) {
+          console.trace(error)
+          this.killProcess(pid)
+        }
+        this._activePID = oldpid
+        return out
+      }
     }
     return callback
   }
