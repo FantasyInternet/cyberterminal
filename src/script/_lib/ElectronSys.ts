@@ -27,7 +27,7 @@ export default class ElectronSys extends WebSys {
     //@ts-ignore
     document.querySelector("style").textContent = css
     this._initHotkeys()
-    this.startupUrl = path.join(app.getPath("userData"), "os") + "/"
+    this.startupUrl = path.join(app.getPath("userData"), "startup") + "/"
     if (process.argv.length > 1) {
       this.startupUrl = process.argv.pop()
     }
@@ -187,7 +187,10 @@ export default class ElectronSys extends WebSys {
     } catch (error) {
       fs.writeFileSync(folder + "user.css", "/* Place your own custom styles here! :) */\nfantasy-terminal { background-color: black; }\n")
     }
-    folder += "os/"
+    try {
+      fs.renameSync(folder + "os", folder + "startup")
+    } catch (error) { }
+    folder += "startup/"
     try {
       fs.mkdirSync(folder)
     } catch (error) { }
