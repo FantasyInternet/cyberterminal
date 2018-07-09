@@ -27,7 +27,7 @@ export default class ElectronSys extends WebSys {
     //@ts-ignore
     document.querySelector("style").textContent = css
     this._initHotkeys()
-    this.startupUrl = path.join(app.getPath("userData"), "os") + "/"
+    this.startupUrl = path.join(app.getPath("userData"), "startup") + "/"
     if (process.argv.length > 1) {
       this.startupUrl = process.argv.pop()
     }
@@ -102,10 +102,16 @@ export default class ElectronSys extends WebSys {
         } catch (error) { }
         path += "/" + parts.shift()
       }
+      let rnd = Math.random().toString()
       //@ts-ignore
-      fs.writeFile(filename, data, (err, res) => {
-        if (err) reject("write error!")
-        else resolve(true)
+      fs.writeFile(filename + rnd, data, (err, res) => {
+        if (err) {
+          reject("write error!")
+          fs.unlink(filename + rnd)
+        } else {
+          fs.renameSync(filename + rnd, filename)
+          resolve(true)
+        }
       })
     })
   }
@@ -125,13 +131,13 @@ export default class ElectronSys extends WebSys {
     })
   }
   list(path: string) {
-    if (path.substr(-1) === "/") path = path.substr(0, path.length - 1)
     let url = new URL(path)
     if (url.protocol !== "file:") {
       return super.list(path)
     }
     path = decodeURI(url.pathname)
     if (process.platform === "win32") path = path.substr(1)
+    if (path.substr(-1) === "/") path = path.substr(0, path.length - 1)
     return new Promise<any>((resolve, reject) => {
       //@ts-ignore
       fs.readdir(path, (err, files) => {
@@ -151,8 +157,14 @@ export default class ElectronSys extends WebSys {
     })
   }
 
-  openWeb(url: string) {
-    shell.openExternal(url)
+  openWeb(path: string) {
+    let url = new URL(path)
+    if (url.protocol !== "file:") {
+      return shell.openExternal(path)
+    }
+    path = decodeURI(url.pathname)
+    if (process.platform === "win32") path = path.substr(1)
+    shell.showItemInFolder(path)
   }
 
   /** _privates */
@@ -181,7 +193,10 @@ export default class ElectronSys extends WebSys {
     } catch (error) {
       fs.writeFileSync(folder + "user.css", "/* Place your own custom styles here! :) */\nfantasy-terminal { background-color: black; }\n")
     }
-    folder += "os/"
+    try {
+      fs.renameSync(folder + "os", folder + "startup")
+    } catch (error) { }
+    folder += "startup/"
     try {
       fs.mkdirSync(folder)
     } catch (error) { }

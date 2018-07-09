@@ -214,7 +214,7 @@ ___
 
 *Overrides [WebSys](_script__lib_websys_.websys.md).[delete](_script__lib_websys_.websys.md#delete)*
 
-*Defined in [script/_lib/ElectronSys.ts:112](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/ElectronSys.ts#L112)*
+*Defined in [script/_lib/ElectronSys.ts:118](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/ElectronSys.ts#L118)*
 
 **Parameters:**
 
@@ -296,7 +296,7 @@ ___
 
 *Overrides [WebSys](_script__lib_websys_.websys.md).[list](_script__lib_websys_.websys.md#list)*
 
-*Defined in [script/_lib/ElectronSys.ts:127](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/ElectronSys.ts#L127)*
+*Defined in [script/_lib/ElectronSys.ts:133](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/ElectronSys.ts#L133)*
 
 **Parameters:**
 
@@ -311,21 +311,21 @@ ___
 
 ###  openWeb
 
-▸ **openWeb**(url: *`string`*): `void`
+▸ **openWeb**(path: *`string`*): `any`
 
 *Implementation of [Sys](../interfaces/_script__lib_sys_.sys.md).[openWeb](../interfaces/_script__lib_sys_.sys.md#openweb)*
 
 *Overrides [WebSys](_script__lib_websys_.websys.md).[openWeb](_script__lib_websys_.websys.md#openweb)*
 
-*Defined in [script/_lib/ElectronSys.ts:154](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/ElectronSys.ts#L154)*
+*Defined in [script/_lib/ElectronSys.ts:160](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/ElectronSys.ts#L160)*
 
 **Parameters:**
 
 | Param | Type |
 | ------ | ------ |
-| url | `string` |
+| path | `string` |
 
-**Returns:** `void`
+**Returns:** `any`
 
 ___
 <a id="post"></a>

@@ -23,7 +23,7 @@ let os = require("os"),
 * Jakefile.js
 * For building web apps
 *
-* @date 23-jun-2018
+* @date 03-jul-2018
 */
 let srcDir = "./src/",
   outDir = "./build/",
@@ -296,7 +296,7 @@ namespace("js", function () {
 
 namespace("wasm", function () {
   let wabt_opts = {
-
+    write_debug_names: debug
   }
 
   task("wast", function () {
@@ -306,6 +306,7 @@ namespace("wasm", function () {
         output = "" + waquire("./" + inFile)
       console.log(inFile, "->", outFile)
 
+      wabt_opts.write_debug_names = debug
       let module = wabt.parseWat(inFile, output)
       output = module.toBinary(wabt_opts).buffer
 

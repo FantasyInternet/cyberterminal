@@ -90,6 +90,11 @@ export default class Machine {
     //@ts-ignore
     ar.set(new Uint8Array(this._popArrayBuffer()), offset)
   }
+  teeToMemory(offset: number) {
+    let len = this.getBufferSize()
+    this.popToMemory(offset)
+    this._bufferStackLengths.push(len)
+  }
   getBufferSize(indexFromEnd: number = 0) {
     indexFromEnd++
     return this._bufferStackLengths[this._bufferStackLengths.length - indexFromEnd] || 0
