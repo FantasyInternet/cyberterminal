@@ -102,10 +102,16 @@ export default class ElectronSys extends WebSys {
         } catch (error) { }
         path += "/" + parts.shift()
       }
+      let rnd = Math.random().toString()
       //@ts-ignore
-      fs.writeFile(filename, data, (err, res) => {
-        if (err) reject("write error!")
-        else resolve(true)
+      fs.writeFile(filename + rnd, data, (err, res) => {
+        if (err) {
+          reject("write error!")
+          fs.unlink(filename + rnd)
+        } else {
+          fs.renameSync(filename + rnd, filename)
+          resolve(true)
+        }
       })
     })
   }
