@@ -311,7 +311,7 @@ ___
 
 ###  openWeb
 
-▸ **openWeb**(url: *`string`*): `void`
+▸ **openWeb**(path: *`string`*): `any`
 
 *Implementation of [Sys](../interfaces/_script__lib_sys_.sys.md).[openWeb](../interfaces/_script__lib_sys_.sys.md#openweb)*
 
@@ -323,9 +323,9 @@ ___
 
 | Param | Type |
 | ------ | ------ |
-| url | `string` |
+| path | `string` |
 
-**Returns:** `void`
+**Returns:** `any`
 
 ___
 <a id="post"></a>

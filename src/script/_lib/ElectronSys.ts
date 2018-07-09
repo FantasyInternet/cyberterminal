@@ -131,13 +131,13 @@ export default class ElectronSys extends WebSys {
     })
   }
   list(path: string) {
-    if (path.substr(-1) === "/") path = path.substr(0, path.length - 1)
     let url = new URL(path)
     if (url.protocol !== "file:") {
       return super.list(path)
     }
     path = decodeURI(url.pathname)
     if (process.platform === "win32") path = path.substr(1)
+    if (path.substr(-1) === "/") path = path.substr(0, path.length - 1)
     return new Promise<any>((resolve, reject) => {
       //@ts-ignore
       fs.readdir(path, (err, files) => {
@@ -157,8 +157,14 @@ export default class ElectronSys extends WebSys {
     })
   }
 
-  openWeb(url: string) {
-    shell.openExternal(url)
+  openWeb(path: string) {
+    let url = new URL(path)
+    if (url.protocol !== "file:") {
+      return shell.openExternal(path)
+    }
+    path = decodeURI(url.pathname)
+    if (process.platform === "win32") path = path.substr(1)
+    shell.showItemInFolder(path)
   }
 
   /** _privates */
