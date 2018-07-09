@@ -212,6 +212,22 @@ export default class ElectronSys extends WebSys {
     } catch (error) {
       fs.writeFileSync(folder + "boot.wasm", new Buffer(bootwasm))
     }
+    await this._checkForUpdates()
+  }
+
+  private async _checkForUpdates() {
+    let res = await fetch("https://api.github.com/repos/FantasyInternet/cyberterminal/releases/latest")
+    let release = await res.json()
+    if (localStorage.getItem("latestVersion")) {
+      if (release.tag_name !== localStorage.getItem("latestVersion")) {
+        if (confirm("A new version of CyberTerminal is available!\nDownload it?")) {
+          localStorage.setItem("latestVersion", release.tag_name)
+          this.openWeb("https://github.com/FantasyInternet/cyberterminal/releases/latest")
+        }
+      }
+    } else {
+      localStorage.setItem("latestVersion", release.tag_name)
+    }
   }
 
 }
