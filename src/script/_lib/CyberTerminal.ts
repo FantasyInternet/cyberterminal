@@ -72,8 +72,10 @@ export default class CyberTerminal {
     } else if (typeof process !== "undefined") {
       this.sys.print(".")
       this._connecting = setTimeout(() => {
-        this.removeMachine()
-        this._connecting = null
+        if (this.machineWorkers.length > 1) {
+          this.removeMachine()
+          this._connecting = null
+        }
       }, 2048)
       this.sys.openWeb(url)
     } else if (location.toString() !== url) {

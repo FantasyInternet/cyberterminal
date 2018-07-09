@@ -28,8 +28,10 @@ export default class ElectronSys extends WebSys {
     document.querySelector("style").textContent = css
     this._initHotkeys()
     this.startupUrl = path.join(app.getPath("userData"), "startup") + "/"
-    if (process.argv.length > 1) {
-      this.startupUrl = process.argv.pop()
+    for (let i = 1; i < process.argv.length; i++) {
+      if (process.argv[i].trim().substr(0, 1) !== "-") {
+        this.startupUrl = process.argv[i].trim()
+      }
     }
     try {
       let file = path.resolve(process.cwd(), this.startupUrl).replace(/\\/g, '/')
@@ -211,6 +213,7 @@ export default class ElectronSys extends WebSys {
       fs.accessSync(folder + "boot.wasm")
     } catch (error) {
       fs.writeFileSync(folder + "boot.wasm", new Buffer(bootwasm))
+      location.reload(true)
     }
     await this._checkForUpdates()
   }
