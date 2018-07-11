@@ -5,7 +5,7 @@ A fantasy terminal for the [fantasy internet](https://fantasyinternet.github.io/
 [![icon](./src/images/icon.gif)  
 💾Get the latest version](https://github.com/FantasyInternet/cyberterminal/releases/latest)
 
-Made by [codeartistic.ninja](http://the.codeartistic.ninja/)
+Made by [poetic android](http://poeticandroid.online/)
 
 Keyboard shortcuts
 ------------------
