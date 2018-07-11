@@ -12,26 +12,19 @@ export default class MouseInput {
   scaleY: number = 1
 
   set element(val: HTMLElement) {
-    this._element.removeEventListener("pointerdown", this._mouseDown.bind(this))
-    this._element.removeEventListener("pointermove", this._mouseMove.bind(this))
-    if (this._element.parentElement && this._element.parentElement.parentElement) {
-      this._element.parentElement.parentElement.removeEventListener("pointerup", this._mouseUp.bind(this))
-      this._element.parentElement.parentElement.removeEventListener("pointerleave", this._mouseUp.bind(this))
-    } else {
-      this._element.removeEventListener("pointerup", this._mouseUp.bind(this))
-    }
+    this._element.removeEventListener("pointerdown", this._mouseDown)
+    this._element.removeEventListener("pointermove", this._mouseMove)
     this._element = val
-    this._element.addEventListener("pointerdown", this._mouseDown.bind(this))
-    this._element.addEventListener("pointermove", this._mouseMove.bind(this))
-    if (this._element.parentElement && this._element.parentElement.parentElement) {
-      this._element.parentElement.parentElement.addEventListener("pointerup", this._mouseUp.bind(this))
-      this._element.parentElement.parentElement.addEventListener("pointerleave", this._mouseUp.bind(this))
-    } else {
-      this._element.addEventListener("pointerup", this._mouseUp.bind(this))
-    }
+    this._element.addEventListener("pointerdown", this._mouseDown)
+    this._element.addEventListener("pointermove", this._mouseMove)
   }
 
   constructor(public sys: Sys) {
+    this._mouseDown = this._mouseDown.bind(this)
+    this._mouseMove = this._mouseMove.bind(this)
+    this._mouseUp = this._mouseUp.bind(this)
+    document.addEventListener("pointerup", this._mouseUp)
+    document.addEventListener("pointerleave", this._mouseUp)
   }
 
   focus() { }
