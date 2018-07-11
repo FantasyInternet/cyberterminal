@@ -45,7 +45,7 @@ Class for taking care of mouse input
 
 ⊕ **new MouseInput**(sys: *[Sys](../interfaces/_script__lib_sys_.sys.md)*): [MouseInput](_script__lib_mouseinput_.mouseinput.md)
 
-*Defined in [script/_lib/MouseInput.ts:22](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/MouseInput.ts#L22)*
+*Defined in [script/_lib/MouseInput.ts:32](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/MouseInput.ts#L32)*
 
 **Parameters:**
 
@@ -83,7 +83,7 @@ ___
 
 **● sys**: *[Sys](../interfaces/_script__lib_sys_.sys.md)*
 
-*Defined in [script/_lib/MouseInput.ts:24](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/MouseInput.ts#L24)*
+*Defined in [script/_lib/MouseInput.ts:34](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/MouseInput.ts#L34)*
 
 ___
 
@@ -115,7 +115,7 @@ ___
 
 ▸ **addEventListener**(fn: *`Function`*): `void`
 
-*Defined in [script/_lib/MouseInput.ts:32](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/MouseInput.ts#L32)*
+*Defined in [script/_lib/MouseInput.ts:43](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/MouseInput.ts#L43)*
 
 **Parameters:**
 
@@ -132,7 +132,7 @@ ___
 
 ▸ **blur**(): `void`
 
-*Defined in [script/_lib/MouseInput.ts:27](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/MouseInput.ts#L27)*
+*Defined in [script/_lib/MouseInput.ts:38](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/MouseInput.ts#L38)*
 
 **Returns:** `void`
 
@@ -143,7 +143,7 @@ ___
 
 ▸ **focus**(): `void`
 
-*Defined in [script/_lib/MouseInput.ts:26](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/MouseInput.ts#L26)*
+*Defined in [script/_lib/MouseInput.ts:37](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/MouseInput.ts#L37)*
 
 **Returns:** `void`
 
@@ -154,7 +154,7 @@ ___
 
 ▸ **removeEventListener**(fn: *`Function`*): `void`
 
-*Defined in [script/_lib/MouseInput.ts:39](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/MouseInput.ts#L39)*
+*Defined in [script/_lib/MouseInput.ts:50](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/MouseInput.ts#L50)*
 
 **Parameters:**
 
