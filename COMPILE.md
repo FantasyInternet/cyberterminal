@@ -6,7 +6,7 @@ Open terminal and type:
 
     $ cd path/to/this/folder/
     $ npm install
-    $ npm start
+    $ npm run build-desktop
 
 Open your browser to http://localhost:8000/
 

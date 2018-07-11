@@ -1,6 +1,6 @@
 {
   "name": "cyberterminal",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "description": "A fantasy internet client.",
   "author": {
     "name": "codeartisticninja",
@@ -48,7 +48,7 @@
     }
   },
   "scripts": {
-    "prepublish": "jake",
+    "prepare": "jake",
     "build": "jake",
     "build-desktop": "electron-builder",
     "deploy": "jake deploy",
