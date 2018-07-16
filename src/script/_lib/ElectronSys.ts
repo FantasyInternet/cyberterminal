@@ -43,7 +43,7 @@ export default class ElectronSys extends WebSys {
     this._createUserFolder()
   }
 
-  setAddress(url: string, push: boolean) {
+  setAddress(url: string) {
     document.title = url + " - " + this._title
   }
 
@@ -160,13 +160,23 @@ export default class ElectronSys extends WebSys {
   }
 
   openWeb(path: string) {
+    let a = <HTMLAnchorElement>this.showLink(path).querySelector("a")
     let url = new URL(path)
-    if (url.protocol !== "file:") {
-      return shell.openExternal(path)
+    if (url.protocol === "file:") {
+      path = decodeURI(url.pathname)
+      if (process.platform === "win32") path = path.substr(1)
+      a.textContent = path
+      a.addEventListener("click", (e) => {
+        shell.showItemInFolder(path)
+        e.preventDefault()
+      })
+    } else {
+      a.addEventListener("click", (e) => {
+        shell.openExternal(path)
+        e.preventDefault()
+      })
     }
-    path = decodeURI(url.pathname)
-    if (process.platform === "win32") path = path.substr(1)
-    shell.showItemInFolder(path)
+    return true
   }
 
   /** _privates */

@@ -26,9 +26,8 @@ export default interface Sys {
   /**
    * Set the current URL.
    * @param url URL
-   * @param push if it should be pushed to the navigation stack.
    */
-  setAddress(url: string, push: boolean): void
+  setAddress(url: string): void
 
   /**
    * Switch display mode.

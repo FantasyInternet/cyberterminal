@@ -48,6 +48,7 @@ Sys implementation for electron app. See [Sys](../interfaces/__lib_sys_.sys.md) 
 * [setDisplayMode](_script__lib_electronsys_.electronsys.md#setdisplaymode)
 * [setNativeMouse](_script__lib_electronsys_.electronsys.md#setnativemouse)
 * [setTextInput](_script__lib_electronsys_.electronsys.md#settextinput)
+* [showLink](_script__lib_electronsys_.electronsys.md#showlink)
 * [startTone](_script__lib_electronsys_.electronsys.md#starttone)
 * [stopTone](_script__lib_electronsys_.electronsys.md#stoptone)
 * [waitForVsync](_script__lib_electronsys_.electronsys.md#waitforvsync)
@@ -177,7 +178,7 @@ ___
 
 *Inherited from [WebSys](_script__lib_websys_.websys.md).[addEventListener](_script__lib_websys_.websys.md#addeventlistener)*
 
-*Defined in [script/_lib/WebSys.ts:449](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L449)*
+*Defined in [script/_lib/WebSys.ts:456](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L456)*
 
 **Parameters:**
 
@@ -199,7 +200,7 @@ ___
 
 *Inherited from [WebSys](_script__lib_websys_.websys.md).[createMachine](_script__lib_websys_.websys.md#createmachine)*
 
-*Defined in [script/_lib/WebSys.ts:252](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L252)*
+*Defined in [script/_lib/WebSys.ts:246](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L246)*
 
 **Returns:** [WebMachineWorker](_script__lib_websys_.webmachineworker.md)
 
@@ -235,7 +236,7 @@ ___
 
 *Inherited from [WebSys](_script__lib_websys_.websys.md).[drawBitmap](_script__lib_websys_.websys.md#drawbitmap)*
 
-*Defined in [script/_lib/WebSys.ts:90](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L90)*
+*Defined in [script/_lib/WebSys.ts:84](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L84)*
 
 **Parameters:**
 
@@ -256,7 +257,7 @@ ___
 
 *Inherited from [WebSys](_script__lib_websys_.websys.md).[focusInput](_script__lib_websys_.websys.md#focusinput)*
 
-*Defined in [script/_lib/WebSys.ts:395](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L395)*
+*Defined in [script/_lib/WebSys.ts:389](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L389)*
 
 **Parameters:**
 
@@ -275,7 +276,7 @@ ___
 
 *Inherited from [WebSys](_script__lib_websys_.websys.md).[head](_script__lib_websys_.websys.md#head)*
 
-*Defined in [script/_lib/WebSys.ts:354](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L354)*
+*Defined in [script/_lib/WebSys.ts:348](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L348)*
 
 **Parameters:**
 
@@ -311,7 +312,7 @@ ___
 
 ###  openWeb
 
-▸ **openWeb**(path: *`string`*): `any`
+▸ **openWeb**(path: *`string`*): `boolean`
 
 *Implementation of [Sys](../interfaces/_script__lib_sys_.sys.md).[openWeb](../interfaces/_script__lib_sys_.sys.md#openweb)*
 
@@ -325,7 +326,7 @@ ___
 | ------ | ------ |
 | path | `string` |
 
-**Returns:** `any`
+**Returns:** `boolean`
 
 ___
 <a id="post"></a>
@@ -336,7 +337,7 @@ ___
 
 *Inherited from [WebSys](_script__lib_websys_.websys.md).[post](_script__lib_websys_.websys.md#post)*
 
-*Defined in [script/_lib/WebSys.ts:317](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L317)*
+*Defined in [script/_lib/WebSys.ts:311](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L311)*
 
 **Parameters:**
 
@@ -358,7 +359,7 @@ ___
 
 *Inherited from [WebSys](_script__lib_websys_.websys.md).[print](_script__lib_websys_.websys.md#print)*
 
-*Defined in [script/_lib/WebSys.ts:98](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L98)*
+*Defined in [script/_lib/WebSys.ts:92](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L92)*
 
 **Parameters:**
 
@@ -401,7 +402,7 @@ ___
 
 *Inherited from [WebSys](_script__lib_websys_.websys.md).[replaceTextInput](_script__lib_websys_.websys.md#replacetextinput)*
 
-*Defined in [script/_lib/WebSys.ts:422](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L422)*
+*Defined in [script/_lib/WebSys.ts:416](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L416)*
 
 **Parameters:**
 
@@ -418,7 +419,7 @@ ___
 
 ###  setAddress
 
-▸ **setAddress**(url: *`string`*, push: *`boolean`*): `void`
+▸ **setAddress**(url: *`string`*): `void`
 
 *Implementation of [Sys](../interfaces/_script__lib_sys_.sys.md).[setAddress](../interfaces/_script__lib_sys_.sys.md#setaddress)*
 
@@ -431,7 +432,6 @@ ___
 | Param | Type |
 | ------ | ------ |
 | url | `string` |
-| push | `boolean` |
 
 **Returns:** `void`
 
@@ -444,7 +444,7 @@ ___
 
 *Inherited from [WebSys](_script__lib_websys_.websys.md).[setDisplayMode](_script__lib_websys_.websys.md#setdisplaymode)*
 
-*Defined in [script/_lib/WebSys.ts:51](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L51)*
+*Defined in [script/_lib/WebSys.ts:45](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L45)*
 
 **Parameters:**
 
@@ -469,7 +469,7 @@ ___
 
 *Inherited from [WebSys](_script__lib_websys_.websys.md).[setNativeMouse](_script__lib_websys_.websys.md#setnativemouse)*
 
-*Defined in [script/_lib/WebSys.ts:440](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L440)*
+*Defined in [script/_lib/WebSys.ts:434](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L434)*
 
 **Parameters:**
 
@@ -488,7 +488,7 @@ ___
 
 *Inherited from [WebSys](_script__lib_websys_.websys.md).[setTextInput](_script__lib_websys_.websys.md#settextinput)*
 
-*Defined in [script/_lib/WebSys.ts:413](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L413)*
+*Defined in [script/_lib/WebSys.ts:407](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L407)*
 
 **Parameters:**
 
@@ -502,6 +502,25 @@ ___
 **Returns:** `void`
 
 ___
+<a id="showlink"></a>
+
+###  showLink
+
+▸ **showLink**(url: *`string`*): `HTMLElement`
+
+*Inherited from [WebSys](_script__lib_websys_.websys.md).[showLink](_script__lib_websys_.websys.md#showlink)*
+
+*Defined in [script/_lib/WebSys.ts:443](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L443)*
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| url | `string` |
+
+**Returns:** `HTMLElement`
+
+___
 <a id="starttone"></a>
 
 ###  startTone
@@ -510,7 +529,7 @@ ___
 
 *Inherited from [WebSys](_script__lib_websys_.websys.md).[startTone](_script__lib_websys_.websys.md#starttone)*
 
-*Defined in [script/_lib/WebSys.ts:388](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L388)*
+*Defined in [script/_lib/WebSys.ts:382](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L382)*
 
 **Returns:** `void`
 
@@ -523,7 +542,7 @@ ___
 
 *Inherited from [WebSys](_script__lib_websys_.websys.md).[stopTone](_script__lib_websys_.websys.md#stoptone)*
 
-*Defined in [script/_lib/WebSys.ts:391](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L391)*
+*Defined in [script/_lib/WebSys.ts:385](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L385)*
 
 **Returns:** `void`
 
@@ -536,7 +555,7 @@ ___
 
 *Inherited from [WebSys](_script__lib_websys_.websys.md).[waitForVsync](_script__lib_websys_.websys.md#waitforvsync)*
 
-*Defined in [script/_lib/WebSys.ts:246](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L246)*
+*Defined in [script/_lib/WebSys.ts:240](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L240)*
 
 **Returns:** `Promise`<`Object`>
 
