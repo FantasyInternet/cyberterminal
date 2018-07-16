@@ -38,14 +38,8 @@ export default class WebSys implements Sys {
     this.startupUrl = location.toString()
   }
 
-  setAddress(url: string, push: boolean) {
-    if (url !== location.toString()) {
-      if (push) {
-        history.pushState(url, url, url)
-      } else {
-        history.replaceState(url, url, url)
-      }
-    }
+  setAddress(url: string) {
+    history.replaceState(url, url, url)
   }
 
   setDisplayMode(mode: "none" | "text" | "pixel", width: number, height: number, visibleWidth = width, visibleHeight = height) {
@@ -443,7 +437,20 @@ export default class WebSys implements Sys {
   }
 
   openWeb(url: string) {
-    location.assign(url)
+    this.showLink(url)
+  }
+
+  showLink(url: string) {
+    let dialog = <HTMLElement>this._container.querySelector(".dialog")
+    dialog.innerHTML = '<p><a></a><br/>👆</p>'
+    let a = <HTMLAnchorElement>dialog.querySelector("a")
+    a.href = url
+    a.textContent = url
+    dialog.classList.add("active")
+    setTimeout(() => {
+      dialog.classList.remove("active")
+    }, 4096)
+    return dialog
   }
 
   addEventListener(event: string, fn: Function) {
@@ -482,9 +489,10 @@ export default class WebSys implements Sys {
 
   private _initContainer() {
     let style = document.createElement("style")
-    style.textContent = css.replace(/;/g, " !important;")
+    style.textContent = css.replace(/}/g, ";}").replace(/;/g, " !important;")
       ; (<HTMLElement>document.querySelector("head")).insertBefore(style, document.querySelector("head *"))
-    this._container.innerHTML = '<div class="display"></div><div class="input"><div class="text"></div><div class="mouse"></div><div class="game"></div></div>'
+    this._container.innerHTML =
+      '<div class="display"></div><div class="input"><div class="text"></div><div class="mouse"></div><div class="game"></div><div class="dialog"></div></div>'
     this._displayContainer = <HTMLElement>this._container.querySelector(".display")
     addEventListener("resize", () => { this._resize() })
   }

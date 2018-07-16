@@ -1,11 +1,11 @@
 {
   "name": "cyberterminal",
-  "version": "0.4.2",
+  "version": "0.4.7",
   "description": "A fantasy internet client.",
   "author": {
-    "name": "codeartisticninja",
-    "url": "http://codeartistic.ninja/",
-    "email": "the@codeartistic.ninja"
+    "name": "poeticandroid",
+    "url": "http://poeticandroid.online/",
+    "email": "i@poeticandroid.online"
   },
   "private": true,
   "build": {
@@ -48,7 +48,7 @@
     }
   },
   "scripts": {
-    "prepublish": "jake",
+    "prepare": "jake",
     "build": "jake",
     "build-desktop": "electron-builder",
     "deploy": "jake deploy",

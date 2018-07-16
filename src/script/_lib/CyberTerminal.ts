@@ -31,13 +31,6 @@ export default class CyberTerminal {
         }
       }
     })
-    addEventListener("popstate", (e: PopStateEvent) => {
-      if (this.machineWorkers.length) {
-        if (e.state !== this.machineWorkers[this.machineWorkers.length - 1].baseUrl) {
-          this.removeMachine()
-        }
-      }
-    })
   }
 
   async connectTo(url: string) {
@@ -59,7 +52,7 @@ export default class CyberTerminal {
     let msg = await this._findBoot(url)
     if (msg.wasm) {
       this.sys.print(".")
-      this.sys.setAddress("" + msg.url, true)
+      this.setAddress("" + msg.url)
       this.sys.setDisplayMode("none", 0, 0)
       machine.send({
         cmd: "resize",
@@ -69,21 +62,17 @@ export default class CyberTerminal {
       this._connecting = setTimeout(() => {
         this._connecting = null
       }, 2048)
-    } else if (typeof process !== "undefined") {
-      this.sys.print(".")
-      this._connecting = setTimeout(() => {
-        if (this.machineWorkers.length > 1) {
-          this.removeMachine()
-          this._connecting = null
-        }
-      }, 2048)
-      this.sys.openWeb(url)
-    } else if (location.toString() !== url) {
-      this.sys.print(".")
-      this.sys.openWeb(url)
     } else {
       this.sys.print("!\n")
       this.sys.print("could not load boot.wasm!")
+      this.setAddress("" + msg.url)
+      this.sys.openWeb(url)
+      this._connecting = setTimeout(() => {
+        if (this.machineWorkers.length > 1) {
+          this.removeMachine()
+        }
+        this._connecting = null
+      }, 2048)
     }
   }
 
@@ -95,6 +84,7 @@ export default class CyberTerminal {
     machine.onMessage(this._onMessage.bind(this))
     this.sys.textInput.setState({ type: "multiline", text: "", pos: 0, len: 0, key: 0 })
     this.sys.chipSound.stopAll()
+    console.log("Machines in stack", this.machineWorkers.length)
     return machine
   }
 
@@ -104,27 +94,28 @@ export default class CyberTerminal {
     console.log("Disconnecting from", machine ? machine.baseUrl : machine)
     this.sys.setDisplayMode("text", 80, 20)
     this.sys.print("\n\nDisconnecting...")
-    history.back()
-    if (this.machineWorkers.length)
-      this.sys.setAddress(this.machineWorkers[this.machineWorkers.length - 1].baseUrl, false)
+    this.sys.textInput.setState({ type: "multiline", text: "", pos: 0, len: 0 })
+    this.sys.chipSound.stopAll()
     setTimeout(() => {
       if (this.machineWorkers.length) {
+        this.setAddress(this.machineWorkers[this.machineWorkers.length - 1].baseUrl)
         this.sys.setDisplayMode("none", 0, 0)
         this.machineWorkers[this.machineWorkers.length - 1].send({ cmd: "resume" })
       } else {
+        console.log("Going back, coz no machines left..")
         history.back()
         setTimeout(() => {
+          console.log("Reloading, coz no machines left")
           location.reload()
         }, 1024)
       }
     }, 128)
-    this.sys.textInput.setState({ type: "multiline", text: "", pos: 0, len: 0 })
-    this.sys.chipSound.stopAll()
+    console.log("Machines in stack", this.machineWorkers.length)
   }
 
-  setAddress(url: string, push: boolean) {
+  setAddress(url: string) {
     this.machineWorkers[this.machineWorkers.length - 1].baseUrl = url
-    this.sys.setAddress(url, push)
+    this.sys.setAddress(url)
   }
 
 

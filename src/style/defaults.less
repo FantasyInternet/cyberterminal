@@ -97,5 +97,35 @@ fantasy-terminal {
         }
       }
     }
+    .dialog {
+      background-color: #def;
+      box-shadow: 0 0 1em black;
+      color: #369;
+      font-size: 20px;
+      transition: top 1s, max-height 2s;
+      position: fixed;
+      left: 0;
+      top: -4em;
+      width: 100%;
+      max-height: 0em;
+      overflow: hidden;
+      &.active,
+      &:hover {
+        top: 0em;
+        max-height: 10em;
+      }
+      p {
+        text-align: center;
+      }
+      a {
+        color: inherit;
+      }
+      button {
+        background-color: rgba(127, 127, 127, .25);
+        border: 2px solid inherit;
+        margin: 0 1em;
+        padding: .1em 1em;
+      }
+    }
   }
 }

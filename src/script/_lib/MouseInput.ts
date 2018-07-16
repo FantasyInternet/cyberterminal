@@ -12,16 +12,20 @@ export default class MouseInput {
   scaleY: number = 1
 
   set element(val: HTMLElement) {
-    this._element.removeEventListener("pointermove", this._mouseMove.bind(this))
-    this._element.removeEventListener("pointerdown", this._mouseDown.bind(this))
-    this._element.removeEventListener("pointerup", this._mouseUp.bind(this))
+    this._element.removeEventListener("pointerdown", this._mouseDown)
+    this._element.removeEventListener("pointermove", this._mouseMove)
     this._element = val
-    this._element.addEventListener("pointermove", this._mouseMove.bind(this))
-    this._element.addEventListener("pointerdown", this._mouseDown.bind(this))
-    this._element.addEventListener("pointerup", this._mouseUp.bind(this))
+    this._element.addEventListener("pointerdown", this._mouseDown)
+    this._element.addEventListener("pointermove", this._mouseMove)
   }
 
-  constructor(public sys: Sys) { }
+  constructor(public sys: Sys) {
+    this._mouseDown = this._mouseDown.bind(this)
+    this._mouseMove = this._mouseMove.bind(this)
+    this._mouseUp = this._mouseUp.bind(this)
+    document.addEventListener("pointerup", this._mouseUp)
+    document.addEventListener("pointerleave", this._mouseUp)
+  }
 
   focus() { }
   blur() {
@@ -59,11 +63,6 @@ export default class MouseInput {
     }
   }
 
-  private _mouseMove(e: PointerEvent) {
-    this.state.x = (e.pageX - this._element.getBoundingClientRect().left) / this.scaleX * devicePixelRatio
-    this.state.y = (e.pageY - this._element.getBoundingClientRect().top) / this.scaleY * devicePixelRatio
-    this._sendState()
-  }
   private _mouseDown(e: PointerEvent) {
     clearTimeout(this._idleTO)
     this.state.x = (e.pageX - this._element.getBoundingClientRect().left) / this.scaleX * devicePixelRatio
@@ -72,9 +71,15 @@ export default class MouseInput {
     this._sendState()
     e.preventDefault()
   }
+  private _mouseMove(e: PointerEvent) {
+    this.state.x = (e.pageX - this._element.getBoundingClientRect().left) / this.scaleX * devicePixelRatio
+    this.state.y = (e.pageY - this._element.getBoundingClientRect().top) / this.scaleY * devicePixelRatio
+    this._sendState()
+  }
   private _mouseUp(e: PointerEvent) {
     this.state.pressed = false
     this._sendState()
+    clearTimeout(this._idleTO)
     this._idleTO = setTimeout(() => {
       this.sys.focusInput(this.sys.inputPriority[0])
     }, 1024)
