@@ -442,14 +442,14 @@ export default class WebSys implements Sys {
 
   showLink(url: string) {
     let dialog = <HTMLElement>this._container.querySelector(".dialog")
-    dialog.innerHTML = '<p><a></a><br/>👆</p>'
+    dialog.innerHTML = '<p><a></a></p>'
     let a = <HTMLAnchorElement>dialog.querySelector("a")
     a.href = url
     a.textContent = url
     dialog.classList.add("active")
     setTimeout(() => {
       dialog.classList.remove("active")
-    }, 4096)
+    }, 8192)
     return dialog
   }
 

@@ -161,6 +161,7 @@ export default class ElectronSys extends WebSys {
 
   openWeb(path: string) {
     let a = <HTMLAnchorElement>this.showLink(path).querySelector("a")
+    a.href = "javascript:void(0)"
     let url = new URL(path)
     if (url.protocol === "file:") {
       path = decodeURI(url.pathname)
@@ -235,7 +236,7 @@ export default class ElectronSys extends WebSys {
       if (release.tag_name !== localStorage.getItem("latestVersion")) {
         if (confirm("A new version of CyberTerminal is available!\nDownload it?")) {
           localStorage.setItem("latestVersion", release.tag_name)
-          this.openWeb("https://github.com/FantasyInternet/cyberterminal/releases/latest")
+          shell.openExternal("https://github.com/FantasyInternet/cyberterminal/releases/latest")
         }
       }
     } else {
