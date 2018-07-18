@@ -220,7 +220,6 @@ export default class ElectronSys extends WebSys {
       winState.width = bounds.width
       winState.height = bounds.height
     }
-    console.log(winState)
     localStorage.setItem("winState", JSON.stringify(winState))
   }
 
