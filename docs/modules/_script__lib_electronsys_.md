@@ -16,6 +16,7 @@
 * [process](_script__lib_electronsys_.md#process)
 * [shell](_script__lib_electronsys_.md#shell)
 * [win](_script__lib_electronsys_.md#win)
+* [winState](_script__lib_electronsys_.md#winstate)
 
 ---
 
@@ -73,6 +74,15 @@ ___
 **● win**: *`any`*
 
 *Defined in [script/_lib/ElectronSys.ts:4](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/ElectronSys.ts#L4)*
+
+___
+<a id="winstate"></a>
+
+### `<Let>` winState
+
+**● winState**: *`any`*
+
+*Defined in [script/_lib/ElectronSys.ts:18](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/ElectronSys.ts#L18)*
 
 ___
 
