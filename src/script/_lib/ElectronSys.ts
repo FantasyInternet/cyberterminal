@@ -25,14 +25,15 @@ export default class ElectronSys extends WebSys {
 
   constructor() {
     super()
+    win.restore()
     if (localStorage.getItem("winState")) {
       winState = JSON.parse(<string>localStorage.getItem("winState"))
       win.setPosition(winState.x || 0, winState.y || 0)
       win.setSize(winState.width || 0, winState.height || 0)
       winState.maximized && win.maximize()
       win.setFullScreen(winState.fullscreen || false)
-    }
-    this._saveWindow()
+    } else this._saveWindow()
+    win.show()
     win.on("resize", this._saveWindow)
     win.on("move", this._saveWindow)
     //@ts-ignore
