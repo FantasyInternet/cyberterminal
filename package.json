@@ -1,6 +1,6 @@
 {
   "name": "cyberterminal",
-  "version": "0.4.7",
+  "version": "0.4.13",
   "description": "A fantasy internet client.",
   "author": {
     "name": "poeticandroid",
@@ -9,7 +9,8 @@
   },
   "private": true,
   "build": {
-    "appId": "ninja.codeartistic",
+    "appId": "poeticandroid.cyberterminal",
+    "productName": "CyberTerminal",
     "nsis": {
       "oneClick": false,
       "allowToChangeInstallationDirectory": true
@@ -27,7 +28,7 @@
       "icon": "icons/512x512.png"
     },
     "mac": {
-      "category": "your.app.category.type"
+      "category": "public.app-category.utilities"
     },
     "linux": {
       "target": [
@@ -39,7 +40,8 @@
           ]
         }
       ],
-      "icon": "icons/"
+      "icon": "icons/",
+      "category": "Network"
     },
     "directories": {
       "buildResources": "./build/electron-version/",

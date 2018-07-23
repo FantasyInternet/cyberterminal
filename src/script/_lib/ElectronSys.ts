@@ -15,6 +15,7 @@ let fs: any, path: any, shell: any, win: any, process: any, app: any; if (typeof
   //@ts-ignore
   app = window.require("electron").remote.app
 }
+let winState: any = {}
 
 /**
  * Sys implementation for electron app.
@@ -24,6 +25,17 @@ export default class ElectronSys extends WebSys {
 
   constructor() {
     super()
+    win.restore()
+    if (localStorage.getItem("winState")) {
+      winState = JSON.parse(<string>localStorage.getItem("winState"))
+      win.setPosition(winState.x || 0, winState.y || 0)
+      win.setSize(winState.width || 0, winState.height || 0)
+      winState.maximized && win.maximize()
+      win.setFullScreen(winState.fullscreen || false)
+    } else this._saveWindow()
+    win.show()
+    win.on("resize", this._saveWindow)
+    win.on("move", this._saveWindow)
     //@ts-ignore
     document.querySelector("style").textContent = css
     this._initHotkeys()
@@ -161,6 +173,7 @@ export default class ElectronSys extends WebSys {
 
   openWeb(path: string) {
     let a = <HTMLAnchorElement>this.showLink(path).querySelector("a")
+    a.href = "javascript:void(0)"
     let url = new URL(path)
     if (url.protocol === "file:") {
       path = decodeURI(url.pathname)
@@ -195,6 +208,19 @@ export default class ElectronSys extends WebSys {
           break
       }
     })
+  }
+
+  private _saveWindow() {
+    winState.maximized = win.isMaximized()
+    winState.fullscreen = win.isFullScreen()
+    if (winState.maximized === false && winState.fullscreen === false) {
+      let bounds = win.getBounds()
+      winState.x = bounds.x
+      winState.y = bounds.y
+      winState.width = bounds.width
+      winState.height = bounds.height
+    }
+    localStorage.setItem("winState", JSON.stringify(winState))
   }
 
   private async _createUserFolder() {
@@ -233,9 +259,9 @@ export default class ElectronSys extends WebSys {
     let release = await res.json()
     if (localStorage.getItem("latestVersion")) {
       if (release.tag_name !== localStorage.getItem("latestVersion")) {
-        if (confirm("A new version of CyberTerminal is available!\nDownload it?")) {
+        if (confirm("A new version of CyberTerminal is available!\nWanna check it out? 😏")) {
           localStorage.setItem("latestVersion", release.tag_name)
-          this.openWeb("https://github.com/FantasyInternet/cyberterminal/releases/latest")
+          shell.openExternal("https://github.com/FantasyInternet/cyberterminal/releases/latest")
         }
       }
     } else {
