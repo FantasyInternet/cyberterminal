@@ -44,6 +44,7 @@ export default class CyberTerminal {
       })
       return
     }
+    console.group(url)
     console.log("Connecting to", url)
     this.sys.setDisplayMode("text", 80, 20)
     this.sys.print("\n\nConnecting to " + url)
@@ -92,6 +93,7 @@ export default class CyberTerminal {
     let machine = this.machineWorkers.pop()
     if (machine) machine.terminate()
     console.log("Disconnecting from", machine ? machine.baseUrl : machine)
+    console.groupEnd()
     this.sys.setDisplayMode("text", 80, 20)
     this.sys.print("\n\nDisconnecting...")
     this.sys.textInput.setState({ type: "multiline", text: "", pos: 0, len: 0 })
