@@ -132,7 +132,6 @@ export default class CyberTerminal {
 
   private _onMessage(message: any, machineWorker: MachineWorker) {
     this._lastActiveMachine = machineWorker
-    console.log(message.method)
     switch (message.cmd) {
       case "call":
         let value
