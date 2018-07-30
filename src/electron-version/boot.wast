@@ -159,7 +159,6 @@
     ))
     (if (i32.eq (get_global $mode) (i32.const 2))(then
       (if (call $cli.step) (then
-        (set_global $cli.input (get_global $cli.input))
         (set_local $newhist (get_global $cli.input) )
         (call $str.trim (get_local $newhist))
         (call $str.appendBytes (get_local $newhist) (i64.const 10))
