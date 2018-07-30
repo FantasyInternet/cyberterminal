@@ -259,7 +259,7 @@ export default class ElectronSys extends WebSys {
     let release = await res.json()
     if (localStorage.getItem("latestVersion")) {
       if (release.tag_name !== localStorage.getItem("latestVersion")) {
-        if (confirm("A new version of CyberTerminal is available!\nWanna check it out? 😏")) {
+        if (confirm("A new version of CyberTerminal is available!\nWanna check it out? ;)")) {
           localStorage.setItem("latestVersion", release.tag_name)
           shell.openExternal("https://github.com/FantasyInternet/cyberterminal/releases/latest")
         }

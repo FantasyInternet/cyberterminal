@@ -59,6 +59,13 @@ export default class WebSys implements Sys {
     delete this._displayContext
     this._displayContainer && this._displayContainer.removeAttribute("style")
     this._displayCursorHistory = []
+    if (this._displayContainer) {
+      this._displayContainer.innerHTML = '<p style="display:none">[no display]</p>'
+      let p = this._displayContainer.querySelector("p")
+      setTimeout(() => {
+        p && p.removeAttribute("style")
+      }, 1024)
+    }
     switch (this._displayMode) {
       case "none":
         break

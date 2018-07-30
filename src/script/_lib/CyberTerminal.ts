@@ -35,19 +35,22 @@ export default class CyberTerminal {
 
   async connectTo(url: string) {
     if (this._connecting) {
-      clearTimeout(this._connecting)
-      this._connecting = setTimeout(() => {
-        this._connecting = null
-      }, 2048)
-      this.machineWorkers[this.machineWorkers.length - 1].send({
+      if (this._lastActiveMachine === this._lastConnectingMachine) {
+        clearTimeout(this._connecting)
+        this._connecting = setTimeout(() => {
+          this._connecting = null
+        }, 2048)
+      }
+      /* this.machineWorkers[this.machineWorkers.length - 1].send({
         cmd: "resume"
-      })
+      }) */
       return
     }
+    console.group(url)
     console.log("Connecting to", url)
     this.sys.setDisplayMode("text", 80, 20)
     this.sys.print("\n\nConnecting to " + url)
-    this._connecting = true
+    this._connecting = setTimeout(null)
     let machine = this.addMachine()
     let msg = await this._findBoot(url)
     if (msg.wasm) {
@@ -59,9 +62,9 @@ export default class CyberTerminal {
         state: this._resizeState
       })
       machine.send(msg)
-      this._connecting = setTimeout(() => {
-        this._connecting = null
-      }, 2048)
+      // this._connecting = setTimeout(() => {
+      this._connecting = null
+      // }, 2048)
     } else {
       this.sys.print("!\n")
       this.sys.print("could not load boot.wasm!")
@@ -74,6 +77,7 @@ export default class CyberTerminal {
         this._connecting = null
       }, 2048)
     }
+    this._lastConnectingMachine = this._lastActiveMachine
   }
 
   addMachine() {
@@ -92,6 +96,7 @@ export default class CyberTerminal {
     let machine = this.machineWorkers.pop()
     if (machine) machine.terminate()
     console.log("Disconnecting from", machine ? machine.baseUrl : machine)
+    console.groupEnd()
     this.sys.setDisplayMode("text", 80, 20)
     this.sys.print("\n\nDisconnecting...")
     this.sys.textInput.setState({ type: "multiline", text: "", pos: 0, len: 0 })
@@ -120,10 +125,13 @@ export default class CyberTerminal {
 
 
   /* _privates */
+  private _lastActiveMachine?: MachineWorker
+  private _lastConnectingMachine?: MachineWorker
   private _connecting: any
   private _resizeState: any = {}
 
   private _onMessage(message: any, machineWorker: MachineWorker) {
+    this._lastActiveMachine = machineWorker
     switch (message.cmd) {
       case "call":
         let value
