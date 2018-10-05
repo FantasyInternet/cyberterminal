@@ -203,7 +203,7 @@ export default class ElectronSys extends WebSys {
           e.preventDefault()
           break
         case "F12":
-          win.webContents.openDevTools()
+          win.webContents.toggleDevTools()
           e.preventDefault()
           break
       }
