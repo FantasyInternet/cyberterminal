@@ -46,8 +46,8 @@ export default class Machine {
     this._sysCall("print", this._popString())
   }
 
-  displayMemory(offset: number, length: number, destination: number = 0) {
-    let process = this._processes[this._activePID]
+  displayMemory(offset: number, length: number, destination: number = 0, pid = 0) {
+    let process = this._processes[pid]
     if (!process) throw "No active process!"
     let buffer: ArrayBuffer
     if (this._transferBuffer && this._transferBuffer.byteLength === (this._displayWidth * this._displayHeight * 4)) {
@@ -73,15 +73,15 @@ export default class Machine {
   getNativeDisplayHeight() {
     return this._nativeDisplay.height
   }
-  pushFromMemory(offset: number, length: number) {
-    let process = this._processes[this._activePID]
+  pushFromMemory(offset: number, length: number, pid = 0) {
+    let process = this._processes[pid]
     if (!process) throw "No active process!"
     let ar = new Uint8Array(length)
     ar.set(new Uint8Array(process.instance.exports.memory.buffer.slice(offset, offset + length)))
     return this._pushArrayBuffer(ar.buffer)
   }
-  popToMemory(offset: number) {
-    let process = this._processes[this._activePID]
+  popToMemory(offset: number, pid = 0) {
+    let process = this._processes[pid]
     if (!process) throw "No active process!"
     if (!this._bufferStackLengths.length) throw "Buffer stack is empty!"
     let ar = new Uint8Array(process.instance.exports.memory.buffer)
@@ -134,7 +134,7 @@ export default class Machine {
     }
     this._sysCall("setAddress", this._baseUrl, false)
   }
-  read(callback: number | Function) {
+  read(callback: number | Function, pid = 0) {
     callback = this._getCallback(callback)
     let id = this._asyncCalls++
     let filename = (new URL(this._popString(), this._baseUrl)).toString()
@@ -150,7 +150,7 @@ export default class Machine {
     })
     return id
   }
-  readImage(callback: number | Function) {
+  readImage(callback: number | Function, pid = 0) {
     callback = this._getCallback(callback)
     let id = this._asyncCalls++
     let filename = (new URL(this._popString(), this._baseUrl)).toString()
@@ -166,7 +166,7 @@ export default class Machine {
     })
     return id
   }
-  write(callback: number | Function) {
+  write(callback: number | Function, pid = 0) {
     callback = this._getCallback(callback)
     let id = this._asyncCalls++
     let data = this._popArrayBuffer()
@@ -182,7 +182,7 @@ export default class Machine {
     })
     return id
   }
-  delete(callback: number | Function) {
+  delete(callback: number | Function, pid = 0) {
     callback = this._getCallback(callback)
     let id = this._asyncCalls++
     let filename = (new URL(this._popString(), this._baseUrl)).toString()
@@ -197,7 +197,7 @@ export default class Machine {
     })
     return id
   }
-  list(callback: number | Function) {
+  list(callback: number | Function, pid = 0) {
     callback = this._getCallback(callback)
     let id = this._asyncCalls++
     let filename = (new URL(this._popString(), this._baseUrl)).toString()
@@ -212,7 +212,7 @@ export default class Machine {
     })
     return id
   }
-  head(callback: number | Function) {
+  head(callback: number | Function, pid = 0) {
     callback = this._getCallback(callback)
     let id = this._asyncCalls++
     let filename = (new URL(this._popString(), this._baseUrl)).toString()
@@ -227,7 +227,7 @@ export default class Machine {
     })
     return id
   }
-  post(callback: number | Function) {
+  post(callback: number | Function, pid = 0) {
     callback = this._getCallback(callback)
     let id = this._asyncCalls++
     let data = this._popString()
@@ -256,7 +256,6 @@ export default class Machine {
     console.log("loading process", pid)
     //@ts-ignore
     WebAssembly.instantiate(wasm, { env, Math }).then((process) => {
-      this._activePID = pid
       this._processes[pid] = process
       if (process.instance.exports.init) {
         try {
@@ -269,15 +268,14 @@ export default class Machine {
         }
       }
       this._nextStep = performance.now()
-      if (this._activePID === 0) this._tick()
-      this._activePID = 0
+      if (pid === 0) this._tick()
     }).catch((err: any) => {
       console.trace(err)
       this._processes[pid] = false
       if (!pid) {
         this._die(err)
       }
-      if (this._activePID === 0) this._tick()
+      if (pid === 0) this._tick()
     })
     return pid
   }
@@ -288,9 +286,7 @@ export default class Machine {
     if (this._processes[pid]) return 2
   }
   stepProcess(pid: number) {
-    let oldpid = this._activePID
-    this._activePID = pid
-    let process = this._processes[this._activePID]
+    let process = this._processes[pid]
     if (process && process.instance.exports.step) {
       try {
         process.instance.exports.step(performance.now())
@@ -299,12 +295,9 @@ export default class Machine {
         this.killProcess(pid)
       }
     }
-    this._activePID = oldpid
   }
   callbackProcess(pid: number, tableIndex: number, ...a: any[]) {
-    let oldpid = this._activePID
-    this._activePID = pid
-    let process = this._processes[this._activePID]
+    let process = this._processes[pid]
     if (process) {
       try {
         process.instance.exports.table.get(tableIndex)(...a)
@@ -313,12 +306,10 @@ export default class Machine {
         this.killProcess(pid)
       }
     }
-    this._activePID = oldpid
   }
   killProcess(pid: number) {
     this._processes[pid] && console.log("killing process", pid)
     this._processes[pid] = false
-    this._activePID = 0
   }
   transferMemory(srcPid: number, srcOffset: number, length: number, destPid: number, destOffset: number) {
     let srcProcess = this._processes[srcPid]
@@ -431,7 +422,7 @@ export default class Machine {
   private _originUrl: string = ""
   private _romApiNames: string[] = []
   private _processes: any[] = []
-  private _activePID: number = -1
+  // private _activePID: number = -1
   //@ts-ignore
   private _bufferStack: Uint8Array = new Uint8Array(1024)
   private _bufferStackLengths: number[] = []
@@ -719,49 +710,24 @@ export default class Machine {
     this.print()
   }
 
-  private _getCallback(callback: number | Function) {
+  private _getCallback(callback: number | Function, pid = 0) {
     if (typeof callback === "number") {
-      let pid = this._activePID
       let process = this._processes[pid]
       if (!process) throw "No active process!"
       let num = callback
       // callback = process.instance.exports.table.get(num)
       callback = (...args: any[]) => {
-        let oldpid = this._activePID
         let out: any
         try {
-          this._activePID = pid
           process = this._processes[pid]
           out = process.instance.exports.table.get(num).apply(this, args)
         } catch (error) {
           console.trace(error)
-          this.killProcess(pid)
+          this._active = false
         }
-        this._activePID = oldpid
         return out
       }
     }
     return callback
   }
-
-  private _getMemoryTable(pid: number = 0) {
-    let buf = this._processes[pid].instance.exports.memory.buffer
-    let mem = new Uint32Array(buf.slice(0, 16))
-    mem = new Uint32Array(buf.slice(mem[2], mem[2] + mem[3]))
-    let index = []
-    for (let i = 0; i < mem.length; i += 4) {
-      index.push({ id: mem[i + 0], parent: mem[i + 1], offset: mem[i + 2], len: mem[i + 3] })
-    }
-    return index
-  }
-  private _getMemoryPart(id: number, pid: number = 0) {
-    let buf = this._processes[pid].instance.exports.memory.buffer
-    let index = this._getMemoryTable(pid)
-    for (let partInfo of index) {
-      if (partInfo.id === id) {
-        return buf.slice(partInfo.offset, partInfo.offset + partInfo.len)
-      }
-    }
-  }
-
 }

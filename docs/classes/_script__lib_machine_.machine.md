@@ -113,7 +113,7 @@ ___
 
 ▸ **callbackProcess**(pid: *`number`*, tableIndex: *`number`*, ...a: *`any`[]*): `void`
 
-*Defined in [script/_lib/Machine.ts:304](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L304)*
+*Defined in [script/_lib/Machine.ts:299](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L299)*
 
 **Parameters:**
 
@@ -141,15 +141,16 @@ ___
 
 ###  delete
 
-▸ **delete**(callback: * `number` &#124; `Function`*): `number`
+▸ **delete**(callback: * `number` &#124; `Function`*, pid?: *`number`*): `number`
 
 *Defined in [script/_lib/Machine.ts:185](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L185)*
 
 **Parameters:**
 
-| Param | Type |
-| ------ | ------ |
-| callback |  `number` &#124; `Function`|
+| Param | Type | Default value |
+| ------ | ------ | ------ |
+| callback |  `number` &#124; `Function`| - |
+| `Default value` pid | `number` | 0 |
 
 **Returns:** `number`
 
@@ -158,7 +159,7 @@ ___
 
 ###  displayMemory
 
-▸ **displayMemory**(offset: *`number`*, length: *`number`*, destination?: *`number`*): `void`
+▸ **displayMemory**(offset: *`number`*, length: *`number`*, destination?: *`number`*, pid?: *`number`*): `void`
 
 *Defined in [script/_lib/Machine.ts:49](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L49)*
 
@@ -169,6 +170,7 @@ ___
 | offset | `number` | - |
 | length | `number` | - |
 | `Default value` destination | `number` | 0 |
+| `Default value` pid | `number` | 0 |
 
 **Returns:** `void`
 
@@ -179,7 +181,7 @@ ___
 
 ▸ **focusInput**(input: *`number`*): `void`
 
-*Defined in [script/_lib/Machine.ts:332](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L332)*
+*Defined in [script/_lib/Machine.ts:323](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L323)*
 
 **Parameters:**
 
@@ -235,7 +237,7 @@ ___
 
 ▸ **getGameAxisX**(): `any`
 
-*Defined in [script/_lib/Machine.ts:394](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L394)*
+*Defined in [script/_lib/Machine.ts:385](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L385)*
 
 **Returns:** `any`
 
@@ -246,7 +248,7 @@ ___
 
 ▸ **getGameAxisY**(): `any`
 
-*Defined in [script/_lib/Machine.ts:395](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L395)*
+*Defined in [script/_lib/Machine.ts:386](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L386)*
 
 **Returns:** `any`
 
@@ -257,7 +259,7 @@ ___
 
 ▸ **getGameButtonA**(): `any`
 
-*Defined in [script/_lib/Machine.ts:396](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L396)*
+*Defined in [script/_lib/Machine.ts:387](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L387)*
 
 **Returns:** `any`
 
@@ -268,7 +270,7 @@ ___
 
 ▸ **getGameButtonB**(): `any`
 
-*Defined in [script/_lib/Machine.ts:397](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L397)*
+*Defined in [script/_lib/Machine.ts:388](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L388)*
 
 **Returns:** `any`
 
@@ -279,7 +281,7 @@ ___
 
 ▸ **getGameButtonX**(): `any`
 
-*Defined in [script/_lib/Machine.ts:398](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L398)*
+*Defined in [script/_lib/Machine.ts:389](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L389)*
 
 **Returns:** `any`
 
@@ -290,7 +292,7 @@ ___
 
 ▸ **getGameButtonY**(): `any`
 
-*Defined in [script/_lib/Machine.ts:399](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L399)*
+*Defined in [script/_lib/Machine.ts:390](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L390)*
 
 **Returns:** `any`
 
@@ -301,7 +303,7 @@ ___
 
 ▸ **getInputKey**(): `any`
 
-*Defined in [script/_lib/Machine.ts:351](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L351)*
+*Defined in [script/_lib/Machine.ts:342](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L342)*
 
 **Returns:** `any`
 
@@ -312,7 +314,7 @@ ___
 
 ▸ **getInputPosition**(): `any`
 
-*Defined in [script/_lib/Machine.ts:349](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L349)*
+*Defined in [script/_lib/Machine.ts:340](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L340)*
 
 **Returns:** `any`
 
@@ -323,7 +325,7 @@ ___
 
 ▸ **getInputSelected**(): `any`
 
-*Defined in [script/_lib/Machine.ts:350](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L350)*
+*Defined in [script/_lib/Machine.ts:341](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L341)*
 
 **Returns:** `any`
 
@@ -334,7 +336,7 @@ ___
 
 ▸ **getInputText**(): `number`
 
-*Defined in [script/_lib/Machine.ts:348](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L348)*
+*Defined in [script/_lib/Machine.ts:339](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L339)*
 
 **Returns:** `number`
 
@@ -345,7 +347,7 @@ ___
 
 ▸ **getMousePressed**(): `any`
 
-*Defined in [script/_lib/Machine.ts:393](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L393)*
+*Defined in [script/_lib/Machine.ts:384](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L384)*
 
 **Returns:** `any`
 
@@ -356,7 +358,7 @@ ___
 
 ▸ **getMouseX**(): `any`
 
-*Defined in [script/_lib/Machine.ts:390](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L390)*
+*Defined in [script/_lib/Machine.ts:381](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L381)*
 
 **Returns:** `any`
 
@@ -367,7 +369,7 @@ ___
 
 ▸ **getMouseY**(): `any`
 
-*Defined in [script/_lib/Machine.ts:391](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L391)*
+*Defined in [script/_lib/Machine.ts:382](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L382)*
 
 **Returns:** `any`
 
@@ -409,15 +411,16 @@ ___
 
 ###  head
 
-▸ **head**(callback: * `number` &#124; `Function`*): `number`
+▸ **head**(callback: * `number` &#124; `Function`*, pid?: *`number`*): `number`
 
 *Defined in [script/_lib/Machine.ts:215](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L215)*
 
 **Parameters:**
 
-| Param | Type |
-| ------ | ------ |
-| callback |  `number` &#124; `Function`|
+| Param | Type | Default value |
+| ------ | ------ | ------ |
+| callback |  `number` &#124; `Function`| - |
+| `Default value` pid | `number` | 0 |
 
 **Returns:** `number`
 
@@ -428,7 +431,7 @@ ___
 
 ▸ **killProcess**(pid: *`number`*): `void`
 
-*Defined in [script/_lib/Machine.ts:318](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L318)*
+*Defined in [script/_lib/Machine.ts:310](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L310)*
 
 **Parameters:**
 
@@ -443,15 +446,16 @@ ___
 
 ###  list
 
-▸ **list**(callback: * `number` &#124; `Function`*): `number`
+▸ **list**(callback: * `number` &#124; `Function`*, pid?: *`number`*): `number`
 
 *Defined in [script/_lib/Machine.ts:200](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L200)*
 
 **Parameters:**
 
-| Param | Type |
-| ------ | ------ |
-| callback |  `number` &#124; `Function`|
+| Param | Type | Default value |
+| ------ | ------ | ------ |
+| callback |  `number` &#124; `Function`| - |
+| `Default value` pid | `number` | 0 |
 
 **Returns:** `number`
 
@@ -493,15 +497,16 @@ ___
 
 ###  popToMemory
 
-▸ **popToMemory**(offset: *`number`*): `void`
+▸ **popToMemory**(offset: *`number`*, pid?: *`number`*): `void`
 
 *Defined in [script/_lib/Machine.ts:83](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L83)*
 
 **Parameters:**
 
-| Param | Type |
-| ------ | ------ |
-| offset | `number` |
+| Param | Type | Default value |
+| ------ | ------ | ------ |
+| offset | `number` | - |
+| `Default value` pid | `number` | 0 |
 
 **Returns:** `void`
 
@@ -510,15 +515,16 @@ ___
 
 ###  post
 
-▸ **post**(callback: * `number` &#124; `Function`*): `number`
+▸ **post**(callback: * `number` &#124; `Function`*, pid?: *`number`*): `number`
 
 *Defined in [script/_lib/Machine.ts:230](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L230)*
 
 **Parameters:**
 
-| Param | Type |
-| ------ | ------ |
-| callback |  `number` &#124; `Function`|
+| Param | Type | Default value |
+| ------ | ------ | ------ |
+| callback |  `number` &#124; `Function`| - |
+| `Default value` pid | `number` | 0 |
 
 **Returns:** `number`
 
@@ -540,7 +546,7 @@ ___
 
 ▸ **processStatus**(pid: *`number`*):  `undefined` &#124; `0` &#124; `1` &#124; `-1` &#124; `2`
 
-*Defined in [script/_lib/Machine.ts:284](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L284)*
+*Defined in [script/_lib/Machine.ts:282](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L282)*
 
 **Parameters:**
 
@@ -555,16 +561,17 @@ ___
 
 ###  pushFromMemory
 
-▸ **pushFromMemory**(offset: *`number`*, length: *`number`*): `number`
+▸ **pushFromMemory**(offset: *`number`*, length: *`number`*, pid?: *`number`*): `number`
 
 *Defined in [script/_lib/Machine.ts:76](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L76)*
 
 **Parameters:**
 
-| Param | Type |
-| ------ | ------ |
-| offset | `number` |
-| length | `number` |
+| Param | Type | Default value |
+| ------ | ------ | ------ |
+| offset | `number` | - |
+| length | `number` | - |
+| `Default value` pid | `number` | 0 |
 
 **Returns:** `number`
 
@@ -573,15 +580,16 @@ ___
 
 ###  read
 
-▸ **read**(callback: * `number` &#124; `Function`*): `number`
+▸ **read**(callback: * `number` &#124; `Function`*, pid?: *`number`*): `number`
 
 *Defined in [script/_lib/Machine.ts:137](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L137)*
 
 **Parameters:**
 
-| Param | Type |
-| ------ | ------ |
-| callback |  `number` &#124; `Function`|
+| Param | Type | Default value |
+| ------ | ------ | ------ |
+| callback |  `number` &#124; `Function`| - |
+| `Default value` pid | `number` | 0 |
 
 **Returns:** `number`
 
@@ -590,15 +598,16 @@ ___
 
 ###  readImage
 
-▸ **readImage**(callback: * `number` &#124; `Function`*): `number`
+▸ **readImage**(callback: * `number` &#124; `Function`*, pid?: *`number`*): `number`
 
 *Defined in [script/_lib/Machine.ts:153](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L153)*
 
 **Parameters:**
 
-| Param | Type |
-| ------ | ------ |
-| callback |  `number` &#124; `Function`|
+| Param | Type | Default value |
+| ------ | ------ | ------ |
+| callback |  `number` &#124; `Function`| - |
+| `Default value` pid | `number` | 0 |
 
 **Returns:** `number`
 
@@ -609,7 +618,7 @@ ___
 
 ▸ **replaceInputText**(fromIndex?: *`number`*): `void`
 
-*Defined in [script/_lib/Machine.ts:375](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L375)*
+*Defined in [script/_lib/Machine.ts:366](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L366)*
 
 **Parameters:**
 
@@ -658,7 +667,7 @@ ___
 
 ▸ **setInputPosition**(position?: *`number`*, selection?: *`number`*): `void`
 
-*Defined in [script/_lib/Machine.ts:368](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L368)*
+*Defined in [script/_lib/Machine.ts:359](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L359)*
 
 **Parameters:**
 
@@ -676,7 +685,7 @@ ___
 
 ▸ **setInputText**(): `void`
 
-*Defined in [script/_lib/Machine.ts:361](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L361)*
+*Defined in [script/_lib/Machine.ts:352](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L352)*
 
 **Returns:** `void`
 
@@ -687,7 +696,7 @@ ___
 
 ▸ **setInputType**(type: *`number`*): `void`
 
-*Defined in [script/_lib/Machine.ts:352](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L352)*
+*Defined in [script/_lib/Machine.ts:343](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L343)*
 
 **Parameters:**
 
@@ -704,7 +713,7 @@ ___
 
 ▸ **setNativeMouse**(type: *`number`*): `void`
 
-*Defined in [script/_lib/Machine.ts:392](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L392)*
+*Defined in [script/_lib/Machine.ts:383](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L383)*
 
 **Parameters:**
 
@@ -749,7 +758,7 @@ ___
 
 ▸ **startTone**(channel: *`number`*, frequency: *`number`*, volume?: *`number`*, type?: *`number`*): `void`
 
-*Defined in [script/_lib/Machine.ts:401](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L401)*
+*Defined in [script/_lib/Machine.ts:392](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L392)*
 
 **Parameters:**
 
@@ -769,7 +778,7 @@ ___
 
 ▸ **stepProcess**(pid: *`number`*): `void`
 
-*Defined in [script/_lib/Machine.ts:290](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L290)*
+*Defined in [script/_lib/Machine.ts:288](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L288)*
 
 **Parameters:**
 
@@ -786,7 +795,7 @@ ___
 
 ▸ **stopTone**(channel: *`number`*): `void`
 
-*Defined in [script/_lib/Machine.ts:402](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L402)*
+*Defined in [script/_lib/Machine.ts:393](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L393)*
 
 **Parameters:**
 
@@ -820,7 +829,7 @@ ___
 
 ▸ **transferMemory**(srcPid: *`number`*, srcOffset: *`number`*, length: *`number`*, destPid: *`number`*, destOffset: *`number`*): `void`
 
-*Defined in [script/_lib/Machine.ts:323](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L323)*
+*Defined in [script/_lib/Machine.ts:314](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L314)*
 
 **Parameters:**
 
@@ -841,7 +850,7 @@ ___
 
 ▸ **wabt**(): `number`
 
-*Defined in [script/_lib/Machine.ts:404](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L404)*
+*Defined in [script/_lib/Machine.ts:395](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L395)*
 
 **Returns:** `number`
 
@@ -850,15 +859,16 @@ ___
 
 ###  write
 
-▸ **write**(callback: * `number` &#124; `Function`*): `number`
+▸ **write**(callback: * `number` &#124; `Function`*, pid?: *`number`*): `number`
 
 *Defined in [script/_lib/Machine.ts:169](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L169)*
 
 **Parameters:**
 
-| Param | Type |
-| ------ | ------ |
-| callback |  `number` &#124; `Function`|
+| Param | Type | Default value |
+| ------ | ------ | ------ |
+| callback |  `number` &#124; `Function`| - |
+| `Default value` pid | `number` | 0 |
 
 **Returns:** `number`
 
