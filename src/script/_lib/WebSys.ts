@@ -312,7 +312,7 @@ export default class WebSys implements Sys {
     })
     if (!res.ok) throw "write error!"
     this._dirCache(filename, true)
-    return res.ok
+    return <boolean>res.ok
   }
 
   async post(filename: string, data: string | ArrayBuffer) {
@@ -349,7 +349,7 @@ export default class WebSys implements Sys {
     })
     if (!res.ok) throw "delete error!"
     this._dirCache(filename, false)
-    return res.ok
+    return <boolean>res.ok
   }
 
   async head(filename: string) {

@@ -14,7 +14,7 @@ let os = require("os"),
   tsify = require("tsify"),
   jsmin = require("jsmin").jsmin,
   walt = require("walt-compiler").default,
-  wabt = require("wabt"),
+  wabt = require("wabt")(),
   waquire = require("waquire"),
   FtpClient = require("ftp"),
   md5 = require("md5")
@@ -23,7 +23,7 @@ let os = require("os"),
 * Jakefile.js
 * For building web apps
 *
-* @date 03-jul-2018
+* @date 05-oct-2018
 */
 let srcDir = "./src/",
   outDir = "./build/",

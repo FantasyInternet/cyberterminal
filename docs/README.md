@@ -47,6 +47,7 @@ Nothing substantial yet, but the following URLs are available. Copy these links 
 
 *   [https://fantasyinternet.github.io/try](https://fantasyinternet.github.io/try)
 *   [http://cybermicro.online/pong/](http://cybermicro.online/pong/)
+*   [http://cybermicro.online/slange/](http://cybermicro.online/slange/)
 
 ## Index
 

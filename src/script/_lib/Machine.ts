@@ -1,5 +1,3 @@
-import { partials } from "handlebars"
-
 let wabt = require("./wabt")
 
 /**
@@ -248,6 +246,7 @@ export default class Machine {
 
   setStepInterval(milliseconds: number) {
     this._stepInterval = milliseconds
+    setTimeout(this._tick.bind(this))
   }
   loadProcess() {
     let wasm = this._popArrayBuffer()

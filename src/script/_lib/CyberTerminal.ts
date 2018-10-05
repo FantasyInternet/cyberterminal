@@ -50,7 +50,7 @@ export default class CyberTerminal {
     console.log("Connecting to", url)
     this.sys.setDisplayMode("text", 80, 20)
     this.sys.print("\n\nConnecting to " + url)
-    this._connecting = setTimeout(null)
+    this._connecting = setTimeout(() => { })
     let machine = this.addMachine()
     let msg = await this._findBoot(url)
     if (msg.wasm) {
