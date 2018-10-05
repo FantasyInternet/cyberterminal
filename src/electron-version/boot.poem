@@ -1,0 +1,50 @@
+include "fantasyinternet.poem/log.poem"
+include "fantasyinternet.poem/display.poem"
+include "fantasyinternet.poem/filesystem.poem"
+include "fantasyinternet.poem/cli.poem"
+include "fantasyinternet.poem/text_input.poem"
+include "fantasyinternet.poem/navigation.poem"
+
+export "init" init
+  set_display_mode 0 80 20
+  read "./updates/cyberterminal.wasm" #update
+  read "./history.txt" #load_history
+
+var stage = 0
+export "step" step
+  if stage == 0
+    intro
+  if stage == 1
+    var url
+    if (url = read_line) != null
+      connect_to url
+      write "./history.txt" (array_join history "\n") #state_success
+      stage=0
+
+func intro
+  println "\u001b[K\u001b[H\u001b[1m\t\t\t\t \u001b[35mCy\u001b[31mber\u001b[33mTer\u001b[32mmin\u001b[36mal\u001b[0;1m\n\n"
+  print "\u001b[K\n\u001b[A\u001b[1;37m Connect to: \u001b[0m"
+  set_input_type 4
+  set_input_text "http://"
+  set_input_position 7
+  stage++
+
+func load_history success data req_id
+  if success
+    history = string_split data "\n"
+    history_pos = array_length history
+  else
+    log "no history"
+
+func update success data req_id
+  if success
+    write "./boot.wasm" data #state_success
+  else
+    log "Error reading update!"
+
+func state_success success req_id
+  if success
+    log "Success!"
+  else
+    log "Error!"
+

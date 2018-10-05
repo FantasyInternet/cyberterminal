@@ -13,9 +13,7 @@ let os = require("os"),
   browserify = require("browserify"),
   tsify = require("tsify"),
   jsmin = require("jsmin").jsmin,
-  walt = require("walt-compiler").default,
-  wabt = require("wabt")(),
-  waquire = require("waquire"),
+  poetry = require("poetry-compiler"),
   FtpClient = require("ftp"),
   md5 = require("md5")
 
@@ -33,7 +31,7 @@ let srcDir = "./src/",
   reloadServer,
   watchThrottle = {}
 
-task("default", ["clean", "html:pug", "html:md", "css:less", "js:ts", "wasm:walt", "wasm:wast", "static:json", "static:all"])
+task("default", ["clean", "html:pug", "html:md", "css:less", "js:ts", "wasm:poem", "static:json", "static:all"])
 
 task("watch", function () {
   http.get("http://localhost:8000/").on("error", function () { })
@@ -43,8 +41,7 @@ task("watch", function () {
   startWatching(".md", "html:md")
   startWatching(".less", "css:less")
   startWatching(".ts", "js:ts")
-  startWatching(".walt", "wasm:walt")
-  startWatching(".wast", "wasm:wast")
+  startWatching(".poem", "wasm:poem")
   startWatching(".json", "static:json")
   startWatching("", "static:all")
 
@@ -295,37 +292,21 @@ namespace("js", function () {
 })
 
 namespace("wasm", function () {
-  let wabt_opts = {
+  let poetry_opts = {
     write_debug_names: debug
   }
 
-  task("wast", function () {
-    console.log("\nCompiling Wast...")
-    fileTypeList([".wast", ".wat"]).forEach(function (inFile) {
-      let outFile = outputFile(inFile, ".wasm"),
-        output = "" + waquire("./" + inFile)
+  task("poem", function () {
+    console.log("\nCompiling Poetry...")
+    fileTypeList(".poem").forEach(function (inFile) {
+      let outFile = outputFile(inFile, ".wasm")
       console.log(inFile, "->", outFile)
 
-      wabt_opts.write_debug_names = debug
-      let module = wabt.parseWat(inFile, output)
-      output = module.toBinary(wabt_opts).buffer
+      poetry_opts.wasm = "./" + outFile
+      if (debug) poetry_opts.wast = "./" + outputFile(inFile, ".wast")
 
       jake.mkdirP(path.dirname(outFile))
-      fs.writeFileSync(outFile, new Uint8Array(output))
-    })
-    console.log("...dONE!")
-  })
-  task("walt", function () {
-    console.log("\nCompiling Walt...")
-    fileTypeList(".walt").forEach(function (inFile) {
-      let outFile = outputFile(inFile, ".wasm"),
-        output = "" + fs.readFileSync(inFile)
-      console.log(inFile, "->", outFile)
-
-      output = walt(output)
-
-      jake.mkdirP(path.dirname(outFile))
-      fs.writeFileSync(outFile, new Uint8Array(output))
+      poetry("./" + inFile, poetry_opts)
     })
     console.log("...dONE!")
   })
@@ -367,7 +348,7 @@ namespace("static", function () {
 
   task("all", function () {
     console.log("\nCopying static files...")
-    fileTypeList([".pug", ".md", ".less", ".ts", ".walt", ".wast"])
+    fileTypeList([".pug", ".md", ".less", ".ts", ".poem"])
     staticFiles.resolve()
     excludeIgnoredFiles(staticFiles.toArray()).forEach(function (inFile) {
       let outFile = outputFile(inFile)
