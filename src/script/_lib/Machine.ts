@@ -88,9 +88,9 @@ export default class Machine {
     //@ts-ignore
     ar.set(new Uint8Array(this._popArrayBuffer()), offset)
   }
-  teeToMemory(offset: number) {
+  teeToMemory(offset: number, pid = 0) {
     let len = this.getBufferSize()
-    this.popToMemory(offset)
+    this.popToMemory(offset, pid)
     this._bufferStackLengths.push(len)
   }
   getBufferSize(indexFromEnd: number = 0) {
@@ -135,7 +135,7 @@ export default class Machine {
     this._sysCall("setAddress", this._baseUrl, false)
   }
   read(callback: number | Function, pid = 0) {
-    callback = this._getCallback(callback)
+    callback = this._getCallback(callback, pid)
     let id = this._asyncCalls++
     let filename = (new URL(this._popString(), this._baseUrl)).toString()
     if (filename.substr(0, this._originUrl.length) !== this._originUrl) throw "cross origin not allowed!"
@@ -151,7 +151,7 @@ export default class Machine {
     return id
   }
   readImage(callback: number | Function, pid = 0) {
-    callback = this._getCallback(callback)
+    callback = this._getCallback(callback, pid)
     let id = this._asyncCalls++
     let filename = (new URL(this._popString(), this._baseUrl)).toString()
     if (filename.substr(0, this._originUrl.length) !== this._originUrl) throw "cross origin not allowed!"
@@ -167,7 +167,7 @@ export default class Machine {
     return id
   }
   write(callback: number | Function, pid = 0) {
-    callback = this._getCallback(callback)
+    callback = this._getCallback(callback, pid)
     let id = this._asyncCalls++
     let data = this._popArrayBuffer()
     let filename = (new URL(this._popString(), this._baseUrl)).toString()
@@ -183,7 +183,7 @@ export default class Machine {
     return id
   }
   delete(callback: number | Function, pid = 0) {
-    callback = this._getCallback(callback)
+    callback = this._getCallback(callback, pid)
     let id = this._asyncCalls++
     let filename = (new URL(this._popString(), this._baseUrl)).toString()
     if (filename.substr(0, this._originUrl.length) !== this._originUrl) throw "cross origin not allowed!"
@@ -198,7 +198,7 @@ export default class Machine {
     return id
   }
   list(callback: number | Function, pid = 0) {
-    callback = this._getCallback(callback)
+    callback = this._getCallback(callback, pid)
     let id = this._asyncCalls++
     let filename = (new URL(this._popString(), this._baseUrl)).toString()
     if (filename.substr(0, this._originUrl.length) !== this._originUrl) throw "cross origin not allowed!"
@@ -213,7 +213,7 @@ export default class Machine {
     return id
   }
   head(callback: number | Function, pid = 0) {
-    callback = this._getCallback(callback)
+    callback = this._getCallback(callback, pid)
     let id = this._asyncCalls++
     let filename = (new URL(this._popString(), this._baseUrl)).toString()
     if (filename.substr(0, this._originUrl.length) !== this._originUrl) throw "cross origin not allowed!"
@@ -228,7 +228,7 @@ export default class Machine {
     return id
   }
   post(callback: number | Function, pid = 0) {
-    callback = this._getCallback(callback)
+    callback = this._getCallback(callback, pid)
     let id = this._asyncCalls++
     let data = this._popString()
     let filename = (new URL(this._popString(), this._baseUrl)).toString()

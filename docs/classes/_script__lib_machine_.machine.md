@@ -810,15 +810,16 @@ ___
 
 ###  teeToMemory
 
-▸ **teeToMemory**(offset: *`number`*): `void`
+▸ **teeToMemory**(offset: *`number`*, pid?: *`number`*): `void`
 
 *Defined in [script/_lib/Machine.ts:91](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L91)*
 
 **Parameters:**
 
-| Param | Type |
-| ------ | ------ |
-| offset | `number` |
+| Param | Type | Default value |
+| ------ | ------ | ------ |
+| offset | `number` | - |
+| `Default value` pid | `number` | 0 |
 
 **Returns:** `void`
 

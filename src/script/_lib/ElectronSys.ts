@@ -243,12 +243,12 @@ export default class ElectronSys extends WebSys {
     } catch (error) { }
     let res = await fetch("boot.wasm")
     let bootwasm = await res.arrayBuffer()
-    fs.writeFileSync(folder + "updates/cyberterminal.wasm.part", new Buffer(bootwasm))
+    fs.writeFileSync(folder + "updates/cyberterminal.wasm.part", Buffer.from(bootwasm))
     fs.renameSync(folder + "updates/cyberterminal.wasm.part", folder + "updates/cyberterminal.wasm")
     try {
       fs.accessSync(folder + "boot.wasm")
     } catch (error) {
-      fs.writeFileSync(folder + "boot.wasm", new Buffer(bootwasm))
+      fs.writeFileSync(folder + "boot.wasm", Buffer.from(bootwasm))
       location.reload(true)
     }
     await this._checkForUpdates()
