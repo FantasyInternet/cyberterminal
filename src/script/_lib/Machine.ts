@@ -390,6 +390,8 @@ export default class Machine {
   getGameButtonY() { return this._gameInputState.buttons.y }
 
   startTone(channel: number, frequency: number, volume: number = 1, type: number = 0) { this._sysCall("startTone", channel, frequency, volume, this._toneTypes[type]) }
+  rampFrequency(channel: number, frequency: number, duration: number) { this._sysCall("rampFrequency", channel, frequency, duration) }
+  rampVolume(channel: number, volume: number, duration: number) { this._sysCall("rampVolume", channel, volume, duration) }
   stopTone(channel: number) { this._sysCall("stopTone", channel) }
 
   wabt() {

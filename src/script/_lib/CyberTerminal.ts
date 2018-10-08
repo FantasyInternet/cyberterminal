@@ -16,7 +16,10 @@ export default class CyberTerminal {
     this.sys.setDisplayMode("text", 80, 20)
     this.sys.print("CyberTerminal v" + pkg.version)
     setTimeout(() => {
-      this.sys.startTone(0, 512)
+      this.sys.startTone(0, 384)
+      this.sys.rampFrequency(0, 384, .063)
+      this.sys.rampFrequency(0, 512, .064)
+      this.sys.rampVolume(0, 0, 0.3333)
       setTimeout(() => {
         this.connectTo(this.sys.startupUrl)
       }, 256)

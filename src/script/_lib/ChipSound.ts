@@ -26,15 +26,40 @@ export default class ChipSound {
       }
       chan.oscillator.connect(chan.gain)
       chan.gain.connect(this._ctx.destination)
+      chan.oscillator.frequency.setValueAtTime(frequency, 0)
+      chan.gain.gain.setValueAtTime(volume * .5, 0)
+    } else {
+      chan.oscillator.frequency.cancelScheduledValues(this._ctx.currentTime + .001)
+      chan.oscillator.frequency.linearRampToValueAtTime(frequency, this._ctx.currentTime + .001)
+      chan.gain.gain.cancelScheduledValues(this._ctx.currentTime + .001)
+      chan.gain.gain.linearRampToValueAtTime(volume * .5, this._ctx.currentTime + .001)
     }
     clearTimeout(chan.autoStop)
-    chan.oscillator.frequency.setValueAtTime(frequency, 0)
-    chan.gain.gain.setValueAtTime(volume*.5, 0)
     chan.oscillator.type = type
     if (!this._channels[channel]) {
       this._channels[channel] = chan
       chan.oscillator.start()
     }
+    chan.autoStop = setTimeout(() => {
+      this.stopTone(channel)
+    }, 1000 * 10)
+  }
+
+  rampFrequency(channel: number, frequency: number, duration: number) {
+    let chan = this._channels[channel]
+    if (!chan) return
+    chan.oscillator.frequency.linearRampToValueAtTime(frequency, this._ctx.currentTime + duration)
+    clearTimeout(chan.autoStop)
+    chan.autoStop = setTimeout(() => {
+      this.stopTone(channel)
+    }, 1000 * 10)
+  }
+
+  rampVolume(channel: number, volume: number, duration: number) {
+    let chan = this._channels[channel]
+    if (!chan) return
+    chan.gain.gain.linearRampToValueAtTime(volume * .5, this._ctx.currentTime + duration)
+    clearTimeout(chan.autoStop)
     chan.autoStop = setTimeout(() => {
       this.stopTone(channel)
     }, 1000 * 10)

@@ -57,6 +57,22 @@ export default interface Sys {
   startTone(channel: number, frequency: number, volume?: number, type?: "sine" | "square" | "sawtooth" | "triangle"): void
 
   /**
+   * Slide to given frequency
+   * @param channel Audio channel to use
+   * @param frequency Frequency of tone
+   * @param duration The amount of time (in seconds) to slide
+   */
+  rampFrequency(channel: number, frequency: number, duration: number): void
+
+  /**
+   * Slide to given volume
+   * @param channel Audio channel to use
+   * @param volume Volume of tone (0-1)
+   * @param duration The amount of time (in seconds) to slide
+   */
+  rampVolume(channel: number, volume: number, duration: number): void
+
+  /**
    * Stop tone oscillator
    * @param channel Audio channel
    */

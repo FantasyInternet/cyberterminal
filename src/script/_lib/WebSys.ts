@@ -393,6 +393,12 @@ export default class WebSys implements Sys {
   startTone() {
     this.chipSound.startTone.apply(this.chipSound, arguments)
   }
+  rampFrequency() {
+    this.chipSound.rampFrequency.apply(this.chipSound, arguments)
+  }
+  rampVolume() {
+    this.chipSound.rampVolume.apply(this.chipSound, arguments)
+  }
   stopTone() {
     this.chipSound.stopTone.apply(this.chipSound, arguments)
   }

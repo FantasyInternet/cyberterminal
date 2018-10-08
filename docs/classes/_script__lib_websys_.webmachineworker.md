@@ -37,7 +37,7 @@
 
 ⊕ **new WebMachineWorker**(): [WebMachineWorker](_script__lib_websys_.webmachineworker.md)
 
-*Defined in [script/_lib/WebSys.ts:694](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L694)*
+*Defined in [script/_lib/WebSys.ts:700](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L700)*
 
 **Returns:** [WebMachineWorker](_script__lib_websys_.webmachineworker.md)
 
@@ -53,7 +53,7 @@ ___
 
 *Implementation of [MachineWorker](../interfaces/_script__lib_machineworker_.machineworker.md).[baseUrl](../interfaces/_script__lib_machineworker_.machineworker.md#baseurl)*
 
-*Defined in [script/_lib/WebSys.ts:694](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L694)*
+*Defined in [script/_lib/WebSys.ts:700](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L700)*
 
 ___
 <a id="worker"></a>
@@ -62,7 +62,7 @@ ___
 
 **● worker**: *`Worker`*
 
-*Defined in [script/_lib/WebSys.ts:693](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L693)*
+*Defined in [script/_lib/WebSys.ts:699](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L699)*
 
 ___
 
@@ -76,7 +76,7 @@ ___
 
 *Implementation of [MachineWorker](../interfaces/_script__lib_machineworker_.machineworker.md).[onMessage](../interfaces/_script__lib_machineworker_.machineworker.md#onmessage)*
 
-*Defined in [script/_lib/WebSys.ts:704](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L704)*
+*Defined in [script/_lib/WebSys.ts:710](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L710)*
 
 **Parameters:**
 
@@ -93,7 +93,7 @@ ___
 
 ▸ **send**(msg: *`any`*, transferables?: * `any`[] &#124; `undefined`*): `void`
 
-*Defined in [script/_lib/WebSys.ts:700](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L700)*
+*Defined in [script/_lib/WebSys.ts:706](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L706)*
 
 **Parameters:**
 
@@ -113,7 +113,7 @@ ___
 
 *Implementation of [MachineWorker](../interfaces/_script__lib_machineworker_.machineworker.md).[terminate](../interfaces/_script__lib_machineworker_.machineworker.md#terminate)*
 
-*Defined in [script/_lib/WebSys.ts:710](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L710)*
+*Defined in [script/_lib/WebSys.ts:716](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/WebSys.ts#L716)*
 
 **Returns:** `void`
 

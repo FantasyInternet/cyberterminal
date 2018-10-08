@@ -35,6 +35,8 @@ Unified interface to system I/O
 * [list](_script__lib_sys_.sys.md#list)
 * [openWeb](_script__lib_sys_.sys.md#openweb)
 * [print](_script__lib_sys_.sys.md#print)
+* [rampFrequency](_script__lib_sys_.sys.md#rampfrequency)
+* [rampVolume](_script__lib_sys_.sys.md#rampvolume)
 * [read](_script__lib_sys_.sys.md#read)
 * [replaceTextInput](_script__lib_sys_.sys.md#replacetextinput)
 * [setAddress](_script__lib_sys_.sys.md#setaddress)
@@ -135,7 +137,7 @@ ___
 
 ▸ **addEventListener**(event: *`string`*, listener: *`Function`*): `void`
 
-*Defined in [script/_lib/Sys.ts:132](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L132)*
+*Defined in [script/_lib/Sys.ts:148](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L148)*
 
 **Parameters:**
 
@@ -153,7 +155,7 @@ ___
 
 ▸ **createMachine**(): [MachineWorker](_script__lib_machineworker_.machineworker.md)
 
-*Defined in [script/_lib/Sys.ts:69](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L69)*
+*Defined in [script/_lib/Sys.ts:85](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L85)*
 
 Create a machine.
 
@@ -167,7 +169,7 @@ ___
 
 ▸ **delete**(filename: *`string`*): `Promise`<`boolean`>
 
-*Defined in [script/_lib/Sys.ts:89](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L89)*
+*Defined in [script/_lib/Sys.ts:105](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L105)*
 
 Delete a file.
 
@@ -205,7 +207,7 @@ ___
 
 ▸ **focusInput**(input: * "text" &#124; "mouse" &#124; "game"*): `string`[]
 
-*Defined in [script/_lib/Sys.ts:101](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L101)*
+*Defined in [script/_lib/Sys.ts:117](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L117)*
 
 Focus on given type of input.
 
@@ -224,7 +226,7 @@ ___
 
 ▸ **list**(path: *`string`*): `Promise`<`any`>
 
-*Defined in [script/_lib/Sys.ts:95](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L95)*
+*Defined in [script/_lib/Sys.ts:111](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L111)*
 
 List contents of a directory.
 
@@ -243,7 +245,7 @@ ___
 
 ▸ **openWeb**(url: *`string`*): `void`
 
-*Defined in [script/_lib/Sys.ts:130](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L130)*
+*Defined in [script/_lib/Sys.ts:146](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L146)*
 
 Open a link in default web browser.
 
@@ -275,13 +277,55 @@ Print string to text display.
 **Returns:** `void`
 
 ___
+<a id="rampfrequency"></a>
+
+###  rampFrequency
+
+▸ **rampFrequency**(channel: *`number`*, frequency: *`number`*, duration: *`number`*): `void`
+
+*Defined in [script/_lib/Sys.ts:65](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L65)*
+
+Slide to given frequency
+
+**Parameters:**
+
+| Param | Type | Description |
+| ------ | ------ | ------ |
+| channel | `number` |  Audio channel to use |
+| frequency | `number` |  Frequency of tone |
+| duration | `number` |  The amount of time (in seconds) to slide |
+
+**Returns:** `void`
+
+___
+<a id="rampvolume"></a>
+
+###  rampVolume
+
+▸ **rampVolume**(channel: *`number`*, volume: *`number`*, duration: *`number`*): `void`
+
+*Defined in [script/_lib/Sys.ts:73](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L73)*
+
+Slide to given volume
+
+**Parameters:**
+
+| Param | Type | Description |
+| ------ | ------ | ------ |
+| channel | `number` |  Audio channel to use |
+| volume | `number` |  Volume of tone (0-1) |
+| duration | `number` |  The amount of time (in seconds) to slide |
+
+**Returns:** `void`
+
+___
 <a id="read"></a>
 
 ###  read
 
 ▸ **read**(filename: *`string`*, options: *`any`*): `Promise`<`any`>
 
-*Defined in [script/_lib/Sys.ts:76](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L76)*
+*Defined in [script/_lib/Sys.ts:92](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L92)*
 
 Read a file.
 
@@ -301,7 +345,7 @@ ___
 
 ▸ **replaceTextInput**(search: *`string`*, replace: *`string`*, fromIndex: *`number`*): `void`
 
-*Defined in [script/_lib/Sys.ts:118](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L118)*
+*Defined in [script/_lib/Sys.ts:134](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L134)*
 
 Replace first occurrence of a substring with another.
 
@@ -362,7 +406,7 @@ ___
 
 ▸ **setNativeMouse**(type: *`string`*): `void`
 
-*Defined in [script/_lib/Sys.ts:124](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L124)*
+*Defined in [script/_lib/Sys.ts:140](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L140)*
 
 Set the appearance of the native mouse cursor.
 
@@ -381,7 +425,7 @@ ___
 
 ▸ **setTextInput**(text: *`string`*, pos: *`number`*, len: *`number`*, type?: * "multiline" &#124; "text" &#124; "password" &#124; "number" &#124; "url" &#124; "email" &#124; "tel"*): `void`
 
-*Defined in [script/_lib/Sys.ts:110](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L110)*
+*Defined in [script/_lib/Sys.ts:126](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L126)*
 
 Set the state of the text input.
 
@@ -425,7 +469,7 @@ ___
 
 ▸ **stopTone**(channel: *`number`*): `void`
 
-*Defined in [script/_lib/Sys.ts:63](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L63)*
+*Defined in [script/_lib/Sys.ts:79](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L79)*
 
 Stop tone oscillator
 
@@ -444,7 +488,7 @@ ___
 
 ▸ **write**(filename: *`string`*, data: * `string` &#124; `ArrayBuffer`*): `Promise`<`boolean`>
 
-*Defined in [script/_lib/Sys.ts:83](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L83)*
+*Defined in [script/_lib/Sys.ts:99](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L99)*
 
 Write to a file.
 

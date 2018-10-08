@@ -52,6 +52,8 @@ Central processing unit for browsers See [Sys](../interfaces/__classes_sys_.sys.
 * [print](_script__lib_machine_.machine.md#print)
 * [processStatus](_script__lib_machine_.machine.md#processstatus)
 * [pushFromMemory](_script__lib_machine_.machine.md#pushfrommemory)
+* [rampFrequency](_script__lib_machine_.machine.md#rampfrequency)
+* [rampVolume](_script__lib_machine_.machine.md#rampvolume)
 * [read](_script__lib_machine_.machine.md#read)
 * [readImage](_script__lib_machine_.machine.md#readimage)
 * [replaceInputText](_script__lib_machine_.machine.md#replaceinputtext)
@@ -576,6 +578,44 @@ ___
 **Returns:** `number`
 
 ___
+<a id="rampfrequency"></a>
+
+###  rampFrequency
+
+▸ **rampFrequency**(channel: *`number`*, frequency: *`number`*, duration: *`number`*): `void`
+
+*Defined in [script/_lib/Machine.ts:393](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L393)*
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| channel | `number` |
+| frequency | `number` |
+| duration | `number` |
+
+**Returns:** `void`
+
+___
+<a id="rampvolume"></a>
+
+###  rampVolume
+
+▸ **rampVolume**(channel: *`number`*, volume: *`number`*, duration: *`number`*): `void`
+
+*Defined in [script/_lib/Machine.ts:394](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L394)*
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| channel | `number` |
+| volume | `number` |
+| duration | `number` |
+
+**Returns:** `void`
+
+___
 <a id="read"></a>
 
 ###  read
@@ -795,7 +835,7 @@ ___
 
 ▸ **stopTone**(channel: *`number`*): `void`
 
-*Defined in [script/_lib/Machine.ts:393](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L393)*
+*Defined in [script/_lib/Machine.ts:395](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L395)*
 
 **Parameters:**
 
@@ -851,7 +891,7 @@ ___
 
 ▸ **wabt**(): `number`
 
-*Defined in [script/_lib/Machine.ts:395](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L395)*
+*Defined in [script/_lib/Machine.ts:397](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L397)*
 
 **Returns:** `number`
 

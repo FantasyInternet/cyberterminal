@@ -77,7 +77,7 @@ ___
 
 ▸ **addMachine**(): [MachineWorker](../interfaces/_script__lib_machineworker_.machineworker.md)
 
-*Defined in [script/_lib/CyberTerminal.ts:83](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L83)*
+*Defined in [script/_lib/CyberTerminal.ts:86](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L86)*
 
 **Returns:** [MachineWorker](../interfaces/_script__lib_machineworker_.machineworker.md)
 
@@ -88,7 +88,7 @@ ___
 
 ▸ **connectTo**(url: *`string`*): `Promise`<`void`>
 
-*Defined in [script/_lib/CyberTerminal.ts:36](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L36)*
+*Defined in [script/_lib/CyberTerminal.ts:39](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L39)*
 
 **Parameters:**
 
@@ -105,7 +105,7 @@ ___
 
 ▸ **removeMachine**(): `void`
 
-*Defined in [script/_lib/CyberTerminal.ts:95](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L95)*
+*Defined in [script/_lib/CyberTerminal.ts:98](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L98)*
 
 **Returns:** `void`
 
@@ -116,7 +116,7 @@ ___
 
 ▸ **setAddress**(url: *`string`*): `void`
 
-*Defined in [script/_lib/CyberTerminal.ts:121](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L121)*
+*Defined in [script/_lib/CyberTerminal.ts:124](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/CyberTerminal.ts#L124)*
 
 **Parameters:**
 
