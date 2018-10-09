@@ -54,7 +54,7 @@ export default interface Sys {
    * @param volume Volume of tone (0-1)
    * @param type Wave type
    */
-  startTone(channel: number, frequency: number, volume?: number, type?: "sine" | "square" | "sawtooth" | "triangle"): void
+  startTone(channel: number, frequency: number, volume?: number, type?: "sine" | "square" | "sawtooth" | "triangle" | "noise"): void
 
   /**
    * Slide to given frequency

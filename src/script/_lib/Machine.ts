@@ -409,7 +409,7 @@ export default class Machine {
   private _stepSecond: number = 0
   private _frameCount: number = 0
   private _frameSecond: number = 0
-  private _toneTypes: string[] = ["square", "sawtooth", "triangle", "sine"]
+  private _toneTypes: string[] = ["square", "sawtooth", "triangle", "sine", "noise"]
   private _displayModes: string[] = ["text", "pixel"]
   private _displayMode: number = -1
   private _displayWidth: number = -1

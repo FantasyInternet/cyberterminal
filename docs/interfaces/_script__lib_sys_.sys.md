@@ -445,7 +445,7 @@ ___
 
 ###  startTone
 
-▸ **startTone**(channel: *`number`*, frequency: *`number`*, volume?: * `undefined` &#124; `number`*, type?: * "sine" &#124; "square" &#124; "sawtooth" &#124; "triangle"*): `void`
+▸ **startTone**(channel: *`number`*, frequency: *`number`*, volume?: * `undefined` &#124; `number`*, type?: * "sine" &#124; "square" &#124; "sawtooth" &#124; "triangle" &#124; "noise"*): `void`
 
 *Defined in [script/_lib/Sys.ts:57](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L57)*
 
@@ -458,7 +458,7 @@ Start tone oscillator
 | channel | `number` |  Audio channel to use |
 | frequency | `number` |  Frequency of tone |
 | `Optional` volume |  `undefined` &#124; `number`|  Volume of tone (0-1) |
-| `Optional` type |  "sine" &#124; "square" &#124; "sawtooth" &#124; "triangle"|  Wave type |
+| `Optional` type |  "sine" &#124; "square" &#124; "sawtooth" &#124; "triangle" &#124; "noise"|  Wave type |
 
 **Returns:** `void`
 
