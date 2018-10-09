@@ -22,7 +22,7 @@
 
 **● wabt**: *`any`* =  require("./wabt")
 
-*Defined in [script/_lib/Machine.ts:3](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L3)*
+*Defined in [script/_lib/Machine.ts:1](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L1)*
 
 ___
 

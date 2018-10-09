@@ -98,7 +98,10 @@ export default class WebSys implements Sys {
 
   print(str: string) {
     if (!this._displayTextGrid) return
+    let wideChars = false
     for (let char of str) {
+      let codePoint = char.codePointAt(0)
+      if (codePoint && codePoint > 1024) wideChars = true
       if (this._displayTextEscape) {
         this._displayTextEscape += char
         if (char === "\x1b") this._displayTextEscape = "e"
@@ -241,6 +244,7 @@ export default class WebSys implements Sys {
     let selector = `div:nth-child(${this._displayCursorRow + 1})\nspan:nth-child(${this._displayCursorCol + 1})`
     let cell = <HTMLElement>this._displayTextGrid.querySelector(selector)
     cell.classList.add("current")
+    if (wideChars) this._resize()
   }
 
 
@@ -312,7 +316,7 @@ export default class WebSys implements Sys {
     })
     if (!res.ok) throw "write error!"
     this._dirCache(filename, true)
-    return res.ok
+    return <boolean>res.ok
   }
 
   async post(filename: string, data: string | ArrayBuffer) {
@@ -349,7 +353,7 @@ export default class WebSys implements Sys {
     })
     if (!res.ok) throw "delete error!"
     this._dirCache(filename, false)
-    return res.ok
+    return <boolean>res.ok
   }
 
   async head(filename: string) {
@@ -388,6 +392,12 @@ export default class WebSys implements Sys {
 
   startTone() {
     this.chipSound.startTone.apply(this.chipSound, arguments)
+  }
+  rampFrequency() {
+    this.chipSound.rampFrequency.apply(this.chipSound, arguments)
+  }
+  rampVolume() {
+    this.chipSound.rampVolume.apply(this.chipSound, arguments)
   }
   stopTone() {
     this.chipSound.stopTone.apply(this.chipSound, arguments)
