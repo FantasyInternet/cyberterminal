@@ -45,6 +45,7 @@ export default class ChipSound {
         chan.bufferSource.start()
       } else {
         chan.oscillator = this._ctx.createOscillator()
+        chan.oscillator.frequency.setValueAtTime(frequency, 0)
         chan.oscillator.type = type
         chan.oscillator.connect(chan.gain)
         chan.oscillator.start()

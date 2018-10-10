@@ -1,6 +1,6 @@
 {
   "name": "cyberterminal",
-  "version": "0.6.13",
+  "version": "0.7.1",
   "description": "A fantasy internet client.",
   "author": {
     "name": "poeticandroid",
@@ -62,7 +62,7 @@
     "browserify": "^16.2.3",
     "cssmin": "^0.4.3",
     "electron-builder": "^20.28.4",
-    "fantasyinternet.poem": "^0.20.0",
+    "fantasyinternet.poem": "^0.21.0",
     "file-watch": "^0.1.0",
     "ftp": "^0.3.10",
     "htmlmin": "0.0.7",
@@ -72,12 +72,12 @@
     "less": "^3.8.1",
     "livereload": "^0.7.0",
     "md5": "^2.2.1",
-    "poetry-compiler": "^0.32.0",
+    "poetry-compiler": "^0.33.0",
     "pug": "^2.0.3",
     "tsify": "^4.0.0",
     "typedoc": "^0.12.0",
-    "typedoc-plugin-markdown": "^1.1.16",
-    "typescript": "^3.1.1"
+    "typedoc-plugin-markdown": "^1.1.17",
+    "typescript": "^3.1.2"
   },
   "dependencies": {
     "statify": "^2.0.1"
