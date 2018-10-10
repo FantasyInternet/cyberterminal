@@ -56,8 +56,10 @@ export default class TextInput {
       this.state.type = state.type
     }
     ; (<HTMLInputElement>this._input).value = state.text
-      ; (<HTMLInputElement>this._input).selectionStart = state.pos
-      ; (<HTMLInputElement>this._input).selectionEnd = state.pos + state.len
+    let start = this._countJsCharacters(state.text, 0, state.pos)
+    let end = start + this._countJsCharacters(state.text, state.pos, state.len)
+      ; (<HTMLInputElement>this._input).selectionStart = start
+      ; (<HTMLInputElement>this._input).selectionEnd = end
     //this._keyDown()
   }
 
@@ -103,15 +105,18 @@ export default class TextInput {
       this.state.key = 0
       let start = this.state.text.substr(0, this.state.pos)
       let sel = this.state.text.substr(this.state.pos, this.state.len)
-      this.state.pos = this._countCharacters(start)
-      this.state.len = this._countCharacters(sel)
+      this.state.pos = this._countUtfCharacters(start)
+      this.state.len = this._countUtfCharacters(sel)
       if (e && e.type === "keydown") this.state.key = e.keyCode
       this._sendState()
     })
   }
 
-  private _countCharacters(str: string) {
-    return Array.from(str).length
+  private _countUtfCharacters(str: string, offset = 0, len = str.length) {
+    return Array.from(str.substr(offset, len)).length
+  }
+  private _countJsCharacters(str: string, offset = 0, len = this._countUtfCharacters(str)) {
+    return Array.from(str).slice(offset, offset + len).join("").length
   }
 
 }
