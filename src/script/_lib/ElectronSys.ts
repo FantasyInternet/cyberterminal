@@ -198,6 +198,9 @@ export default class ElectronSys extends WebSys {
   private _initHotkeys() {
     document.addEventListener("keydown", (e) => {
       switch (e.code) {
+        case "F6":
+          this.openWeb(document.title.substr(0, document.title.lastIndexOf("-")).trim())
+          break
         case "F7":
           this._cropToBorders()
           e.preventDefault()

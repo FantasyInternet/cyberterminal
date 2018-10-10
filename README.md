@@ -13,6 +13,7 @@ Shortcut  | Action
 --------- | ------
 Esc       | Send break signal
 Hold Esc  | Force shutdown, return to previous connection
+F6        | Open in web browser
 F7        | Crop to border
 F11       | Full screen
 F12       | Developer console

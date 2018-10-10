@@ -24,6 +24,10 @@ Hold Esc
 
 Force shutdown, return to previous connection
 
+F6
+
+Open in web browser
+
 F7
 
 Crop to border
