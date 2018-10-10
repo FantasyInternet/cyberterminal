@@ -13,6 +13,7 @@ Shortcut  | Action
 --------- | ------
 Esc       | Send break signal
 Hold Esc  | Force shutdown, return to previous connection
+F7        | Crop to border
 F11       | Full screen
 F12       | Developer console
 Alt+G     | Switch to game input
@@ -22,6 +23,6 @@ Fantasy internet sites to check out
 -----------------------------------
 Nothing substantial yet, but the following URLs are available. Copy these links into the terminal.
 
- - https://fantasyinternet.github.io/try
+ - https://fantasyinternet.github.io/
  - http://cybermicro.online/pong/
  - http://cybermicro.online/slange/
