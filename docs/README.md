@@ -24,6 +24,14 @@ Hold Esc
 
 Force shutdown, return to previous connection
 
+F6
+
+Open in web browser
+
+F7
+
+Crop to border
+
 F11
 
 Full screen
@@ -45,7 +53,7 @@ Fantasy internet sites to check out
 
 Nothing substantial yet, but the following URLs are available. Copy these links into the terminal.
 
-*   [https://fantasyinternet.github.io/try](https://fantasyinternet.github.io/try)
+*   [https://fantasyinternet.github.io/](https://fantasyinternet.github.io/)
 *   [http://cybermicro.online/pong/](http://cybermicro.online/pong/)
 *   [http://cybermicro.online/slange/](http://cybermicro.online/slange/)
 

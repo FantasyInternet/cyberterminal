@@ -13,12 +13,12 @@ export default class GameInput {
     if (!this._element.innerHTML.trim()) {
       let html = ""
       html += '<div class="left">'
-      html += '<div class="slider">'
+      html += '<div class="slider" style="left: calc(40% - 1.5em);top: 60%;">'
       html += '<div class="knob"></div>'
       html += '</div>'
       html += '</div>'
       html += '<div class="right">'
-      html += '<div class="slider">'
+      html += '<div class="slider" style="left: calc(60% - 1.5em);top: 60%;">'
       html += '<div class="knob"></div>'
       html += '</div>'
       html += '</div>'

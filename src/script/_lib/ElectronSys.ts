@@ -198,6 +198,13 @@ export default class ElectronSys extends WebSys {
   private _initHotkeys() {
     document.addEventListener("keydown", (e) => {
       switch (e.code) {
+        case "F6":
+          this.openWeb(document.title.substr(0, document.title.lastIndexOf("-")).trim())
+          break
+        case "F7":
+          this._cropToBorders()
+          e.preventDefault()
+          break
         case "F11":
           win.setFullScreen(!win.isFullScreen())
           e.preventDefault()
@@ -221,6 +228,15 @@ export default class ElectronSys extends WebSys {
       winState.height = bounds.height
     }
     localStorage.setItem("winState", JSON.stringify(winState))
+  }
+
+  private _cropToBorders() {
+    let display = <HTMLElement>document.querySelector("fantasy-terminal canvas, fantasy-terminal pre")
+    let bounds = {
+      width: window.innerWidth,
+      height: window.innerHeight
+    }
+    window.resizeBy(display.offsetWidth - bounds.width, display.offsetHeight - bounds.height)
   }
 
   private async _createUserFolder() {

@@ -296,6 +296,17 @@ export default class Machine {
       }
     }
   }
+  displayProcess(pid: number) {
+    let process = this._processes[pid]
+    if (process && process.instance.exports.display) {
+      try {
+        process.instance.exports.display(performance.now())
+      } catch (error) {
+        console.trace(error)
+        this.killProcess(pid)
+      }
+    }
+  }
   callbackProcess(pid: number, tableIndex: number, ...a: any[]) {
     let process = this._processes[pid]
     if (process) {

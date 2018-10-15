@@ -30,7 +30,6 @@ fantasy-terminal {
     .text {
       position: absolute;
       right: 100vw;
-      bottom: 100vh;
       textarea,
       input {
         position: static;
@@ -55,7 +54,6 @@ fantasy-terminal {
       .left {
         left: 0;
         .slider {
-          left: calc(40% - 1.5em);
           .knob {
             background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAsUlEQVRo3u2ZXQqAMAyDiyfv0XqDHUlfHIiIVvfXzHzgiwhNUJd2EyGEkFlJIrLuV0ITbwfh2YihibeHezDiYUx4BIY24RWWTYRDX74tQgj5ts5rwxraKid6BlD1WiPSs1rNkdFfXDtCG2wl80SUQSTd9U7LH0ZC2E8I/ieeYhmdIsh6mlAB28EghARCGz3bDfiNLU9OjGxNik2EF38nFEb8VRsMd8Bxnicgj5gIIcTHBmt2bad/9QQUAAAAAElFTkSuQmCC");
           }
@@ -64,7 +62,6 @@ fantasy-terminal {
       .right {
         right: 0;
         .slider {
-          left: calc(60% - 1.5em);
           .knob {
             background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAACQUlEQVRo3u2YQUiUQRTHfy2aosQGuSB6CoqKvYTQoYN60kNoRIe6REHdPESX1KtQEl2ULoEgboJ0ExGUiLqXGEVUUGJYlKZ4UDMFa9sO/hcWmW/xk53BifnD8DHv8d68983Mf94MBPx/yO1oG8A7oAeo8DGBwpbxKQGAcqAW6JZs3bcE8qiR7LtPCRwAksBZYFyyTl/3wDegw8ZgCUdJ1QANQLVPM5BQ4G3AtGSDvm7iOsmWSz1YmeVkEsBh4Lz6f3xKIGeQPfaNhf4Cm8BnoBc4GCqtgAC7GNHmextRu1+RfsBBLGMa60wcoyQwJ8O+HbpTKodfOGCTFLAlFhuKa9wIZGXcKlmVblU/gHoHf/8WsACMioaPxHVwR7MwL+MM8BtocrSU36hualcct/dyQr+U8Ud9bzoK/rTGu6g4FoHZvVTOx4CfcvbUIZH0a/0fUr9PMZyL66gamJHxL+CEg+DLgSXguWFGJuI6e6QnkWdyMK0BbOJCkReNLHB0t46uy+iGqPWL+r2OuD+q3d+Nk7SWzLCBWrMWmSjP/Z8MulrdJZaBymJOqoD3wAfD/fWu/sKcZsUG95sO0Dwmpb9WzElGfz8dQa1TcjJiiftzQEuE/rL0U6HiCwiwgyfaZFcj9MeBNUsEUBKkxdVfDVxdCbzWgZjcz7PwULPQbZBngeb9voxSwCqwwva7aCF/3/NlL3Qp4AcqydeAVw4KwZKhgu2XuC2VJBvASd8Y6VJBBdmBpzA9s5ccCTxHSCAkEOA5/gEUCbDsMuovvwAAAABJRU5ErkJggg==");
           }
@@ -83,13 +80,10 @@ fantasy-terminal {
           position: absolute;
           width: 3em;
           height: 3em;
-          top: 60%;
           .knob {
             background-color: white;
             border-radius: 1em;
             position: absolute;
-            left: 0em;
-            top: 0em;
             margin: .5em .5em;
             width: 2em;
             height: 2em;

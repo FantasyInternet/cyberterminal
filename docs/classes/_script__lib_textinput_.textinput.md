@@ -73,7 +73,7 @@ ___
 
 ▸ **addEventListener**(fn: *`Function`*): `void`
 
-*Defined in [script/_lib/TextInput.ts:64](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/TextInput.ts#L64)*
+*Defined in [script/_lib/TextInput.ts:66](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/TextInput.ts#L66)*
 
 **Parameters:**
 
@@ -112,7 +112,7 @@ ___
 
 ▸ **removeEventListener**(fn: *`Function`*): `void`
 
-*Defined in [script/_lib/TextInput.ts:71](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/TextInput.ts#L71)*
+*Defined in [script/_lib/TextInput.ts:73](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/TextInput.ts#L73)*
 
 **Parameters:**
 
