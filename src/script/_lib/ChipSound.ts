@@ -61,7 +61,7 @@ export default class ChipSound {
     if (!chan) return
     if (chan.bufferSource) {
       chan.bufferSource.playbackRate.cancelScheduledValues(this._ctx.currentTime + duration)
-      chan.bufferSource.playbackRate.linearRampToValueAtTime(frequency / 1760, this._ctx.currentTime + duration)
+      chan.bufferSource.playbackRate.linearRampToValueAtTime((frequency / this._ctx.sampleRate) * 10, this._ctx.currentTime + duration)
     }
     if (chan.oscillator) {
       chan.oscillator.frequency.cancelScheduledValues(this._ctx.currentTime + duration)
