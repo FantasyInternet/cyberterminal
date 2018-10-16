@@ -682,9 +682,9 @@ export default class WebSys implements Sys {
     while (path.substr(0, 1) === "/") path = path.substr(1)
     let parts = path.split("/")
     let name = parts.shift() || "."
+    if (cache == null || typeof cache !== "object") cache = {}
     if (parts.length) {
-      if (typeof cache !== "object") cache = {}
-      if (typeof cache[name] !== "object") cache[name] = {}
+      if (cache[name] == null || typeof cache[name] !== "object") cache[name] = {}
       return this._dirCache(parts.join("/"), exists, cache[name])
     } else {
       if (cache[name] == null) cache[name] = null
