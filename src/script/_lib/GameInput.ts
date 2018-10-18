@@ -103,6 +103,7 @@ export default class GameInput {
   private _keysDown: any = {}
 
   private _onKeyDown(e: KeyboardEvent) {
+    if (e.ctrlKey) return
     if (this.sys.inputPriority.indexOf("game") > this.sys.inputPriority.indexOf("text")) return this.sys.focusInput("text")
     if (e.altKey && e.code === "KeyT") return this.sys.focusInput("text")
     this._device = "keyboard"
