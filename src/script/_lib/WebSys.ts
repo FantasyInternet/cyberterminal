@@ -680,6 +680,8 @@ export default class WebSys implements Sys {
 
   private _dirCache(path: string, exists?: boolean, cache = dirCache): any {
     while (path.substr(0, 1) === "/") path = path.substr(1)
+    if (path.includes("?")) path = path.substr(0, path.indexOf("?"))
+    if (path.includes("#")) path = path.substr(0, path.indexOf("#"))
     let parts = path.split("/")
     let name = parts.shift() || "."
     if (cache == null || typeof cache !== "object") cache = {}
