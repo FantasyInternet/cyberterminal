@@ -69,7 +69,7 @@ export default class MouseInput {
     this.state.y = (e.pageY - this._element.getBoundingClientRect().top) / this.scaleY * devicePixelRatio
     this.state.pressed = true
     this._sendState()
-    e.preventDefault()
+    // e.preventDefault()
   }
   private _mouseMove(e: PointerEvent) {
     this.state.x = (e.pageX - this._element.getBoundingClientRect().left) / this.scaleX * devicePixelRatio
