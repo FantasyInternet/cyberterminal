@@ -17,9 +17,9 @@ export default class CyberTerminal {
     this.sys.print("CyberTerminal v" + pkg.version)
     setTimeout(() => {
       this.sys.startTone(0, 384)
-      this.sys.rampFrequency(0, 384, .063)
-      this.sys.rampFrequency(0, 512, .064)
-      this.sys.rampVolume(0, 0, 0.3333)
+      this.sys.rampFrequency(0, 384, 63)
+      this.sys.rampFrequency(0, 512, 64)
+      this.sys.rampVolume(0, 0, 333.333)
       setTimeout(() => {
         this.connectTo(this.sys.startupUrl)
       }, 256)
