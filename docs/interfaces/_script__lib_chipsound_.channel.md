@@ -26,7 +26,7 @@
 
 **● autoStop**: *`any`*
 
-*Defined in [script/_lib/ChipSound.ts:122](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/ChipSound.ts#L122)*
+*Defined in [script/_lib/ChipSound.ts:124](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/ChipSound.ts#L124)*
 
 ___
 <a id="buffersource"></a>
@@ -36,7 +36,7 @@ ___
 **● bufferSource**: * `AudioBufferSourceNode` &#124; `null`
 *
 
-*Defined in [script/_lib/ChipSound.ts:120](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/ChipSound.ts#L120)*
+*Defined in [script/_lib/ChipSound.ts:122](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/ChipSound.ts#L122)*
 
 ___
 <a id="gain"></a>
@@ -45,7 +45,7 @@ ___
 
 **● gain**: *`GainNode`*
 
-*Defined in [script/_lib/ChipSound.ts:121](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/ChipSound.ts#L121)*
+*Defined in [script/_lib/ChipSound.ts:123](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/ChipSound.ts#L123)*
 
 ___
 <a id="oscillator"></a>
@@ -55,7 +55,7 @@ ___
 **● oscillator**: * `OscillatorNode` &#124; `null`
 *
 
-*Defined in [script/_lib/ChipSound.ts:119](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/ChipSound.ts#L119)*
+*Defined in [script/_lib/ChipSound.ts:121](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/ChipSound.ts#L121)*
 
 ___
 <a id="type"></a>
@@ -65,7 +65,7 @@ ___
 **● type**: * "sine" &#124; "square" &#124; "sawtooth" &#124; "triangle" &#124; "noise"
 *
 
-*Defined in [script/_lib/ChipSound.ts:118](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/ChipSound.ts#L118)*
+*Defined in [script/_lib/ChipSound.ts:120](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/ChipSound.ts#L120)*
 
 ___
 

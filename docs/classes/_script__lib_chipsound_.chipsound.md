@@ -65,7 +65,7 @@ ___
 
 ▸ **rampVolume**(channel: *`number`*, volume: *`number`*, duration: *`number`*): `void`
 
-*Defined in [script/_lib/ChipSound.ts:76](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/ChipSound.ts#L76)*
+*Defined in [script/_lib/ChipSound.ts:77](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/ChipSound.ts#L77)*
 
 **Parameters:**
 
@@ -104,7 +104,7 @@ ___
 
 ▸ **stopAll**(): `void`
 
-*Defined in [script/_lib/ChipSound.ts:104](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/ChipSound.ts#L104)*
+*Defined in [script/_lib/ChipSound.ts:106](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/ChipSound.ts#L106)*
 
 **Returns:** `void`
 
@@ -115,7 +115,7 @@ ___
 
 ▸ **stopTone**(channel: *`number`*): `void`
 
-*Defined in [script/_lib/ChipSound.ts:87](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/ChipSound.ts#L87)*
+*Defined in [script/_lib/ChipSound.ts:89](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/ChipSound.ts#L89)*
 
 **Parameters:**
 

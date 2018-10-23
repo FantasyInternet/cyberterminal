@@ -57,6 +57,7 @@ export default class ChipSound {
   }
 
   rampFrequency(channel: number, frequency: number, duration: number) {
+    duration /= 1000
     let chan = this._channels[channel]
     if (!chan) return
     if (chan.bufferSource) {
@@ -74,6 +75,7 @@ export default class ChipSound {
   }
 
   rampVolume(channel: number, volume: number, duration: number) {
+    duration /= 1000
     let chan = this._channels[channel]
     if (!chan) return
     chan.gain.gain.cancelScheduledValues(this._ctx.currentTime + duration)
