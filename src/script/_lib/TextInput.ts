@@ -103,11 +103,11 @@ export default class TextInput {
       this.state.pos = input.selectionStart == null ? input.value.length : input.selectionStart
       this.state.len = (input.selectionEnd || this.state.pos) - this.state.pos
       this.state.key = 0
+      if (e && e.type === "keydown") this.state.key = e.keyCode
       let start = this.state.text.substr(0, this.state.pos)
       let sel = this.state.text.substr(this.state.pos, this.state.len)
       this.state.pos = this._countUtfCharacters(start)
       this.state.len = this._countUtfCharacters(sel)
-      if (e && e.type === "keydown") this.state.key = e.keyCode
       this._sendState()
     })
   }

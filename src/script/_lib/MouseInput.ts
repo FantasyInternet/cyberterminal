@@ -80,9 +80,12 @@ export default class MouseInput {
     this.state.pressed = false
     this._sendState()
     clearTimeout(this._idleTO)
-    this._idleTO = setTimeout(() => {
-      this.sys.focusInput(this.sys.inputPriority[0])
-    }, 1024)
+    let sel = document.getSelection()
+    if (!sel || (sel && sel.type !== "Range")) {
+      this._idleTO = setTimeout(() => {
+        this.sys.focusInput(this.sys.inputPriority[0])
+      }, 1024)
+    }
   }
 
 }

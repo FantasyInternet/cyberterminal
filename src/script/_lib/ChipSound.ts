@@ -52,8 +52,8 @@ export default class ChipSound {
       }
       this._channels[channel] = chan
     }
-    this.rampFrequency(channel, frequency, .001)
-    this.rampVolume(channel, volume, .001)
+    this.rampFrequency(channel, frequency, 1)
+    this.rampVolume(channel, volume, 1)
   }
 
   rampFrequency(channel: number, frequency: number, duration: number) {
