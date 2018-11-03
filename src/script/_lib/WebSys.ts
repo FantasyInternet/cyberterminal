@@ -5,6 +5,7 @@ import ChipSound from "./ChipSound"
 import MouseInput from "./MouseInput"
 import TextInput from "./TextInput"
 import Breaker from "./Breaker"
+import { resolve } from "dns"
 
 let scriptSrc: string
 let dirCache: any = {}
@@ -248,12 +249,6 @@ export default class WebSys implements Sys {
   }
 
 
-  async waitForVsync() {
-    return new Promise((resolve, reject) => {
-      requestAnimationFrame(resolve)
-    })
-  }
-
   createMachine() {
     return new WebMachineWorker()
   }
@@ -478,6 +473,10 @@ export default class WebSys implements Sys {
       listeners.push(fn)
       if (event === "resize") this._resize()
     }
+  }
+
+  vsync() {
+    return new Promise(resolve => requestAnimationFrame(resolve))
   }
 
 

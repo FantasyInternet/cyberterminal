@@ -246,8 +246,9 @@ export default class Machine {
   }
 
   setStepInterval(milliseconds: number) {
+    if (this._stepInterval < 0) setTimeout(this._tick)
     this._stepInterval = milliseconds
-    this._revUp()
+    // this._tick()
   }
   loadProcess() {
     let wasm = this._popArrayBuffer()
@@ -268,15 +269,15 @@ export default class Machine {
           this._die(error)
         }
       }
-      // this._nextStep = performance.now()
-      if (pid === 0) this._revUp()
+      this._nextStep = performance.now()
+      if (pid === 0) this._tick()
     }).catch((err: any) => {
       console.trace(err)
       this._processes[pid] = false
       if (!pid) {
         this._die(err)
       }
-      if (pid === 0) this._revUp()
+      if (pid === 0) this._tick()
     })
     return pid
   }
@@ -415,7 +416,7 @@ export default class Machine {
 
   /* _privates */
   private _active: boolean = false
-  private _rev: number = 0
+  // private _rev: number = 0
   private _nextStep: number = performance.now()
   private _stepInterval: number = -1
   private _stepCount: number = 0
@@ -460,48 +461,44 @@ export default class Machine {
     width: 0, height: 0
   }
 
-  private _revUp() {
-    this._rev++
-    let t = Math.round(performance.now())
-    let step = Math.max(1, this._stepInterval)
-    this._nextStep = t
-    while (this._nextStep < t + 128 + step * 3) {
-      this._nextStep += step
-      setTimeout(this._tick, this._nextStep - t, this._rev)
-    }
-  }
-
-  private _tick(rev = this._rev) {
-    if (rev != this._rev) return
+  private _tick() {
+    // if (rev != this._rev) return
     if (!this._active) return
     let t = performance.now()
+    let deadline = t + 1000 / 60
     let process = this._processes[0]
     if (!process) {
       return this._active = false
     }
     if (this._stepInterval >= 0) {
-      this._nextStep += this._stepInterval
-      setTimeout(this._tick, this._nextStep - t, this._rev)
+      this._sysRequest("vsync").then(this._tick)
     }
     try {
-      this._textInputState.key = this._keyBuffer.shift() || 0
+      let stepped = !(process.instance.exports.step)
       if (process.instance.exports.step) {
-        process.instance.exports.step(t)
-        this._stepCount++
-        if (this._stepSecond !== Math.floor(performance.now() / 1000)) {
-          if (this._baseUrl.includes("?debug")) console.log("Plan ahead", this._nextStep - t)
-          if (this._baseUrl.includes("?debug")) console.log("Steps Per Second", this._stepCount)
-          this._stepCount = 0
-          this._stepSecond = Math.floor(performance.now() / 1000)
+        while (this._nextStep < t && t < deadline) {
+          this._textInputState.key = this._keyBuffer.shift() || 0
+          process.instance.exports.step(t)
+          this._nextStep += this._stepInterval
+          stepped = true
+          this._stepCount++
+          if (this._stepSecond !== Math.floor(t / 1000)) {
+            if (this._baseUrl.includes("?debug")) console.log("Steps Per Second", this._stepCount)
+            this._stepCount = 0
+            this._stepSecond = Math.floor(t / 1000)
+          }
+          if (this._stepInterval < 0) deadline = t
+          t = performance.now()
         }
+        if (this._nextStep < t) this._nextStep = t
       }
-      if (this._transferBuffer && process.instance.exports.display) {
+      if (stepped && this._transferBuffer && process.instance.exports.display) {
         process.instance.exports.display(t)
         this._frameCount++
-        if (this._frameSecond !== Math.floor(performance.now() / 1000)) {
+        if (this._frameSecond !== Math.floor(t / 1000)) {
           if (this._baseUrl.includes("?debug")) console.log("Frames Per Second", this._frameCount)
           this._frameCount = 0
-          this._frameSecond = Math.floor(performance.now() / 1000)
+          this._frameSecond = Math.floor(t / 1000)
         }
       }
     } catch (error) {
@@ -535,7 +532,8 @@ export default class Machine {
         break
 
       case "resume":
-        this._active = true
+        // this._active = true
+        console.log("resuming!")
         if (this._displayMode >= 0) {
           this.setDisplayMode(this._displayMode, this._displayWidth, this._displayHeight, this._visibleWidth, this._visibleHeight)
           let txt = this._textInputState
@@ -547,8 +545,11 @@ export default class Machine {
           this.focusInput(this._inputFocus)
           this._keyBuffer.push(16)
         }
-        // this._nextStep = performance.now()
-        this._revUp()
+        this._nextStep = performance.now() + this._stepInterval
+        if (!this._active) setTimeout(() => {
+          this._active = true
+          this._tick()
+        }, 128)
         break
 
       case "break":

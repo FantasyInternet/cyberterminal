@@ -171,14 +171,14 @@ export default class CyberTerminal {
         let buffer = message.buffer
         if (!buffer) throw "No buffer received!"
         this.sys.drawBitmap(buffer)
-        requestAnimationFrame(() => {
-          machineWorker.send({
-            cmd: "imagedata",
-            width: message.width,
-            height: message.height,
-            buffer: buffer
-          }, [buffer])
-        })
+        // requestAnimationFrame(() => {
+        machineWorker.send({
+          cmd: "imagedata",
+          width: message.width,
+          height: message.height,
+          buffer: buffer
+        }, [buffer])
+        // })
         break
 
       default:

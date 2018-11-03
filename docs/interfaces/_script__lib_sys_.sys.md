@@ -45,6 +45,7 @@ Unified interface to system I/O
 * [setTextInput](_script__lib_sys_.sys.md#settextinput)
 * [startTone](_script__lib_sys_.sys.md#starttone)
 * [stopTone](_script__lib_sys_.sys.md#stoptone)
+* [vsync](_script__lib_sys_.sys.md#vsync)
 * [write](_script__lib_sys_.sys.md#write)
 
 ---
@@ -480,6 +481,17 @@ Stop tone oscillator
 | channel | `number` |  Audio channel |
 
 **Returns:** `void`
+
+___
+<a id="vsync"></a>
+
+###  vsync
+
+▸ **vsync**(): `Promise`<`any`>
+
+*Defined in [script/_lib/Sys.ts:150](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L150)*
+
+**Returns:** `Promise`<`any`>
 
 ___
 <a id="write"></a>
