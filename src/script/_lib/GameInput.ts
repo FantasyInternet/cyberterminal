@@ -103,8 +103,7 @@ export default class GameInput {
   private _keysDown: any = {}
 
   private _onKeyDown(e: KeyboardEvent) {
-    if (e.ctrlKey) return
-    if (this.sys.inputPriority.indexOf("game") > this.sys.inputPriority.indexOf("text")) return this.sys.focusInput("text")
+    if (this.sys.inputPriority.indexOf("game") > this.sys.inputPriority.indexOf("text")) return
     if (e.altKey && e.code === "KeyT") return this.sys.focusInput("text")
     this._device = "keyboard"
     let ctrl = this._keyMap[e.code]
@@ -131,6 +130,7 @@ export default class GameInput {
   }
 
   private _onKeyUp(e: KeyboardEvent) {
+    if (this.sys.inputPriority.indexOf("game") > this.sys.inputPriority.indexOf("text")) this.sys.focusInput("text")
     let ctrl = this._keyMap[e.code]
     if (ctrl) {
       this._keysDown[ctrl] = false

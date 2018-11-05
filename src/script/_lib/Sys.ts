@@ -146,4 +146,6 @@ export default interface Sys {
   openWeb(url: string): void
 
   addEventListener(event: string, listener: Function): void
+
+  vsync(): Promise<any>
 }
