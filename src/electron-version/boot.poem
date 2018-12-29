@@ -19,12 +19,14 @@ var stage = 0
 export "step" step
   if stage == 0
     intro
-  if stage == 1
+  elsif stage == 1
     var url
     if (url = read_line) != null
       connect_to url
       write "./history.txt" (array_join history "\n") #state_success
-      stage=0
+      stage++
+  else
+    shutdown
 
 func intro ~ 𝒞𝓎𝒷𝑒𝓇𝒯𝑒𝓇𝓂𝒾𝓃𝒶𝓁
   println "\u001b[K\u001b[H\u001b[1m\n\n\t\t\t\t \u001b[35m𝒞𝓎\u001b[31m𝒷𝑒𝓇\u001b[33m𝒯𝑒𝓇\u001b[32m𝓂𝒾𝓃\u001b[36m𝒶𝓁\u001b[0;1m\n\n"
@@ -35,13 +37,16 @@ func intro ~ 𝒞𝓎𝒷𝑒𝓇𝒯𝑒𝓇𝓂𝒾𝓃𝒶𝓁
   stage++
 
 func load_history success data req_id
-  var url = "http://fantasyinternet.github.io/"
   if success
     history = string_split data "\n"
-    history_pos = (array_length history) - 1
-    url = history[history_pos]
+    if (array_search history "http://cybermicro.online/") == null
+      array_push history "http://cybermicro.online/"
   else
-    print "\u001b[J"
+    history =
+      "https://fantasyinternet.github.io/"
+      "http://cybermicro.online/"
+  history_pos = (array_length history) - 1
+  var url = history[history_pos]
   set_input_text url
   set_input_position string_length url
 
