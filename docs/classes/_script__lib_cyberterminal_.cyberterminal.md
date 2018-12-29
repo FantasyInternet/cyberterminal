@@ -40,7 +40,7 @@ Terminal app
 
 **Parameters:**
 
-| Param | Type |
+| Name | Type |
 | ------ | ------ |
 | sys | [Sys](../interfaces/_script__lib_sys_.sys.md) |
 
@@ -92,7 +92,7 @@ ___
 
 **Parameters:**
 
-| Param | Type |
+| Name | Type |
 | ------ | ------ |
 | url | `string` |
 
@@ -120,7 +120,7 @@ ___
 
 **Parameters:**
 
-| Param | Type |
+| Name | Type |
 | ------ | ------ |
 | url | `string` |
 

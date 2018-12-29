@@ -89,7 +89,7 @@ ___
 
 ###  inputPriority
 
-**● inputPriority**: *( "text" &#124; "mouse" &#124; "game")[]*
+**● inputPriority**: *("text" | "mouse" | "game")[]*
 
 *Defined in [script/_lib/Sys.ts:20](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L20)*
 
@@ -142,7 +142,7 @@ ___
 
 **Parameters:**
 
-| Param | Type |
+| Name | Type |
 | ------ | ------ |
 | event | `string` |
 | listener | `Function` |
@@ -176,7 +176,7 @@ Delete a file.
 
 **Parameters:**
 
-| Param | Type | Description |
+| Name | Type | Description |
 | ------ | ------ | ------ |
 | filename | `string` |  Name of file to delete |
 
@@ -195,7 +195,7 @@ Draw given bitmap to pixel display.
 
 **Parameters:**
 
-| Param | Type |
+| Name | Type |
 | ------ | ------ |
 | buffer | `ArrayBuffer` |
 
@@ -206,7 +206,7 @@ ___
 
 ###  focusInput
 
-▸ **focusInput**(input: * "text" &#124; "mouse" &#124; "game"*): `string`[]
+▸ **focusInput**(input: *"text" | "mouse" | "game"*): `string`[]
 
 *Defined in [script/_lib/Sys.ts:117](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L117)*
 
@@ -214,9 +214,9 @@ Focus on given type of input.
 
 **Parameters:**
 
-| Param | Type | Description |
+| Name | Type | Description |
 | ------ | ------ | ------ |
-| input |  "text" &#124; "mouse" &#124; "game"|  The type of input to prioritize |
+| input | "text" | "mouse" | "game" |  The type of input to prioritize |
 
 **Returns:** `string`[]
 
@@ -233,7 +233,7 @@ List contents of a directory.
 
 **Parameters:**
 
-| Param | Type | Description |
+| Name | Type | Description |
 | ------ | ------ | ------ |
 | path | `string` |  Name of directory to list |
 
@@ -252,7 +252,7 @@ Open a link in default web browser.
 
 **Parameters:**
 
-| Param | Type | Description |
+| Name | Type | Description |
 | ------ | ------ | ------ |
 | url | `string` |  URL to open |
 
@@ -271,7 +271,7 @@ Print string to text display.
 
 **Parameters:**
 
-| Param | Type |
+| Name | Type |
 | ------ | ------ |
 | str | `string` |
 
@@ -290,7 +290,7 @@ Slide to given frequency
 
 **Parameters:**
 
-| Param | Type | Description |
+| Name | Type | Description |
 | ------ | ------ | ------ |
 | channel | `number` |  Audio channel to use |
 | frequency | `number` |  Frequency of tone |
@@ -311,7 +311,7 @@ Slide to given volume
 
 **Parameters:**
 
-| Param | Type | Description |
+| Name | Type | Description |
 | ------ | ------ | ------ |
 | channel | `number` |  Audio channel to use |
 | volume | `number` |  Volume of tone (0-1) |
@@ -332,7 +332,7 @@ Read a file.
 
 **Parameters:**
 
-| Param | Type | Description |
+| Name | Type | Description |
 | ------ | ------ | ------ |
 | filename | `string` |  Name of file to read |
 | options | `any` |  Options |
@@ -352,7 +352,7 @@ Replace first occurrence of a substring with another.
 
 **Parameters:**
 
-| Param | Type | Description |
+| Name | Type | Description |
 | ------ | ------ | ------ |
 | search | `string` |  string to search for |
 | replace | `string` |  replacement string |
@@ -373,7 +373,7 @@ Set the current URL.
 
 **Parameters:**
 
-| Param | Type | Description |
+| Name | Type | Description |
 | ------ | ------ | ------ |
 | url | `string` |  URL |
 
@@ -384,7 +384,7 @@ ___
 
 ###  setDisplayMode
 
-▸ **setDisplayMode**(mode: * "none" &#124; "text" &#124; "pixel"*, width: *`number`*, height: *`number`*): `void`
+▸ **setDisplayMode**(mode: *"none" | "text" | "pixel"*, width: *`number`*, height: *`number`*): `void`
 
 *Defined in [script/_lib/Sys.ts:38](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L38)*
 
@@ -392,9 +392,9 @@ Switch display mode.
 
 **Parameters:**
 
-| Param | Type | Description |
+| Name | Type | Description |
 | ------ | ------ | ------ |
-| mode |  "none" &#124; "text" &#124; "pixel"|  Name of mode to switch to |
+| mode | "none" | "text" | "pixel" |  Name of mode to switch to |
 | width | `number` |  The width of the display in characters or pixels |
 | height | `number` |  The height of the display in characters or pixels |
 
@@ -413,7 +413,7 @@ Set the appearance of the native mouse cursor.
 
 **Parameters:**
 
-| Param | Type | Description |
+| Name | Type | Description |
 | ------ | ------ | ------ |
 | type | `string` |  Type of Cursor |
 
@@ -424,7 +424,7 @@ ___
 
 ###  setTextInput
 
-▸ **setTextInput**(text: *`string`*, pos: *`number`*, len: *`number`*, type?: * "multiline" &#124; "text" &#124; "password" &#124; "number" &#124; "url" &#124; "email" &#124; "tel"*): `void`
+▸ **setTextInput**(text: *`string`*, pos: *`number`*, len: *`number`*, type?: *"multiline" | "text" | "password" | "number" | "url" | "email" | "tel"*): `void`
 
 *Defined in [script/_lib/Sys.ts:126](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L126)*
 
@@ -432,12 +432,12 @@ Set the state of the text input.
 
 **Parameters:**
 
-| Param | Type | Description |
+| Name | Type | Description |
 | ------ | ------ | ------ |
 | text | `string` |  Text to put into editor |
 | pos | `number` |  Cursor position |
 | len | `number` |  Selection length |
-| `Optional` type |  "multiline" &#124; "text" &#124; "password" &#124; "number" &#124; "url" &#124; "email" &#124; "tel"|  Type of text input |
+| `Optional` type | "multiline" | "text" | "password" | "number" | "url" | "email" | "tel" |  Type of text input |
 
 **Returns:** `void`
 
@@ -446,7 +446,7 @@ ___
 
 ###  startTone
 
-▸ **startTone**(channel: *`number`*, frequency: *`number`*, volume?: * `undefined` &#124; `number`*, type?: * "sine" &#124; "square" &#124; "sawtooth" &#124; "triangle" &#124; "noise"*): `void`
+▸ **startTone**(channel: *`number`*, frequency: *`number`*, volume?: *`undefined` | `number`*, type?: *"sine" | "square" | "sawtooth" | "triangle" | "noise"*): `void`
 
 *Defined in [script/_lib/Sys.ts:57](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L57)*
 
@@ -454,12 +454,12 @@ Start tone oscillator
 
 **Parameters:**
 
-| Param | Type | Description |
+| Name | Type | Description |
 | ------ | ------ | ------ |
 | channel | `number` |  Audio channel to use |
 | frequency | `number` |  Frequency of tone |
-| `Optional` volume |  `undefined` &#124; `number`|  Volume of tone (0-1) |
-| `Optional` type |  "sine" &#124; "square" &#124; "sawtooth" &#124; "triangle" &#124; "noise"|  Wave type |
+| `Optional` volume | `undefined` | `number` |  Volume of tone (0-1) |
+| `Optional` type | "sine" | "square" | "sawtooth" | "triangle" | "noise" |  Wave type |
 
 **Returns:** `void`
 
@@ -476,7 +476,7 @@ Stop tone oscillator
 
 **Parameters:**
 
-| Param | Type | Description |
+| Name | Type | Description |
 | ------ | ------ | ------ |
 | channel | `number` |  Audio channel |
 
@@ -498,7 +498,7 @@ ___
 
 ###  write
 
-▸ **write**(filename: *`string`*, data: * `string` &#124; `ArrayBuffer`*): `Promise`<`boolean`>
+▸ **write**(filename: *`string`*, data: *`string` | `ArrayBuffer`*): `Promise`<`boolean`>
 
 *Defined in [script/_lib/Sys.ts:99](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Sys.ts#L99)*
 
@@ -506,10 +506,10 @@ Write to a file.
 
 **Parameters:**
 
-| Param | Type | Description |
+| Name | Type | Description |
 | ------ | ------ | ------ |
 | filename | `string` |  Name of file to write to |
-| data |  `string` &#124; `ArrayBuffer`|  Data to write |
+| data | `string` | `ArrayBuffer` |  Data to write |
 
 **Returns:** `Promise`<`boolean`>
 

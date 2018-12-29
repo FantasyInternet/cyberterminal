@@ -54,7 +54,7 @@ Register an event listener for received messages.
 
 **Parameters:**
 
-| Param | Type | Description |
+| Name | Type | Description |
 | ------ | ------ | ------ |
 | listener | `Function` |  Callback function to call whenever a message is received |
 
@@ -73,7 +73,7 @@ Send a message to machine.
 
 **Parameters:**
 
-| Param | Type | Description |
+| Name | Type | Description |
 | ------ | ------ | ------ |
 | msg | `any` |  Message to send |
 | `Optional` transferables | `any`[] |  Objects to transfer |

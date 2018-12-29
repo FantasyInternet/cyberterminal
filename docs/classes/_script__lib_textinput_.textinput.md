@@ -44,7 +44,7 @@ Class for taking care of text input
 
 **Parameters:**
 
-| Param | Type |
+| Name | Type |
 | ------ | ------ |
 | sys | [Sys](../interfaces/_script__lib_sys_.sys.md) |
 | _element | `HTMLElement` |
@@ -77,7 +77,7 @@ ___
 
 **Parameters:**
 
-| Param | Type |
+| Name | Type |
 | ------ | ------ |
 | fn | `Function` |
 
@@ -116,7 +116,7 @@ ___
 
 **Parameters:**
 
-| Param | Type |
+| Name | Type |
 | ------ | ------ |
 | fn | `Function` |
 
@@ -133,7 +133,7 @@ ___
 
 **Parameters:**
 
-| Param | Type |
+| Name | Type |
 | ------ | ------ |
 | state | `any` |
 

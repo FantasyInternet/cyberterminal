@@ -37,6 +37,7 @@ export default class WebSys implements Sys {
     this.gameInput = new GameInput(this, <HTMLInputElement>this._container.querySelector(".input .game"))
     this.breaker = new Breaker(this)
     this.startupUrl = location.toString()
+    this._resizeCanvas = this._resizeCanvas.bind(this)
   }
 
   setAddress(url: string) {
@@ -386,15 +387,19 @@ export default class WebSys implements Sys {
   }
 
   startTone() {
+    //@ts-ignore
     this.chipSound.startTone.apply(this.chipSound, arguments)
   }
   rampFrequency() {
+    //@ts-ignore
     this.chipSound.rampFrequency.apply(this.chipSound, arguments)
   }
   rampVolume() {
+    //@ts-ignore
     this.chipSound.rampVolume.apply(this.chipSound, arguments)
   }
   stopTone() {
+    //@ts-ignore
     this.chipSound.stopTone.apply(this.chipSound, arguments)
   }
 
@@ -671,7 +676,7 @@ export default class WebSys implements Sys {
       (this._visibleHeight - this._displayCanvas.height) / 2 * this._displayScale / devicePixelRatio + "px"
     this._displayCanvas.style.display = "inline-block"
     if (!checkHeight) {
-      requestAnimationFrame(this._resizeCanvas.bind(this))
+      requestAnimationFrame(<FrameRequestCallback>(<unknown>this._resizeCanvas))
     } else {
       this.mouseInput.scaleX = this.mouseInput.scaleY = this._displayScale
     }

@@ -102,7 +102,7 @@ ___
 
 **Parameters:**
 
-| Param | Type |
+| Name | Type |
 | ------ | ------ |
 | index | `number` |
 | `Rest` params | `number`[] |
@@ -120,7 +120,7 @@ ___
 
 **Parameters:**
 
-| Param | Type |
+| Name | Type |
 | ------ | ------ |
 | pid | `number` |
 | tableIndex | `number` |
@@ -144,15 +144,15 @@ ___
 
 ###  delete
 
-▸ **delete**(callback: * `number` &#124; `Function`*, pid?: *`number`*): `number`
+▸ **delete**(callback: *`number` | `Function`*, pid?: *`number`*): `number`
 
 *Defined in [script/_lib/Machine.ts:186](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L186)*
 
 **Parameters:**
 
-| Param | Type | Default value |
+| Name | Type | Default value |
 | ------ | ------ | ------ |
-| callback |  `number` &#124; `Function`| - |
+| callback | `number` | `Function` | - |
 | `Default value` pid | `number` | 0 |
 
 **Returns:** `number`
@@ -168,7 +168,7 @@ ___
 
 **Parameters:**
 
-| Param | Type | Default value |
+| Name | Type | Default value |
 | ------ | ------ | ------ |
 | offset | `number` | - |
 | length | `number` | - |
@@ -188,7 +188,7 @@ ___
 
 **Parameters:**
 
-| Param | Type |
+| Name | Type |
 | ------ | ------ |
 | pid | `number` |
 
@@ -205,7 +205,7 @@ ___
 
 **Parameters:**
 
-| Param | Type |
+| Name | Type |
 | ------ | ------ |
 | input | `number` |
 
@@ -244,7 +244,7 @@ ___
 
 **Parameters:**
 
-| Param | Type | Default value |
+| Name | Type | Default value |
 | ------ | ------ | ------ |
 | `Default value` indexFromEnd | `number` | 0 |
 
@@ -431,15 +431,15 @@ ___
 
 ###  head
 
-▸ **head**(callback: * `number` &#124; `Function`*, pid?: *`number`*): `number`
+▸ **head**(callback: *`number` | `Function`*, pid?: *`number`*): `number`
 
 *Defined in [script/_lib/Machine.ts:216](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L216)*
 
 **Parameters:**
 
-| Param | Type | Default value |
+| Name | Type | Default value |
 | ------ | ------ | ------ |
-| callback |  `number` &#124; `Function`| - |
+| callback | `number` | `Function` | - |
 | `Default value` pid | `number` | 0 |
 
 **Returns:** `number`
@@ -455,7 +455,7 @@ ___
 
 **Parameters:**
 
-| Param | Type |
+| Name | Type |
 | ------ | ------ |
 | pid | `number` |
 
@@ -466,15 +466,15 @@ ___
 
 ###  list
 
-▸ **list**(callback: * `number` &#124; `Function`*, pid?: *`number`*): `number`
+▸ **list**(callback: *`number` | `Function`*, pid?: *`number`*): `number`
 
 *Defined in [script/_lib/Machine.ts:201](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L201)*
 
 **Parameters:**
 
-| Param | Type | Default value |
+| Name | Type | Default value |
 | ------ | ------ | ------ |
-| callback |  `number` &#124; `Function`| - |
+| callback | `number` | `Function` | - |
 | `Default value` pid | `number` | 0 |
 
 **Returns:** `number`
@@ -523,7 +523,7 @@ ___
 
 **Parameters:**
 
-| Param | Type | Default value |
+| Name | Type | Default value |
 | ------ | ------ | ------ |
 | offset | `number` | - |
 | `Default value` pid | `number` | 0 |
@@ -535,15 +535,15 @@ ___
 
 ###  post
 
-▸ **post**(callback: * `number` &#124; `Function`*, pid?: *`number`*): `number`
+▸ **post**(callback: *`number` | `Function`*, pid?: *`number`*): `number`
 
 *Defined in [script/_lib/Machine.ts:231](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L231)*
 
 **Parameters:**
 
-| Param | Type | Default value |
+| Name | Type | Default value |
 | ------ | ------ | ------ |
-| callback |  `number` &#124; `Function`| - |
+| callback | `number` | `Function` | - |
 | `Default value` pid | `number` | 0 |
 
 **Returns:** `number`
@@ -564,17 +564,17 @@ ___
 
 ###  processStatus
 
-▸ **processStatus**(pid: *`number`*):  `undefined` &#124; `0` &#124; `1` &#124; `-1` &#124; `2`
+▸ **processStatus**(pid: *`number`*): `undefined` | `0` | `1` | `-1` | `2`
 
 *Defined in [script/_lib/Machine.ts:284](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L284)*
 
 **Parameters:**
 
-| Param | Type |
+| Name | Type |
 | ------ | ------ |
 | pid | `number` |
 
-**Returns:**  `undefined` &#124; `0` &#124; `1` &#124; `-1` &#124; `2`
+**Returns:** `undefined` | `0` | `1` | `-1` | `2`
 
 ___
 <a id="pushfrommemory"></a>
@@ -587,7 +587,7 @@ ___
 
 **Parameters:**
 
-| Param | Type | Default value |
+| Name | Type | Default value |
 | ------ | ------ | ------ |
 | offset | `number` | - |
 | length | `number` | - |
@@ -606,7 +606,7 @@ ___
 
 **Parameters:**
 
-| Param | Type |
+| Name | Type |
 | ------ | ------ |
 | channel | `number` |
 | frequency | `number` |
@@ -625,7 +625,7 @@ ___
 
 **Parameters:**
 
-| Param | Type |
+| Name | Type |
 | ------ | ------ |
 | channel | `number` |
 | volume | `number` |
@@ -638,15 +638,15 @@ ___
 
 ###  read
 
-▸ **read**(callback: * `number` &#124; `Function`*, pid?: *`number`*): `number`
+▸ **read**(callback: *`number` | `Function`*, pid?: *`number`*): `number`
 
 *Defined in [script/_lib/Machine.ts:138](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L138)*
 
 **Parameters:**
 
-| Param | Type | Default value |
+| Name | Type | Default value |
 | ------ | ------ | ------ |
-| callback |  `number` &#124; `Function`| - |
+| callback | `number` | `Function` | - |
 | `Default value` pid | `number` | 0 |
 
 **Returns:** `number`
@@ -656,15 +656,15 @@ ___
 
 ###  readImage
 
-▸ **readImage**(callback: * `number` &#124; `Function`*, pid?: *`number`*): `number`
+▸ **readImage**(callback: *`number` | `Function`*, pid?: *`number`*): `number`
 
 *Defined in [script/_lib/Machine.ts:154](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L154)*
 
 **Parameters:**
 
-| Param | Type | Default value |
+| Name | Type | Default value |
 | ------ | ------ | ------ |
-| callback |  `number` &#124; `Function`| - |
+| callback | `number` | `Function` | - |
 | `Default value` pid | `number` | 0 |
 
 **Returns:** `number`
@@ -680,7 +680,7 @@ ___
 
 **Parameters:**
 
-| Param | Type | Default value |
+| Name | Type | Default value |
 | ------ | ------ | ------ |
 | `Default value` fromIndex | `number` | 0 |
 
@@ -708,7 +708,7 @@ ___
 
 **Parameters:**
 
-| Param | Type | Default value |
+| Name | Type | Default value |
 | ------ | ------ | ------ |
 | mode | `number` | - |
 | width | `number` | - |
@@ -729,7 +729,7 @@ ___
 
 **Parameters:**
 
-| Param | Type | Default value |
+| Name | Type | Default value |
 | ------ | ------ | ------ |
 | `Default value` position | `number` | 0 |
 | `Default value` selection | `number` | 0 |
@@ -758,7 +758,7 @@ ___
 
 **Parameters:**
 
-| Param | Type |
+| Name | Type |
 | ------ | ------ |
 | type | `number` |
 
@@ -775,7 +775,7 @@ ___
 
 **Parameters:**
 
-| Param | Type |
+| Name | Type |
 | ------ | ------ |
 | type | `number` |
 
@@ -792,7 +792,7 @@ ___
 
 **Parameters:**
 
-| Param | Type |
+| Name | Type |
 | ------ | ------ |
 | milliseconds | `number` |
 
@@ -820,7 +820,7 @@ ___
 
 **Parameters:**
 
-| Param | Type | Default value |
+| Name | Type | Default value |
 | ------ | ------ | ------ |
 | channel | `number` | - |
 | frequency | `number` | - |
@@ -840,7 +840,7 @@ ___
 
 **Parameters:**
 
-| Param | Type |
+| Name | Type |
 | ------ | ------ |
 | pid | `number` |
 
@@ -857,7 +857,7 @@ ___
 
 **Parameters:**
 
-| Param | Type |
+| Name | Type |
 | ------ | ------ |
 | channel | `number` |
 
@@ -874,7 +874,7 @@ ___
 
 **Parameters:**
 
-| Param | Type | Default value |
+| Name | Type | Default value |
 | ------ | ------ | ------ |
 | offset | `number` | - |
 | `Default value` pid | `number` | 0 |
@@ -892,7 +892,7 @@ ___
 
 **Parameters:**
 
-| Param | Type |
+| Name | Type |
 | ------ | ------ |
 | srcPid | `number` |
 | srcOffset | `number` |
@@ -918,15 +918,15 @@ ___
 
 ###  write
 
-▸ **write**(callback: * `number` &#124; `Function`*, pid?: *`number`*): `number`
+▸ **write**(callback: *`number` | `Function`*, pid?: *`number`*): `number`
 
 *Defined in [script/_lib/Machine.ts:170](https://github.com/FantasyInternet/cyberterminal/blob/HEAD/src/script/_lib/Machine.ts#L170)*
 
 **Parameters:**
 
-| Param | Type | Default value |
+| Name | Type | Default value |
 | ------ | ------ | ------ |
-| callback |  `number` &#124; `Function`| - |
+| callback | `number` | `Function` | - |
 | `Default value` pid | `number` | 0 |
 
 **Returns:** `number`

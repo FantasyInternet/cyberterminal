@@ -41,7 +41,7 @@ Class for taking care of break input
 
 **Parameters:**
 
-| Param | Type |
+| Name | Type |
 | ------ | ------ |
 | sys | [Sys](../interfaces/_script__lib_sys_.sys.md) |
 
@@ -73,7 +73,7 @@ ___
 
 **Parameters:**
 
-| Param | Type |
+| Name | Type |
 | ------ | ------ |
 | fn | `Function` |
 
@@ -90,7 +90,7 @@ ___
 
 **Parameters:**
 
-| Param | Type |
+| Name | Type |
 | ------ | ------ |
 | fn | `Function` |
 

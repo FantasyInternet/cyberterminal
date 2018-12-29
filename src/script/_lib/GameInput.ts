@@ -28,7 +28,7 @@ export default class GameInput {
     document.addEventListener("keyup", this._onKeyUp.bind(this))
 
     document.addEventListener("touchstart", this._onTouchOn.bind(this))
-    this._element.addEventListener("click", this._onTouchOff.bind(this))
+    this._element.addEventListener("click", <EventListener>this._onTouchOff.bind(this))
     let left = <HTMLElement>this._element.querySelector(".left")
     left.addEventListener("touchstart", this._onLeftTouchStart.bind(this))
     left.addEventListener("touchmove", this._onLeftTouchMove.bind(this))
@@ -38,7 +38,7 @@ export default class GameInput {
     right.addEventListener("touchmove", this._onRightTouchMove.bind(this))
     right.addEventListener("touchend", this._onRightTouchEnd.bind(this))
 
-    addEventListener("gamepadconnected", this._onGamepadConnected.bind(this))
+    addEventListener("gamepadconnected", <EventListener>this._onGamepadConnected.bind(this))
   }
 
   focus() {
@@ -320,7 +320,7 @@ export default class GameInput {
     localStorage.setItem("GameInput._device", this._device)
   }
 
-  private _scanGamepad() {
+  private _scanGamepad(): any {
     cancelAnimationFrame(this._scanRaf)
     if (!navigator.getGamepads().length) return
     let gamepad = <Gamepad>navigator.getGamepads()[this._gamepadIndex]

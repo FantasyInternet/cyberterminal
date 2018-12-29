@@ -49,7 +49,7 @@ Class for taking care of mouse input
 
 **Parameters:**
 
-| Param | Type |
+| Name | Type |
 | ------ | ------ |
 | sys | [Sys](../interfaces/_script__lib_sys_.sys.md) |
 
@@ -99,7 +99,7 @@ setelement(val: *`HTMLElement`*): `void`
 
 **Parameters:**
 
-| Param | Type |
+| Name | Type |
 | ------ | ------ |
 | val | `HTMLElement` |
 
@@ -119,7 +119,7 @@ ___
 
 **Parameters:**
 
-| Param | Type |
+| Name | Type |
 | ------ | ------ |
 | fn | `Function` |
 
@@ -158,7 +158,7 @@ ___
 
 **Parameters:**
 
-| Param | Type |
+| Name | Type |
 | ------ | ------ |
 | fn | `Function` |
 
