@@ -200,8 +200,8 @@ export default class GameInput {
   }
 
   /** touch */
-  private _leftTouchCenter: any = { x: 0, y: 0 }
-  private _rightTouchCenter: any = { x: 0, y: 0 }
+  private _leftTouchCenter: any = { x: 0, y: 0, id: null }
+  private _rightTouchCenter: any = { x: 0, y: 0, id: null }
   private _touchRadius: number = 36
   private _fireTO: any
 
@@ -226,22 +226,29 @@ export default class GameInput {
   private _onLeftTouchStart(e: TouchEvent) {
     this._device = "touch"
     this._element.classList.remove("idle")
+    if (this._leftTouchCenter.id) return
     this._leftTouchCenter.x = e.changedTouches[0].clientX
     this._leftTouchCenter.y = e.changedTouches[0].clientY
+    this._leftTouchCenter.id = e.changedTouches[0].identifier
     let left = <HTMLElement>this._element.querySelector(".left")
     let slider = <HTMLElement>this._element.querySelector(".slider")
     slider.style.left = (e.changedTouches[0].clientX - left.offsetLeft - this._touchRadius) + "px"
     slider.style.top = (e.changedTouches[0].clientY - left.offsetTop - this._touchRadius) + "px"
   }
   private _onLeftTouchMove(e: TouchEvent) {
-    let deltaX = e.changedTouches[0].clientX - this._leftTouchCenter.x
-    let deltaY = e.changedTouches[0].clientY - this._leftTouchCenter.y
+    let touch
+    for (let t of e.changedTouches) {
+      if (t.identifier === this._leftTouchCenter.id) touch = t
+    }
+    if (!touch) return
+    let deltaX = touch.clientX - this._leftTouchCenter.x
+    let deltaY = touch.clientY - this._leftTouchCenter.y
     let mag = Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2))
     if (mag > this._touchRadius) {
       deltaX /= mag / this._touchRadius
       deltaY /= mag / this._touchRadius
-      this._leftTouchCenter.x = e.changedTouches[0].clientX - deltaX
-      this._leftTouchCenter.y = e.changedTouches[0].clientY - deltaY
+      this._leftTouchCenter.x = touch.clientX - deltaX
+      this._leftTouchCenter.y = touch.clientY - deltaY
     }
     this.state.axis.x = deltaX / (this._touchRadius - 1)
     this.state.axis.y = deltaY / (this._touchRadius - 1)
@@ -252,30 +259,38 @@ export default class GameInput {
     this.state.axis.x = 0
     this.state.axis.y = 0
     this._sendState()
+    this._leftTouchCenter.id = null
   }
 
   private _onRightTouchStart(e: TouchEvent) {
     this._device = "touch"
     this._element.classList.remove("idle")
+    if (this._rightTouchCenter.id) return
     clearTimeout(this._fireTO)
     this.state.buttons.a = false
     this._sendState()
     this._rightTouchCenter.x = e.changedTouches[0].clientX
     this._rightTouchCenter.y = e.changedTouches[0].clientY
+    this._rightTouchCenter.id = e.changedTouches[0].identifier
     let right = <HTMLElement>this._element.querySelector(".right")
     let slider = <HTMLElement>right.querySelector(".slider")
     slider.style.left = (e.changedTouches[0].clientX - right.offsetLeft - this._touchRadius) + "px"
     slider.style.top = (e.changedTouches[0].clientY - right.offsetTop - this._touchRadius) + "px"
   }
   private _onRightTouchMove(e: TouchEvent) {
-    let deltaX = e.changedTouches[0].clientX - this._rightTouchCenter.x
-    let deltaY = e.changedTouches[0].clientY - this._rightTouchCenter.y
+    let touch
+    for (let t of e.changedTouches) {
+      if (t.identifier === this._rightTouchCenter.id) touch = t
+    }
+    if (!touch) return
+    let deltaX = touch.clientX - this._rightTouchCenter.x
+    let deltaY = touch.clientY - this._rightTouchCenter.y
     let mag = Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2))
     if (mag > this._touchRadius) {
       deltaX /= mag / this._touchRadius
       deltaY /= mag / this._touchRadius
-      this._rightTouchCenter.x = e.changedTouches[0].clientX - deltaX
-      this._rightTouchCenter.y = e.changedTouches[0].clientY - deltaY
+      this._rightTouchCenter.x = touch.clientX - deltaX
+      this._rightTouchCenter.y = touch.clientY - deltaY
     }
     let x = Math.round(deltaX / this._touchRadius)
     let y = Math.round(deltaY / this._touchRadius)
@@ -307,6 +322,7 @@ export default class GameInput {
         this.state.buttons.y = false
     }
     this._sendState()
+    this._rightTouchCenter.id = null
   }
 
   /** gamepad */
